@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deutsch Atelier by Achim</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #f2ede6;
+    --ink: #2a2825;
+    --ink-soft: #5a5650;
+    --ink-muted: #9a948e;
+    --accent: #3a5a4a;
+    --accent-light: #eaf0ec;
+    --coming: #c8c2ba;
+  }
+
+  html, body {
+    height: 100%;
+  }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+  }
+
+  /* ── Logo area ── */
+  .logo-area {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+
+  .logo-arc {
+    display: block;
+    margin: 0 auto 4px;
+    width: 180px;
+    height: 28px;
+  }
+
+  .logo-feather {
+    font-size: 1.3em;
+    display: block;
+    margin-bottom: 2px;
+    color: var(--ink);
+  }
+
+  .logo-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.6em;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    line-height: 1.1;
+  }
+
+  .logo-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.2em;
+    font-weight: 300;
+    color: var(--ink-soft);
+    margin-top: 4px;
+  }
+
+  /* ── Divider ── */
+  .divider {
+    width: 48px;
+    height: 1px;
+    background: var(--ink-muted);
+    margin: 0 auto 48px;
+  }
+
+  /* ── Level selection ── */
+  .section-label {
+    text-align: center;
+    font-size: 0.72em;
+    letter-spacing: 0.18em;
+    color: var(--ink-muted);
+    margin-bottom: 20px;
+    font-weight: 400;
+  }
+
+  .levels {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+  }
+
+  .level-btn {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25em;
+    font-weight: 500;
+    padding: 12px 28px;
+    border: 1px solid var(--ink);
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    letter-spacing: 0.04em;
+  }
+
+  .level-btn:hover,
+  .level-btn.active {
+    background: var(--ink);
+    color: var(--cream);
+  }
+
+  .level-btn.coming {
+    border-color: var(--coming);
+    color: var(--coming);
+    cursor: default;
+    position: relative;
+  }
+
+  .level-btn.coming:hover {
+    background: transparent;
+    color: var(--coming);
+  }
+
+  .coming-tag {
+    display: block;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.45em;
+    letter-spacing: 0.12em;
+    color: var(--coming);
+    margin-top: 2px;
+    font-weight: 300;
+  }
+
+  /* ── Skills ── */
+  .skills {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(8px);
+    transition: opacity 0.3s, transform 0.3s;
+  }
+
+  .skills.visible {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateY(0);
+  }
+
+  .skill-card {
+    width: 180px;
+    border: 1px solid var(--ink);
+    padding: 28px 20px;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+    transition: background 0.2s, color 0.2s;
+    background: transparent;
+  }
+
+  .skill-card:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+  }
+
+  .skill-icon {
+    font-size: 1.8em;
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .skill-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3em;
+    font-weight: 500;
+    color: inherit;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .skill-desc {
+    font-size: 0.75em;
+    color: var(--ink-muted);
+    letter-spacing: 0.06em;
+    display: block;
+  }
+
+  .skill-card:hover .skill-desc {
+    color: rgba(255,255,255,0.7);
+  }
+
+  /* ── Footer ── */
+  .footer {
+    margin-top: 72px;
+    font-size: 0.72em;
+    color: var(--ink-muted);
+    text-align: center;
+    letter-spacing: 0.06em;
+  }
+
+  @media (max-width: 480px) {
+    .logo-title { font-size: 2em; }
+    .skill-card { width: 140px; padding: 22px 14px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Logo -->
+<div class="logo-area">
+  <svg class="logo-arc" viewBox="0 0 180 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10 24 Q90 2 170 24" stroke="#2a2825" stroke-width="1" fill="none"/>
+    <text x="90" y="14" text-anchor="middle" font-size="14" fill="#2a2825">🪶</text>
+  </svg>
+  <div class="logo-title">Deutsch Atelier</div>
+  <div class="logo-sub">by Achim</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- Level selection -->
+<div class="section-label">Niveau wählen</div>
+<div class="levels">
+  <button class="level-btn active" onclick="selectLevel(this, 'B2')">B2</button>
+  <button class="level-btn coming" disabled>B1<span class="coming-tag">demnächst</span></button>
+  <button class="level-btn coming" disabled>A2<span class="coming-tag">demnächst</span></button>
+  <button class="level-btn coming" disabled>A1<span class="coming-tag">demnächst</span></button>
+</div>
+
+<!-- Skills -->
+<div class="section-label">Fertigkeit wählen</div>
+<div class="skills visible" id="skills-box">
+  <a class="skill-card" href="b2-lesen.html">
+    <span class="skill-icon">📖</span>
+    <span class="skill-name">Lesen</span>
+    <span class="skill-desc">Leseverstehen B2</span>
+  </a>
+  <a class="skill-card" href="b2-hoeren.html">
+    <span class="skill-icon">🎧</span>
+    <span class="skill-name">Hören</span>
+    <span class="skill-desc">Hörverstehen B2</span>
+  </a>
+</div>
+
+<div class="footer">© Deutsch Atelier by Achim · Medellín</div>
+
+<script>
+  function selectLevel(btn, level) {
+    document.querySelectorAll('.level-btn:not(.coming)').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const box = document.getElementById('skills-box');
+    box.classList.remove('visible');
+    setTimeout(() => {
+      // Update links based on level
+      box.querySelectorAll('.skill-card').forEach(card => {
+        const skill = card.querySelector('.skill-name').textContent.toLowerCase()
+          .replace('ö','oe').replace('ü','ue').replace('ä','ae');
+        card.href = `${level.toLowerCase()}-${skill === 'lesen' ? 'lesen' : 'hoeren'}.html`;
+        card.querySelector('.skill-desc').textContent = `${card.querySelector('.skill-name').textContent}verstehen ${level}`;
+      });
+      box.classList.add('visible');
+    }, 200);
+  }
+</script>
+
+</body>
+</html>
