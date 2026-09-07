@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ÖSD B2 – Leseverstehen Teil 2 · Übung 2</title>
+<style>
+  body {
+    font-family: 'Georgia', serif;
+    max-width: 820px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #fafaf8;
+    color: #2c2c2c;
+    line-height: 1.7;
+  }
+  h1 {
+    font-size: 1.3em;
+    border-bottom: 2px solid #333;
+    padding-bottom: 8px;
+    margin-bottom: 6px;
+  }
+  .meta {
+    font-size: 0.85em;
+    color: #666;
+    margin-bottom: 30px;
+  }
+  .anweisung {
+    background: #eef2f7;
+    border-left: 4px solid #4a6fa5;
+    padding: 14px 18px;
+    margin-bottom: 30px;
+    font-size: 0.95em;
+  }
+  .ueberschriften-box {
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 18px 22px;
+    margin-bottom: 36px;
+    border-radius: 4px;
+  }
+  .ueberschriften-box h2 {
+    font-size: 1em;
+    margin-top: 0;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #444;
+  }
+  .ueberschriften-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 30px;
+  }
+  .ue-item { font-size: 0.95em; }
+  .ue-key {
+    font-weight: bold;
+    color: #4a6fa5;
+    margin-right: 6px;
+  }
+  .text-block {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+  }
+  .text-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    gap: 14px;
+  }
+  .text-nr {
+    background: #4a6fa5;
+    color: white;
+    font-weight: bold;
+    padding: 4px 12px;
+    border-radius: 3px;
+    font-size: 0.95em;
+    white-space: nowrap;
+  }
+  .antwort-feld {
+    border: none;
+    border-bottom: 2px solid #4a6fa5;
+    width: 60px;
+    font-size: 1em;
+    text-align: center;
+    background: transparent;
+    outline: none;
+    color: #2c2c2c;
+  }
+  .antwort-label {
+    font-size: 0.85em;
+    color: #666;
+  }
+  .text-body { font-size: 0.95em; }
+  .back {
+    display: inline-block;
+    margin-bottom: 24px;
+    font-size: 0.82em;
+    color: #666;
+    text-decoration: none;
+    letter-spacing: 0.05em;
+  }
+  .back:hover { color: #2c2c2c; }
+  .loesung-toggle {
+    margin-top: 40px;
+    text-align: center;
+  }
+  .btn-loesung {
+    background: #4a6fa5;
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    font-size: 0.9em;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    font-family: 'Georgia', serif;
+    transition: background 0.2s;
+  }
+  .btn-loesung:hover { background: #3a5a8a; }
+  .loesung-section {
+    margin-top: 24px;
+    border-top: 2px dashed #bbb;
+    padding-top: 20px;
+    display: none;
+  }
+  .loesung-section.visible { display: block; }
+  .loesung-section h2 {
+    font-size: 1em;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #444;
+  }
+  .loesung-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-top: 12px;
+  }
+  .loesung-item {
+    text-align: center;
+    background: #eef2f7;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+  .loesung-item span {
+    display: block;
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #4a6fa5;
+  }
+  @media print {
+    .loesung-section { display: none; }
+    .back { display: none; }
+    .btn-loesung { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<a class="back" href="b2-lesen-teil2.html">← Zurück zur Übungsauswahl</a>
+
+<h1>ÖSD Zertifikat B2 – Leseverstehen Teil 2</h1>
+<div class="meta">Übungsmaterial · Niveau B2 · Wissenschaftliche Themen</div>
+
+<div class="anweisung">
+  <strong>Aufgabe:</strong> Lesen Sie die fünf Texte (1–5) und ordnen Sie jedem Text die passende Überschrift zu.
+  Es gibt zehn Überschriften (A–J), aber nur fünf passen. Schreiben Sie den passenden Buchstaben in das Feld neben dem Text.
+  <br><br>
+  <em>Jede Überschrift darf nur einmal verwendet werden.</em>
+</div>
+
+<!-- Überschriften -->
+<div class="ueberschriften-box">
+  <h2>Überschriften A – J</h2>
+  <div class="ueberschriften-grid">
+    <div class="ue-item"><span class="ue-key">A</span> Wenn Maschinen das Denken übernehmen</div>
+    <div class="ue-item"><span class="ue-key">B</span> Der Schlaf als unterschätzter Faktor</div>
+    <div class="ue-item"><span class="ue-key">C</span> Forschen ohne Grenzen – aber mit Risiken</div>
+    <div class="ue-item"><span class="ue-key">D</span> Mehr Daten, weniger Diagnose?</div>
+    <div class="ue-item"><span class="ue-key">E</span> Wenn das Gehirn auf Reise geht</div>
+    <div class="ue-item"><span class="ue-key">F</span> Die Natur als Vorbild der Technik</div>
+    <div class="ue-item"><span class="ue-key">G</span> Heilen mit dem Erbgut</div>
+    <div class="ue-item"><span class="ue-key">H</span> Zwischen Labor und Markt</div>
+    <div class="ue-item"><span class="ue-key">I</span> Was uns wirklich krank macht</div>
+    <div class="ue-item"><span class="ue-key">J</span> Tiere als Wegweiser der Forschung</div>
+  </div>
+</div>
+
+<!-- Text 1 -->
+<div class="text-block">
+  <div class="text-header">
+    <div class="text-nr">Text 1</div>
+    <div class="antwort-label">Überschrift:&nbsp;</div>
+    <input class="antwort-feld" type="text" maxlength="1" placeholder="?">
+  </div>
+  <div class="text-body">
+    <p>Künstliche Intelligenz hält zunehmend Einzug in die Medizin – von der Bildauswertung bis zur Diagnoseunterstützung. Algorithmen erkennen auf Röntgenaufnahmen Auffälligkeiten, die dem menschlichen Auge entgehen können, und werten in Sekunden Datensätze aus, für die Ärzte Stunden benötigen würden. Doch Experten warnen vor einer unkritischen Abhängigkeit von automatisierten Systemen: Nicht jede statistische Korrelation führt zu einer sinnvollen klinischen Entscheidung. Zudem stellen sich ethische Fragen rund um Datenschutz und Haftung. Der Einsatz digitaler Werkzeuge in der Medizin bietet enormes Potenzial – setzt aber ein tiefes Verständnis ihrer Grenzen voraus.</p>
+  </div>
+</div>
+
+<!-- Text 2 -->
+<div class="text-block">
+  <div class="text-header">
+    <div class="text-nr">Text 2</div>
+    <div class="antwort-label">Überschrift:&nbsp;</div>
+    <input class="antwort-feld" type="text" maxlength="1" placeholder="?">
+  </div>
+  <div class="text-body">
+    <p>Die Gentherapie gilt als eine der vielversprechendsten Entwicklungen der modernen Medizin. Durch gezielte Eingriffe in das Erbgut lassen sich genetisch bedingte Krankheiten theoretisch an der Wurzel bekämpfen, anstatt lediglich Symptome zu behandeln. Erste klinische Erfolge bei seltenen Erkrankungen wie bestimmten Formen der Blindheit oder Muskelschwäche haben die Forschung beflügelt. Dennoch sind viele Fragen ungeklärt: Langzeitfolgen sind kaum absehbar, die Kosten der Therapien enorm, und die ethische Debatte über die Grenzen genetischer Eingriffe beim Menschen ist noch lange nicht abgeschlossen.</p>
+  </div>
+</div>
+
+<!-- Text 3 -->
+<div class="text-block">
+  <div class="text-header">
+    <div class="text-nr">Text 3</div>
+    <div class="antwort-label">Überschrift:&nbsp;</div>
+    <input class="antwort-feld" type="text" maxlength="1" placeholder="?">
+  </div>
+  <div class="text-body">
+    <p>Lange wurde Schlaf als passive Ruhephase betrachtet – ein notwendiges Übel zwischen den produktiven Stunden des Tages. Die Neurowissenschaft hat dieses Bild grundlegend korrigiert: Im Schlaf verarbeitet das Gehirn Eindrücke, festigt Erinnerungen und reinigt sich von Stoffwechselabfällen, die mit neurodegenerativen Erkrankungen wie Alzheimer in Verbindung gebracht werden. Chronischer Schlafmangel erhöht nachweislich das Risiko für Herz-Kreislauf-Erkrankungen, Diabetes und Depressionen. Trotz dieser Erkenntnisse wird ausreichend Schlaf in der Gesellschaft oft als Zeichen von Faulheit wahrgenommen – eine Einstellung, die Wissenschaftler zunehmend als gefährlich bezeichnen.</p>
+  </div>
+</div>
+
+<!-- Text 4 -->
+<div class="text-block">
+  <div class="text-header">
+    <div class="text-nr">Text 4</div>
+    <div class="antwort-label">Überschrift:&nbsp;</div>
+    <input class="antwort-feld" type="text" maxlength="1" placeholder="?">
+  </div>
+  <div class="text-body">
+    <p>Die Bionik beschäftigt sich damit, Lösungen der Natur auf technische Probleme zu übertragen. Ob der Lotos-Effekt bei wasserabweisenden Oberflächen, die aerodynamische Form von Haifischflossen als Vorbild für Schwimmanzüge oder die Struktur von Vogelknochen im Leichtbau – die Evolution hat Milliarden von Jahren optimiert, was Ingenieure in Jahrzehnten kaum erreichen könnten. Immer häufiger orientiert sich die Materialforschung an biologischen Strukturen, um leichtere, widerstandsfähigere und nachhaltigere Werkstoffe zu entwickeln. Die Natur, so die Überzeugung vieler Forscher, ist der beste Ingenieur.</p>
+  </div>
+</div>
+
+<!-- Text 5 -->
+<div class="text-block">
+  <div class="text-header">
+    <div class="text-nr">Text 5</div>
+    <div class="antwort-label">Überschrift:&nbsp;</div>
+    <input class="antwort-feld" type="text" maxlength="1" placeholder="?">
+  </div>
+  <div class="text-body">
+    <p>Stressforschung ist eines der am schnellsten wachsenden Felder der Medizin. Während akuter Stress kurzfristig leistungsfördernd wirken kann, hat chronischer Stress weitreichende Folgen für den gesamten Organismus: Das Immunsystem wird geschwächt, Entzündungsprozesse begünstigt und das Risiko für psychische Erkrankungen erhöht. Besonders alarmierend ist, dass viele Betroffene ihren eigenen Stresspegel systematisch unterschätzen. Forscher betonen, dass soziale Faktoren wie Einsamkeit, Ungleichheit und fehlende Kontrolle über das eigene Leben zu den stärksten biologischen Stressoren zählen – mit messbaren Auswirkungen auf Zellen und Gene.</p>
+  </div>
+</div>
+
+<!-- Lösungsschlüssel -->
+<div class="loesung-toggle">
+  <button class="btn-loesung" onclick="toggleLoesung(this)">Lösungen anzeigen</button>
+</div>
+
+<div class="loesung-section" id="loesung">
+  <h2>Lösungsschlüssel</h2>
+  <div class="loesung-grid">
+    <div class="loesung-item">Text 1<span>D</span></div>
+    <div class="loesung-item">Text 2<span>G</span></div>
+    <div class="loesung-item">Text 3<span>B</span></div>
+    <div class="loesung-item">Text 4<span>F</span></div>
+    <div class="loesung-item">Text 5<span>I</span></div>
+  </div>
+  <p style="font-size:0.85em; color:#666; margin-top:16px;">
+    <strong>Distraktoren:</strong> A, C, E, H, J – thematisch verwandt, aber inhaltlich nicht präzise genug für die jeweiligen Texte.
+  </p>
+</div>
+
+<script>
+  function toggleLoesung(btn) {
+    const loesung = document.getElementById('loesung');
+    const visible = loesung.classList.toggle('visible');
+    btn.textContent = visible ? 'Lösungen verbergen' : 'Lösungen anzeigen';
+  }
+</script>
+
+</body>
+</html>
