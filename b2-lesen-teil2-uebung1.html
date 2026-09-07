@@ -129,12 +129,73 @@
     font-size: 1.1em;
     color: #4a6fa5;
   }
+  .back {
+    display: inline-block;
+    margin-bottom: 24px;
+    font-size: 0.82em;
+    color: #666;
+    text-decoration: none;
+    letter-spacing: 0.05em;
+  }
+  .back:hover { color: #2c2c2c; }
+  .loesung-toggle {
+    margin-top: 40px;
+    text-align: center;
+  }
+  .btn-loesung {
+    background: #4a6fa5;
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    font-size: 0.9em;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    font-family: 'Georgia', serif;
+    transition: background 0.2s;
+  }
+  .btn-loesung:hover { background: #3a5a8a; }
+  .loesung-section {
+    margin-top: 24px;
+    border-top: 2px dashed #bbb;
+    padding-top: 20px;
+    display: none;
+  }
+  .loesung-section.visible { display: block; }
+  .loesung-section h2 {
+    font-size: 1em;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #444;
+  }
+  .loesung-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-top: 12px;
+  }
+  .loesung-item {
+    text-align: center;
+    background: #eef2f7;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+  .loesung-item span {
+    display: block;
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #4a6fa5;
+  }
   @media print {
     .loesung-section { display: none; }
+    .back { display: none; }
+    .btn-loesung { display: none; }
   }
 </style>
 </head>
 <body>
+
+<a class="back" href="b2-lesen-teil2.html">← Zurück zur Übungsauswahl</a>
 
 <h1>ÖSD Zertifikat B2 – Leseverstehen Teil 2</h1>
 <div class="meta">Übungsmaterial · Niveau B2 · Gesellschaftliche Themen</div>
@@ -224,8 +285,12 @@
 </div>
 
 <!-- Lösungsschlüssel -->
-<div class="loesung-section">
-  <h2>Lösungsschlüssel (nur für Lehrkräfte)</h2>
+<div class="loesung-toggle">
+  <button class="btn-loesung" onclick="toggleLoesung(this)">Lösungen anzeigen</button>
+</div>
+
+<div class="loesung-section" id="loesung">
+  <h2>Lösungsschlüssel</h2>
   <div class="loesung-grid">
     <div class="loesung-item">Text 1<span>I</span></div>
     <div class="loesung-item">Text 2<span>F</span></div>
@@ -237,6 +302,14 @@
     <strong>Distraktoren:</strong> A, D, E, G, H – passen thematisch, treffen aber den Kern der Texte nicht präzise genug.
   </p>
 </div>
+
+<script>
+  function toggleLoesung(btn) {
+    const loesung = document.getElementById('loesung');
+    const visible = loesung.classList.toggle('visible');
+    btn.textContent = visible ? 'Lösungen verbergen' : 'Lösungen anzeigen';
+  }
+</script>
 
 </body>
 </html>
