@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deutsch Atelier – B2 Leseverstehen Teil 1</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --cream: #f2ede6; --ink: #2a2825; --ink-soft: #5a5650;
+    --ink-muted: #9a948e; --accent: #3a5a4a; --coming: #c8c2ba;
+  }
+  body {
+    background: var(--cream); color: var(--ink);
+    font-family: 'Jost', sans-serif; font-weight: 300;
+    min-height: 100vh; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; padding: 40px 20px;
+  }
+  .back { position: fixed; top: 24px; left: 28px; font-size: 0.78em;
+    letter-spacing: 0.1em; color: var(--ink-muted); text-decoration: none;
+    display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+  .back:hover { color: var(--ink); }
+  .logo-area { text-align: center; margin-bottom: 48px; }
+  .logo-title { font-family: 'Cormorant Garamond', serif; font-size: 2.6em;
+    font-weight: 400; letter-spacing: 0.02em; color: var(--ink); line-height: 1.1; }
+  .logo-sub { font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 1.2em; font-weight: 300; color: var(--ink-soft); margin-top: 4px; }
+  .breadcrumb { font-size: 0.72em; letter-spacing: 0.14em; color: var(--ink-muted);
+    text-align: center; margin-bottom: 10px; }
+  .divider { width: 48px; height: 1px; background: var(--ink-muted); margin: 0 auto 44px; }
+  .section-label { text-align: center; font-size: 0.72em; letter-spacing: 0.18em;
+    color: var(--ink-muted); margin-bottom: 24px; font-weight: 400; }
+  .exercises { display: flex; flex-direction: column; gap: 14px;
+    max-width: 380px; width: 100%; margin-bottom: 48px; }
+  .ex-card { border: 1px solid var(--ink); padding: 20px 28px;
+    display: flex; align-items: center; justify-content: space-between;
+    cursor: pointer; text-decoration: none; color: var(--ink);
+    transition: background 0.2s, color 0.2s; background: transparent; }
+  .ex-card:hover { background: var(--accent); border-color: var(--accent); color: white; }
+  .ex-card.coming { border-color: var(--coming); color: var(--coming); pointer-events: none; }
+  .ex-left { display: flex; align-items: baseline; gap: 14px; }
+  .ex-nr { font-family: 'Cormorant Garamond', serif; font-size: 1.6em;
+    font-weight: 500; line-height: 1; }
+  .ex-name { font-size: 0.82em; letter-spacing: 0.08em; }
+  .ex-tag { font-size: 0.65em; letter-spacing: 0.1em; color: var(--coming); }
+  .ex-arrow { font-size: 1em; opacity: 0.4; }
+  .ex-card:hover .ex-arrow { opacity: 1; }
+  .footer { margin-top: 48px; font-size: 0.72em; color: var(--ink-muted);
+    text-align: center; letter-spacing: 0.06em; }
+</style>
+</head>
+<body>
+
+<a class="back" href="b2-lesen.html">← Zurück</a>
+
+<div class="logo-area">
+  <div class="logo-title">Deutsch Atelier</div>
+  <div class="logo-sub">by Achim</div>
+</div>
+
+<div class="breadcrumb">B2 · Leseverstehen · Teil 1 – Globales Lesen</div>
+<div class="divider"></div>
+
+<div class="section-label">Übung wählen</div>
+
+<div class="exercises">
+  <a class="ex-card" href="b2-lesen-teil1-uebung1.html">
+    <div class="ex-left">
+      <span class="ex-nr">1</span>
+      <span class="ex-name">KI im Alltag</span>
+    </div>
+    <span class="ex-arrow">→</span>
+  </a>
+  <a class="ex-card coming" href="#">
+    <div class="ex-left">
+      <span class="ex-nr">2</span>
+      <span class="ex-name">Übung 2</span>
+    </div>
+    <span class="ex-tag">demnächst</span>
+  </a>
+  <a class="ex-card coming" href="#">
+    <div class="ex-left">
+      <span class="ex-nr">3</span>
+      <span class="ex-name">Übung 3</span>
+    </div>
+    <span class="ex-tag">demnächst</span>
+  </a>
+</div>
+
+<div class="footer">© Deutsch Atelier by Achim · Medellín</div>
+
+</body>
+</html>

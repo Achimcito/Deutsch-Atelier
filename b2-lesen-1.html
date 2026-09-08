@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deutsch Atelier – B2 Leseverstehen</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #f2ede6;
+    --ink: #2a2825;
+    --ink-soft: #5a5650;
+    --ink-muted: #9a948e;
+    --accent: #3a5a4a;
+    --coming: #c8c2ba;
+  }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+  }
+
+  /* ── Back link ── */
+  .back {
+    position: fixed;
+    top: 24px;
+    left: 28px;
+    font-size: 0.78em;
+    letter-spacing: 0.1em;
+    color: var(--ink-muted);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s;
+  }
+  .back:hover { color: var(--ink); }
+
+  /* ── Logo area ── */
+  .logo-area {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .logo-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.6em;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    line-height: 1.1;
+  }
+
+  .logo-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.2em;
+    font-weight: 300;
+    color: var(--ink-soft);
+    margin-top: 4px;
+  }
+
+  /* ── Breadcrumb ── */
+  .breadcrumb {
+    font-size: 0.72em;
+    letter-spacing: 0.14em;
+    color: var(--ink-muted);
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .divider {
+    width: 48px;
+    height: 1px;
+    background: var(--ink-muted);
+    margin: 0 auto 44px;
+  }
+
+  /* ── Section label ── */
+  .section-label {
+    text-align: center;
+    font-size: 0.72em;
+    letter-spacing: 0.18em;
+    color: var(--ink-muted);
+    margin-bottom: 24px;
+    font-weight: 400;
+  }
+
+  /* ── Teil cards ── */
+  .parts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    max-width: 480px;
+    width: 100%;
+    margin-bottom: 48px;
+  }
+
+  .part-card {
+    border: 1px solid var(--ink);
+    padding: 28px 20px;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+    transition: background 0.2s, color 0.2s;
+    background: transparent;
+    color: var(--ink);
+  }
+
+  .part-card:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+  }
+
+  .part-card.coming {
+    border-color: var(--coming);
+    color: var(--coming);
+    cursor: default;
+    pointer-events: none;
+  }
+
+  .part-nr {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2em;
+    font-weight: 500;
+    display: block;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .part-name {
+    font-size: 0.75em;
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .part-desc {
+    font-size: 0.68em;
+    color: var(--ink-muted);
+    display: block;
+    letter-spacing: 0.04em;
+    line-height: 1.4;
+  }
+
+  .part-card:hover .part-desc {
+    color: rgba(255,255,255,0.65);
+  }
+
+  .part-card.coming .part-desc {
+    color: var(--coming);
+  }
+
+  .coming-tag {
+    display: inline-block;
+    font-size: 0.65em;
+    letter-spacing: 0.1em;
+    color: var(--coming);
+    margin-top: 4px;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    margin-top: 48px;
+    font-size: 0.72em;
+    color: var(--ink-muted);
+    text-align: center;
+    letter-spacing: 0.06em;
+  }
+
+  @media (max-width: 400px) {
+    .parts { grid-template-columns: 1fr; max-width: 240px; }
+    .logo-title { font-size: 2em; }
+  }
+</style>
+</head>
+<body>
+
+<a class="back" href="index.html">← Zurück</a>
+
+<!-- Logo -->
+<div class="logo-area">
+  <div class="logo-title">Deutsch Atelier</div>
+  <div class="logo-sub">by Achim</div>
+</div>
+
+<div class="breadcrumb">B2 · Leseverstehen</div>
+<div class="divider"></div>
+
+<div class="section-label">Aufgabe wählen</div>
+
+<div class="parts">
+
+  <a class="part-card" href="b2-lesen-teil1.html">
+    <span class="part-nr">Teil 1</span>
+    <span class="part-name">Globales Lesen</span>
+    <span class="part-desc">Einen Zeitungsartikel verstehen und Multiple-Choice-Aufgaben lösen</span>
+  </a>
+
+  <a class="part-card" href="b2-lesen-teil2.html">
+    <span class="part-nr">Teil 2</span>
+    <span class="part-name">Zuordnung</span>
+    <span class="part-desc">Texte und Überschriften einander zuordnen</span>
+  </a>
+
+  <a class="part-card coming" href="#">
+    <span class="part-nr">Teil 3</span>
+    <span class="part-name">Detailverstehen</span>
+    <span class="part-desc">Aussagen einem Text zuordnen</span>
+    <span class="coming-tag">demnächst</span>
+  </a>
+
+  <a class="part-card coming" href="#">
+    <span class="part-nr">Teil 4</span>
+    <span class="part-name">Globales Lesen</span>
+    <span class="part-desc">Den Hauptgedanken eines Textes erfassen</span>
+    <span class="coming-tag">demnächst</span>
+  </a>
+
+</div>
+
+<div class="footer">© Deutsch Atelier by Achim · Medellín</div>
+
+</body>
+</html>
