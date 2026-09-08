@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ÖSD B2 – Leseverstehen Teil 1 · Übung 2</title>
+<style>
+  body {
+    font-family: 'Georgia', serif;
+    max-width: 820px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #fafaf8;
+    color: #2c2c2c;
+    line-height: 1.7;
+  }
+  h1 { font-size: 1.3em; border-bottom: 2px solid #333; padding-bottom: 8px; margin-bottom: 6px; }
+  .meta { font-size: 0.85em; color: #666; margin-bottom: 30px; }
+  .anweisung { background: #eef2f7; border-left: 4px solid #4a6fa5; padding: 14px 18px; margin-bottom: 30px; font-size: 0.95em; }
+  .artikel-box { background: #fff; border: 1px solid #ccc; padding: 28px 32px; margin-bottom: 36px; border-radius: 4px; }
+  .artikel-box h2 { font-size: 1.25em; font-weight: bold; margin-bottom: 6px; color: #2c2c2c; line-height: 1.3; }
+  .artikel-box .quelle { font-size: 0.78em; color: #999; margin-bottom: 20px; font-style: italic; }
+  .artikel-box p { margin-bottom: 14px; font-size: 0.97em; }
+  .aufgaben h2 { font-size: 1em; text-transform: uppercase; letter-spacing: 0.05em; color: #444; margin-bottom: 20px; }
+  .aufgabe { background: #fff; border: 1px solid #ddd; border-radius: 4px; padding: 18px 22px; margin-bottom: 18px; }
+  .aufgabe.beispiel { border-color: #4a6fa5; background: #f0f4fa; }
+  .aufgabe-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .aufgabe-nr { background: #4a6fa5; color: white; font-weight: bold; padding: 3px 10px; border-radius: 3px; font-size: 0.88em; white-space: nowrap; }
+  .aufgabe.beispiel .aufgabe-nr { background: #2c5282; }
+  .beispiel-tag { font-size: 0.75em; color: #4a6fa5; font-style: italic; letter-spacing: 0.04em; }
+  .aufgabe-frage { font-size: 0.97em; font-weight: bold; margin-bottom: 12px; color: #2c2c2c; }
+  .optionen { display: flex; flex-direction: column; gap: 8px; }
+  .option { display: flex; align-items: flex-start; gap: 10px; cursor: pointer; padding: 6px 8px; border-radius: 3px; transition: background 0.15s; font-size: 0.93em; }
+  .option:hover { background: #f0f4fa; }
+  .option input[type="radio"] { margin-top: 3px; accent-color: #4a6fa5; flex-shrink: 0; }
+  .option.correct { background: #e6f4ea; border-left: 3px solid #3a7d44; }
+  .option.wrong { background: #fdecea; border-left: 3px solid #c0392b; }
+  .option.reveal-correct { background: #e6f4ea; border-left: 3px solid #3a7d44; }
+  .back { display: inline-block; margin-bottom: 24px; font-size: 0.82em; color: #666; text-decoration: none; letter-spacing: 0.05em; }
+  .back:hover { color: #2c2c2c; }
+  .loesung-toggle { margin-top: 40px; text-align: center; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn-loesung, .btn-reset { border: none; padding: 12px 28px; font-size: 0.9em; letter-spacing: 0.06em; cursor: pointer; font-family: 'Georgia', serif; transition: background 0.2s; border-radius: 2px; }
+  .btn-loesung { background: #4a6fa5; color: white; }
+  .btn-loesung:hover { background: #3a5a8a; }
+  .btn-reset { background: transparent; color: #666; border: 1px solid #ccc; }
+  .btn-reset:hover { background: #f0f0f0; }
+  .ergebnis-box { margin-top: 24px; text-align: center; font-size: 1.1em; color: #2c2c2c; display: none; }
+  .ergebnis-box.visible { display: block; }
+  .punkte { font-size: 2em; font-weight: bold; color: #4a6fa5; display: block; margin: 8px 0; }
+  @media print { .back, .loesung-toggle, .ergebnis-box { display: none; } }
+  @media (max-width: 500px) { .artikel-box { padding: 18px; } }
+</style>
+</head>
+<body>
+
+<a class="back" href="b2-lesen-teil1.html">← Zurück zur Übungsauswahl</a>
+
+<h1>ÖSD Zertifikat B2 – Leseverstehen Teil 1</h1>
+<div class="meta">Übungsmaterial · Niveau B2 · Urbanisierung und Stadtentwicklung</div>
+
+<div class="anweisung">
+  <strong>Aufgabe:</strong> Lesen Sie den folgenden Zeitungsartikel und beantworten Sie die Aufgaben 1–6.
+  Wählen Sie bei jeder Aufgabe die richtige Antwort (a, b oder c).
+  <br><br>
+  <em>Aufgabe 0 ist ein Beispiel und wird nicht gewertet.</em>
+</div>
+
+<div class="artikel-box">
+  <h2>Die Stadt als Versprechen – Urbanisierung zwischen Chance und Überforderung</h2>
+  <div class="quelle">Fiktiver Artikel · Übungsmaterial Deutsch Atelier</div>
+
+  <p>Noch nie in der Geschichte der Menschheit lebten so viele Menschen in Städten wie heute. Laut Schätzungen der Vereinten Nationen wird bis 2050 rund zwei Drittel der Weltbevölkerung in urbanen Räumen wohnen. Was einst ein langsamer historischer Prozess war, vollzieht sich heute in manchen Regionen der Welt mit atemberaubender Geschwindigkeit – vor allem in Afrika und Südostasien, wo täglich Tausende Menschen vom Land in die Stadt ziehen, auf der Suche nach Arbeit, Bildung und einem besseren Leben.</p>
+
+  <p>Die Gründe für diesen Zuzug sind vielfältig. Städte bieten eine Infrastruktur, die ländliche Gebiete oft nicht leisten können: Krankenhäuser, Schulen, öffentlicher Nahverkehr und ein breiteres Arbeitsangebot. Für viele Menschen, insbesondere für Frauen und Jugendliche, bedeutet die Stadt auch mehr persönliche Freiheit und gesellschaftliche Teilhabe. Studien zeigen, dass Bildungsniveau und Einkommen in städtischen Gebieten im Durchschnitt höher sind als auf dem Land – ein Umstand, der den Sog in Richtung Metropolen weiter verstärkt.</p>
+
+  <p>Doch das schnelle Wachstum der Städte bringt enorme Herausforderungen mit sich. In vielen Megastädten des globalen Südens entstehen riesige informelle Siedlungen, sogenannte Slums, in denen Millionen Menschen ohne ausreichende Wasserversorgung, Kanalisation oder rechtliche Absicherung leben. Auch in wohlhabenderen Ländern ist der Wohnraum in Großstädten zur Mangelware geworden: Steigende Mieten verdrängen einkommensschwache Bevölkerungsgruppen an die Stadtränder, wo sie oft weit von ihren Arbeitsplätzen und sozialen Netzwerken entfernt leben.</p>
+
+  <p>Stadtplaner stehen vor der Aufgabe, wachsende Bevölkerungen mit begrenzten Ressourcen zu versorgen und gleichzeitig Lebensqualität zu sichern. Konzepte wie die „15-Minuten-Stadt", in der alle wichtigen Einrichtungen zu Fuß oder per Fahrrad erreichbar sein sollen, gewinnen an Bedeutung. Andere Ansätze setzen auf die Verdichtung bestehender Stadtviertel, um Zersiedelung zu vermeiden und den öffentlichen Raum zu stärken. Einig sind sich die meisten Experten darin, dass nachhaltige Stadtentwicklung nur gelingen kann, wenn Bürgerinnen und Bürger aktiv in Planungsprozesse einbezogen werden.</p>
+
+  <p>Die Stadt bleibt trotz aller Widersprüche ein Ort der Hoffnung – und der Notwendigkeit. Ob sie tatsächlich das Versprechen eines besseren Lebens einlösen kann, hängt weniger von ihrer Größe ab als von der Frage, wie gerecht sie organisiert ist. Wer Zugang zu Wohnraum, Bildung und Mobilität hat, und wer nicht – das entscheidet darüber, ob Urbanisierung zur Chance oder zur Falle wird.</p>
+</div>
+
+<div class="aufgaben">
+  <h2>Aufgaben 0 – 6</h2>
+
+  <!-- Beispiel -->
+  <div class="aufgabe beispiel">
+    <div class="aufgabe-header">
+      <div class="aufgabe-nr">0</div>
+      <span class="beispiel-tag">Beispiel – wird nicht gewertet</span>
+    </div>
+    <div class="aufgabe-frage">Laut dem Artikel wird bis 2050 …</div>
+    <div class="optionen">
+      <label class="option reveal-correct">
+        <input type="radio" name="q0" disabled checked>
+        <span>a) die Mehrheit der Weltbevölkerung in Städten leben.</span>
+      </label>
+      <label class="option">
+        <input type="radio" name="q0" disabled>
+        <span>b) die Landbevölkerung weltweit zunehmen.</span>
+      </label>
+      <label class="option">
+        <input type="radio" name="q0" disabled>
+        <span>c) Urbanisierung hauptsächlich in Europa stattfinden.</span>
+      </label>
+    </div>
+  </div>
+
+  <!-- Aufgabe 1 -->
+  <div class="aufgabe" id="a1">
+    <div class="aufgabe-header"><div class="aufgabe-nr">1</div></div>
+    <div class="aufgabe-frage">Wo vollzieht sich die Urbanisierung laut Artikel besonders schnell?</div>
+    <div class="optionen">
+      <label class="option"><input type="radio" name="q1" value="a"><span>a) In Europa und Nordamerika, wo die Infrastruktur am besten ausgebaut ist.</span></label>
+      <label class="option"><input type="radio" name="q1" value="b"><span>b) In Afrika und Südostasien, wo täglich viele Menschen vom Land in die Stadt ziehen.</span></label>
+      <label class="option"><input type="radio" name="q1" value="c"><span>c) In Südamerika, wo Megastädte besonders stark wachsen.</span></label>
+    </div>
+  </div>
+
+  <!-- Aufgabe 2 -->
+  <div class="aufgabe" id="a2">
+    <div class="aufgabe-header"><div class="aufgabe-nr">2</div></div>
+    <div class="aufgabe-frage">Was bedeutet die Stadt laut Text besonders für Frauen und Jugendliche?</div>
+    <div class="optionen">
+      <label class="option"><input type="radio" name="q2" value="a"><span>a) Mehr persönliche Freiheit und gesellschaftliche Teilhabe.</span></label>
+      <label class="option"><input type="radio" name="q2" value="b"><span>b) Bessere Möglichkeiten, traditionelle Lebensweisen beizubehalten.</span></label>
+      <label class="option"><input type="radio" name="q2" value="c"><span>c) Höhere Sicherheit im Vergleich zum Landleben.</span></label>
+    </div>
+  </div>
+
+  <!-- Aufgabe 3 -->
+  <div class="aufgabe" id="a3">
+    <div class="aufgabe-header"><div class="aufgabe-nr">3</div></div>
+    <div class="aufgabe-frage">Welches Problem beschreibt der dritte Absatz in wohlhabenderen Ländern?</div>
+    <div class="optionen">
+      <label class="option"><input type="radio" name="q3" value="a"><span>a) Mangelnde Wasserversorgung in Großstädten.</span></label>
+      <label class="option"><input type="radio" name="q3" value="b"><span>b) Steigende Mieten, die einkommensschwache Menschen verdrängen.</span></label>
+      <label class="option"><input type="radio" name="q3" value="c"><span>c) Fehlende Schulen und Krankenhäuser in Stadtvierteln.</span></label>
+    </div>
+  </div>
+
+  <!-- Aufgabe 4 -->
+  <div class="aufgabe" id="a4">
+    <div class="aufgabe-header"><div class="aufgabe-nr">4</div></div>
+    <div class="aufgabe-frage">Was versteht man laut Text unter der „15-Minuten-Stadt"?</div>
+    <div class="optionen">
+      <label class="option"><input type="radio" name="q4" value="a"><span>a) Eine Stadt, in der öffentliche Verkehrsmittel alle 15 Minuten fahren.</span></label>
+      <label class="option"><input type="radio" name="q4" value="b"><span>b) Ein Konzept, bei dem alle wichtigen Einrichtungen zu Fuß oder per Rad erreichbar sind.</span></label>
+      <label class="option"><input type="radio" name="q4" value="c"><span>c) Ein Stadtmodell, das Pendeln auf maximal 15 Minuten begrenzt.</span></label>
+    </div>
+  </div>
+
+  <!-- Aufgabe 5 -->
+  <div class="aufgabe" id="a5">
+    <div class="aufgabe-header"><div class="aufgabe-nr">5</div></div>
+    <div class="aufgabe-frage">Worin sind sich laut Text die meisten Experten einig?</div>
+    <div class="optionen">
+      <label class="option"><input type="radio" name="q5" value="a"><span>a) Dass Städte aufhören müssen zu wachsen, um nachhaltig zu sein.</span></label>
+      <label class="option"><input type="radio" name="q5" value="b"><span>b) Dass nachhaltige Stadtentwicklung die aktive Beteiligung der Bürger erfordert.</span></label>
+      <label class="option"><input type="radio" name="q5" value="c"><span>c) Dass Verdichtung die einzig wirksame Lösung gegen Wohnungsmangel ist.</span></label>
+    </div>
+  </div>
+
+  <!-- Aufgabe 6 -->
+  <div class="aufgabe" id="a6">
+    <div class="aufgabe-header"><div class="aufgabe-nr">6</div></div>
+    <div class="aufgabe-frage">Wovon hängt es laut letztem Absatz ab, ob Urbanisierung zur Chance wird?</div>
+    <div class="optionen">
+      <label class="option"><input type="radio" name="q6" value="a"><span>a) Von der Größe der Stadt und ihrer wirtschaftlichen Stärke.</span></label>
+      <label class="option"><input type="radio" name="q6" value="b"><span>b) Davon, wie gerecht der Zugang zu Wohnraum, Bildung und Mobilität organisiert ist.</span></label>
+      <label class="option"><input type="radio" name="q6" value="c"><span>c) Von der Geschwindigkeit, mit der neue Stadtteile gebaut werden.</span></label>
+    </div>
+  </div>
+
+</div>
+
+<div class="loesung-toggle">
+  <button class="btn-loesung" onclick="auswerten()">Auswerten</button>
+  <button class="btn-reset" onclick="reset()">Zurücksetzen</button>
+</div>
+
+<div class="ergebnis-box" id="ergebnis">
+  <span class="punkte" id="punkte-anzeige"></span>
+  <span id="ergebnis-text"></span>
+</div>
+
+<script>
+  const loesungen = { q1: 'b', q2: 'a', q3: 'b', q4: 'b', q5: 'b', q6: 'b' };
+
+  function auswerten() {
+    let punkte = 0;
+    for (const [name, richtig] of Object.entries(loesungen)) {
+      const nr = name.replace('q', 'a');
+      const aufgabe = document.getElementById(nr);
+      const ausgewaehlt = document.querySelector(`input[name="${name}"]:checked`);
+      aufgabe.querySelectorAll('.option').forEach(opt => opt.classList.remove('correct', 'wrong', 'reveal-correct'));
+      aufgabe.querySelectorAll('.option').forEach(opt => {
+        if (opt.querySelector('input').value === richtig) opt.classList.add('reveal-correct');
+      });
+      if (ausgewaehlt) {
+        const gewaehltOpt = ausgewaehlt.closest('.option');
+        if (ausgewaehlt.value === richtig) { gewaehltOpt.classList.add('correct'); punkte++; }
+        else { gewaehltOpt.classList.add('wrong'); }
+      }
+    }
+    const ergebnis = document.getElementById('ergebnis');
+    document.getElementById('punkte-anzeige').textContent = `${punkte} / 6`;
+    const texte = ['Noch etwas üben! 💪', 'Guter Anfang! 📖', 'Solide! Weiter so! 👍', 'Gut gemacht! 😊', 'Sehr gut! 🎉', 'Fast perfekt! ⭐', 'Ausgezeichnet! 🏆'];
+    document.getElementById('ergebnis-text').textContent = texte[punkte];
+    ergebnis.classList.add('visible');
+    ergebnis.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function reset() {
+    document.querySelectorAll('input[type="radio"]:not([disabled])').forEach(r => r.checked = false);
+    document.querySelectorAll('.option').forEach(o => o.classList.remove('correct', 'wrong', 'reveal-correct'));
+    document.getElementById('ergebnis').classList.remove('visible');
+  }
+</script>
+
+</body>
+</html>
