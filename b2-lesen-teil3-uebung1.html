@@ -21,58 +21,33 @@
     overflow: hidden;
     position: relative;
   }
-
-  /* Simulierter abgeschnittener Rand */
   .artikel-container::after {
     content: '';
     position: absolute;
     top: 0; right: 0;
-    width: 80px;
-    height: 100%;
-    background: linear-gradient(to right, transparent, #fff 60%);
+    width: 60px; height: 100%;
+    background: linear-gradient(to right, transparent, #fff 70%);
     pointer-events: none;
   }
-
-  .artikel-titel { font-size: 1.15em; font-weight: bold; margin-bottom: 4px; padding-right: 90px; line-height: 1.3; }
+  .artikel-titel { font-size: 1.15em; font-weight: bold; margin-bottom: 4px; padding-right: 80px; line-height: 1.3; }
   .artikel-quelle { font-size: 0.78em; color: #999; font-style: italic; margin-bottom: 20px; }
-
   .zeilen-wrap { font-size: 0.96em; }
-
-  .zeile {
-    display: flex;
-    align-items: baseline;
-    min-height: 1.9em;
-    border-bottom: 1px solid #f0f0f0;
-  }
+  .zeile { display: flex; align-items: baseline; min-height: 1.9em; border-bottom: 1px solid #f0f0f0; }
   .zeile:last-child { border-bottom: none; }
-
-  .zeile-nr {
-    font-size: 0.70em; color: #bbb; width: 26px; flex-shrink: 0;
-    text-align: right; padding-right: 10px; font-family: monospace;
-    user-select: none; padding-top: 2px;
-  }
-
+  .zeile-nr { font-size: 0.70em; color: #bbb; width: 26px; flex-shrink: 0; text-align: right; padding-right: 10px; font-family: monospace; user-select: none; padding-top: 2px; }
   .zeile-text { white-space: nowrap; }
 
   .aufgaben-box { background: #fff; border: 1px solid #ccc; border-radius: 4px; padding: 22px 28px; margin-bottom: 30px; }
   .aufgaben-box h2 { font-size: 1em; text-transform: uppercase; letter-spacing: 0.05em; color: #444; margin-bottom: 18px; }
-
   .aufgabe-reihe { display: grid; grid-template-columns: 28px 1fr; align-items: center; gap: 0 12px; margin-bottom: 10px; }
   .aufgabe-nr-label { font-size: 0.85em; color: #4a6fa5; font-weight: bold; text-align: right; }
   .aufgabe-reihe.beispiel .aufgabe-nr-label { color: #2c5282; }
-
   .eingabe-wrap { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
   .vortext { font-size: 0.93em; color: #444; }
-  .eingabe-feld {
-    border: none; border-bottom: 2px solid #4a6fa5;
-    width: 52px; font-size: 0.95em; font-family: 'Georgia', serif;
-    text-align: center; background: transparent; outline: none;
-    color: #2c2c2c; padding: 2px 4px;
-  }
+  .eingabe-feld { border: none; border-bottom: 2px solid #4a6fa5; width: 52px; font-size: 0.95em; font-family: 'Georgia', serif; text-align: center; background: transparent; outline: none; color: #2c2c2c; padding: 2px 4px; }
   .eingabe-feld.richtig { border-color: #3a7d44; background: #e6f4ea; color: #2c7a3a; }
   .eingabe-feld.falsch  { border-color: #c0392b; background: #fdecea; color: #c0392b; }
   .eingabe-feld.beispiel-feld { border-color: #2c5282; background: #f0f4fa; color: #2c5282; }
-  .nachtext { font-size: 0.93em; color: #aaa; }
   .beispiel-tag { font-size: 0.72em; color: #4a6fa5; font-style: italic; }
 
   .loesung-toggle { margin-top: 32px; text-align: center; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
@@ -84,17 +59,14 @@
   .ergebnis-box { margin-top: 24px; text-align: center; font-size: 1.1em; color: #2c2c2c; display: none; }
   .ergebnis-box.visible { display: block; }
   .punkte { font-size: 2em; font-weight: bold; color: #4a6fa5; display: block; margin: 8px 0; }
-
   @media print { .back, .loesung-toggle, .ergebnis-box { display: none; } }
 </style>
 </head>
 <body>
 
 <a class="back" href="b2-lesen-teil3.html">← Zurück zur Übungsauswahl</a>
-
 <h1>ÖSD Zertifikat B2 – Leseverstehen Teil 3</h1>
 <div class="meta">Übungsmaterial · Niveau B2 · Ehrenamt in Deutschland</div>
-
 <div class="anweisung">
   <strong>Aufgabe:</strong> Lesen Sie den folgenden Zeitungsartikel. Der rechte Rand des Textes ist abgeschnitten.
   Ergänzen Sie das fehlende Wortende (maximal 3 Buchstaben) in den Aufgaben 1–29. Aufgabe 0 ist ein Beispiel.
@@ -103,42 +75,40 @@
 <div class="artikel-container">
   <div class="artikel-titel">Helfen als Lebensstil – Ehrenamt im Wandel</div>
   <div class="artikel-quelle">Fiktiver Artikel · Übungsmaterial Deutsch Atelier</div>
-
   <div class="zeilen-wrap">
-    <div class="zeile"><span class="zeile-nr">0</span><span class="zeile-text">In Deutschland engagieren sich Millionen Menschen freiwil<strong style="color:#2c5282">lig</strong></span></div>
-    <div class="zeile"><span class="zeile-nr">1</span><span class="zeile-text">und ohne Bezahlung für andere. Ob in Sportverei</span></div>
-    <div class="zeile"><span class="zeile-nr">2</span><span class="zeile-text">Feuerwehren oder sozialen Einrichtungen – das Ehren</span></div>
-    <div class="zeile"><span class="zeile-nr">3</span><span class="zeile-text">ist tief in der deutschen Gesellschaft verank</span></div>
-    <div class="zeile"><span class="zeile-nr">4</span><span class="zeile-text">Laut Studien ist jeder dritte Erwachsene ehrenamtl</span></div>
-    <div class="zeile"><span class="zeile-nr">5</span><span class="zeile-text">tätig. Das macht Deutschland zu einem der engagi</span></div>
-    <div class="zeile"><span class="zeile-nr">6</span><span class="zeile-text">ertesten Länder in Eur</span></div>
-    <div class="zeile"><span class="zeile-nr">7</span><span class="zeile-text">Doch was treibt Menschen dazu an, ihre Freizeit für and</span></div>
-    <div class="zeile"><span class="zeile-nr">8</span><span class="zeile-text">einzusetzen? Die Motivationen sind vielf</span></div>
-    <div class="zeile"><span class="zeile-nr">9</span><span class="zeile-text">Viele Ehrenamtliche berichten, dass ihnen das Gefühl von Sin</span></div>
-    <div class="zeile"><span class="zeile-nr">10</span><span class="zeile-text">besonders wichtig ist – etwas zu tun, das über die eigenen Inter</span></div>
-    <div class="zeile"><span class="zeile-nr">11</span><span class="zeile-text">essen hinausgeht. Andere schätzen die sozialen Kont</span></div>
-    <div class="zeile"><span class="zeile-nr">12</span><span class="zeile-text">akte, die freiwillige Arbeit mit sich bri</span></div>
-    <div class="zeile"><span class="zeile-nr">13</span><span class="zeile-text">sowie das Gefühl der Zugehörigkeit zu einer Gemein</span></div>
-    <div class="zeile"><span class="zeile-nr">14</span><span class="zeile-text">schaft. Für Jugendliche bietet das Ehrenamt zudem die Mögli</span></div>
-    <div class="zeile"><span class="zeile-nr">15</span><span class="zeile-text">chkeit, praktische Fähigkeiten zu erw</span></div>
-    <div class="zeile"><span class="zeile-nr">16</span><span class="zeile-text">erben und den eigenen Lebenslauf zu bereich</span></div>
-    <div class="zeile"><span class="zeile-nr">17</span><span class="zeile-text">ern. Arbeitgeber sehen freiwilliges Engagement als Zeich</span></div>
-    <div class="zeile"><span class="zeile-nr">18</span><span class="zeile-text">en von Verantwortung und sozialer Kompet</span></div>
-    <div class="zeile"><span class="zeile-nr">19</span><span class="zeile-text">enz. Dennoch steht das Ehrenamt vor großen Herausford</span></div>
-    <div class="zeile"><span class="zeile-nr">20</span><span class="zeile-text">erungen. Der Nachwuchs fehlt in vielen Organ</span></div>
-    <div class="zeile"><span class="zeile-nr">21</span><span class="zeile-text">isationen, da jüngere Generationen beruflich stärker eingeb</span></div>
-    <div class="zeile"><span class="zeile-nr">22</span><span class="zeile-text">unden sind. Hinzu kommt eine wachsende bürokratische Bel</span></div>
-    <div class="zeile"><span class="zeile-nr">23</span><span class="zeile-text">astung, die viele potenzielle Ehrenamtliche abschr</span></div>
-    <div class="zeile"><span class="zeile-nr">24</span><span class="zeile-text">eckt. Politikerinnen fordern deshalb bessere Rahmenbed</span></div>
-    <div class="zeile"><span class="zeile-nr">25</span><span class="zeile-text">ingungen, etwa durch steuerliche Vergünst</span></div>
-    <div class="zeile"><span class="zeile-nr">26</span><span class="zeile-text">igungen oder flexible Freistellun</span></div>
-    <div class="zeile"><span class="zeile-nr">27</span><span class="zeile-text">gen vom Beruf. Eins ist jedoch sich</span></div>
-    <div class="zeile"><span class="zeile-nr">28</span><span class="zeile-text">er: Eine Gesellschaft, die nur auf staatliche Leist</span></div>
-    <div class="zeile"><span class="zeile-nr">29</span><span class="zeile-text">ungen setzt, verliert einen wichtigen Teil ihres sozialen Zus</span></div>
+    <div class="zeile"><span class="zeile-nr">0</span><span class="zeile-text">In Deutschland engagieren sich Millionen von Menschen freiwil<strong style="color:#2c5282">lig</strong></span></div>
+    <div class="zeile"><span class="zeile-nr">1</span><span class="zeile-text">und ohne Bezahlung für andere. Das Ehren</span></div>
+    <div class="zeile"><span class="zeile-nr">2</span><span class="zeile-text">amt ist tief in der deutschen Gesellschaft verank</span></div>
+    <div class="zeile"><span class="zeile-nr">3</span><span class="zeile-text">ert. Ob in Sportvereinen, Feuerwehren oder bei sozial</span></div>
+    <div class="zeile"><span class="zeile-nr">4</span><span class="zeile-text">en Projekten – laut Studien ist fast jeder dritte Bürg</span></div>
+    <div class="zeile"><span class="zeile-nr">5</span><span class="zeile-text">er ehrenamtlich tätig. Das macht Deutschland zu einem der</span></div>
+    <div class="zeile"><span class="zeile-nr">6</span><span class="zeile-text">engagiertesten Länder Eur</span></div>
+    <div class="zeile"><span class="zeile-nr">7</span><span class="zeile-text">opas. Doch was treibt Menschen dazu an, ihre Freizeit für and</span></div>
+    <div class="zeile"><span class="zeile-nr">8</span><span class="zeile-text">ere einzusetzen? Die Motivationen sind vie</span></div>
+    <div class="zeile"><span class="zeile-nr">9</span><span class="zeile-text">lfältig. Viele berichten, dass ihnen das Gefühl von Sin</span></div>
+    <div class="zeile"><span class="zeile-nr">10</span><span class="zeile-text">n besonders wichtig ist – etwas zu tun, das über die eig</span></div>
+    <div class="zeile"><span class="zeile-nr">11</span><span class="zeile-text">enen Interessen hinausgeht. Andere schätzen die sozialen Bon</span></div>
+    <div class="zeile"><span class="zeile-nr">12</span><span class="zeile-text">ds, die freiwillige Arbeit mit sich bri</span></div>
+    <div class="zeile"><span class="zeile-nr">13</span><span class="zeile-text">ngt, sowie das Gefühl der Zugehörigkeit zu einer Gru</span></div>
+    <div class="zeile"><span class="zeile-nr">14</span><span class="zeile-text">ppe. Für Jugendliche bietet das Ehrenamt die Chan</span></div>
+    <div class="zeile"><span class="zeile-nr">15</span><span class="zeile-text">ce, praktische Fähigkeiten zu erwerben und den eigenen Weg</span></div>
+    <div class="zeile"><span class="zeile-nr">16</span><span class="zeile-text">zu bereichern. Arbeitgeber sehen es als Zeich</span></div>
+    <div class="zeile"><span class="zeile-nr">17</span><span class="zeile-text">en von Reife und sozialer Verantw</span></div>
+    <div class="zeile"><span class="zeile-nr">18</span><span class="zeile-text">ortung. Dennoch steht das Ehrenamt vor großen Probl</span></div>
+    <div class="zeile"><span class="zeile-nr">19</span><span class="zeile-text">emen. Der Nachwuchs fehlt in vielen Ver</span></div>
+    <div class="zeile"><span class="zeile-nr">20</span><span class="zeile-text">einen, da jüngere Generationen beruflich stärker eingeb</span></div>
+    <div class="zeile"><span class="zeile-nr">21</span><span class="zeile-text">unden sind als frühere. Hinzu kommt eine bürokratische Las</span></div>
+    <div class="zeile"><span class="zeile-nr">22</span><span class="zeile-text">t, die viele potenzielle Helfer abschr</span></div>
+    <div class="zeile"><span class="zeile-nr">23</span><span class="zeile-text">eckt. Politikerinnen fordern deshalb bessere Bedingu</span></div>
+    <div class="zeile"><span class="zeile-nr">24</span><span class="zeile-text">ngen, etwa durch steuerliche Vorte</span></div>
+    <div class="zeile"><span class="zeile-nr">25</span><span class="zeile-text">ile oder flexible Freistell</span></div>
+    <div class="zeile"><span class="zeile-nr">26</span><span class="zeile-text">ungen vom Beruf. Eins ist sich</span></div>
+    <div class="zeile"><span class="zeile-nr">27</span><span class="zeile-text">er: Freiwilliges Engagement stärkt den sozialen Zus</span></div>
+    <div class="zeile"><span class="zeile-nr">28</span><span class="zeile-text">ammenhalt einer Gesellschaft auf eine Wei</span></div>
+    <div class="zeile"><span class="zeile-nr">29</span><span class="zeile-text">se, die kein staatliches Prog</span></div>
   </div>
 </div>
 
-<!-- Aufgaben -->
 <div class="aufgaben-box">
   <h2>Aufgaben 0 – 29</h2>
 
@@ -151,35 +121,35 @@
     </div>
   </div>
 
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">1</span><div class="eingabe-wrap"><span class="vortext">Sportverei</span><input class="eingabe-feld" id="f1" data-loesung="nen" placeholder="___"><span class="nachtext">nen,</span></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">2</span><div class="eingabe-wrap"><span class="vortext">Ehren</span><input class="eingabe-feld" id="f2" data-loesung="amt" placeholder="___"></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">3</span><div class="eingabe-wrap"><span class="vortext">verank</span><input class="eingabe-feld" id="f3" data-loesung="ert" placeholder="___"><span class="nachtext">ert.</span></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">4</span><div class="eingabe-wrap"><span class="vortext">ehrenamtl</span><input class="eingabe-feld" id="f4" data-loesung="ich" placeholder="___"></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">5</span><div class="eingabe-wrap"><span class="vortext">engagi</span><input class="eingabe-feld" id="f5" data-loesung="ert" placeholder="___"></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">6</span><div class="eingabe-wrap"><span class="vortext">Eur</span><input class="eingabe-feld" id="f6" data-loesung="opa" placeholder="___"><span class="nachtext">opa.</span></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">1</span><div class="eingabe-wrap"><span class="vortext">Ehren</span><input class="eingabe-feld" id="f1" data-loesung="amt" placeholder="___"></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">2</span><div class="eingabe-wrap"><span class="vortext">verank</span><input class="eingabe-feld" id="f2" data-loesung="ert" placeholder="___"></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">3</span><div class="eingabe-wrap"><span class="vortext">sozial</span><input class="eingabe-feld" id="f3" data-loesung="en" placeholder="__"></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">4</span><div class="eingabe-wrap"><span class="vortext">Bürg</span><input class="eingabe-feld" id="f4" data-loesung="er" placeholder="__"></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">5</span><div class="eingabe-wrap"><span class="vortext">einem der</span><input class="eingabe-feld" id="f5" data-loesung" placeholder="__"></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">6</span><div class="eingabe-wrap"><span class="vortext">Eur</span><input class="eingabe-feld" id="f6" data-loesung="opa" placeholder="___"></div></div>
   <div class="aufgabe-reihe"><span class="aufgabe-nr-label">7</span><div class="eingabe-wrap"><span class="vortext">für and</span><input class="eingabe-feld" id="f7" data-loesung="ere" placeholder="___"></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">8</span><div class="eingabe-wrap"><span class="vortext">vielf</span><input class="eingabe-feld" id="f8" data-loesung="ält" placeholder="___"><span class="nachtext">ältig.</span></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">9</span><div class="eingabe-wrap"><span class="vortext">von Sin</span><input class="eingabe-feld" id="f9" data-loesung="n" placeholder="__"></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">10</span><div class="eingabe-wrap"><span class="vortext">Inter</span><input class="eingabe-feld" id="f10" data-loesung="ess" placeholder="___"><span class="nachtext">essen</span></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">11</span><div class="eingabe-wrap"><span class="vortext">Kont</span><input class="eingabe-feld" id="f11" data-loesung="akt" placeholder="___"><span class="nachtext">akte</span></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">12</span><div class="eingabe-wrap"><span class="vortext">bri</span><input class="eingabe-feld" id="f12" data-loesung="ngt" placeholder="___"><span class="nachtext">ngt,</span></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">13</span><div class="eingabe-wrap"><span class="vortext">Gemein</span><input class="eingabe-feld" id="f13" data-loesung="sch" placeholder="___"><span class="nachtext">schaft.</span></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">14</span><div class="eingabe-wrap"><span class="vortext">Mögli</span><input class="eingabe-feld" id="f14" data-loesung="ch" placeholder="___"><span class="nachtext">chkeit,</span></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">15</span><div class="eingabe-wrap"><span class="vortext">zu erw</span><input class="eingabe-feld" id="f15" data-loesung="erb" placeholder="___"><span class="nachtext">erben</span></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">16</span><div class="eingabe-wrap"><span class="vortext">zu bereich</span><input class="eingabe-feld" id="f16" data-loesung="ern" placeholder="___"><span class="nachtext">ern.</span></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">17</span><div class="eingabe-wrap"><span class="vortext">als Zeich</span><input class="eingabe-feld" id="f17" data-loesung="en" placeholder="__"><span class="nachtext">en</span></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">18</span><div class="eingabe-wrap"><span class="vortext">Kompet</span><input class="eingabe-feld" id="f18" data-loesung="enz" placeholder="___"><span class="nachtext">enz.</span></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">19</span><div class="eingabe-wrap"><span class="vortext">Herausford</span><input class="eingabe-feld" id="f19" data-loesung="eru" placeholder="___"><span class="nachtext">erungen.</span></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">20</span><div class="eingabe-wrap"><span class="vortext">Organ</span><input class="eingabe-feld" id="f20" data-loesung="isa" placeholder="___"><span class="nachtext">isationen,</span></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">21</span><div class="eingabe-wrap"><span class="vortext">eingeb</span><input class="eingabe-feld" id="f21" data-loesung="und" placeholder="___"><span class="nachtext">unden</span></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">22</span><div class="eingabe-wrap"><span class="vortext">Bel</span><input class="eingabe-feld" id="f22" data-loesung="ast" placeholder="___"><span class="nachtext">astung,</span></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">23</span><div class="eingabe-wrap"><span class="vortext">abschr</span><input class="eingabe-feld" id="f23" data-loesung="eck" placeholder="___"><span class="nachtext">eckt.</span></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">24</span><div class="eingabe-wrap"><span class="vortext">Rahmenbed</span><input class="eingabe-feld" id="f24" data-loesung="ing" placeholder="___"><span class="nachtext">ingungen,</span></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">25</span><div class="eingabe-wrap"><span class="vortext">Vergünst</span><input class="eingabe-feld" id="f25" data-loesung="igu" placeholder="___"><span class="nachtext">igungen</span></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">26</span><div class="eingabe-wrap"><span class="vortext">Freistellun</span><input class="eingabe-feld" id="f26" data-loesung="gen" placeholder="___"></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">27</span><div class="eingabe-wrap"><span class="vortext">sich</span><input class="eingabe-feld" id="f27" data-loesung="er" placeholder="__"><span class="nachtext">er:</span></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">28</span><div class="eingabe-wrap"><span class="vortext">Leist</span><input class="eingabe-feld" id="f28" data-loesung="ung" placeholder="___"><span class="nachtext">ungen</span></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">29</span><div class="eingabe-wrap"><span class="vortext">Zus</span><input class="eingabe-feld" id="f29" data-loesung="amm" placeholder="___"><span class="nachtext">ammenhalts.</span></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">8</span><div class="eingabe-wrap"><span class="vortext">sind vie</span><input class="eingabe-feld" id="f8" data-loesung="lf" placeholder="__"></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">9</span><div class="eingabe-wrap"><span class="vortext">von Sin</span><input class="eingabe-feld" id="f9" data-loesung="n" placeholder="_"></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">10</span><div class="eingabe-wrap"><span class="vortext">die eig</span><input class="eingabe-feld" id="f10" data-loesung="en" placeholder="__"></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">11</span><div class="eingabe-wrap"><span class="vortext">sozialen Bon</span><input class="eingabe-feld" id="f11" data-loesung="ds" placeholder="__"></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">12</span><div class="eingabe-wrap"><span class="vortext">mit sich bri</span><input class="eingabe-feld" id="f12" data-loesung="ngt" placeholder="___"></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">13</span><div class="eingabe-wrap"><span class="vortext">einer Gru</span><input class="eingabe-feld" id="f13" data-loesung="ppe" placeholder="___"></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">14</span><div class="eingabe-wrap"><span class="vortext">die Chan</span><input class="eingabe-feld" id="f14" data-loesung="ce" placeholder="__"></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">15</span><div class="eingabe-wrap"><span class="vortext">eigenen Weg</span><input class="eingabe-feld" id="f15" data-loesung" placeholder="__"></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">16</span><div class="eingabe-wrap"><span class="vortext">als Zeich</span><input class="eingabe-feld" id="f16" data-loesung="en" placeholder="__"></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">17</span><div class="eingabe-wrap"><span class="vortext">Verantw</span><input class="eingabe-feld" id="f17" data-loesung="ort" placeholder="___"></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">18</span><div class="eingabe-wrap"><span class="vortext">großen Probl</span><input class="eingabe-feld" id="f18" data-loesung="em" placeholder="__"></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">19</span><div class="eingabe-wrap"><span class="vortext">vielen Ver</span><input class="eingabe-feld" id="f19" data-loesung="ein" placeholder="___"></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">20</span><div class="eingabe-wrap"><span class="vortext">stärker eingeb</span><input class="eingabe-feld" id="f20" data-loesung="und" placeholder="___"></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">21</span><div class="eingabe-wrap"><span class="vortext">bürokratische Las</span><input class="eingabe-feld" id="f21" data-loesung="t" placeholder="_"></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">22</span><div class="eingabe-wrap"><span class="vortext">Helfer abschr</span><input class="eingabe-feld" id="f22" data-loesung="eck" placeholder="___"></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">23</span><div class="eingabe-wrap"><span class="vortext">bessere Bedingu</span><input class="eingabe-feld" id="f23" data-loesung="ng" placeholder="__"></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">24</span><div class="eingabe-wrap"><span class="vortext">steuerliche Vorte</span><input class="eingabe-feld" id="f24" data-loesung="ile" placeholder="___"></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">25</span><div class="eingabe-wrap"><span class="vortext">flexible Freistell</span><input class="eingabe-feld" id="f25" data-loesung="un" placeholder="__"></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">26</span><div class="eingabe-wrap"><span class="vortext">Eins ist sich</span><input class="eingabe-feld" id="f26" data-loesung="er" placeholder="__"></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">27</span><div class="eingabe-wrap"><span class="vortext">den sozialen Zus</span><input class="eingabe-feld" id="f27" data-loesung="amm" placeholder="___"></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">28</span><div class="eingabe-wrap"><span class="vortext">auf eine Wei</span><input class="eingabe-feld" id="f28" data-loesung="se" placeholder="__"></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">29</span><div class="eingabe-wrap"><span class="vortext">staatliches Prog</span><input class="eingabe-feld" id="f29" data-loesung="ram" placeholder="___"></div></div>
 </div>
 
 <div class="loesung-toggle">
@@ -197,7 +167,7 @@
     let punkte = 0;
     document.querySelectorAll('.eingabe-feld:not(.beispiel-feld)').forEach(feld => {
       const eingabe = feld.value.trim().toLowerCase();
-      const loesung = feld.dataset.loesung.toLowerCase();
+      const loesung = (feld.dataset.loesung || '').toLowerCase();
       feld.classList.remove('richtig', 'falsch');
       if (eingabe === loesung) { feld.classList.add('richtig'); punkte++; }
       else { feld.classList.add('falsch'); }
