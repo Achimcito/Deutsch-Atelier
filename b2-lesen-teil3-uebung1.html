@@ -5,22 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ÖSD B2 – Leseverstehen Teil 3 · Übung 1</title>
 <style>
-  body {
-    font-family: 'Georgia', serif;
-    max-width: 820px;
-    margin: 40px auto;
-    padding: 20px;
-    background: #fafaf8;
-    color: #2c2c2c;
-    line-height: 1.7;
-  }
+  body { font-family: 'Georgia', serif; max-width: 820px; margin: 40px auto; padding: 20px; background: #fafaf8; color: #2c2c2c; line-height: 1.7; }
   h1 { font-size: 1.3em; border-bottom: 2px solid #333; padding-bottom: 8px; margin-bottom: 6px; }
   .meta { font-size: 0.85em; color: #666; margin-bottom: 30px; }
   .anweisung { background: #eef2f7; border-left: 4px solid #4a6fa5; padding: 14px 18px; margin-bottom: 30px; font-size: 0.95em; }
   .back { display: inline-block; margin-bottom: 24px; font-size: 0.82em; color: #666; text-decoration: none; letter-spacing: 0.05em; }
   .back:hover { color: #2c2c2c; }
 
-  /* Zeitungsartikel-Optik mit abgeschnittenem rechten Rand */
   .artikel-container {
     background: #fff;
     border: 1px solid #ccc;
@@ -31,167 +22,70 @@
     position: relative;
   }
 
-  .artikel-titel {
-    font-size: 1.2em;
-    font-weight: bold;
-    margin-bottom: 6px;
-    padding-right: 32px;
-    line-height: 1.3;
+  /* Simulierter abgeschnittener Rand */
+  .artikel-container::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 80px;
+    height: 100%;
+    background: linear-gradient(to right, transparent, #fff 60%);
+    pointer-events: none;
   }
 
-  .artikel-quelle {
-    font-size: 0.78em;
-    color: #999;
-    font-style: italic;
-    margin-bottom: 24px;
-  }
+  .artikel-titel { font-size: 1.15em; font-weight: bold; margin-bottom: 4px; padding-right: 90px; line-height: 1.3; }
+  .artikel-quelle { font-size: 0.78em; color: #999; font-style: italic; margin-bottom: 20px; }
 
-  /* Jede Zeile als eigene Einheit */
-  .zeilen-wrap {
-    font-size: 0.96em;
-    line-height: 1;
-  }
+  .zeilen-wrap { font-size: 0.96em; }
 
   .zeile {
     display: flex;
-    align-items: center;
-    height: 2.1em;
+    align-items: baseline;
+    min-height: 1.9em;
     border-bottom: 1px solid #f0f0f0;
   }
-
   .zeile:last-child { border-bottom: none; }
 
   .zeile-nr {
-    font-size: 0.72em;
-    color: #bbb;
-    width: 28px;
-    flex-shrink: 0;
-    text-align: right;
-    padding-right: 10px;
-    font-family: monospace;
-    user-select: none;
+    font-size: 0.70em; color: #bbb; width: 26px; flex-shrink: 0;
+    text-align: right; padding-right: 10px; font-family: monospace;
+    user-select: none; padding-top: 2px;
   }
 
-  .zeile-text {
-    flex: 1;
-    white-space: nowrap;
-    overflow: hidden;
-    /* simuliert abgeschnittenen rechten Rand */
-    -webkit-mask-image: linear-gradient(to right, black 78%, transparent 95%);
-    mask-image: linear-gradient(to right, black 78%, transparent 95%);
-  }
+  .zeile-text { white-space: nowrap; }
 
-  .zeile-text.beispiel-zeile {
-    -webkit-mask-image: none;
-    mask-image: none;
-  }
+  .aufgaben-box { background: #fff; border: 1px solid #ccc; border-radius: 4px; padding: 22px 28px; margin-bottom: 30px; }
+  .aufgaben-box h2 { font-size: 1em; text-transform: uppercase; letter-spacing: 0.05em; color: #444; margin-bottom: 18px; }
 
-  /* Lücke im Text */
-  .luecke {
-    display: inline-block;
-    border-bottom: 2px solid #4a6fa5;
-    min-width: 40px;
-    color: transparent;
-    user-select: none;
-  }
+  .aufgabe-reihe { display: grid; grid-template-columns: 28px 1fr; align-items: center; gap: 0 12px; margin-bottom: 10px; }
+  .aufgabe-nr-label { font-size: 0.85em; color: #4a6fa5; font-weight: bold; text-align: right; }
+  .aufgabe-reihe.beispiel .aufgabe-nr-label { color: #2c5282; }
 
-  /* Aufgabenbereich */
-  .aufgaben-box {
-    background: #fff;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 22px 28px;
-    margin-bottom: 30px;
-  }
-
-  .aufgaben-box h2 {
-    font-size: 1em;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: #444;
-    margin-bottom: 18px;
-  }
-
-  .aufgabe-reihe {
-    display: grid;
-    grid-template-columns: 28px 1fr;
-    align-items: center;
-    gap: 0 12px;
-    margin-bottom: 10px;
-  }
-
-  .aufgabe-reihe.beispiel .aufgabe-nr-label {
-    color: #2c5282;
-    font-weight: bold;
-  }
-
-  .aufgabe-nr-label {
-    font-size: 0.85em;
-    color: #4a6fa5;
-    font-weight: bold;
-    text-align: right;
-  }
-
-  .eingabe-wrap {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-
-  .eingabe-wrap .vortext {
-    font-size: 0.93em;
-    color: #444;
-  }
-
+  .eingabe-wrap { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .vortext { font-size: 0.93em; color: #444; }
   .eingabe-feld {
-    border: none;
-    border-bottom: 2px solid #4a6fa5;
-    width: 64px;
-    font-size: 0.95em;
-    font-family: 'Georgia', serif;
-    text-align: center;
-    background: transparent;
-    outline: none;
-    color: #2c2c2c;
-    padding: 2px 4px;
+    border: none; border-bottom: 2px solid #4a6fa5;
+    width: 52px; font-size: 0.95em; font-family: 'Georgia', serif;
+    text-align: center; background: transparent; outline: none;
+    color: #2c2c2c; padding: 2px 4px;
   }
-
   .eingabe-feld.richtig { border-color: #3a7d44; background: #e6f4ea; color: #2c7a3a; }
-  .eingabe-feld.falsch { border-color: #c0392b; background: #fdecea; color: #c0392b; }
+  .eingabe-feld.falsch  { border-color: #c0392b; background: #fdecea; color: #c0392b; }
   .eingabe-feld.beispiel-feld { border-color: #2c5282; background: #f0f4fa; color: #2c5282; }
+  .nachtext { font-size: 0.93em; color: #aaa; }
+  .beispiel-tag { font-size: 0.72em; color: #4a6fa5; font-style: italic; }
 
-  .beispiel-tag {
-    font-size: 0.72em;
-    color: #4a6fa5;
-    font-style: italic;
-  }
-
-  /* Buttons */
-  .loesung-toggle {
-    margin-top: 32px;
-    text-align: center;
-    display: flex;
-    gap: 12px;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  .btn-loesung, .btn-reset {
-    border: none; padding: 12px 28px; font-size: 0.9em;
-    letter-spacing: 0.06em; cursor: pointer;
-    font-family: 'Georgia', serif; transition: background 0.2s; border-radius: 2px;
-  }
+  .loesung-toggle { margin-top: 32px; text-align: center; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn-loesung, .btn-reset { border: none; padding: 12px 28px; font-size: 0.9em; letter-spacing: 0.06em; cursor: pointer; font-family: 'Georgia', serif; transition: background 0.2s; border-radius: 2px; }
   .btn-loesung { background: #4a6fa5; color: white; }
   .btn-loesung:hover { background: #3a5a8a; }
   .btn-reset { background: transparent; color: #666; border: 1px solid #ccc; }
   .btn-reset:hover { background: #f0f0f0; }
-
   .ergebnis-box { margin-top: 24px; text-align: center; font-size: 1.1em; color: #2c2c2c; display: none; }
   .ergebnis-box.visible { display: block; }
   .punkte { font-size: 2em; font-weight: bold; color: #4a6fa5; display: block; margin: 8px 0; }
 
   @media print { .back, .loesung-toggle, .ergebnis-box { display: none; } }
-  @media (max-width: 500px) { .artikel-container { padding: 16px 0 16px 16px; } }
 </style>
 </head>
 <body>
@@ -203,137 +97,44 @@
 
 <div class="anweisung">
   <strong>Aufgabe:</strong> Lesen Sie den folgenden Zeitungsartikel. Der rechte Rand des Textes ist abgeschnitten.
-  Ergänzen Sie das fehlende Wortende in den Aufgaben 1–29. Aufgabe 0 ist ein Beispiel.
+  Ergänzen Sie das fehlende Wortende (maximal 3 Buchstaben) in den Aufgaben 1–29. Aufgabe 0 ist ein Beispiel.
 </div>
 
-<!-- Artikel mit abgeschnittenem Rand -->
 <div class="artikel-container">
   <div class="artikel-titel">Helfen als Lebensstil – Ehrenamt im Wandel</div>
   <div class="artikel-quelle">Fiktiver Artikel · Übungsmaterial Deutsch Atelier</div>
 
   <div class="zeilen-wrap">
-
-    <div class="zeile">
-      <span class="zeile-nr">0</span>
-      <span class="zeile-text beispiel-zeile">In Deutschland engagieren sich Millionen von Menschen freiwil<strong style="color:#2c5282">lig</strong></span>
-    </div>
-    <div class="zeile">
-      <span class="zeile-nr">1</span>
-      <span class="zeile-text">und ohne Bezahlung für andere. Ob in Sportverei</span>
-    </div>
-    <div class="zeile">
-      <span class="zeile-nr">2</span>
-      <span class="zeile-text">Feuerwehren, sozialen Einrichtungen oder Nachbarschaftsinitiat</span>
-    </div>
-    <div class="zeile">
-      <span class="zeile-nr">3</span>
-      <span class="zeile-text">– das Ehrenamt ist tief in der deutschen Gesellsch</span>
-    </div>
-    <div class="zeile">
-      <span class="zeile-nr">4</span>
-      <span class="zeile-text">verankert. Laut aktuellen Studien ist jeder dritte Erwa</span>
-    </div>
-    <div class="zeile">
-      <span class="zeile-nr">5</span>
-      <span class="zeile-text">ehrenamtlich tätig, was Deutschland zu einem der engagiert</span>
-    </div>
-    <div class="zeile">
-      <span class="zeile-nr">6</span>
-      <span class="zeile-text">Länder in Europa macht. Doch was treibt Menschen d</span>
-    </div>
-    <div class="zeile">
-      <span class="zeile-nr">7</span>
-      <span class="zeile-text">an, ihre Freizeit für andere einzuset</span>
-    </div>
-    <div class="zeile">
-      <span class="zeile-nr">8</span>
-      <span class="zeile-text">Die Motivationen sind vielfältig. Viele Ehrenamtliche beric</span>
-    </div>
-    <div class="zeile">
-      <span class="zeile-nr">9</span>
-      <span class="zeile-text">dass ihnen das Gefühl von Sinnhaf</span>
-    </div>
-    <div class="zeile">
-      <span class="zeile-nr">10</span>
-      <span class="zeile-text">besonders wichtig ist – etwas zu tun, das über die eig</span>
-    </div>
-    <div class="zeile">
-      <span class="zeile-nr">11</span>
-      <span class="zeile-text">Interessen hinausgeht. Andere schätzen die sozialen Kontak</span>
-    </div>
-    <div class="zeile">
-      <span class="zeile-nr">12</span>
-      <span class="zeile-text">die freiwillige Arbeit mit sich bringt, sowie das Gefü</span>
-    </div>
-    <div class="zeile">
-      <span class="zeile-nr">13</span>
-      <span class="zeile-text">der Zugehörigkeit zu einer Gemeinsch</span>
-    </div>
-    <div class="zeile">
-      <span class="zeile-nr">14</span>
-      <span class="zeile-text">Für Jugendliche bietet das Ehrenamt zudem die Möglichk</span>
-    </div>
-    <div class="zeile">
-      <span class="zeile-nr">15</span>
-      <span class="zeile-text">praktische Fähigkeiten zu erwerben und den eigenen Lebensla</span>
-    </div>
-    <div class="zeile">
-      <span class="zeile-nr">16</span>
-      <span class="zeile-text">zu bereichern. Arbeitgeber sehen freiwilliges Engagem</span>
-    </div>
-    <div class="zeile">
-      <span class="zeile-nr">17</span>
-      <span class="zeile-text">im Lebenslauf zunehmend als Zeichen von Verantwo</span>
-    </div>
-    <div class="zeile">
-      <span class="zeile-nr">18</span>
-      <span class="zeile-text">und sozialer Kompet</span>
-    </div>
-    <div class="zeile">
-      <span class="zeile-nr">19</span>
-      <span class="zeile-text">Dennoch steht das Ehrenamt vor großen Herausford</span>
-    </div>
-    <div class="zeile">
-      <span class="zeile-nr">20</span>
-      <span class="zeile-text">Der Nachwuchs fehlt in vielen Organis</span>
-    </div>
-    <div class="zeile">
-      <span class="zeile-nr">21</span>
-      <span class="zeile-text">da jüngere Generationen mobiler und beruflich stärker eingeb</span>
-    </div>
-    <div class="zeile">
-      <span class="zeile-nr">22</span>
-      <span class="zeile-text">sind als frühere. Hinzu kommt eine wachsende bürokratische Bel</span>
-    </div>
-    <div class="zeile">
-      <span class="zeile-nr">23</span>
-      <span class="zeile-text">die viele potenzielle Ehrenamtliche abschr</span>
-    </div>
-    <div class="zeile">
-      <span class="zeile-nr">24</span>
-      <span class="zeile-text">Politikerinnen und Politiker fordern deshalb bessere Rahmenbedi</span>
-    </div>
-    <div class="zeile">
-      <span class="zeile-nr">25</span>
-      <span class="zeile-text">etwa durch steuerliche Vergünstig</span>
-    </div>
-    <div class="zeile">
-      <span class="zeile-nr">26</span>
-      <span class="zeile-text">oder flexible Freistell</span>
-    </div>
-    <div class="zeile">
-      <span class="zeile-nr">27</span>
-      <span class="zeile-text">vom Beruf. Eins ist jedoch sicher: Eine Gesellsch</span>
-    </div>
-    <div class="zeile">
-      <span class="zeile-nr">28</span>
-      <span class="zeile-text">die nur auf staatliche Leis</span>
-    </div>
-    <div class="zeile">
-      <span class="zeile-nr">29</span>
-      <span class="zeile-text">setzt, verliert einen wichtigen Teil ihres sozialen Zusa</span>
-    </div>
-
+    <div class="zeile"><span class="zeile-nr">0</span><span class="zeile-text">In Deutschland engagieren sich Millionen Menschen freiwil<strong style="color:#2c5282">lig</strong></span></div>
+    <div class="zeile"><span class="zeile-nr">1</span><span class="zeile-text">und ohne Bezahlung für andere. Ob in Sportverei</span></div>
+    <div class="zeile"><span class="zeile-nr">2</span><span class="zeile-text">Feuerwehren oder sozialen Einrichtungen – das Ehren</span></div>
+    <div class="zeile"><span class="zeile-nr">3</span><span class="zeile-text">ist tief in der deutschen Gesellschaft verank</span></div>
+    <div class="zeile"><span class="zeile-nr">4</span><span class="zeile-text">Laut Studien ist jeder dritte Erwachsene ehrenamtl</span></div>
+    <div class="zeile"><span class="zeile-nr">5</span><span class="zeile-text">tätig. Das macht Deutschland zu einem der engagi</span></div>
+    <div class="zeile"><span class="zeile-nr">6</span><span class="zeile-text">ertesten Länder in Eur</span></div>
+    <div class="zeile"><span class="zeile-nr">7</span><span class="zeile-text">Doch was treibt Menschen dazu an, ihre Freizeit für and</span></div>
+    <div class="zeile"><span class="zeile-nr">8</span><span class="zeile-text">einzusetzen? Die Motivationen sind vielf</span></div>
+    <div class="zeile"><span class="zeile-nr">9</span><span class="zeile-text">Viele Ehrenamtliche berichten, dass ihnen das Gefühl von Sin</span></div>
+    <div class="zeile"><span class="zeile-nr">10</span><span class="zeile-text">besonders wichtig ist – etwas zu tun, das über die eigenen Inter</span></div>
+    <div class="zeile"><span class="zeile-nr">11</span><span class="zeile-text">essen hinausgeht. Andere schätzen die sozialen Kont</span></div>
+    <div class="zeile"><span class="zeile-nr">12</span><span class="zeile-text">akte, die freiwillige Arbeit mit sich bri</span></div>
+    <div class="zeile"><span class="zeile-nr">13</span><span class="zeile-text">sowie das Gefühl der Zugehörigkeit zu einer Gemein</span></div>
+    <div class="zeile"><span class="zeile-nr">14</span><span class="zeile-text">schaft. Für Jugendliche bietet das Ehrenamt zudem die Mögli</span></div>
+    <div class="zeile"><span class="zeile-nr">15</span><span class="zeile-text">chkeit, praktische Fähigkeiten zu erw</span></div>
+    <div class="zeile"><span class="zeile-nr">16</span><span class="zeile-text">erben und den eigenen Lebenslauf zu bereich</span></div>
+    <div class="zeile"><span class="zeile-nr">17</span><span class="zeile-text">ern. Arbeitgeber sehen freiwilliges Engagement als Zeich</span></div>
+    <div class="zeile"><span class="zeile-nr">18</span><span class="zeile-text">en von Verantwortung und sozialer Kompet</span></div>
+    <div class="zeile"><span class="zeile-nr">19</span><span class="zeile-text">enz. Dennoch steht das Ehrenamt vor großen Herausford</span></div>
+    <div class="zeile"><span class="zeile-nr">20</span><span class="zeile-text">erungen. Der Nachwuchs fehlt in vielen Organ</span></div>
+    <div class="zeile"><span class="zeile-nr">21</span><span class="zeile-text">isationen, da jüngere Generationen beruflich stärker eingeb</span></div>
+    <div class="zeile"><span class="zeile-nr">22</span><span class="zeile-text">unden sind. Hinzu kommt eine wachsende bürokratische Bel</span></div>
+    <div class="zeile"><span class="zeile-nr">23</span><span class="zeile-text">astung, die viele potenzielle Ehrenamtliche abschr</span></div>
+    <div class="zeile"><span class="zeile-nr">24</span><span class="zeile-text">eckt. Politikerinnen fordern deshalb bessere Rahmenbed</span></div>
+    <div class="zeile"><span class="zeile-nr">25</span><span class="zeile-text">ingungen, etwa durch steuerliche Vergünst</span></div>
+    <div class="zeile"><span class="zeile-nr">26</span><span class="zeile-text">igungen oder flexible Freistellun</span></div>
+    <div class="zeile"><span class="zeile-nr">27</span><span class="zeile-text">gen vom Beruf. Eins ist jedoch sich</span></div>
+    <div class="zeile"><span class="zeile-nr">28</span><span class="zeile-text">er: Eine Gesellschaft, die nur auf staatliche Leist</span></div>
+    <div class="zeile"><span class="zeile-nr">29</span><span class="zeile-text">ungen setzt, verliert einen wichtigen Teil ihres sozialen Zus</span></div>
   </div>
 </div>
 
@@ -350,37 +151,35 @@
     </div>
   </div>
 
-  <!-- Aufgaben 1-29 -->
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">1</span><div class="eingabe-wrap"><span class="vortext">Sportverei</span><input class="eingabe-feld" id="f1" data-loesung="nen" placeholder="___"></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">2</span><div class="eingabe-wrap"><span class="vortext">Nachbarschaftsinitiat</span><input class="eingabe-feld" id="f2" data-loesung="iven" placeholder="___"></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">3</span><div class="eingabe-wrap"><span class="vortext">Gesellsch</span><input class="eingabe-feld" id="f3" data-loesung="aft" placeholder="___"></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">4</span><div class="eingabe-wrap"><span class="vortext">Erwa</span><input class="eingabe-feld" id="f4" data-loesung="chsene" placeholder="___"></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">5</span><div class="eingabe-wrap"><span class="vortext">engagiert</span><input class="eingabe-feld" id="f5" data-loesung="esten" placeholder="___"></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">6</span><div class="eingabe-wrap"><span class="vortext">Menschen d</span><input class="eingabe-feld" id="f6" data-loesung="azu" placeholder="___"></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">7</span><div class="eingabe-wrap"><span class="vortext">einzuset</span><input class="eingabe-feld" id="f7" data-loesung="zen?" placeholder="___"></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">8</span><div class="eingabe-wrap"><span class="vortext">beric</span><input class="eingabe-feld" id="f8" data-loesung="hten," placeholder="___"></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">9</span><div class="eingabe-wrap"><span class="vortext">Sinnhaf</span><input class="eingabe-feld" id="f9" data-loesung="tigkeit" placeholder="___"></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">10</span><div class="eingabe-wrap"><span class="vortext">eig</span><input class="eingabe-feld" id="f10" data-loesung="enen" placeholder="___"></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">11</span><div class="eingabe-wrap"><span class="vortext">Kontak</span><input class="eingabe-feld" id="f11" data-loesung="te" placeholder="___"></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">12</span><div class="eingabe-wrap"><span class="vortext">Gefü</span><input class="eingabe-feld" id="f12" data-loesung="hl" placeholder="___"></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">13</span><div class="eingabe-wrap"><span class="vortext">Gemeinsch</span><input class="eingabe-feld" id="f13" data-loesung="aft." placeholder="___"></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">14</span><div class="eingabe-wrap"><span class="vortext">Möglichk</span><input class="eingabe-feld" id="f14" data-loesung="eit," placeholder="___"></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">15</span><div class="eingabe-wrap"><span class="vortext">Lebensla</span><input class="eingabe-feld" id="f15" data-loesung="uf" placeholder="___"></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">16</span><div class="eingabe-wrap"><span class="vortext">Engagem</span><input class="eingabe-feld" id="f16" data-loesung="ent" placeholder="___"></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">17</span><div class="eingabe-wrap"><span class="vortext">Verantwo</span><input class="eingabe-feld" id="f17" data-loesung="rtung" placeholder="___"></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">18</span><div class="eingabe-wrap"><span class="vortext">Kompet</span><input class="eingabe-feld" id="f18" data-loesung="enz." placeholder="___"></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">19</span><div class="eingabe-wrap"><span class="vortext">Herausford</span><input class="eingabe-feld" id="f19" data-loesung="erungen." placeholder="___"></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">20</span><div class="eingabe-wrap"><span class="vortext">Organis</span><input class="eingabe-feld" id="f20" data-loesung="ationen," placeholder="___"></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">21</span><div class="eingabe-wrap"><span class="vortext">eingeb</span><input class="eingabe-feld" id="f21" data-loesung="unden" placeholder="___"></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">22</span><div class="eingabe-wrap"><span class="vortext">Bel</span><input class="eingabe-feld" id="f22" data-loesung="astung," placeholder="___"></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">23</span><div class="eingabe-wrap"><span class="vortext">abschr</span><input class="eingabe-feld" id="f23" data-loesung="eckt." placeholder="___"></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">24</span><div class="eingabe-wrap"><span class="vortext">Rahmenbedi</span><input class="eingabe-feld" id="f24" data-loesung="ngungen," placeholder="___"></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">25</span><div class="eingabe-wrap"><span class="vortext">Vergünstig</span><input class="eingabe-feld" id="f25" data-loesung="ungen" placeholder="___"></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">26</span><div class="eingabe-wrap"><span class="vortext">Freistell</span><input class="eingabe-feld" id="f26" data-loesung="ungen" placeholder="___"></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">27</span><div class="eingabe-wrap"><span class="vortext">Gesellsch</span><input class="eingabe-feld" id="f27" data-loesung="aft," placeholder="___"></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">28</span><div class="eingabe-wrap"><span class="vortext">Leis</span><input class="eingabe-feld" id="f28" data-loesung="tungen" placeholder="___"></div></div>
-  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">29</span><div class="eingabe-wrap"><span class="vortext">Zusa</span><input class="eingabe-feld" id="f29" data-loesung="mmenhalts." placeholder="___"></div></div>
-
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">1</span><div class="eingabe-wrap"><span class="vortext">Sportverei</span><input class="eingabe-feld" id="f1" data-loesung="nen" placeholder="___"><span class="nachtext">nen,</span></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">2</span><div class="eingabe-wrap"><span class="vortext">Ehren</span><input class="eingabe-feld" id="f2" data-loesung="amt" placeholder="___"></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">3</span><div class="eingabe-wrap"><span class="vortext">verank</span><input class="eingabe-feld" id="f3" data-loesung="ert" placeholder="___"><span class="nachtext">ert.</span></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">4</span><div class="eingabe-wrap"><span class="vortext">ehrenamtl</span><input class="eingabe-feld" id="f4" data-loesung="ich" placeholder="___"></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">5</span><div class="eingabe-wrap"><span class="vortext">engagi</span><input class="eingabe-feld" id="f5" data-loesung="ert" placeholder="___"></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">6</span><div class="eingabe-wrap"><span class="vortext">Eur</span><input class="eingabe-feld" id="f6" data-loesung="opa" placeholder="___"><span class="nachtext">opa.</span></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">7</span><div class="eingabe-wrap"><span class="vortext">für and</span><input class="eingabe-feld" id="f7" data-loesung="ere" placeholder="___"></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">8</span><div class="eingabe-wrap"><span class="vortext">vielf</span><input class="eingabe-feld" id="f8" data-loesung="ält" placeholder="___"><span class="nachtext">ältig.</span></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">9</span><div class="eingabe-wrap"><span class="vortext">von Sin</span><input class="eingabe-feld" id="f9" data-loesung="n" placeholder="__"></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">10</span><div class="eingabe-wrap"><span class="vortext">Inter</span><input class="eingabe-feld" id="f10" data-loesung="ess" placeholder="___"><span class="nachtext">essen</span></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">11</span><div class="eingabe-wrap"><span class="vortext">Kont</span><input class="eingabe-feld" id="f11" data-loesung="akt" placeholder="___"><span class="nachtext">akte</span></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">12</span><div class="eingabe-wrap"><span class="vortext">bri</span><input class="eingabe-feld" id="f12" data-loesung="ngt" placeholder="___"><span class="nachtext">ngt,</span></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">13</span><div class="eingabe-wrap"><span class="vortext">Gemein</span><input class="eingabe-feld" id="f13" data-loesung="sch" placeholder="___"><span class="nachtext">schaft.</span></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">14</span><div class="eingabe-wrap"><span class="vortext">Mögli</span><input class="eingabe-feld" id="f14" data-loesung="ch" placeholder="___"><span class="nachtext">chkeit,</span></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">15</span><div class="eingabe-wrap"><span class="vortext">zu erw</span><input class="eingabe-feld" id="f15" data-loesung="erb" placeholder="___"><span class="nachtext">erben</span></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">16</span><div class="eingabe-wrap"><span class="vortext">zu bereich</span><input class="eingabe-feld" id="f16" data-loesung="ern" placeholder="___"><span class="nachtext">ern.</span></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">17</span><div class="eingabe-wrap"><span class="vortext">als Zeich</span><input class="eingabe-feld" id="f17" data-loesung="en" placeholder="__"><span class="nachtext">en</span></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">18</span><div class="eingabe-wrap"><span class="vortext">Kompet</span><input class="eingabe-feld" id="f18" data-loesung="enz" placeholder="___"><span class="nachtext">enz.</span></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">19</span><div class="eingabe-wrap"><span class="vortext">Herausford</span><input class="eingabe-feld" id="f19" data-loesung="eru" placeholder="___"><span class="nachtext">erungen.</span></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">20</span><div class="eingabe-wrap"><span class="vortext">Organ</span><input class="eingabe-feld" id="f20" data-loesung="isa" placeholder="___"><span class="nachtext">isationen,</span></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">21</span><div class="eingabe-wrap"><span class="vortext">eingeb</span><input class="eingabe-feld" id="f21" data-loesung="und" placeholder="___"><span class="nachtext">unden</span></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">22</span><div class="eingabe-wrap"><span class="vortext">Bel</span><input class="eingabe-feld" id="f22" data-loesung="ast" placeholder="___"><span class="nachtext">astung,</span></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">23</span><div class="eingabe-wrap"><span class="vortext">abschr</span><input class="eingabe-feld" id="f23" data-loesung="eck" placeholder="___"><span class="nachtext">eckt.</span></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">24</span><div class="eingabe-wrap"><span class="vortext">Rahmenbed</span><input class="eingabe-feld" id="f24" data-loesung="ing" placeholder="___"><span class="nachtext">ingungen,</span></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">25</span><div class="eingabe-wrap"><span class="vortext">Vergünst</span><input class="eingabe-feld" id="f25" data-loesung="igu" placeholder="___"><span class="nachtext">igungen</span></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">26</span><div class="eingabe-wrap"><span class="vortext">Freistellun</span><input class="eingabe-feld" id="f26" data-loesung="gen" placeholder="___"></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">27</span><div class="eingabe-wrap"><span class="vortext">sich</span><input class="eingabe-feld" id="f27" data-loesung="er" placeholder="__"><span class="nachtext">er:</span></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">28</span><div class="eingabe-wrap"><span class="vortext">Leist</span><input class="eingabe-feld" id="f28" data-loesung="ung" placeholder="___"><span class="nachtext">ungen</span></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">29</span><div class="eingabe-wrap"><span class="vortext">Zus</span><input class="eingabe-feld" id="f29" data-loesung="amm" placeholder="___"><span class="nachtext">ammenhalts.</span></div></div>
 </div>
 
 <div class="loesung-toggle">
@@ -396,40 +195,25 @@
 <script>
   function auswerten() {
     let punkte = 0;
-    const felder = document.querySelectorAll('.eingabe-feld:not(.beispiel-feld)');
-    felder.forEach(feld => {
-      const eingabe = feld.value.trim().toLowerCase().replace(/[.,?!]$/, '');
-      const loesung = feld.dataset.loesung.toLowerCase().replace(/[.,?!]$/, '');
+    document.querySelectorAll('.eingabe-feld:not(.beispiel-feld)').forEach(feld => {
+      const eingabe = feld.value.trim().toLowerCase();
+      const loesung = feld.dataset.loesung.toLowerCase();
       feld.classList.remove('richtig', 'falsch');
-      if (eingabe === loesung) {
-        feld.classList.add('richtig');
-        punkte++;
-      } else {
-        feld.classList.add('falsch');
-      }
+      if (eingabe === loesung) { feld.classList.add('richtig'); punkte++; }
+      else { feld.classList.add('falsch'); }
     });
     const ergebnis = document.getElementById('ergebnis');
     document.getElementById('punkte-anzeige').textContent = `${punkte} / 29`;
     const pct = punkte / 29;
-    let text = '';
-    if (pct < 0.4) text = 'Noch etwas üben! 💪';
-    else if (pct < 0.6) text = 'Guter Anfang! 📖';
-    else if (pct < 0.75) text = 'Solide! Weiter so! 👍';
-    else if (pct < 0.9) text = 'Sehr gut! 🎉';
-    else text = 'Ausgezeichnet! 🏆';
+    let text = pct < 0.4 ? 'Noch etwas üben! 💪' : pct < 0.6 ? 'Guter Anfang! 📖' : pct < 0.75 ? 'Solide! Weiter so! 👍' : pct < 0.9 ? 'Sehr gut! 🎉' : 'Ausgezeichnet! 🏆';
     document.getElementById('ergebnis-text').textContent = text;
     ergebnis.classList.add('visible');
     ergebnis.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
-
   function reset() {
-    document.querySelectorAll('.eingabe-feld:not(.beispiel-feld)').forEach(f => {
-      f.value = '';
-      f.classList.remove('richtig', 'falsch');
-    });
+    document.querySelectorAll('.eingabe-feld:not(.beispiel-feld)').forEach(f => { f.value = ''; f.classList.remove('richtig', 'falsch'); });
     document.getElementById('ergebnis').classList.remove('visible');
   }
 </script>
-
 </body>
 </html>
