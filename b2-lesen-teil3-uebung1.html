@@ -9,34 +9,14 @@
   h1 { font-size: 1.3em; border-bottom: 2px solid #333; padding-bottom: 8px; margin-bottom: 6px; }
   .meta { font-size: 0.85em; color: #666; margin-bottom: 30px; }
   .anweisung { background: #eef2f7; border-left: 4px solid #4a6fa5; padding: 14px 18px; margin-bottom: 30px; font-size: 0.95em; }
-
-  /* Artikel mit abgeschnittenem Rand */
-  .artikel-container {
-    background: #fff;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 28px 0 28px 32px;
-    margin-bottom: 36px;
-    overflow: hidden;
-    position: relative;
-  }
-  .artikel-container::after {
-    content: '';
-    position: absolute;
-    top: 0; right: 0;
-    width: 60px; height: 100%;
-    background: linear-gradient(to right, transparent, #fff 70%);
-    pointer-events: none;
-  }
+  .artikel-container { background: #fff; border: 1px solid #ccc; border-radius: 4px; padding: 28px 0 28px 32px; margin-bottom: 36px; overflow: hidden; position: relative; }
+  .artikel-container::after { content: ''; position: absolute; top: 0; right: 0; width: 60px; height: 100%; background: linear-gradient(to right, transparent, #fff 70%); pointer-events: none; }
   .artikel-titel { font-size: 1.15em; font-weight: bold; margin-bottom: 4px; padding-right: 80px; line-height: 1.3; }
   .artikel-quelle { font-size: 0.78em; color: #999; font-style: italic; margin-bottom: 20px; }
-
   .zeile { display: flex; align-items: baseline; min-height: 1.9em; border-bottom: 1px solid #f0f0f0; font-size: 0.96em; }
   .zeile:last-child { border-bottom: none; }
   .zeile-nr { font-size: 0.70em; color: #bbb; width: 26px; flex-shrink: 0; text-align: right; padding-right: 10px; font-family: monospace; user-select: none; }
   .zeile-text { white-space: nowrap; }
-
-  /* Aufgaben unten */
   .aufgaben-box { background: #fff; border: 1px solid #ccc; border-radius: 4px; padding: 22px 28px; margin-bottom: 30px; }
   .aufgaben-box h2 { font-size: 1em; text-transform: uppercase; letter-spacing: 0.05em; color: #444; margin-bottom: 18px; }
   .aufgabe-reihe { display: grid; grid-template-columns: 28px 1fr; align-items: center; gap: 0 12px; margin-bottom: 10px; }
@@ -46,13 +26,15 @@
   .vortext { font-size: 0.93em; color: #444; }
   .eingabe-feld { border: none; border-bottom: 2px solid #4a6fa5; width: 52px; font-size: 0.95em; font-family: 'Georgia', serif; text-align: center; background: transparent; outline: none; color: #2c2c2c; padding: 2px 4px; }
   .eingabe-feld.richtig { border-color: #3a7d44; background: #e6f4ea; color: #2c7a3a; }
-  .eingabe-feld.falsch  { border-color: #c0392b; background: #fdecea; color: #c0392b; }
+  .eingabe-feld.falsch { border-color: #c0392b; background: #fdecea; color: #c0392b; }
   .eingabe-feld.beispiel-feld { border-color: #2c5282; background: #f0f4fa; color: #2c5282; }
   .beispiel-tag { font-size: 0.72em; color: #4a6fa5; font-style: italic; }
-
-  .loesung-toggle { margin-top: 32px; text-align: center; }
-  .btn-loesung { background: #4a6fa5; color: white; border: none; padding: 12px 28px; font-size: 0.9em; letter-spacing: 0.06em; cursor: pointer; font-family: 'Georgia', serif; border-radius: 2px; }
+  .loesung-toggle { margin-top: 32px; text-align: center; display: flex; gap: 12px; justify-content: center; }
+  .btn-loesung, .btn-reset { border: none; padding: 12px 28px; font-size: 0.9em; letter-spacing: 0.06em; cursor: pointer; font-family: 'Georgia', serif; border-radius: 2px; }
+  .btn-loesung { background: #4a6fa5; color: white; }
   .btn-loesung:hover { background: #3a5a8a; }
+  .btn-reset { background: transparent; color: #666; border: 1px solid #ccc; }
+  .btn-reset:hover { background: #f0f0f0; }
   .ergebnis-box { margin-top: 24px; text-align: center; font-size: 1.1em; display: none; }
   .ergebnis-box.visible { display: block; }
   .punkte { font-size: 2em; font-weight: bold; color: #4a6fa5; display: block; margin: 8px 0; }
@@ -62,7 +44,6 @@
 
 <h1>ÖSD Zertifikat B2 – Leseverstehen Teil 3 · TEST</h1>
 <div class="meta">Übungsmaterial · Niveau B2 · Ehrenamt in Deutschland</div>
-
 <div class="anweisung">
   <strong>Aufgabe:</strong> Lesen Sie den folgenden Zeitungsartikel. Der rechte Rand des Textes ist abgeschnitten.
   Ergänzen Sie das fehlende Wortende (maximal 3 Buchstaben). Aufgabe 0 ist ein Beispiel.
@@ -76,10 +57,19 @@
   <div class="zeile"><span class="zeile-nr">1</span><span class="zeile-text">und ohne Bezahlung für andere. Das Ehren</span></div>
   <div class="zeile"><span class="zeile-nr">2</span><span class="zeile-text">ist tief in der deutschen Gesellschaft verank</span></div>
   <div class="zeile"><span class="zeile-nr">3</span><span class="zeile-text">Ob in Sportvereinen, Feuerwehren oder bei sozial</span></div>
+  <div class="zeile"><span class="zeile-nr">4</span><span class="zeile-text">Projekten – laut Studien ist f</span></div>
+  <div class="zeile"><span class="zeile-nr">5</span><span class="zeile-text">ast jeder dritte Bür</span></div>
+  <div class="zeile"><span class="zeile-nr">6</span><span class="zeile-text">ger ehrenamtlich tätig. Das ma</span></div>
+  <div class="zeile"><span class="zeile-nr">7</span><span class="zeile-text">cht Deutschland zu einem</span></div>
+  <div class="zeile"><span class="zeile-nr">8</span><span class="zeile-text">der engagiertesten Länder Europ</span></div>
+  <div class="zeile"><span class="zeile-nr">9</span><span class="zeile-text">as. Doch was treibt Menschen an, ih</span></div>
+  <div class="zeile"><span class="zeile-nr">10</span><span class="zeile-text">re Freizeit für and</span></div>
+  <div class="zeile"><span class="zeile-nr">11</span><span class="zeile-text">ere einzusetzen? Die Motivationen</span></div>
+  <div class="zeile"><span class="zeile-nr">12</span><span class="zeile-text">sind vielfäl</span></div>
 </div>
 
 <div class="aufgaben-box">
-  <h2>Aufgaben 0 – 3</h2>
+  <h2>Aufgaben 0 – 12</h2>
 
   <div class="aufgabe-reihe beispiel">
     <span class="aufgabe-nr-label">0</span>
@@ -90,33 +80,23 @@
     </div>
   </div>
 
-  <div class="aufgabe-reihe">
-    <span class="aufgabe-nr-label">1</span>
-    <div class="eingabe-wrap">
-      <span class="vortext">Ehren</span>
-      <input class="eingabe-feld" id="f1" data-loesung="amt" placeholder="___">
-    </div>
-  </div>
-
-  <div class="aufgabe-reihe">
-    <span class="aufgabe-nr-label">2</span>
-    <div class="eingabe-wrap">
-      <span class="vortext">verank</span>
-      <input class="eingabe-feld" id="f2" data-loesung="ert" placeholder="___">
-    </div>
-  </div>
-
-  <div class="aufgabe-reihe">
-    <span class="aufgabe-nr-label">3</span>
-    <div class="eingabe-wrap">
-      <span class="vortext">sozial</span>
-      <input class="eingabe-feld" id="f3" data-loesung="en" placeholder="__">
-    </div>
-  </div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">1</span><div class="eingabe-wrap"><span class="vortext">Ehren</span><input class="eingabe-feld" id="f1" data-loesung="amt" placeholder="___"></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">2</span><div class="eingabe-wrap"><span class="vortext">verank</span><input class="eingabe-feld" id="f2" data-loesung="ert" placeholder="___"></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">3</span><div class="eingabe-wrap"><span class="vortext">sozial</span><input class="eingabe-feld" id="f3" data-loesung="en" placeholder="__"></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">4</span><div class="eingabe-wrap"><span class="vortext">ist f</span><input class="eingabe-feld" id="f4" data-loesung="ast" placeholder="___"></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">5</span><div class="eingabe-wrap"><span class="vortext">Bür</span><input class="eingabe-feld" id="f5" data-loesung="ger" placeholder="___"></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">6</span><div class="eingabe-wrap"><span class="vortext">Das ma</span><input class="eingabe-feld" id="f6" data-loesung="cht" placeholder="___"></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">7</span><div class="eingabe-wrap"><span class="vortext">zu einem</span><input class="eingabe-feld" id="f7" data-loesung="der" placeholder="___"></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">8</span><div class="eingabe-wrap"><span class="vortext">Europ</span><input class="eingabe-feld" id="f8" data-loesung="as" placeholder="__"></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">9</span><div class="eingabe-wrap"><span class="vortext">an, ih</span><input class="eingabe-feld" id="f9" data-loesung="re" placeholder="__"></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">10</span><div class="eingabe-wrap"><span class="vortext">für and</span><input class="eingabe-feld" id="f10" data-loesung="ere" placeholder="___"></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">11</span><div class="eingabe-wrap"><span class="vortext">– keine Lücke –</span></div></div>
+  <div class="aufgabe-reihe"><span class="aufgabe-nr-label">12</span><div class="eingabe-wrap"><span class="vortext">vielfäl</span><input class="eingabe-feld" id="f12" data-loesung="tig" placeholder="___"></div></div>
 </div>
 
 <div class="loesung-toggle">
   <button class="btn-loesung" onclick="auswerten()">Auswerten</button>
+  <button class="btn-reset" onclick="reset()">Zurücksetzen</button>
 </div>
 
 <div class="ergebnis-box" id="ergebnis">
@@ -126,20 +106,26 @@
 
 <script>
   function auswerten() {
-    let punkte = 0;
+    let punkte = 0, total = 0;
     document.querySelectorAll('.eingabe-feld:not(.beispiel-feld)').forEach(feld => {
+      if (!feld.dataset.loesung) return;
+      total++;
       const eingabe = feld.value.trim().toLowerCase();
       const loesung = feld.dataset.loesung.toLowerCase();
       feld.classList.remove('richtig', 'falsch');
       if (eingabe === loesung) { feld.classList.add('richtig'); punkte++; }
       else { feld.classList.add('falsch'); }
     });
-    document.getElementById('punkte-anzeige').textContent = `${punkte} / 3`;
-    const texte = ['Noch üben! 💪', 'Fast! 👍', 'Gut! 😊', 'Perfekt! 🏆'];
-    document.getElementById('ergebnis-text').textContent = texte[punkte];
+    document.getElementById('punkte-anzeige').textContent = `${punkte} / ${total}`;
+    const pct = punkte / total;
+    const text = pct < 0.4 ? 'Noch üben! 💪' : pct < 0.7 ? 'Solide! 👍' : pct < 1 ? 'Sehr gut! 🎉' : 'Ausgezeichnet! 🏆';
+    document.getElementById('ergebnis-text').textContent = text;
     document.getElementById('ergebnis').classList.add('visible');
   }
+  function reset() {
+    document.querySelectorAll('.eingabe-feld:not(.beispiel-feld)').forEach(f => { f.value = ''; f.classList.remove('richtig', 'falsch'); });
+    document.getElementById('ergebnis').classList.remove('visible');
+  }
 </script>
-
 </body>
 </html>
