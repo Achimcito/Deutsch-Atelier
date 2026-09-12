@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ÖSD B2 – Leseverstehen Teil 4 · Übung 5</title>
+<style>
+  body { font-family: 'Georgia', serif; max-width: 820px; margin: 40px auto; padding: 20px; background: #fafaf8; color: #2c2c2c; line-height: 1.8; }
+  h1 { font-size: 1.3em; border-bottom: 2px solid #333; padding-bottom: 8px; margin-bottom: 6px; }
+  .meta { font-size: 0.85em; color: #666; margin-bottom: 30px; }
+  .anweisung { background: #eef2f7; border-left: 4px solid #4a6fa5; padding: 14px 18px; margin-bottom: 30px; font-size: 0.95em; }
+  .back { display: inline-block; margin-bottom: 24px; font-size: 0.82em; color: #666; text-decoration: none; letter-spacing: 0.05em; }
+  .back:hover { color: #2c2c2c; }
+  .brief-box { background: #fff; border: 1px solid #ccc; border-radius: 4px; padding: 32px 36px; margin-bottom: 36px; font-size: 0.97em; }
+  .brief-absender { font-weight: bold; font-size: 1.05em; margin-bottom: 20px; color: #2c2c2c; border-bottom: 1px solid #eee; padding-bottom: 12px; }
+  .brief-anrede { margin-bottom: 14px; }
+  .brief-text p { margin-bottom: 14px; }
+  .luecke-wrap { display: inline-flex; align-items: center; gap: 3px; vertical-align: middle; }
+  .luecke-nr { font-size: 0.72em; color: #4a6fa5; font-weight: bold; vertical-align: super; margin-right: 1px; }
+  .luecke-feld { border: none; border-bottom: 2px solid #4a6fa5; width: 90px; font-size: 0.95em; font-family: 'Georgia', serif; text-align: center; background: transparent; outline: none; color: #2c2c2c; padding: 1px 4px; }
+  .luecke-feld.richtig { border-color: #3a7d44; background: #e6f4ea; color: #2c7a3a; }
+  .luecke-feld.falsch { border-color: #c0392b; background: #fdecea; color: #c0392b; }
+  .brief-gruss { margin-top: 20px; }
+  .loesung-toggle { margin-top: 32px; text-align: center; display: flex; gap: 12px; justify-content: center; }
+  .btn-loesung, .btn-reset { border: none; padding: 12px 28px; font-size: 0.9em; letter-spacing: 0.06em; cursor: pointer; font-family: 'Georgia', serif; border-radius: 2px; }
+  .btn-loesung { background: #4a6fa5; color: white; }
+  .btn-loesung:hover { background: #3a5a8a; }
+  .btn-reset { background: transparent; color: #666; border: 1px solid #ccc; }
+  .btn-reset:hover { background: #f0f0f0; }
+  .ergebnis-box { margin-top: 24px; text-align: center; font-size: 1.1em; display: none; }
+  .ergebnis-box.visible { display: block; }
+  .punkte { font-size: 2em; font-weight: bold; color: #4a6fa5; display: block; margin: 8px 0; }
+  @media print { .back, .loesung-toggle, .ergebnis-box { display: none; } }
+</style>
+</head>
+<body>
+
+<a class="back" href="b2-lesen-teil4-seite2.html">← Zurück zur Übungsauswahl</a>
+<h1>ÖSD Zertifikat B2 – Leseverstehen Teil 4</h1>
+<div class="meta">Übungsmaterial · Niveau B2 · Werbebrief Stadtbibliothek</div>
+
+<div class="anweisung">
+  <strong>Aufgabe:</strong> Im folgenden Werbebrief fehlen einige Wörter. Lesen Sie den Text und ergänzen Sie die fehlenden Wörter (1–10). Achtung: Die Lösungen müssen sinngemäß, grammatikalisch und orthografisch passen. Es gibt für jede Lücke eine Lösung mit einem Wort.
+</div>
+
+<div class="brief-box">
+  <div class="brief-absender">Stadtbibliothek LesBar – Lesen, Entdecken, Erleben</div>
+  <div class="brief-anrede">Sehr geehrte Damen und Herren,</div>
+
+  <div class="brief-text">
+    <p>wir möchten Sie herzlich
+      <span class="luecke-wrap"><span class="luecke-nr">(1)</span><input class="luecke-feld" id="l1" data-loesung="einladen" placeholder="________"></span>,
+      unsere neu gestaltete Stadtbibliothek „LesBar" kennenzulernen. Nach einer umfangreichen Renovierung öffnen wir unsere Pforten
+      <span class="luecke-wrap"><span class="luecke-nr">(2)</span><input class="luecke-feld" id="l2" data-loesung="in" placeholder="__"></span>
+      neuem Glanz und freuen uns
+      <span class="luecke-wrap"><span class="luecke-nr">(3)</span><input class="luecke-feld" id="l3" data-loesung="auf" placeholder="___"></span>
+      Ihren Besuch.
+    </p>
+
+    <p>Neben einer großen Auswahl
+      <span class="luecke-wrap"><span class="luecke-nr">(4)</span><input class="luecke-feld" id="l4" data-loesung="an" placeholder="__"></span>
+      Büchern, Zeitschriften und digitalen Medien bieten wir Ihnen ab sofort auch Veranstaltungen
+      <span class="luecke-wrap"><span class="luecke-nr">(5)</span><input class="luecke-feld" id="l5" data-loesung="an" placeholder="__"></span>:
+      Lesungen, Workshops und Sprachkurse für Jung und Alt. Alle Angebote sind
+      <span class="luecke-wrap"><span class="luecke-nr">(6)</span><input class="luecke-feld" id="l6" data-loesung="kostenlos" placeholder="_________"></span>
+      zugänglich.
+    </p>
+
+    <p>Unsere freundlichen Mitarbeiterinnen und Mitarbeiter helfen Ihnen gerne
+      <span class="luecke-wrap"><span class="luecke-nr">(7)</span><input class="luecke-feld" id="l7" data-loesung="bei" placeholder="___"></span>
+      der Suche nach dem richtigen Buch oder Medium. Außerdem können Sie sich
+      <span class="luecke-wrap"><span class="luecke-nr">(8)</span><input class="luecke-feld" id="l8" data-loesung="in" placeholder="__"></span>
+      unserer modernen Leselounge entspannen und in Ruhe schmökern.
+    </p>
+
+    <p>Als besonderes Willkommensgeschenk erhalten alle Neumitglieder, die sich
+      <span class="luecke-wrap"><span class="luecke-nr">(9)</span><input class="luecke-feld" id="l9" data-loesung="vor" placeholder="___"></span>
+      Ende des Monats anmelden, ein kleines Willkommensgeschenk. Wir freuen uns
+      <span class="luecke-wrap"><span class="luecke-nr">(10)</span><input class="luecke-feld" id="l10" data-loesung="auf" placeholder="___"></span>
+      Sie!
+    </p>
+  </div>
+
+  <div class="brief-gruss">
+    Mit herzlichen Grüßen<br>
+    Das Team der Stadtbibliothek LesBar
+  </div>
+</div>
+
+<div class="loesung-toggle">
+  <button class="btn-loesung" onclick="auswerten()">Auswerten</button>
+  <button class="btn-reset" onclick="reset()">Zurücksetzen</button>
+</div>
+
+<div class="ergebnis-box" id="ergebnis">
+  <span class="punkte" id="punkte-anzeige"></span>
+  <span id="ergebnis-text"></span>
+</div>
+
+<script>
+  function auswerten() {
+    let punkte = 0;
+    document.querySelectorAll('.luecke-feld').forEach(feld => {
+      const eingabe = feld.value.trim().toLowerCase();
+      const loesung = feld.dataset.loesung.toLowerCase();
+      feld.classList.remove('richtig', 'falsch');
+      if (eingabe === loesung) { feld.classList.add('richtig'); punkte++; }
+      else { feld.classList.add('falsch'); }
+    });
+    document.getElementById('punkte-anzeige').textContent = `${punkte} / 10`;
+    const texte = ['Noch üben! 💪', 'Guter Anfang! 📖', 'Solide! 👍', 'Gut gemacht! 😊', 'Sehr gut! 🎉', 'Fast perfekt! ⭐', 'Fast perfekt! ⭐', 'Ausgezeichnet! 🏆', 'Ausgezeichnet! 🏆', 'Ausgezeichnet! 🏆', 'Perfekt! 🏆'];
+    document.getElementById('ergebnis-text').textContent = texte[punkte];
+    document.getElementById('ergebnis').classList.add('visible');
+    document.getElementById('ergebnis').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+  function reset() {
+    document.querySelectorAll('.luecke-feld').forEach(f => { f.value = ''; f.classList.remove('richtig', 'falsch'); });
+    document.getElementById('ergebnis').classList.remove('visible');
+  }
+</script>
+</body>
+</html>
