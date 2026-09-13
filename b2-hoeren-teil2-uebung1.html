@@ -173,9 +173,9 @@
     <!-- Dauer -->
     <tr>
       <td>Dauer</td>
-      <td><input class="eingabe-feld" id="dauer-a" data-loesung="12 Wochen" placeholder="......... Wochen"></td>
-      <td><input class="eingabe-feld" id="dauer-b" data-loesung="6 Wochen" placeholder="......... Wochen"></td>
-      <td><input class="eingabe-feld" id="dauer-c" data-loesung="10 Wochen" placeholder="......... Wochen"></td>
+      <td><input class="eingabe-feld" id="dauer-a" data-loesung="12" placeholder="__" style="width:50px"> Wochen</td>
+      <td><input class="eingabe-feld" id="dauer-b" data-loesung="6" placeholder="__" style="width:50px"> Wochen</td>
+      <td><input class="eingabe-feld" id="dauer-c" data-loesung="10" placeholder="__" style="width:50px"> Wochen</td>
     </tr>
 
     <!-- Unterrichtstage -->
@@ -233,9 +233,9 @@
     <!-- Preis -->
     <tr>
       <td>Preis</td>
-      <td><input class="eingabe-feld" id="preis-a" data-loesung="180 €" placeholder="..............€"></td>
-      <td><input class="eingabe-feld" id="preis-b" data-loesung="220 €" placeholder="..............€"></td>
-      <td><input class="eingabe-feld" id="preis-c" data-loesung="150 €" placeholder="..............€"></td>
+      <td><input class="eingabe-feld" id="preis-a" data-loesung="180" placeholder="___" style="width:60px"> €</td>
+      <td><input class="eingabe-feld" id="preis-b" data-loesung="220" placeholder="___" style="width:60px"> €</td>
+      <td><input class="eingabe-feld" id="preis-c" data-loesung="150" placeholder="___" style="width:60px"> €</td>
     </tr>
 
     <!-- Ort -->
@@ -380,6 +380,12 @@ function reset() {
     f.classList.remove('richtig','falsch');
   });
   document.getElementById('ergebnis').classList.remove('visible');
+  // Audio zurücksetzen
+  const audio = document.getElementById('main-audio');
+  audio.controls = true;
+  audio.currentTime = 0;
+  hatGespielt = false;
+  document.getElementById('audio-hinweis').classList.remove('sichtbar');
 }
 </script>
 </body>
