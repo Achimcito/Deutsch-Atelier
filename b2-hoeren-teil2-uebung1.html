@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ÖSD B2 – Hören Teil 2 · Übung 1</title>
+<style>
+  body { font-family: 'Georgia', serif; max-width: 900px; margin: 40px auto; padding: 20px; background: #fafaf8; color: #2c2c2c; line-height: 1.6; }
+  h1 { font-size: 1.3em; border-bottom: 2px solid #333; padding-bottom: 8px; margin-bottom: 6px; }
+  .meta { font-size: 0.85em; color: #666; margin-bottom: 30px; }
+  .anweisung { background: #eef2f7; border-left: 4px solid #4a6fa5; padding: 14px 18px; margin-bottom: 30px; font-size: 0.95em; }
+  .back { display: inline-block; margin-bottom: 24px; font-size: 0.82em; color: #666; text-decoration: none; letter-spacing: 0.05em; }
+  .back:hover { color: #2c2c2c; }
+
+  /* Audio Player */
+  .audio-box {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 20px 24px;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .audio-label { font-size: 0.9em; color: #444; white-space: nowrap; }
+  audio { flex: 1; height: 36px; }
+
+  /* Tabelle */
+  .tabelle-wrap { overflow-x: auto; margin-bottom: 30px; }
+  table { width: 100%; border-collapse: collapse; background: #fff; font-size: 0.92em; }
+  th { background: #2c2c2c; color: white; padding: 10px 14px; text-align: left; font-weight: normal; letter-spacing: 0.04em; }
+  th:first-child { width: 160px; }
+  td { border: 1px solid #ddd; padding: 10px 14px; vertical-align: top; }
+  tr:nth-child(even) td { background: #f8f8f6; }
+  td:first-child { font-weight: bold; font-size: 0.9em; color: #444; background: #f0ede8 !important; }
+
+  /* Checkboxen */
+  .checkbox-group { display: flex; flex-direction: column; gap: 6px; }
+  .checkbox-option { display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 0.92em; }
+  .checkbox-option input[type="checkbox"] { width: 16px; height: 16px; accent-color: #4a6fa5; cursor: pointer; flex-shrink: 0; }
+  .checkbox-option.richtig-markiert { color: #3a7d44; font-weight: bold; }
+  .checkbox-option.falsch-markiert { color: #c0392b; }
+
+  /* Eingabefelder */
+  .eingabe-feld {
+    border: none;
+    border-bottom: 2px solid #4a6fa5;
+    width: 100%;
+    font-size: 0.92em;
+    font-family: 'Georgia', serif;
+    background: transparent;
+    outline: none;
+    color: #2c2c2c;
+    padding: 2px 4px;
+  }
+  .eingabe-feld.richtig { border-color: #3a7d44; background: #e6f4ea; color: #2c7a3a; }
+  .eingabe-feld.falsch { border-color: #c0392b; background: #fdecea; color: #c0392b; }
+
+  /* Buttons */
+  .loesung-toggle { margin-top: 24px; text-align: center; display: flex; gap: 12px; justify-content: center; }
+  .btn-loesung, .btn-reset { border: none; padding: 12px 28px; font-size: 0.9em; letter-spacing: 0.06em; cursor: pointer; font-family: 'Georgia', serif; border-radius: 2px; }
+  .btn-loesung { background: #4a6fa5; color: white; }
+  .btn-loesung:hover { background: #3a5a8a; }
+  .btn-reset { background: transparent; color: #666; border: 1px solid #ccc; }
+  .btn-reset:hover { background: #f0f0f0; }
+  .ergebnis-box { margin-top: 24px; text-align: center; font-size: 1.1em; display: none; }
+  .ergebnis-box.visible { display: block; }
+  .punkte { font-size: 2em; font-weight: bold; color: #4a6fa5; display: block; margin: 8px 0; }
+
+  @media print { .back, .loesung-toggle, .ergebnis-box, .audio-box { display: none; } }
+  @media (max-width: 600px) { th:first-child { width: 100px; } td { padding: 8px; } }
+</style>
+</head>
+<body>
+
+<a class="back" href="b2-hoeren-teil2.html">← Zurück zur Übungsauswahl</a>
+<h1>ÖSD Zertifikat B2 – Hören Teil 2</h1>
+<div class="meta">Übungsmaterial · Niveau B2 · Spanischkurse an der VHS</div>
+
+<div class="anweisung">
+  <strong>Aufgabe:</strong> Sie hören ein Gespräch über drei Spanischkurse. Hören Sie den Dialog und füllen Sie die Tabelle aus. Kreuzen Sie die richtige Option an oder schreiben Sie die fehlende Information in das Feld.
+  <br><br><em>Sie können den Dialog zweimal hören.</em>
+</div>
+
+<!-- Audio Player -->
+<div class="audio-box">
+  <span class="audio-label">🎧 Dialog abspielen:</span>
+  <audio controls>
+    <source src="audio/b2-hoeren-teil2-uebung1.mp3" type="audio/mpeg">
+    Ihr Browser unterstützt das Audio-Element nicht.
+  </audio>
+</div>
+
+<!-- Tabelle -->
+<div class="tabelle-wrap">
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>Option A</th>
+      <th>Option B</th>
+      <th>Option C</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <!-- Kursname -->
+    <tr>
+      <td>Kursname</td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="kursname-a" value="Spanisch für Anfänger" data-loesung="true"> Spanisch für Anfänger</label>
+          <label class="checkbox-option"><input type="checkbox" name="kursname-a" value="Spanisch Intensiv"> Spanisch Intensiv</label>
+          <label class="checkbox-option"><input type="checkbox" name="kursname-a" value="Spanisch Konversation"> Spanisch Konversation</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="kursname-b" value="Spanisch für Anfänger"> Spanisch für Anfänger</label>
+          <label class="checkbox-option"><input type="checkbox" name="kursname-b" value="Spanisch Intensiv" data-loesung="true"> Spanisch Intensiv</label>
+          <label class="checkbox-option"><input type="checkbox" name="kursname-b" value="Spanisch Konversation"> Spanisch Konversation</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="kursname-c" value="Spanisch für Anfänger"> Spanisch für Anfänger</label>
+          <label class="checkbox-option"><input type="checkbox" name="kursname-c" value="Spanisch Intensiv"> Spanisch Intensiv</label>
+          <label class="checkbox-option"><input type="checkbox" name="kursname-c" value="Spanisch Konversation" data-loesung="true"> Spanisch Konversation</label>
+        </div>
+      </td>
+    </tr>
+
+    <!-- Niveau -->
+    <tr>
+      <td>Niveau</td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="niveau-a" value="A1" data-loesung="true"> A1</label>
+          <label class="checkbox-option"><input type="checkbox" name="niveau-a" value="A2"> A2</label>
+          <label class="checkbox-option"><input type="checkbox" name="niveau-a" value="B1"> B1</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="niveau-b" value="A1" data-loesung="true"> A1</label>
+          <label class="checkbox-option"><input type="checkbox" name="niveau-b" value="A2"> A2</label>
+          <label class="checkbox-option"><input type="checkbox" name="niveau-b" value="B1"> B1</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="niveau-c" value="A1"> A1</label>
+          <label class="checkbox-option"><input type="checkbox" name="niveau-c" value="A2"> A2</label>
+          <label class="checkbox-option"><input type="checkbox" name="niveau-c" value="A2/B1" data-loesung="true"> A2/B1</label>
+        </div>
+      </td>
+    </tr>
+
+    <!-- Startdatum -->
+    <tr>
+      <td>Startdatum</td>
+      <td><input class="eingabe-feld" id="start-a" data-loesung="15. Oktober" placeholder="....................."></td>
+      <td><input class="eingabe-feld" id="start-b" data-loesung="20. Oktober" placeholder="....................."></td>
+      <td><input class="eingabe-feld" id="start-c" data-loesung="5. November" placeholder="....................."></td>
+    </tr>
+
+    <!-- Dauer -->
+    <tr>
+      <td>Dauer</td>
+      <td><input class="eingabe-feld" id="dauer-a" data-loesung="12 Wochen" placeholder="......... Wochen"></td>
+      <td><input class="eingabe-feld" id="dauer-b" data-loesung="6 Wochen" placeholder="......... Wochen"></td>
+      <td><input class="eingabe-feld" id="dauer-c" data-loesung="10 Wochen" placeholder="......... Wochen"></td>
+    </tr>
+
+    <!-- Unterrichtstage -->
+    <tr>
+      <td>Unterrichtstage</td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="tage-a" value="Samstag"> Samstag</label>
+          <label class="checkbox-option"><input type="checkbox" name="tage-a" value="Montag"> Montag</label>
+          <label class="checkbox-option"><input type="checkbox" name="tage-a" value="Dienstag & Donnerstag" data-loesung="true"> Dienstag & Donnerstag</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="tage-b" value="Samstag" data-loesung="true"> Samstag</label>
+          <label class="checkbox-option"><input type="checkbox" name="tage-b" value="Montag"> Montag</label>
+          <label class="checkbox-option"><input type="checkbox" name="tage-b" value="Dienstag & Donnerstag"> Dienstag & Donnerstag</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="tage-c" value="Samstag"> Samstag</label>
+          <label class="checkbox-option"><input type="checkbox" name="tage-c" value="Montag" data-loesung="true"> Montag</label>
+          <label class="checkbox-option"><input type="checkbox" name="tage-c" value="Dienstag & Donnerstag"> Dienstag & Donnerstag</label>
+        </div>
+      </td>
+    </tr>
+
+    <!-- Uhrzeit -->
+    <tr>
+      <td>Uhrzeit</td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="uhr-a" value="18:00–19:30" data-loesung="true"> 18:00–19:30 Uhr</label>
+          <label class="checkbox-option"><input type="checkbox" name="uhr-a" value="19:00–20:30"> 19:00–20:30 Uhr</label>
+          <label class="checkbox-option"><input type="checkbox" name="uhr-a" value="10:00–13:00"> 10:00–13:00 Uhr</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="uhr-b" value="18:00–19:30"> 18:00–19:30 Uhr</label>
+          <label class="checkbox-option"><input type="checkbox" name="uhr-b" value="19:00–20:30"> 19:00–20:30 Uhr</label>
+          <label class="checkbox-option"><input type="checkbox" name="uhr-b" value="10:00–13:00" data-loesung="true"> 10:00–13:00 Uhr</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="uhr-c" value="18:00–19:30"> 18:00–19:30 Uhr</label>
+          <label class="checkbox-option"><input type="checkbox" name="uhr-c" value="19:00–20:30" data-loesung="true"> 19:00–20:30 Uhr</label>
+          <label class="checkbox-option"><input type="checkbox" name="uhr-c" value="10:00–13:00"> 10:00–13:00 Uhr</label>
+        </div>
+      </td>
+    </tr>
+
+    <!-- Preis -->
+    <tr>
+      <td>Preis</td>
+      <td><input class="eingabe-feld" id="preis-a" data-loesung="180 €" placeholder="..............€"></td>
+      <td><input class="eingabe-feld" id="preis-b" data-loesung="220 €" placeholder="..............€"></td>
+      <td><input class="eingabe-feld" id="preis-c" data-loesung="150 €" placeholder="..............€"></td>
+    </tr>
+
+    <!-- Ort -->
+    <tr>
+      <td>Ort</td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="ort-a" value="Raum 204" data-loesung="true"> VHS-Zentrum, Raum 204</label>
+          <label class="checkbox-option"><input type="checkbox" name="ort-a" value="Online"> Online (Zoom)</label>
+          <label class="checkbox-option"><input type="checkbox" name="ort-a" value="Raum 310"> VHS-Zentrum, Raum 310</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="ort-b" value="Raum 204"> VHS-Zentrum, Raum 204</label>
+          <label class="checkbox-option"><input type="checkbox" name="ort-b" value="Online"> Online (Zoom)</label>
+          <label class="checkbox-option"><input type="checkbox" name="ort-b" value="Raum 310" data-loesung="true"> VHS-Zentrum, Raum 310</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="ort-c" value="Raum 204"> VHS-Zentrum, Raum 204</label>
+          <label class="checkbox-option"><input type="checkbox" name="ort-c" value="Online" data-loesung="true"> Online (Zoom)</label>
+          <label class="checkbox-option"><input type="checkbox" name="ort-c" value="Raum 310"> VHS-Zentrum, Raum 310</label>
+        </div>
+      </td>
+    </tr>
+
+    <!-- Lehrbuch -->
+    <tr>
+      <td>Lehrbuch</td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="buch-a" value="Vamos" data-loesung="true"> „¡Vamos! A1"</label>
+          <label class="checkbox-option"><input type="checkbox" name="buch-a" value="Spanisch intensiv"> „Spanisch intensiv"</label>
+          <label class="checkbox-option"><input type="checkbox" name="buch-a" value="Kein Lehrbuch"> Kein Lehrbuch</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="buch-b" value="Vamos"> „¡Vamos! A1"</label>
+          <label class="checkbox-option"><input type="checkbox" name="buch-b" value="Spanisch intensiv" data-loesung="true"> „Spanisch intensiv"</label>
+          <label class="checkbox-option"><input type="checkbox" name="buch-b" value="Kein Lehrbuch"> Kein Lehrbuch</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="buch-c" value="Vamos"> „¡Vamos! A1"</label>
+          <label class="checkbox-option"><input type="checkbox" name="buch-c" value="Spanisch intensiv"> „Spanisch intensiv"</label>
+          <label class="checkbox-option"><input type="checkbox" name="buch-c" value="Kein Lehrbuch" data-loesung="true"> Kein Lehrbuch</label>
+        </div>
+      </td>
+    </tr>
+
+    <!-- Anmeldeschluss -->
+    <tr>
+      <td>Anmeldeschluss</td>
+      <td><input class="eingabe-feld" id="anmeld-a" data-loesung="10. Oktober" placeholder="....................."></td>
+      <td><input class="eingabe-feld" id="anmeld-b" data-loesung="18. Oktober" placeholder="....................."></td>
+      <td><input class="eingabe-feld" id="anmeld-c" data-loesung="1. November" placeholder="....................."></td>
+    </tr>
+
+  </tbody>
+</table>
+</div>
+
+<div class="loesung-toggle">
+  <button class="btn-loesung" onclick="auswerten()">Auswerten</button>
+  <button class="btn-reset" onclick="reset()">Zurücksetzen</button>
+</div>
+
+<div class="ergebnis-box" id="ergebnis">
+  <span class="punkte" id="punkte-anzeige"></span>
+  <span id="ergebnis-text"></span>
+</div>
+
+<script>
+function auswerten() {
+  let punkte = 0, total = 0;
+
+  // Checkboxen auswerten
+  const gruppen = ['kursname-a','kursname-b','kursname-c','niveau-a','niveau-b','niveau-c','tage-a','tage-b','tage-c','uhr-a','uhr-b','uhr-c','ort-a','ort-b','ort-c','buch-a','buch-b','buch-c'];
+  gruppen.forEach(name => {
+    total++;
+    const alle = document.querySelectorAll(`input[name="${name}"]`);
+    const richtigeBox = document.querySelector(`input[name="${name}"][data-loesung="true"]`);
+    let korrekt = true;
+    alle.forEach(cb => {
+      const sollChecked = cb.dataset.loesung === 'true';
+      if (cb.checked !== sollChecked) korrekt = false;
+      const label = cb.closest('.checkbox-option');
+      label.classList.remove('richtig-markiert','falsch-markiert');
+      if (cb.checked && sollChecked) label.classList.add('richtig-markiert');
+      else if (cb.checked && !sollChecked) label.classList.add('falsch-markiert');
+      else if (!cb.checked && sollChecked) label.classList.add('falsch-markiert');
+    });
+    if (korrekt) punkte++;
+  });
+
+  // Eingabefelder auswerten
+  document.querySelectorAll('.eingabe-feld').forEach(feld => {
+    total++;
+    const eingabe = feld.value.trim().toLowerCase().replace(/\s+/g,' ');
+    const loesung = feld.dataset.loesung.toLowerCase().replace(/\s+/g,' ');
+    feld.classList.remove('richtig','falsch');
+    if (eingabe === loesung) { feld.classList.add('richtig'); punkte++; }
+    else { feld.classList.add('falsch'); }
+  });
+
+  document.getElementById('punkte-anzeige').textContent = `${punkte} / ${total}`;
+  const pct = punkte / total;
+  const text = pct < 0.4 ? 'Noch üben! 💪' : pct < 0.6 ? 'Guter Anfang! 📖' : pct < 0.75 ? 'Solide! 👍' : pct < 0.9 ? 'Sehr gut! 🎉' : 'Ausgezeichnet! 🏆';
+  document.getElementById('ergebnis-text').textContent = text;
+  document.getElementById('ergebnis').classList.add('visible');
+  document.getElementById('ergebnis').scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function reset() {
+  document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+    cb.checked = false;
+    cb.closest('.checkbox-option').classList.remove('richtig-markiert','falsch-markiert');
+  });
+  document.querySelectorAll('.eingabe-feld').forEach(f => {
+    f.value = '';
+    f.classList.remove('richtig','falsch');
+  });
+  document.getElementById('ergebnis').classList.remove('visible');
+}
+</script>
+</body>
+</html>
