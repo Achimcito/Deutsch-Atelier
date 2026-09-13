@@ -25,6 +25,8 @@
   }
   .audio-label { font-size: 0.9em; color: #444; white-space: nowrap; }
   audio { flex: 1; height: 36px; }
+  .audio-hinweis { font-size: 0.82em; color: #c0392b; font-style: italic; display: none; margin-top: 6px; }
+  .audio-hinweis.sichtbar { display: block; }
 
   /* Tabelle */
   .tabelle-wrap { overflow-x: auto; margin-bottom: 30px; }
@@ -84,12 +86,15 @@
 </div>
 
 <!-- Audio Player -->
-<div class="audio-box">
-  <span class="audio-label">🎧 Dialog abspielen:</span>
-  <audio controls>
-    <source src="audio/b2-hoeren-teil2-uebung1.mp3" type="audio/mpeg">
-    Ihr Browser unterstützt das Audio-Element nicht.
-  </audio>
+<div class="audio-box" style="flex-direction: column; align-items: flex-start;">
+  <div style="display:flex; align-items:center; gap:16px; width:100%;">
+    <span class="audio-label">🎧 Dialog abspielen:</span>
+    <audio id="main-audio" controls>
+      <source src="audio/b2-hoeren-teil2-uebung1.mp3" type="audio/mpeg">
+      Ihr Browser unterstützt das Audio-Element nicht.
+    </audio>
+  </div>
+  <div class="audio-hinweis" id="audio-hinweis">⚠️ Sie haben den Dialog bereits gehört. Im echten Test ist nur ein Abspielen möglich.</div>
 </div>
 
 <!-- Tabelle -->
@@ -308,6 +313,23 @@
 </div>
 
 <script>
+// Audio nur einmal abspielen
+const audio = document.getElementById('main-audio');
+let hatGespielt = false;
+audio.addEventListener('play', function() {
+  if (hatGespielt) {
+    audio.pause();
+    audio.currentTime = 0;
+    audio.controls = false;
+    document.getElementById('audio-hinweis').classList.add('sichtbar');
+  }
+});
+audio.addEventListener('ended', function() {
+  hatGespielt = true;
+  audio.controls = false;
+  document.getElementById('audio-hinweis').classList.add('sichtbar');
+});
+
 function auswerten() {
   let punkte = 0, total = 0;
 
