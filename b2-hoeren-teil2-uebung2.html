@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ÖSD B2 – Hören Teil 2 · Übung 2</title>
+<style>
+  body { font-family: 'Georgia', serif; max-width: 900px; margin: 40px auto; padding: 20px; background: #fafaf8; color: #2c2c2c; line-height: 1.6; }
+  h1 { font-size: 1.3em; border-bottom: 2px solid #333; padding-bottom: 8px; margin-bottom: 6px; }
+  .meta { font-size: 0.85em; color: #666; margin-bottom: 30px; }
+  .anweisung { background: #eef2f7; border-left: 4px solid #4a6fa5; padding: 14px 18px; margin-bottom: 30px; font-size: 0.95em; }
+  .back { display: inline-block; margin-bottom: 24px; font-size: 0.82em; color: #666; text-decoration: none; letter-spacing: 0.05em; }
+  .back:hover { color: #2c2c2c; }
+
+  .audio-box { background: #fff; border: 1px solid #ccc; border-radius: 4px; padding: 20px 24px; margin-bottom: 28px; }
+  .audio-label { font-size: 0.9em; color: #444; white-space: nowrap; }
+  audio { flex: 1; height: 36px; }
+  .audio-hinweis { font-size: 0.82em; color: #c0392b; font-style: italic; display: none; margin-top: 6px; }
+  .audio-hinweis.sichtbar { display: block; }
+
+  .tabelle-wrap { overflow-x: auto; margin-bottom: 30px; }
+  table { width: 100%; border-collapse: collapse; background: #fff; font-size: 0.92em; }
+  th { background: #2c2c2c; color: white; padding: 10px 14px; text-align: left; font-weight: normal; letter-spacing: 0.04em; }
+  th:first-child { width: 160px; }
+  td { border: 1px solid #ddd; padding: 10px 14px; vertical-align: top; }
+  tr:nth-child(even) td { background: #f8f8f6; }
+  td:first-child { font-weight: bold; font-size: 0.9em; color: #444; background: #f0ede8 !important; }
+
+  .checkbox-group { display: flex; flex-direction: column; gap: 6px; }
+  .checkbox-option { display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 0.92em; }
+  .checkbox-option input[type="checkbox"] { width: 16px; height: 16px; accent-color: #4a6fa5; cursor: pointer; flex-shrink: 0; }
+  .checkbox-option.richtig-markiert { color: #3a7d44; font-weight: bold; }
+  .checkbox-option.falsch-markiert { color: #c0392b; }
+
+  .eingabe-feld { border: none; border-bottom: 2px solid #4a6fa5; font-size: 0.92em; font-family: 'Georgia', serif; background: transparent; outline: none; color: #2c2c2c; padding: 2px 4px; }
+  .eingabe-feld.richtig { border-color: #3a7d44; background: #e6f4ea; color: #2c7a3a; }
+  .eingabe-feld.falsch { border-color: #c0392b; background: #fdecea; color: #c0392b; }
+  .eingabe-breit { width: 100%; }
+  .eingabe-kurz { width: 50px; }
+  .eingabe-mittel { width: 70px; }
+
+  .loesung-toggle { margin-top: 24px; text-align: center; display: flex; gap: 12px; justify-content: center; }
+  .btn-loesung, .btn-reset { border: none; padding: 12px 28px; font-size: 0.9em; letter-spacing: 0.06em; cursor: pointer; font-family: 'Georgia', serif; border-radius: 2px; }
+  .btn-loesung { background: #4a6fa5; color: white; }
+  .btn-loesung:hover { background: #3a5a8a; }
+  .btn-reset { background: transparent; color: #666; border: 1px solid #ccc; }
+  .btn-reset:hover { background: #f0f0f0; }
+  .ergebnis-box { margin-top: 24px; text-align: center; font-size: 1.1em; display: none; }
+  .ergebnis-box.visible { display: block; }
+  .punkte { font-size: 2em; font-weight: bold; color: #4a6fa5; display: block; margin: 8px 0; }
+
+  @media print { .back, .loesung-toggle, .ergebnis-box, .audio-box { display: none; } }
+  @media (max-width: 600px) { th:first-child { width: 100px; } td { padding: 8px; } }
+</style>
+</head>
+<body>
+
+<a class="back" href="b2-hoeren-teil2.html">← Zurück zur Übungsauswahl</a>
+<h1>ÖSD Zertifikat B2 – Hören Teil 2</h1>
+<div class="meta">Übungsmaterial · Niveau B2 · Fitnessstudio-Tarife</div>
+
+<div class="anweisung">
+  <strong>Aufgabe:</strong> Sie hören ein Gespräch über drei Fitnessstudio-Tarife. Hören Sie den Dialog und füllen Sie die Tabelle aus. Kreuzen Sie die richtige Option an oder schreiben Sie die fehlende Information in das Feld.
+  <br><br><em>Sie können den Dialog einmal hören.</em>
+</div>
+
+<!-- Audio Player -->
+<div class="audio-box">
+  <div style="display:flex; align-items:center; gap:16px; width:100%;">
+    <span class="audio-label">🎧 Dialog abspielen:</span>
+    <audio id="main-audio" controls>
+      <source src="audio/b2-hoeren-teil2-uebung2.mp3" type="audio/mpeg">
+      Ihr Browser unterstützt das Audio-Element nicht.
+    </audio>
+  </div>
+  <div class="audio-hinweis" id="audio-hinweis">⚠️ Sie haben den Dialog bereits gehört. Im echten Test ist nur ein Abspielen möglich.</div>
+</div>
+
+<!-- Tabelle -->
+<div class="tabelle-wrap">
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>Basic</th>
+      <th>Plus</th>
+      <th>Premium</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <!-- Monatspreis -->
+    <tr>
+      <td>Monatspreis</td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="preis-a" value="19.90" data-loesung="true"> 19,90 €</label>
+          <label class="checkbox-option"><input type="checkbox" name="preis-a" value="29.90"> 29,90 €</label>
+          <label class="checkbox-option"><input type="checkbox" name="preis-a" value="49.90"> 49,90 €</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="preis-b" value="19.90"> 19,90 €</label>
+          <label class="checkbox-option"><input type="checkbox" name="preis-b" value="29.90" data-loesung="true"> 29,90 €</label>
+          <label class="checkbox-option"><input type="checkbox" name="preis-b" value="49.90"> 49,90 €</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="preis-c" value="19.90"> 19,90 €</label>
+          <label class="checkbox-option"><input type="checkbox" name="preis-c" value="29.90"> 29,90 €</label>
+          <label class="checkbox-option"><input type="checkbox" name="preis-c" value="49.90" data-loesung="true"> 49,90 €</label>
+        </div>
+      </td>
+    </tr>
+
+    <!-- Anmeldegebühr -->
+    <tr>
+      <td>Anmeldegebühr</td>
+      <td><input class="eingabe-feld eingabe-mittel" id="anmeld-a" data-loesung="20" placeholder="___"> €</td>
+      <td><input class="eingabe-feld eingabe-mittel" id="anmeld-b" data-loesung="30" placeholder="___"> €</td>
+      <td><input class="eingabe-feld eingabe-mittel" id="anmeld-c" data-loesung="0" placeholder="___"> €</td>
+    </tr>
+
+    <!-- Vertragslaufzeit -->
+    <tr>
+      <td>Vertragslaufzeit</td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="laufzeit-a" value="12" data-loesung="true"> 12 Monate</label>
+          <label class="checkbox-option"><input type="checkbox" name="laufzeit-a" value="6"> 6 Monate</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="laufzeit-b" value="12" data-loesung="true"> 12 Monate</label>
+          <label class="checkbox-option"><input type="checkbox" name="laufzeit-b" value="6"> 6 Monate</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="laufzeit-c" value="12"> 12 Monate</label>
+          <label class="checkbox-option"><input type="checkbox" name="laufzeit-c" value="6" data-loesung="true"> 6 Monate</label>
+        </div>
+      </td>
+    </tr>
+
+    <!-- Kündigungsfrist -->
+    <tr>
+      <td>Kündigungsfrist</td>
+      <td><input class="eingabe-feld eingabe-kurz" id="kuend-a" data-loesung="3" placeholder="__"> Monat(e)</td>
+      <td><input class="eingabe-feld eingabe-kurz" id="kuend-b" data-loesung="3" placeholder="__"> Monat(e)</td>
+      <td><input class="eingabe-feld eingabe-kurz" id="kuend-c" data-loesung="1" placeholder="__"> Monat(e)</td>
+    </tr>
+
+    <!-- Öffnungszeiten -->
+    <tr>
+      <td>Öffnungszeiten</td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="oeffnung-a" value="623"> täglich 6–23 Uhr</label>
+          <label class="checkbox-option"><input type="checkbox" name="oeffnung-a" value="624"> täglich 6–24 Uhr</label>
+          <label class="checkbox-option"><input type="checkbox" name="oeffnung-a" value="mofr" data-loesung="true"> Mo–Fr 6–22 Uhr</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="oeffnung-b" value="623" data-loesung="true"> täglich 6–23 Uhr</label>
+          <label class="checkbox-option"><input type="checkbox" name="oeffnung-b" value="624"> täglich 6–24 Uhr</label>
+          <label class="checkbox-option"><input type="checkbox" name="oeffnung-b" value="mofr"> Mo–Fr 6–22 Uhr</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="oeffnung-c" value="623"> täglich 6–23 Uhr</label>
+          <label class="checkbox-option"><input type="checkbox" name="oeffnung-c" value="624" data-loesung="true"> täglich 6–24 Uhr</label>
+          <label class="checkbox-option"><input type="checkbox" name="oeffnung-c" value="mofr"> Mo–Fr 6–22 Uhr</label>
+        </div>
+      </td>
+    </tr>
+
+    <!-- Kurse inklusive -->
+    <tr>
+      <td>Kurse inklusive</td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="kurse-a" value="ja"> ja</label>
+          <label class="checkbox-option"><input type="checkbox" name="kurse-a" value="nein" data-loesung="true"> nein</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="kurse-b" value="ja" data-loesung="true"> ja</label>
+          <label class="checkbox-option"><input type="checkbox" name="kurse-b" value="nein"> nein</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="kurse-c" value="ja" data-loesung="true"> ja</label>
+          <label class="checkbox-option"><input type="checkbox" name="kurse-c" value="nein"> nein</label>
+        </div>
+      </td>
+    </tr>
+
+    <!-- Sauna -->
+    <tr>
+      <td>Sauna</td>
+      <td><input class="eingabe-feld eingabe-breit" id="sauna-a" data-loesung="nein" placeholder="..............."></td>
+      <td><input class="eingabe-feld eingabe-breit" id="sauna-b" data-loesung="5 € pro Besuch" placeholder="..............."></td>
+      <td><input class="eingabe-feld eingabe-breit" id="sauna-c" data-loesung="inklusive" placeholder="..............."></td>
+    </tr>
+
+    <!-- Schwimmbad -->
+    <tr>
+      <td>Schwimmbad</td>
+      <td><input class="eingabe-feld eingabe-breit" id="schwimm-a" data-loesung="nein" placeholder="..............."></td>
+      <td><input class="eingabe-feld eingabe-breit" id="schwimm-b" data-loesung="nein" placeholder="..............."></td>
+      <td><input class="eingabe-feld eingabe-breit" id="schwimm-c" data-loesung="inklusive" placeholder="..............."></td>
+    </tr>
+
+    <!-- Handtuchservice -->
+    <tr>
+      <td>Handtuchservice</td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="handtuch-a" value="ja"> ja</label>
+          <label class="checkbox-option"><input type="checkbox" name="handtuch-a" value="nein" data-loesung="true"> nein</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="handtuch-b" value="ja"> ja</label>
+          <label class="checkbox-option"><input type="checkbox" name="handtuch-b" value="nein" data-loesung="true"> nein</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="handtuch-c" value="ja" data-loesung="true"> ja</label>
+          <label class="checkbox-option"><input type="checkbox" name="handtuch-c" value="nein"> nein</label>
+        </div>
+      </td>
+    </tr>
+
+    <!-- Kostenlose Probewoche -->
+    <tr>
+      <td>Kostenlose Probewoche</td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="probe-a" value="ja" data-loesung="true"> ja</label>
+          <label class="checkbox-option"><input type="checkbox" name="probe-a" value="nein"> nein</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="probe-b" value="ja" data-loesung="true"> ja</label>
+          <label class="checkbox-option"><input type="checkbox" name="probe-b" value="nein"> nein</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="probe-c" value="ja" data-loesung="true"> ja</label>
+          <label class="checkbox-option"><input type="checkbox" name="probe-c" value="nein"> nein</label>
+        </div>
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+</div>
+
+<div class="loesung-toggle">
+  <button class="btn-loesung" onclick="auswerten()">Auswerten</button>
+  <button class="btn-reset" onclick="reset()">Zurücksetzen</button>
+</div>
+
+<div class="ergebnis-box" id="ergebnis">
+  <span class="punkte" id="punkte-anzeige"></span>
+  <span id="ergebnis-text"></span>
+</div>
+
+<script>
+// Audio nur einmal abspielen
+const audio = document.getElementById('main-audio');
+let hatGespielt = false;
+audio.addEventListener('ended', function() {
+  hatGespielt = true;
+  audio.controls = false;
+  document.getElementById('audio-hinweis').classList.add('sichtbar');
+});
+audio.addEventListener('play', function() {
+  if (hatGespielt) {
+    audio.pause();
+    audio.currentTime = 0;
+    audio.controls = false;
+    document.getElementById('audio-hinweis').classList.add('sichtbar');
+  }
+});
+
+function auswerten() {
+  let punkte = 0, total = 0;
+
+  // Checkboxen
+  const gruppen = ['preis-a','preis-b','preis-c','laufzeit-a','laufzeit-b','laufzeit-c','oeffnung-a','oeffnung-b','oeffnung-c','kurse-a','kurse-b','kurse-c','handtuch-a','handtuch-b','handtuch-c','probe-a','probe-b','probe-c'];
+  gruppen.forEach(name => {
+    total++;
+    const alle = document.querySelectorAll(`input[name="${name}"]`);
+    let korrekt = true;
+    alle.forEach(cb => {
+      const sollChecked = cb.dataset.loesung === 'true';
+      if (cb.checked !== sollChecked) korrekt = false;
+      const label = cb.closest('.checkbox-option');
+      label.classList.remove('richtig-markiert','falsch-markiert');
+      if (cb.checked && sollChecked) label.classList.add('richtig-markiert');
+      else if (cb.checked && !sollChecked) label.classList.add('falsch-markiert');
+      else if (!cb.checked && sollChecked) label.classList.add('falsch-markiert');
+    });
+    if (korrekt) punkte++;
+  });
+
+  // Eingabefelder
+  document.querySelectorAll('.eingabe-feld').forEach(feld => {
+    total++;
+    const eingabe = feld.value.trim().toLowerCase().replace(/\s+/g,' ');
+    const loesung = feld.dataset.loesung.toLowerCase().replace(/\s+/g,' ');
+    feld.classList.remove('richtig','falsch');
+    if (eingabe === loesung) { feld.classList.add('richtig'); punkte++; }
+    else { feld.classList.add('falsch'); }
+  });
+
+  document.getElementById('punkte-anzeige').textContent = `${punkte} / ${total}`;
+  const pct = punkte / total;
+  const text = pct < 0.4 ? 'Noch üben! 💪' : pct < 0.6 ? 'Guter Anfang! 📖' : pct < 0.75 ? 'Solide! 👍' : pct < 0.9 ? 'Sehr gut! 🎉' : 'Ausgezeichnet! 🏆';
+  document.getElementById('ergebnis-text').textContent = text;
+  document.getElementById('ergebnis').classList.add('visible');
+  document.getElementById('ergebnis').scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function reset() {
+  document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+    cb.checked = false;
+    cb.closest('.checkbox-option').classList.remove('richtig-markiert','falsch-markiert');
+  });
+  document.querySelectorAll('.eingabe-feld').forEach(f => {
+    f.value = '';
+    f.classList.remove('richtig','falsch');
+  });
+  document.getElementById('ergebnis').classList.remove('visible');
+  // Audio zurücksetzen
+  audio.controls = true;
+  audio.currentTime = 0;
+  hatGespielt = false;
+  document.getElementById('audio-hinweis').classList.remove('sichtbar');
+}
+</script>
+</body>
+</html>
