@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ÖSD B2 – Hören Teil 2 · Übung 3</title>
+<style>
+  body { font-family: 'Georgia', serif; max-width: 900px; margin: 40px auto; padding: 20px; background: #fafaf8; color: #2c2c2c; line-height: 1.6; }
+  h1 { font-size: 1.3em; border-bottom: 2px solid #333; padding-bottom: 8px; margin-bottom: 6px; }
+  .meta { font-size: 0.85em; color: #666; margin-bottom: 30px; }
+  .anweisung { background: #eef2f7; border-left: 4px solid #4a6fa5; padding: 14px 18px; margin-bottom: 30px; font-size: 0.95em; }
+  .back { display: inline-block; margin-bottom: 24px; font-size: 0.82em; color: #666; text-decoration: none; letter-spacing: 0.05em; }
+  .back:hover { color: #2c2c2c; }
+  .audio-box { background: #fff; border: 1px solid #ccc; border-radius: 4px; padding: 20px 24px; margin-bottom: 28px; }
+  .audio-label { font-size: 0.9em; color: #444; white-space: nowrap; }
+  .audio-hinweis { font-size: 0.82em; color: #c0392b; font-style: italic; display: none; margin-top: 6px; }
+  .audio-hinweis.sichtbar { display: block; }
+  .tabelle-wrap { overflow-x: auto; margin-bottom: 30px; }
+  table { width: 100%; border-collapse: collapse; background: #fff; font-size: 0.92em; }
+  th { background: #2c2c2c; color: white; padding: 10px 14px; text-align: left; font-weight: normal; letter-spacing: 0.04em; }
+  th:first-child { width: 160px; }
+  td { border: 1px solid #ddd; padding: 10px 14px; vertical-align: top; }
+  tr:nth-child(even) td { background: #f8f8f6; }
+  td:first-child { font-weight: bold; font-size: 0.9em; color: #444; background: #f0ede8 !important; }
+  .checkbox-group { display: flex; flex-direction: column; gap: 6px; }
+  .checkbox-option { display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 0.92em; }
+  .checkbox-option input[type="checkbox"] { width: 16px; height: 16px; accent-color: #4a6fa5; cursor: pointer; flex-shrink: 0; }
+  .checkbox-option.richtig-markiert { color: #3a7d44; font-weight: bold; }
+  .checkbox-option.falsch-markiert { color: #c0392b; }
+  .eingabe-feld { border: none; border-bottom: 2px solid #4a6fa5; font-size: 0.92em; font-family: 'Georgia', serif; background: transparent; outline: none; color: #2c2c2c; padding: 2px 4px; }
+  .eingabe-feld.richtig { border-color: #3a7d44; background: #e6f4ea; color: #2c7a3a; }
+  .eingabe-feld.falsch { border-color: #c0392b; background: #fdecea; color: #c0392b; }
+  .eingabe-breit { width: 100%; }
+  .eingabe-kurz { width: 50px; }
+  .eingabe-mittel { width: 70px; }
+  .loesung-toggle { margin-top: 24px; text-align: center; display: flex; gap: 12px; justify-content: center; }
+  .btn-loesung, .btn-reset { border: none; padding: 12px 28px; font-size: 0.9em; letter-spacing: 0.06em; cursor: pointer; font-family: 'Georgia', serif; border-radius: 2px; }
+  .btn-loesung { background: #4a6fa5; color: white; }
+  .btn-loesung:hover { background: #3a5a8a; }
+  .btn-reset { background: transparent; color: #666; border: 1px solid #ccc; }
+  .btn-reset:hover { background: #f0f0f0; }
+  .ergebnis-box { margin-top: 24px; text-align: center; font-size: 1.1em; display: none; }
+  .ergebnis-box.visible { display: block; }
+  .punkte { font-size: 2em; font-weight: bold; color: #4a6fa5; display: block; margin: 8px 0; }
+  @media print { .back, .loesung-toggle, .ergebnis-box, .audio-box { display: none; } }
+  @media (max-width: 600px) { th:first-child { width: 100px; } td { padding: 8px; } }
+</style>
+</head>
+<body>
+
+<a class="back" href="b2-hoeren-teil2.html">← Zurück zur Übungsauswahl</a>
+<h1>ÖSD Zertifikat B2 – Hören Teil 2</h1>
+<div class="meta">Übungsmaterial · Niveau B2 · Autovermietung</div>
+
+<div class="anweisung">
+  <strong>Aufgabe:</strong> Sie hören ein Gespräch über drei Mietwagen-Kategorien. Hören Sie den Dialog und füllen Sie die Tabelle aus. Kreuzen Sie die richtige Option an oder schreiben Sie die fehlende Information in das Feld.
+  <br><br><em>Sie können den Dialog einmal hören.</em>
+</div>
+
+<!-- Audio Player -->
+<div class="audio-box">
+  <div style="display:flex; align-items:center; gap:16px; width:100%;">
+    <span class="audio-label">🎧 Dialog abspielen:</span>
+    <audio id="main-audio" controls>
+      <source src="audio/b2-hoeren-teil2-uebung3.mp3" type="audio/mpeg">
+      Ihr Browser unterstützt das Audio-Element nicht.
+    </audio>
+  </div>
+  <div class="audio-hinweis" id="audio-hinweis">⚠️ Sie haben den Dialog bereits gehört. Im echten Test ist nur ein Abspielen möglich.</div>
+</div>
+
+<!-- Tabelle -->
+<div class="tabelle-wrap">
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>Öko</th>
+      <th>Komfort</th>
+      <th>SUV</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <!-- Preis pro Tag -->
+    <tr>
+      <td>Preis pro Tag</td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="preis-a" value="35" data-loesung="true"> 35 €</label>
+          <label class="checkbox-option"><input type="checkbox" name="preis-a" value="55"> 55 €</label>
+          <label class="checkbox-option"><input type="checkbox" name="preis-a" value="75"> 75 €</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="preis-b" value="35"> 35 €</label>
+          <label class="checkbox-option"><input type="checkbox" name="preis-b" value="55" data-loesung="true"> 55 €</label>
+          <label class="checkbox-option"><input type="checkbox" name="preis-b" value="75"> 75 €</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="preis-c" value="35"> 35 €</label>
+          <label class="checkbox-option"><input type="checkbox" name="preis-c" value="55"> 55 €</label>
+          <label class="checkbox-option"><input type="checkbox" name="preis-c" value="75" data-loesung="true"> 75 €</label>
+        </div>
+      </td>
+    </tr>
+
+    <!-- Personenzahl -->
+    <tr>
+      <td>Personenzahl</td>
+      <td><input class="eingabe-feld eingabe-kurz" id="person-a" data-loesung="4" placeholder="__"></td>
+      <td><input class="eingabe-feld eingabe-kurz" id="person-b" data-loesung="5" placeholder="__"></td>
+      <td><input class="eingabe-feld eingabe-kurz" id="person-c" data-loesung="5" placeholder="__"></td>
+    </tr>
+
+    <!-- Anzahl Koffer -->
+    <tr>
+      <td>Anzahl Koffer</td>
+      <td><input class="eingabe-feld eingabe-kurz" id="koffer-a" data-loesung="2" placeholder="__"></td>
+      <td><input class="eingabe-feld eingabe-kurz" id="koffer-b" data-loesung="4" placeholder="__"></td>
+      <td><input class="eingabe-feld eingabe-kurz" id="koffer-c" data-loesung="6" placeholder="__"></td>
+    </tr>
+
+    <!-- Versicherung -->
+    <tr>
+      <td>Versicherung</td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="vers-a" value="haft" data-loesung="true"> Haftpflicht</label>
+          <label class="checkbox-option"><input type="checkbox" name="vers-a" value="haft15"> Haftpflicht + Vollkasko 15 €</label>
+          <label class="checkbox-option"><input type="checkbox" name="vers-a" value="inkl"> Haftpflicht + Vollkasko inbegriffen</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="vers-b" value="haft"> Haftpflicht</label>
+          <label class="checkbox-option"><input type="checkbox" name="vers-b" value="haft15" data-loesung="true"> Haftpflicht + Vollkasko 15 €</label>
+          <label class="checkbox-option"><input type="checkbox" name="vers-b" value="inkl"> Haftpflicht + Vollkasko inbegriffen</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="vers-c" value="haft"> Haftpflicht</label>
+          <label class="checkbox-option"><input type="checkbox" name="vers-c" value="haft15"> Haftpflicht + Vollkasko 15 €</label>
+          <label class="checkbox-option"><input type="checkbox" name="vers-c" value="inkl" data-loesung="true"> Haftpflicht + Vollkasko inbegriffen</label>
+        </div>
+      </td>
+    </tr>
+
+    <!-- Kilometer -->
+    <tr>
+      <td>Kilometer</td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="km-a" value="750"> 750</label>
+          <label class="checkbox-option"><input type="checkbox" name="km-a" value="1000"> 1.000</label>
+          <label class="checkbox-option"><input type="checkbox" name="km-a" value="unbegrenzt" data-loesung="true"> unbegrenzt</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="km-b" value="750"> 750</label>
+          <label class="checkbox-option"><input type="checkbox" name="km-b" value="1000"> 1.000</label>
+          <label class="checkbox-option"><input type="checkbox" name="km-b" value="unbegrenzt" data-loesung="true"> unbegrenzt</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="km-c" value="750"> 750</label>
+          <label class="checkbox-option"><input type="checkbox" name="km-c" value="1000"> 1.000</label>
+          <label class="checkbox-option"><input type="checkbox" name="km-c" value="unbegrenzt" data-loesung="true"> unbegrenzt</label>
+        </div>
+      </td>
+    </tr>
+
+    <!-- Kaution -->
+    <tr>
+      <td>Kaution</td>
+      <td><input class="eingabe-feld eingabe-mittel" id="kaution-a" data-loesung="200" placeholder="___"> €</td>
+      <td><input class="eingabe-feld eingabe-mittel" id="kaution-b" data-loesung="300" placeholder="___"> €</td>
+      <td><input class="eingabe-feld eingabe-mittel" id="kaution-c" data-loesung="500" placeholder="___"> €</td>
+    </tr>
+
+    <!-- Rückgabe in anderer Stadt -->
+    <tr>
+      <td>Rückgabe in anderer Stadt</td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="rueck-a" value="extra" data-loesung="true"> 50 € extra</label>
+          <label class="checkbox-option"><input type="checkbox" name="rueck-a" value="inkl"> inbegriffen</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="rueck-b" value="extra" data-loesung="true"> 50 € extra</label>
+          <label class="checkbox-option"><input type="checkbox" name="rueck-b" value="inkl"> inbegriffen</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="rueck-c" value="extra"> 50 € extra</label>
+          <label class="checkbox-option"><input type="checkbox" name="rueck-c" value="inkl" data-loesung="true"> inbegriffen</label>
+        </div>
+      </td>
+    </tr>
+
+    <!-- Abholung -->
+    <tr>
+      <td>Abholung</td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="abhol-a" value="innen" data-loesung="true"> Innenstadtfiliale</label>
+          <label class="checkbox-option"><input type="checkbox" name="abhol-a" value="flug"> Flughafen</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="abhol-b" value="innen" data-loesung="true"> Innenstadtfiliale</label>
+          <label class="checkbox-option"><input type="checkbox" name="abhol-b" value="flug" data-loesung="true"> Flughafen</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="abhol-c" value="innen" data-loesung="true"> Innenstadtfiliale</label>
+          <label class="checkbox-option"><input type="checkbox" name="abhol-c" value="flug" data-loesung="true"> Flughafen</label>
+        </div>
+      </td>
+    </tr>
+
+    <!-- Extras -->
+    <tr>
+      <td>Extras</td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="extra-a" value="heiz"> Sitzheizung</label>
+          <label class="checkbox-option"><input type="checkbox" name="extra-a" value="tempo"> Tempomat</label>
+          <label class="checkbox-option"><input type="checkbox" name="extra-a" value="navi"> Navi</label>
+          <label class="checkbox-option"><input type="checkbox" name="extra-a" value="allrad"> Allradantrieb</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="extra-b" value="heiz" data-loesung="true"> Sitzheizung</label>
+          <label class="checkbox-option"><input type="checkbox" name="extra-b" value="tempo" data-loesung="true"> Tempomat</label>
+          <label class="checkbox-option"><input type="checkbox" name="extra-b" value="navi"> Navi</label>
+          <label class="checkbox-option"><input type="checkbox" name="extra-b" value="allrad"> Allradantrieb</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="extra-c" value="heiz"> Sitzheizung</label>
+          <label class="checkbox-option"><input type="checkbox" name="extra-c" value="tempo"> Tempomat</label>
+          <label class="checkbox-option"><input type="checkbox" name="extra-c" value="navi" data-loesung="true"> Navi</label>
+          <label class="checkbox-option"><input type="checkbox" name="extra-c" value="allrad" data-loesung="true"> Allradantrieb</label>
+        </div>
+      </td>
+    </tr>
+
+    <!-- Tankregelung -->
+    <tr>
+      <td>Tankregelung</td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="tank-a" value="voll" data-loesung="true"> voll / voll</label>
+          <label class="checkbox-option"><input type="checkbox" name="tank-a" value="keine"> voll / keine</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="tank-b" value="voll" data-loesung="true"> voll / voll</label>
+          <label class="checkbox-option"><input type="checkbox" name="tank-b" value="keine"> voll / keine</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="tank-c" value="voll"> voll / voll</label>
+          <label class="checkbox-option"><input type="checkbox" name="tank-c" value="keine" data-loesung="true"> voll / keine</label>
+        </div>
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+</div>
+
+<div class="loesung-toggle">
+  <button class="btn-loesung" onclick="auswerten()">Auswerten</button>
+  <button class="btn-reset" onclick="reset()">Zurücksetzen</button>
+</div>
+
+<div class="ergebnis-box" id="ergebnis">
+  <span class="punkte" id="punkte-anzeige"></span>
+  <span id="ergebnis-text"></span>
+</div>
+
+<script>
+const audio = document.getElementById('main-audio');
+let hatGespielt = false;
+audio.addEventListener('ended', function() {
+  hatGespielt = true;
+  audio.controls = false;
+  document.getElementById('audio-hinweis').classList.add('sichtbar');
+});
+audio.addEventListener('play', function() {
+  if (hatGespielt) {
+    audio.pause();
+    audio.currentTime = 0;
+    audio.controls = false;
+    document.getElementById('audio-hinweis').classList.add('sichtbar');
+  }
+});
+
+function auswerten() {
+  let punkte = 0, total = 0;
+
+  // Checkboxgruppen – bei Mehrfachauswahl (Abholung, Extras) alle Haken müssen stimmen
+  const gruppen = ['preis-a','preis-b','preis-c','vers-a','vers-b','vers-c','km-a','km-b','km-c','rueck-a','rueck-b','rueck-c','abhol-a','abhol-b','abhol-c','extra-a','extra-b','extra-c','tank-a','tank-b','tank-c'];
+  gruppen.forEach(name => {
+    total++;
+    const alle = document.querySelectorAll(`input[name="${name}"]`);
+    let korrekt = true;
+    alle.forEach(cb => {
+      const sollChecked = cb.dataset.loesung === 'true';
+      if (cb.checked !== sollChecked) korrekt = false;
+      const label = cb.closest('.checkbox-option');
+      label.classList.remove('richtig-markiert','falsch-markiert');
+      if (cb.checked && sollChecked) label.classList.add('richtig-markiert');
+      else if (cb.checked && !sollChecked) label.classList.add('falsch-markiert');
+      else if (!cb.checked && sollChecked) label.classList.add('falsch-markiert');
+    });
+    if (korrekt) punkte++;
+  });
+
+  // Eingabefelder
+  document.querySelectorAll('.eingabe-feld').forEach(feld => {
+    total++;
+    const eingabe = feld.value.trim().toLowerCase().replace(/\s+/g,' ');
+    const loesung = feld.dataset.loesung.toLowerCase().replace(/\s+/g,' ');
+    feld.classList.remove('richtig','falsch');
+    if (eingabe === loesung) { feld.classList.add('richtig'); punkte++; }
+    else { feld.classList.add('falsch'); }
+  });
+
+  document.getElementById('punkte-anzeige').textContent = `${punkte} / ${total}`;
+  const pct = punkte / total;
+  const text = pct < 0.4 ? 'Noch üben! 💪' : pct < 0.6 ? 'Guter Anfang! 📖' : pct < 0.75 ? 'Solide! 👍' : pct < 0.9 ? 'Sehr gut! 🎉' : 'Ausgezeichnet! 🏆';
+  document.getElementById('ergebnis-text').textContent = text;
+  document.getElementById('ergebnis').classList.add('visible');
+  document.getElementById('ergebnis').scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function reset() {
+  document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+    cb.checked = false;
+    cb.closest('.checkbox-option').classList.remove('richtig-markiert','falsch-markiert');
+  });
+  document.querySelectorAll('.eingabe-feld').forEach(f => {
+    f.value = '';
+    f.classList.remove('richtig','falsch');
+  });
+  document.getElementById('ergebnis').classList.remove('visible');
+  audio.controls = true;
+  audio.currentTime = 0;
+  hatGespielt = false;
+  document.getElementById('audio-hinweis').classList.remove('sichtbar');
+}
+</script>
+</body>
+</html>
