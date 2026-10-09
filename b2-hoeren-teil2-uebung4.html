@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ÖSD B2 – Hören Teil 2 · Übung 4</title>
+<style>
+  body { font-family: 'Georgia', serif; max-width: 900px; margin: 40px auto; padding: 20px; background: #fafaf8; color: #2c2c2c; line-height: 1.6; }
+  h1 { font-size: 1.3em; border-bottom: 2px solid #333; padding-bottom: 8px; margin-bottom: 6px; }
+  .meta { font-size: 0.85em; color: #666; margin-bottom: 30px; }
+  .anweisung { background: #eef2f7; border-left: 4px solid #4a6fa5; padding: 14px 18px; margin-bottom: 30px; font-size: 0.95em; }
+  .back { display: inline-block; margin-bottom: 24px; font-size: 0.82em; color: #666; text-decoration: none; letter-spacing: 0.05em; }
+  .back:hover { color: #2c2c2c; }
+  .audio-box { background: #fff; border: 1px solid #ccc; border-radius: 4px; padding: 20px 24px; margin-bottom: 28px; }
+  .audio-label { font-size: 0.9em; color: #444; white-space: nowrap; }
+  .audio-hinweis { font-size: 0.82em; color: #c0392b; font-style: italic; display: none; margin-top: 6px; }
+  .audio-hinweis.sichtbar { display: block; }
+  .tabelle-wrap { overflow-x: auto; margin-bottom: 30px; }
+  table { width: 100%; border-collapse: collapse; background: #fff; font-size: 0.92em; }
+  th { background: #2c2c2c; color: white; padding: 10px 14px; text-align: left; font-weight: normal; letter-spacing: 0.04em; }
+  th:first-child { width: 170px; }
+  td { border: 1px solid #ddd; padding: 10px 14px; vertical-align: top; }
+  tr:nth-child(even) td { background: #f8f8f6; }
+  td:first-child { font-weight: bold; font-size: 0.9em; color: #444; background: #f0ede8 !important; }
+  .checkbox-group { display: flex; flex-direction: column; gap: 6px; }
+  .checkbox-option { display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 0.92em; }
+  .checkbox-option input[type="checkbox"] { width: 16px; height: 16px; accent-color: #4a6fa5; cursor: pointer; flex-shrink: 0; }
+  .checkbox-option.richtig-markiert { color: #3a7d44; font-weight: bold; }
+  .checkbox-option.falsch-markiert { color: #c0392b; }
+  .eingabe-feld { border: none; border-bottom: 2px solid #4a6fa5; font-size: 0.92em; font-family: 'Georgia', serif; background: transparent; outline: none; color: #2c2c2c; padding: 2px 4px; }
+  .eingabe-feld.richtig { border-color: #3a7d44; background: #e6f4ea; color: #2c7a3a; }
+  .eingabe-feld.falsch { border-color: #c0392b; background: #fdecea; color: #c0392b; }
+  .eingabe-kurz { width: 50px; }
+  .eingabe-mittel { width: 70px; }
+  .loesung-toggle { margin-top: 24px; text-align: center; display: flex; gap: 12px; justify-content: center; }
+  .btn-loesung, .btn-reset { border: none; padding: 12px 28px; font-size: 0.9em; letter-spacing: 0.06em; cursor: pointer; font-family: 'Georgia', serif; border-radius: 2px; }
+  .btn-loesung { background: #4a6fa5; color: white; }
+  .btn-loesung:hover { background: #3a5a8a; }
+  .btn-reset { background: transparent; color: #666; border: 1px solid #ccc; }
+  .btn-reset:hover { background: #f0f0f0; }
+  .ergebnis-box { margin-top: 24px; text-align: center; font-size: 1.1em; display: none; }
+  .ergebnis-box.visible { display: block; }
+  .punkte { font-size: 2em; font-weight: bold; color: #4a6fa5; display: block; margin: 8px 0; }
+  @media print { .back, .loesung-toggle, .ergebnis-box, .audio-box { display: none; } }
+</style>
+</head>
+<body>
+
+<a class="back" href="b2-hoeren-teil2-seite2.html">← Zurück zur Übungsauswahl</a>
+<h1>ÖSD Zertifikat B2 – Hören Teil 2</h1>
+<div class="meta">Übungsmaterial · Niveau B2 · Carsharing-Anbieter</div>
+
+<div class="anweisung">
+  <strong>Aufgabe:</strong> Sie hören ein Gespräch über drei Carsharing-Anbieter. Hören Sie den Dialog und füllen Sie die Tabelle aus. Kreuzen Sie die richtige Option an oder schreiben Sie die fehlende Information in das Feld.
+  <br><br><em>Sie können den Dialog einmal hören.</em>
+</div>
+
+<div class="audio-box">
+  <div style="display:flex; align-items:center; gap:16px; width:100%;">
+    <span class="audio-label">🎧 Dialog abspielen:</span>
+    <audio id="main-audio" controls>
+      <source src="audio/b2-hoeren-teil2-uebung4.mp3" type="audio/mpeg">
+      Ihr Browser unterstützt das Audio-Element nicht.
+    </audio>
+  </div>
+  <div class="audio-hinweis" id="audio-hinweis">⚠️ Sie haben den Dialog bereits gehört. Im echten Test ist nur ein Abspielen möglich.</div>
+</div>
+
+<div class="tabelle-wrap">
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>FlinkCar</th>
+      <th>Stadtflitzer</th>
+      <th>EcoRide</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <!-- Registrierung -->
+    <tr>
+      <td>Registrierung / Mitgliedschaft</td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="reg-a" value="kostenlos" data-loesung="true"> kostenlos</label>
+          <label class="checkbox-option"><input type="checkbox" name="reg-a" value="einmalig"> 20 € einmalig</label>
+          <label class="checkbox-option"><input type="checkbox" name="reg-a" value="monatlich"> 5 € monatlich</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="reg-b" value="kostenlos"> kostenlos</label>
+          <label class="checkbox-option"><input type="checkbox" name="reg-b" value="einmalig"> 20 € einmalig</label>
+          <label class="checkbox-option"><input type="checkbox" name="reg-b" value="monatlich" data-loesung="true"> 5 € monatlich</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="reg-c" value="kostenlos"> kostenlos</label>
+          <label class="checkbox-option"><input type="checkbox" name="reg-c" value="einmalig" data-loesung="true"> 20 € einmalig</label>
+          <label class="checkbox-option"><input type="checkbox" name="reg-c" value="monatlich"> 5 € monatlich</label>
+        </div>
+      </td>
+    </tr>
+
+    <!-- Preis pro Stunde -->
+    <tr>
+      <td>Preis pro Stunde</td>
+      <td><input class="eingabe-mittel" id="stunde-a" data-loesung="2,50" placeholder="___"> €</td>
+      <td><input class="eingabe-mittel" id="stunde-b" data-loesung="1,90" placeholder="___"> €</td>
+      <td><input class="eingabe-mittel" id="stunde-c" data-loesung="3,50" placeholder="___"> €</td>
+    </tr>
+
+    <!-- Preis pro km -->
+    <tr>
+      <td>Preis pro km</td>
+      <td><input class="eingabe-mittel" id="km-a" data-loesung="0,30" placeholder="___"> €</td>
+      <td><input class="eingabe-mittel" id="km-b" data-loesung="0,25" placeholder="___"> €</td>
+      <td><input class="eingabe-mittel" id="km-c" data-loesung="0,20" placeholder="___"> €</td>
+    </tr>
+
+    <!-- Fahrzeugtyp -->
+    <tr>
+      <td>Fahrzeugtyp</td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="fahr-a" value="elektro"> Elektro</label>
+          <label class="checkbox-option"><input type="checkbox" name="fahr-a" value="klein" data-loesung="true"> Kleinwagen</label>
+          <label class="checkbox-option"><input type="checkbox" name="fahr-a" value="komfort"> Komfort</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="fahr-b" value="elektro"> Elektro</label>
+          <label class="checkbox-option"><input type="checkbox" name="fahr-b" value="klein"> Kleinwagen</label>
+          <label class="checkbox-option"><input type="checkbox" name="fahr-b" value="komfort" data-loesung="true"> Komfort</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="fahr-c" value="elektro" data-loesung="true"> Elektro</label>
+          <label class="checkbox-option"><input type="checkbox" name="fahr-c" value="klein"> Kleinwagen</label>
+          <label class="checkbox-option"><input type="checkbox" name="fahr-c" value="komfort"> Komfort</label>
+        </div>
+      </td>
+    </tr>
+
+    <!-- Selbstbeteiligung -->
+    <tr>
+      <td>Selbstbeteiligung</td>
+      <td><input class="eingabe-mittel" id="selbst-a" data-loesung="500" placeholder="___"> €</td>
+      <td><input class="eingabe-mittel" id="selbst-b" data-loesung="300" placeholder="___"> €</td>
+      <td><input class="eingabe-mittel" id="selbst-c" data-loesung="200" placeholder="___"> €</td>
+    </tr>
+
+    <!-- Rückgabe -->
+    <tr>
+      <td>Rückgabe</td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="rueck-a" value="ueberall" data-loesung="true"> überall in der Stadt</label>
+          <label class="checkbox-option"><input type="checkbox" name="rueck-a" value="fest"> feste Stationen</label>
+          <label class="checkbox-option"><input type="checkbox" name="rueck-a" value="zonen"> bestimmte Zonen</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="rueck-b" value="ueberall"> überall in der Stadt</label>
+          <label class="checkbox-option"><input type="checkbox" name="rueck-b" value="fest" data-loesung="true"> feste Stationen</label>
+          <label class="checkbox-option"><input type="checkbox" name="rueck-b" value="zonen"> bestimmte Zonen</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="rueck-c" value="ueberall"> überall in der Stadt</label>
+          <label class="checkbox-option"><input type="checkbox" name="rueck-c" value="fest" data-loesung="true"> feste Stationen</label>
+          <label class="checkbox-option"><input type="checkbox" name="rueck-c" value="zonen" data-loesung="true"> bestimmte Zonen</label>
+        </div>
+      </td>
+    </tr>
+
+    <!-- Maximale Nutzungsdauer -->
+    <tr>
+      <td>Maximale Nutzungsdauer</td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="dauer-a" value="48"> 48 Stunden</label>
+          <label class="checkbox-option"><input type="checkbox" name="dauer-a" value="24"> 24 Stunden</label>
+          <label class="checkbox-option"><input type="checkbox" name="dauer-a" value="keine" data-loesung="true"> nicht genannt</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="dauer-b" value="48"> 48 Stunden</label>
+          <label class="checkbox-option"><input type="checkbox" name="dauer-b" value="24" data-loesung="true"> 24 Stunden</label>
+          <label class="checkbox-option"><input type="checkbox" name="dauer-b" value="keine"> nicht genannt</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="dauer-c" value="48" data-loesung="true"> 48 Stunden</label>
+          <label class="checkbox-option"><input type="checkbox" name="dauer-c" value="24"> 24 Stunden</label>
+          <label class="checkbox-option"><input type="checkbox" name="dauer-c" value="keine"> nicht genannt</label>
+        </div>
+      </td>
+    </tr>
+
+    <!-- Mindestalter -->
+    <tr>
+      <td>Mindestalter des Fahrers</td>
+      <td><input class="eingabe-kurz" id="alter-a" data-loesung="21" placeholder="__"> Jahr(e)</td>
+      <td><input class="eingabe-kurz" id="alter-b" data-loesung="18" placeholder="__"> Jahr(e)</td>
+      <td><input class="eingabe-kurz" id="alter-c" data-loesung="18" placeholder="__"> Jahr(e)</td>
+    </tr>
+
+    <!-- Führerscheinbesitz -->
+    <tr>
+      <td>Führerscheinbesitz</td>
+      <td><input class="eingabe-kurz" id="fuehr-a" data-loesung="1" placeholder="__"> Jahr(e)</td>
+      <td><input class="eingabe-kurz" id="fuehr-b" data-loesung="1" placeholder="__"> Jahr(e)</td>
+      <td><input class="eingabe-kurz" id="fuehr-c" data-loesung="1" placeholder="__"> Jahr(e)</td>
+    </tr>
+
+    <!-- Nutzung außerhalb -->
+    <tr>
+      <td>Nutzung außerhalb der Stadt</td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="aussen-a" value="nein" data-loesung="true"> nein</label>
+          <label class="checkbox-option"><input type="checkbox" name="aussen-a" value="50km"> bis 50 km</label>
+          <label class="checkbox-option"><input type="checkbox" name="aussen-a" value="unbegrenzt"> unbegrenzt</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="aussen-b" value="nein"> nein</label>
+          <label class="checkbox-option"><input type="checkbox" name="aussen-b" value="50km" data-loesung="true"> bis 50 km</label>
+          <label class="checkbox-option"><input type="checkbox" name="aussen-b" value="unbegrenzt"> unbegrenzt</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="aussen-c" value="nein"> nein</label>
+          <label class="checkbox-option"><input type="checkbox" name="aussen-c" value="50km"> bis 50 km</label>
+          <label class="checkbox-option"><input type="checkbox" name="aussen-c" value="unbegrenzt" data-loesung="true"> unbegrenzt</label>
+        </div>
+      </td>
+    </tr>
+
+    <!-- Bezahlung -->
+    <tr>
+      <td>Bezahlung</td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="bez-a" value="monatlich" data-loesung="true"> monatlich</label>
+          <label class="checkbox-option"><input type="checkbox" name="bez-a" value="sofort"> sofort</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="bez-b" value="monatlich"> monatlich</label>
+          <label class="checkbox-option"><input type="checkbox" name="bez-b" value="sofort" data-loesung="true"> sofort</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="bez-c" value="monatlich" data-loesung="true"> monatlich</label>
+          <label class="checkbox-option"><input type="checkbox" name="bez-c" value="sofort"> sofort</label>
+        </div>
+      </td>
+    </tr>
+
+    <!-- Zahlungsmodalität -->
+    <tr>
+      <td>Zahlungsmodalität</td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="zahl-a" value="lastschrift" data-loesung="true"> Lastschrift</label>
+          <label class="checkbox-option"><input type="checkbox" name="zahl-a" value="kreditkarte" data-loesung="true"> Kreditkarte</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="zahl-b" value="lastschrift"> Lastschrift</label>
+          <label class="checkbox-option"><input type="checkbox" name="zahl-b" value="kreditkarte" data-loesung="true"> Kreditkarte</label>
+        </div>
+      </td>
+      <td>
+        <div class="checkbox-group">
+          <label class="checkbox-option"><input type="checkbox" name="zahl-c" value="lastschrift" data-loesung="true"> Lastschrift</label>
+          <label class="checkbox-option"><input type="checkbox" name="zahl-c" value="kreditkarte" data-loesung="true"> Kreditkarte</label>
+        </div>
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+</div>
+
+<div class="loesung-toggle">
+  <button class="btn-loesung" onclick="auswerten()">Auswerten</button>
+  <button class="btn-reset" onclick="reset()">Zurücksetzen</button>
+</div>
+
+<div class="ergebnis-box" id="ergebnis">
+  <span class="punkte" id="punkte-anzeige"></span>
+  <span id="ergebnis-text"></span>
+</div>
+
+<script>
+const audio = document.getElementById('main-audio');
+let hatGespielt = false;
+audio.addEventListener('ended', function() {
+  hatGespielt = true;
+  audio.controls = false;
+  document.getElementById('audio-hinweis').classList.add('sichtbar');
+});
+audio.addEventListener('play', function() {
+  if (hatGespielt) {
+    audio.pause();
+    audio.currentTime = 0;
+    audio.controls = false;
+    document.getElementById('audio-hinweis').classList.add('sichtbar');
+  }
+});
+
+function auswerten() {
+  let punkte = 0, total = 0;
+  const gruppen = ['reg-a','reg-b','reg-c','fahr-a','fahr-b','fahr-c','rueck-a','rueck-b','rueck-c','dauer-a','dauer-b','dauer-c','aussen-a','aussen-b','aussen-c','bez-a','bez-b','bez-c','zahl-a','zahl-b','zahl-c'];
+  gruppen.forEach(name => {
+    total++;
+    const alle = document.querySelectorAll(`input[name="${name}"]`);
+    let korrekt = true;
+    alle.forEach(cb => {
+      const sollChecked = cb.dataset.loesung === 'true';
+      if (cb.checked !== sollChecked) korrekt = false;
+      const label = cb.closest('.checkbox-option');
+      label.classList.remove('richtig-markiert','falsch-markiert');
+      if (cb.checked && sollChecked) label.classList.add('richtig-markiert');
+      else if (cb.checked && !sollChecked) label.classList.add('falsch-markiert');
+      else if (!cb.checked && sollChecked) label.classList.add('falsch-markiert');
+    });
+    if (korrekt) punkte++;
+  });
+  document.querySelectorAll('.eingabe-feld, .eingabe-kurz, .eingabe-mittel').forEach(feld => {
+    if (!feld.dataset.loesung) return;
+    total++;
+    const eingabe = feld.value.trim().toLowerCase().replace(/\s+/g,' ');
+    const loesung = feld.dataset.loesung.toLowerCase().replace(/\s+/g,' ');
+    feld.classList.remove('richtig','falsch');
+    if (eingabe === loesung) { feld.classList.add('richtig'); punkte++; }
+    else { feld.classList.add('falsch'); }
+  });
+  document.getElementById('punkte-anzeige').textContent = `${punkte} / ${total}`;
+  const pct = punkte / total;
+  const text = pct < 0.4 ? 'Noch üben! 💪' : pct < 0.6 ? 'Guter Anfang! 📖' : pct < 0.75 ? 'Solide! 👍' : pct < 0.9 ? 'Sehr gut! 🎉' : 'Ausgezeichnet! 🏆';
+  document.getElementById('ergebnis-text').textContent = text;
+  document.getElementById('ergebnis').classList.add('visible');
+  document.getElementById('ergebnis').scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function reset() {
+  document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+    cb.checked = false;
+    cb.closest('.checkbox-option').classList.remove('richtig-markiert','falsch-markiert');
+  });
+  document.querySelectorAll('.eingabe-feld, .eingabe-kurz, .eingabe-mittel').forEach(f => {
+    f.value = '';
+    f.classList.remove('richtig','falsch');
+  });
+  document.getElementById('ergebnis').classList.remove('visible');
+  audio.controls = true;
+  audio.currentTime = 0;
+  hatGespielt = false;
+  document.getElementById('audio-hinweis').classList.remove('sichtbar');
+}
+</script>
+</body>
+</html>
