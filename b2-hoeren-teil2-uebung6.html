@@ -222,7 +222,7 @@
     <!-- Anzahl Ausflüge inbegriffen -->
     <tr>
       <td>Anzahl Ausflüge inbegriffen</td>
-      <td><input class="eingabe-feld eingabe-kurz" id="ausfluege-a" data-loesung="0" placeholder="____"></td>
+      <td><input class="eingabe-feld eingabe-kurz" id="ausfluege-a" data-loesung="0" data-loesung2="keine" placeholder="____"></td>
       <td><input class="eingabe-feld eingabe-kurz" id="ausfluege-b" data-loesung="3" placeholder="____"></td>
       <td><input class="eingabe-feld eingabe-kurz" id="ausfluege-c" data-loesung="4" placeholder="____"></td>
     </tr>
@@ -354,9 +354,13 @@ function auswerten() {
     total++;
     const eingabe = feld.value.trim().toLowerCase();
     const loesung = feld.dataset.loesung.toLowerCase();
+    const loesung2 = (feld.dataset.loesung2 || '').toLowerCase();
     feld.classList.remove('richtig','falsch');
-    if (eingabe === loesung) { feld.classList.add('richtig'); punkte++; }
-    else { feld.classList.add('falsch'); }
+    if (eingabe === loesung || (loesung2 && eingabe === loesung2)) {
+      feld.classList.add('richtig'); punkte++;
+    } else {
+      feld.classList.add('falsch');
+    }
   });
   document.getElementById('punkte-anzeige').textContent = `${punkte} / ${total}`;
   const pct = punkte / total;
