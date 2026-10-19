@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ÖSD B2 – Hören Teil 1 · Übung 5</title>
+<style>
+  body { font-family: 'Georgia', serif; max-width: 820px; margin: 40px auto; padding: 20px; background: #fafaf8; color: #2c2c2c; line-height: 1.7; }
+  h1 { font-size: 1.3em; border-bottom: 2px solid #333; padding-bottom: 8px; margin-bottom: 6px; }
+  .meta { font-size: 0.85em; color: #666; margin-bottom: 30px; }
+  .situation { background: #f5f0eb; border-left: 4px solid #8a7a6a; padding: 12px 18px; margin-bottom: 10px; font-size: 0.95em; }
+  .back { display: inline-block; margin-bottom: 24px; font-size: 0.82em; color: #666; text-decoration: none; letter-spacing: 0.05em; }
+  .back:hover { color: #2c2c2c; }
+  .audio-box { background: #fff; border: 1px solid #ccc; border-radius: 4px; padding: 20px 24px; margin-bottom: 28px; }
+  .audio-row { display: flex; align-items: center; gap: 16px; margin-bottom: 8px; }
+  .audio-label { font-size: 0.9em; color: #444; white-space: nowrap; }
+  audio { flex: 1; height: 36px; }
+  .audio-zaehler { font-size: 0.82em; color: #4a6fa5; font-style: italic; }
+  .audio-hinweis { font-size: 0.82em; color: #c0392b; font-style: italic; display: none; margin-top: 4px; }
+  .audio-hinweis.sichtbar { display: block; }
+  .abschnitt { background: #fff; border: 1px solid #ddd; border-radius: 4px; padding: 20px 24px; margin-bottom: 20px; }
+  .abschnitt-titel { font-size: 0.78em; text-transform: uppercase; letter-spacing: 0.12em; color: #4a6fa5; font-weight: bold; margin-bottom: 16px; font-family: 'Georgia', serif; }
+  .aussage { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #f0f0f0; }
+  .aussage:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .aussage-nr { font-size: 0.85em; color: #4a6fa5; font-weight: bold; min-width: 24px; padding-top: 6px; }
+  .aussage-content { flex: 1; }
+  .aussage-text { font-size: 0.95em; margin-bottom: 8px; }
+  .rf-buttons { display: flex; gap: 8px; }
+  .rf-btn { border: 2px solid #ccc; background: transparent; padding: 5px 18px; font-size: 0.85em; font-family: 'Georgia', serif; cursor: pointer; border-radius: 3px; transition: all 0.15s; color: #666; }
+  .rf-btn:hover { border-color: #4a6fa5; color: #4a6fa5; }
+  .rf-btn.selected-r { border-color: #4a6fa5; background: #4a6fa5; color: white; }
+  .rf-btn.selected-f { border-color: #4a6fa5; background: #4a6fa5; color: white; }
+  .rf-btn.richtig { border-color: #3a7d44 !important; background: #e6f4ea !important; color: #3a7d44 !important; }
+  .rf-btn.falsch { border-color: #c0392b !important; background: #fdecea !important; color: #c0392b !important; }
+  .rf-btn.korrekt-markiert { border-color: #3a7d44 !important; background: #3a7d44 !important; color: white !important; }
+  .hinweis-text { font-size: 0.8em; color: #c0392b; font-style: italic; margin-top: 6px; display: none; }
+  .hinweis-text.sichtbar { display: block; }
+  .loesung-toggle { margin-top: 32px; text-align: center; display: flex; gap: 12px; justify-content: center; }
+  .btn-loesung, .btn-reset { border: none; padding: 12px 28px; font-size: 0.9em; letter-spacing: 0.06em; cursor: pointer; font-family: 'Georgia', serif; border-radius: 2px; }
+  .btn-loesung { background: #4a6fa5; color: white; }
+  .btn-loesung:hover { background: #3a5a8a; }
+  .btn-reset { background: transparent; color: #666; border: 1px solid #ccc; }
+  .btn-reset:hover { background: #f0f0f0; }
+  .ergebnis-box { margin-top: 24px; text-align: center; font-size: 1.1em; display: none; }
+  .ergebnis-box.visible { display: block; }
+  .punkte { font-size: 2em; font-weight: bold; color: #4a6fa5; display: block; margin: 8px 0; }
+  @media print { .back, .loesung-toggle, .ergebnis-box, .audio-box { display: none; } }
+</style>
+</head>
+<body>
+
+<a class="back" href="b2-hoeren-teil1-seite2.html">← Zurück zur Übungsauswahl</a>
+<h1>ÖSD Zertifikat B2 – Hören Teil 1</h1>
+<div class="meta">Übungsmaterial · Niveau B2 · Radiosendung: Bewegungsmangel</div>
+
+<div class="situation">
+  <strong>Situation:</strong> Du hörst eine Radiosendung über Bewegungsmangel in der modernen Gesellschaft.
+  Du hast 90 Sekunden zum Lesen der folgenden Aussagen. Dann hörst du den Hörtext <strong>zweimal</strong> und markierst <strong>richtig</strong> oder <strong>falsch</strong>.
+</div>
+
+<div class="audio-box">
+  <div class="audio-row">
+    <span class="audio-label">🎧 Radiosendung abspielen:</span>
+    <audio id="main-audio" controls>
+      <source src="audio/b2-hoeren-teil1-uebung5.mp3" type="audio/mpeg">
+      Ihr Browser unterstützt das Audio-Element nicht.
+    </audio>
+  </div>
+  <div class="audio-zaehler">Abgespielt: <span id="zaehler">0</span> / 2 mal</div>
+  <div class="audio-hinweis" id="audio-hinweis">⚠️ Sie haben den Hörtext bereits zweimal gehört. Im echten Test ist kein weiteres Abspielen möglich.</div>
+</div>
+
+<!-- Abschnitt 1 -->
+<div class="abschnitt">
+  <div class="abschnitt-titel">Abschnitt 1 · Fakten und Empfehlungen</div>
+
+  <div class="aussage">
+    <span class="aussage-nr">1</span>
+    <div class="aussage-content">
+      <div class="aussage-text">Bewegung ist laut Sprecherin ein Luxus.</div>
+      <div class="rf-buttons">
+        <button class="rf-btn" onclick="waehlen(this, 1, 'R')" id="btn-1-R">richtig</button>
+        <button class="rf-btn" onclick="waehlen(this, 1, 'F')" id="btn-1-F">falsch</button>
+      </div>
+      <div class="hinweis-text" id="hinweis-1">Laut Sprecherin ist Bewegung eine Notwendigkeit, kein Luxus.</div>
+    </div>
+  </div>
+
+  <div class="aussage">
+    <span class="aussage-nr">2</span>
+    <div class="aussage-content">
+      <div class="aussage-text">Die WHO empfiehlt mindestens 150 Minuten moderate Bewegung pro Woche.</div>
+      <div class="rf-buttons">
+        <button class="rf-btn" onclick="waehlen(this, 2, 'R')" id="btn-2-R">richtig</button>
+        <button class="rf-btn" onclick="waehlen(this, 2, 'F')" id="btn-2-F">falsch</button>
+      </div>
+      <div class="hinweis-text" id="hinweis-2"></div>
+    </div>
+  </div>
+
+  <div class="aussage">
+    <span class="aussage-nr">3</span>
+    <div class="aussage-content">
+      <div class="aussage-text">In Deutschland erreichen 40 Prozent der Erwachsenen diese Empfehlung.</div>
+      <div class="rf-buttons">
+        <button class="rf-btn" onclick="waehlen(this, 3, 'R')" id="btn-3-R">richtig</button>
+        <button class="rf-btn" onclick="waehlen(this, 3, 'F')" id="btn-3-F">falsch</button>
+      </div>
+      <div class="hinweis-text" id="hinweis-3"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Abschnitt 2 -->
+<div class="abschnitt">
+  <div class="abschnitt-titel">Abschnitt 2 · Folgen des Bewegungsmangels</div>
+
+  <div class="aussage">
+    <span class="aussage-nr">4</span>
+    <div class="aussage-content">
+      <div class="aussage-text">Bewegungsmangel kann Übergewicht, Bluthochdruck und Depressionen verursachen.</div>
+      <div class="rf-buttons">
+        <button class="rf-btn" onclick="waehlen(this, 4, 'R')" id="btn-4-R">richtig</button>
+        <button class="rf-btn" onclick="waehlen(this, 4, 'F')" id="btn-4-F">falsch</button>
+      </div>
+      <div class="hinweis-text" id="hinweis-4"></div>
+    </div>
+  </div>
+
+  <div class="aussage">
+    <span class="aussage-nr">5</span>
+    <div class="aussage-content">
+      <div class="aussage-text">Die zitierte Ärztin sagt, Bewegungsmangel sei nur ein individuelles Problem.</div>
+      <div class="rf-buttons">
+        <button class="rf-btn" onclick="waehlen(this, 5, 'R')" id="btn-5-R">richtig</button>
+        <button class="rf-btn" onclick="waehlen(this, 5, 'F')" id="btn-5-F">falsch</button>
+      </div>
+      <div class="hinweis-text" id="hinweis-5">Die Ärztin bezeichnet Bewegungsmangel als gesellschaftliches Problem.</div>
+    </div>
+  </div>
+
+  <div class="aussage">
+    <span class="aussage-nr">6</span>
+    <div class="aussage-content">
+      <div class="aussage-text">Kinder und Jugendliche bewegen sich heute mehr als früher.</div>
+      <div class="rf-buttons">
+        <button class="rf-btn" onclick="waehlen(this, 6, 'R')" id="btn-6-R">richtig</button>
+        <button class="rf-btn" onclick="waehlen(this, 6, 'F')" id="btn-6-F">falsch</button>
+      </div>
+      <div class="hinweis-text" id="hinweis-6">Kinder und Jugendliche bewegen sich heute weniger als frühere Generationen.</div>
+    </div>
+  </div>
+</div>
+
+<!-- Abschnitt 3 -->
+<div class="abschnitt">
+  <div class="abschnitt-titel">Abschnitt 3 · Lösungsansätze</div>
+
+  <div class="aussage">
+    <span class="aussage-nr">7</span>
+    <div class="aussage-content">
+      <div class="aussage-text">Der zitierte Bewegungstherapeut empfiehlt, Bewegung in den Alltag zu integrieren.</div>
+      <div class="rf-buttons">
+        <button class="rf-btn" onclick="waehlen(this, 7, 'R')" id="btn-7-R">richtig</button>
+        <button class="rf-btn" onclick="waehlen(this, 7, 'F')" id="btn-7-F">falsch</button>
+      </div>
+      <div class="hinweis-text" id="hinweis-7"></div>
+    </div>
+  </div>
+
+  <div class="aussage">
+    <span class="aussage-nr">8</span>
+    <div class="aussage-content">
+      <div class="aussage-text">Laut Sprecherin muss jeder Marathon laufen, um gesund zu bleiben.</div>
+      <div class="rf-buttons">
+        <button class="rf-btn" onclick="waehlen(this, 8, 'R')" id="btn-8-R">richtig</button>
+        <button class="rf-btn" onclick="waehlen(this, 8, 'F')" id="btn-8-F">falsch</button>
+      </div>
+      <div class="hinweis-text" id="hinweis-8">Nicht jeder muss Marathon laufen – schon kleine Bewegungseinheiten helfen.</div>
+    </div>
+  </div>
+</div>
+
+<!-- Abschnitt 4 -->
+<div class="abschnitt">
+  <div class="abschnitt-titel">Abschnitt 4 · Bewegung am Arbeitsplatz</div>
+
+  <div class="aussage">
+    <span class="aussage-nr">9</span>
+    <div class="aussage-content">
+      <div class="aussage-text">Bewegung am Arbeitsplatz kann die Produktivität steigern und Krankheitstage reduzieren.</div>
+      <div class="rf-buttons">
+        <button class="rf-btn" onclick="waehlen(this, 9, 'R')" id="btn-9-R">richtig</button>
+        <button class="rf-btn" onclick="waehlen(this, 9, 'F')" id="btn-9-F">falsch</button>
+      </div>
+      <div class="hinweis-text" id="hinweis-9"></div>
+    </div>
+  </div>
+
+  <div class="aussage">
+    <span class="aussage-nr">10</span>
+    <div class="aussage-content">
+      <div class="aussage-text">Die zitierte Personalmanagerin sagt, Bewegungspausen seien unnötig.</div>
+      <div class="rf-buttons">
+        <button class="rf-btn" onclick="waehlen(this, 10, 'R')" id="btn-10-R">richtig</button>
+        <button class="rf-btn" onclick="waehlen(this, 10, 'F')" id="btn-10-F">falsch</button>
+      </div>
+      <div class="hinweis-text" id="hinweis-10">Die Personalmanagerin sagt, Bewegungspausen fördern die Konzentration.</div>
+    </div>
+  </div>
+</div>
+
+<div class="loesung-toggle">
+  <button class="btn-loesung" onclick="auswerten()">Auswerten</button>
+  <button class="btn-reset" onclick="reset()">Zurücksetzen</button>
+</div>
+
+<div class="ergebnis-box" id="ergebnis">
+  <span class="punkte" id="punkte-anzeige"></span>
+  <span id="ergebnis-text"></span>
+</div>
+
+<script>
+const loesungen = { 1:'F', 2:'R', 3:'R', 4:'R', 5:'F', 6:'F', 7:'R', 8:'F', 9:'R', 10:'F' };
+const auswahl = {};
+
+const audio = document.getElementById('main-audio');
+let abspielCount = 0;
+audio.addEventListener('ended', function() {
+  abspielCount++;
+  document.getElementById('zaehler').textContent = abspielCount;
+  if (abspielCount >= 2) {
+    audio.controls = false;
+    document.getElementById('audio-hinweis').classList.add('sichtbar');
+  }
+});
+audio.addEventListener('play', function() {
+  if (abspielCount >= 2) {
+    audio.pause();
+    audio.currentTime = 0;
+    audio.controls = false;
+    document.getElementById('audio-hinweis').classList.add('sichtbar');
+  }
+});
+
+function waehlen(btn, nr, wahl) {
+  ['R','F'].forEach(w => {
+    document.getElementById(`btn-${nr}-${w}`).classList.remove('selected-r','selected-f');
+  });
+  btn.classList.add(wahl === 'R' ? 'selected-r' : 'selected-f');
+  auswahl[nr] = wahl;
+}
+
+function auswerten() {
+  let punkte = 0;
+  for (let i = 1; i <= 10; i++) {
+    const btnR = document.getElementById(`btn-${i}-R`);
+    const btnF = document.getElementById(`btn-${i}-F`);
+    const hinweis = document.getElementById(`hinweis-${i}`);
+    btnR.classList.remove('richtig','falsch','korrekt-markiert','selected-r','selected-f');
+    btnF.classList.remove('richtig','falsch','korrekt-markiert','selected-r','selected-f');
+    const gewaehlt = auswahl[i];
+    const richtig = loesungen[i];
+    document.getElementById(`btn-${i}-${richtig}`).classList.add('korrekt-markiert');
+    if (gewaehlt === richtig) {
+      document.getElementById(`btn-${i}-${gewaehlt}`).classList.add('richtig');
+      punkte++;
+      if (hinweis) hinweis.classList.remove('sichtbar');
+    } else if (gewaehlt) {
+      document.getElementById(`btn-${i}-${gewaehlt}`).classList.add('falsch');
+      if (hinweis && hinweis.textContent.trim()) hinweis.classList.add('sichtbar');
+    } else {
+      if (hinweis && hinweis.textContent.trim() && richtig === 'F') hinweis.classList.add('sichtbar');
+    }
+  }
+  document.getElementById('punkte-anzeige').textContent = `${punkte} / 10`;
+  const pct = punkte / 10;
+  const text = pct < 0.4 ? 'Noch üben! 💪' : pct < 0.6 ? 'Guter Anfang! 📖' : pct < 0.75 ? 'Solide! 👍' : pct < 0.9 ? 'Sehr gut! 🎉' : 'Ausgezeichnet! 🏆';
+  document.getElementById('ergebnis-text').textContent = text;
+  document.getElementById('ergebnis').classList.add('visible');
+  document.getElementById('ergebnis').scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function reset() {
+  for (let i = 1; i <= 10; i++) {
+    ['R','F'].forEach(w => {
+      document.getElementById(`btn-${i}-${w}`).classList.remove('richtig','falsch','korrekt-markiert','selected-r','selected-f');
+    });
+    const hinweis = document.getElementById(`hinweis-${i}`);
+    if (hinweis) hinweis.classList.remove('sichtbar');
+    delete auswahl[i];
+  }
+  document.getElementById('ergebnis').classList.remove('visible');
+  audio.controls = true;
+  audio.currentTime = 0;
+  abspielCount = 0;
+  document.getElementById('zaehler').textContent = '0';
+  document.getElementById('audio-hinweis').classList.remove('sichtbar');
+}
+</script>
+</body>
+</html>
