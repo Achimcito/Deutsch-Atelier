@@ -15,6 +15,7 @@
     --ink-muted: #9a948e;
     --accent: #3a5a4a;
     --accent-light: #eaf0ec;
+    --accent-a2: #1a3a6a;
     --coming: #c8c2ba;
   }
 
@@ -130,6 +131,13 @@
     color: var(--coming);
   }
 
+  .level-btn.a2-btn:hover,
+  .level-btn.a2-btn.active {
+    background: var(--accent-a2);
+    border-color: var(--accent-a2);
+    color: var(--cream);
+  }
+
   .coming-tag {
     display: block;
     font-family: 'Jost', sans-serif;
@@ -236,7 +244,7 @@
 <div class="levels">
   <button class="level-btn active" onclick="selectLevel(this, 'B2')">B2</button>
   <button class="level-btn coming" disabled>B1<span class="coming-tag">demnächst</span></button>
-  <button class="level-btn coming" disabled>A2<span class="coming-tag">demnächst</span></button>
+  <button class="level-btn a2-btn" onclick="selectLevel(this, 'A2')">A2</button>
   <button class="level-btn coming" disabled>A1<span class="coming-tag">demnächst</span></button>
 </div>
 
