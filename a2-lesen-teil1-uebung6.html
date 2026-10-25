@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A2 – Lesen Teil 1 · Übung 6</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  body { font-family: 'Georgia', serif; max-width: 820px; margin: 40px auto; padding: 20px; background: #fafaf8; color: #2c2c2c; line-height: 1.7; }
+  h1 { font-size: 1.3em; border-bottom: 2px solid #1a3a6a; padding-bottom: 8px; margin-bottom: 6px; }
+  .meta { font-size: 0.85em; color: #666; margin-bottom: 30px; }
+  .anweisung { background: #eef2f7; border-left: 4px solid #1a3a6a; padding: 14px 18px; margin-bottom: 20px; font-size: 0.95em; }
+  .back { display: inline-block; margin-bottom: 24px; font-size: 0.82em; color: #666; text-decoration: none; letter-spacing: 0.05em; }
+  .back:hover { color: #1a3a6a; }
+  .timer-box { background: #fff; border: 2px solid #1a3a6a; border-radius: 4px; padding: 12px 20px; margin-bottom: 24px; display: flex; align-items: center; gap: 16px; justify-content: space-between; }
+  .timer-label { font-size: 0.85em; color: #444; letter-spacing: 0.05em; }
+  .timer-anzeige { font-family: monospace; font-size: 1.6em; font-weight: bold; color: #1a3a6a; min-width: 80px; text-align: center; }
+  .timer-anzeige.rot { color: #c0392b; animation: blinken 1s infinite; }
+  @keyframes blinken { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
+  .timer-buttons { display: flex; gap: 8px; }
+  .timer-btn { border: 1px solid #1a3a6a; background: transparent; color: #1a3a6a; padding: 5px 14px; font-size: 0.82em; cursor: pointer; border-radius: 2px; font-family: 'Georgia', serif; }
+  .timer-btn:hover { background: #1a3a6a; color: white; }
+  .timer-info { font-size: 0.75em; color: #999; font-style: italic; }
+  .ueberschriften-box { background: #fff; border: 1px solid #ccc; padding: 18px 22px; margin-bottom: 28px; border-radius: 4px; }
+  .ueberschriften-box h2 { font-size: 1em; margin-top: 0; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #1a3a6a; }
+  .ueberschriften-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 30px; }
+  .ue-item { font-size: 0.93em; }
+  .ue-key { font-weight: bold; color: #1a3a6a; margin-right: 6px; }
+  .text-block { background: #fff; border: 1px solid #ddd; border-radius: 4px; padding: 18px 22px; margin-bottom: 20px; }
+  .text-header { display: flex; align-items: center; margin-bottom: 12px; gap: 14px; }
+  .text-nr { background: #1a3a6a; color: white; font-weight: bold; padding: 4px 12px; border-radius: 3px; font-size: 0.95em; white-space: nowrap; }
+  .antwort-label { font-size: 0.85em; color: #666; }
+  .antwort-feld { border: none; border-bottom: 2px solid #1a3a6a; width: 60px; font-size: 1em; text-align: center; background: transparent; outline: none; color: #2c2c2c; font-family: 'Georgia', serif; }
+  .antwort-feld.richtig { border-color: #3a7d44; background: #e6f4ea; color: #3a7d44; }
+  .antwort-feld.falsch { border-color: #c0392b; background: #fdecea; color: #c0392b; }
+  .text-body { font-size: 0.95em; }
+  .loesung-toggle { margin-top: 32px; text-align: center; display: flex; gap: 12px; justify-content: center; }
+  .btn-loesung, .btn-reset { border: none; padding: 12px 28px; font-size: 0.9em; letter-spacing: 0.06em; cursor: pointer; font-family: 'Georgia', serif; border-radius: 2px; }
+  .btn-loesung { background: #1a3a6a; color: white; }
+  .btn-loesung:hover { background: #142d54; }
+  .btn-reset { background: transparent; color: #666; border: 1px solid #ccc; }
+  .btn-reset:hover { background: #f0f0f0; }
+  .loesung-section { margin-top: 32px; border-top: 2px dashed #bbb; padding-top: 20px; display: none; }
+  .loesung-section.visible { display: block; }
+  .loesung-section h2 { font-size: 1em; text-transform: uppercase; letter-spacing: 0.05em; color: #444; }
+  .loesung-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-top: 12px; }
+  .loesung-item { text-align: center; background: #eef2f7; padding: 10px; border-radius: 4px; font-size: 0.9em; }
+  .loesung-item span { display: block; font-weight: bold; font-size: 1.1em; color: #1a3a6a; }
+  .ergebnis-box { margin-top: 24px; text-align: center; font-size: 1.1em; display: none; }
+  .ergebnis-box.visible { display: block; }
+  .punkte { font-size: 2em; font-weight: bold; color: #1a3a6a; display: block; margin: 8px 0; }
+  @media (max-width: 500px) { .ueberschriften-grid { grid-template-columns: 1fr; } .loesung-grid { grid-template-columns: repeat(3, 1fr); } .timer-box { flex-wrap: wrap; } }
+  @media print { .back, .loesung-toggle, .ergebnis-box, .timer-box { display: none; } }
+</style>
+</head>
+<body>
+
+<a class="back" href="a2-lesen-teil1-weitere.html">← Zurück zur Übungsauswahl</a>
+<h1>Lesen Teil 1 · Übung 6</h1>
+<div class="meta">Übungsmaterial · Niveau A2 · Thema: Verkehr und Mobilität</div>
+
+<div class="anweisung">
+  <strong>Aufgabe:</strong> Lies die fünf Texte (1–5) und wähle für jeden Text die passende Überschrift (A–K).
+  Schreib den richtigen Buchstaben in das Feld. Jede Überschrift kannst du nur einmal verwenden.
+  Fünf Überschriften bleiben übrig.
+</div>
+
+<div class="timer-box">
+  <div>
+    <div class="timer-label">⏱ Zeit</div>
+    <div class="timer-anzeige" id="timer">20:00</div>
+    <div class="timer-info">Wird nach 20 Min. rot – die Aufgabe läuft weiter!</div>
+  </div>
+  <div class="timer-buttons">
+    <button class="timer-btn" onclick="startTimer()">Start</button>
+    <button class="timer-btn" onclick="pauseTimer()">Pause</button>
+    <button class="timer-btn" onclick="resetTimer()">Reset</button>
+  </div>
+</div>
+
+<div class="ueberschriften-box">
+  <h2>Überschriften A – K</h2>
+  <div class="ueberschriften-grid">
+    <div class="ue-item"><span class="ue-key">A</span> Neue Busverbindung entlastet den Schulweg</div>
+    <div class="ue-item"><span class="ue-key">B</span> Warum mein Kollege sein Auto aufgegeben hat</div>
+    <div class="ue-item"><span class="ue-key">C</span> Brücke wegen Reparatur gesperrt</div>
+    <div class="ue-item"><span class="ue-key">D</span> Ein neues Leihsystem für Fahrräder in der Stadt</div>
+    <div class="ue-item"><span class="ue-key">E</span> Warum ich keinen Führerschein machen möchte</div>
+    <div class="ue-item"><span class="ue-key">F</span> Tipps für mehr Sicherheit im Straßenverkehr</div>
+    <div class="ue-item"><span class="ue-key">G</span> Autofahren wird immer teurer</div>
+    <div class="ue-item"><span class="ue-key">H</span> Warum der Bus morgens immer im Stau steht</div>
+    <div class="ue-item"><span class="ue-key">I</span> Wie man beim Fahrradfahren Zeit spart</div>
+    <div class="ue-item"><span class="ue-key">K</span> Wie man sicher mit dem Auto an sein Ziel kommt</div>
+  </div>
+</div>
+
+<div class="text-block">
+  <div class="text-header">
+    <div class="text-nr">Text 1</div>
+    <div class="antwort-label">Überschrift:&nbsp;</div>
+    <input class="antwort-feld" id="a1" type="text" maxlength="1" placeholder="?">
+  </div>
+  <div class="text-body">
+    <p>Seitdem die Stadt die neue Buslinie 42 eingeführt hat, ist es für viele Schüler viel einfacher geworden, zur Schule zu kommen. Früher mussten sie oft 20 Minuten zu Fuß gehen oder ihre Eltern mussten sie mit dem Auto fahren. Jetzt hält der Bus direkt vor dem Schulgebäude. Die Stadt hofft, dass durch diesen neuen Weg auch weniger Autos vor der Schule stehen und es morgens weniger Stau gibt.</p>
+  </div>
+</div>
+
+<div class="text-block">
+  <div class="text-header">
+    <div class="text-nr">Text 2</div>
+    <div class="antwort-label">Überschrift:&nbsp;</div>
+    <input class="antwort-feld" id="a2" type="text" maxlength="1" placeholder="?">
+  </div>
+  <div class="text-body">
+    <p>Viele Leute beschweren sich über die steigenden Preise für Benzin. Mein Kollege hat sich deshalb entschieden, sein Auto zu verkaufen und nur noch mit dem Fahrrad zur Arbeit zu fahren. Er wohnt zum Glück nicht weit weg, nur etwa fünf Kilometer. Er sagt, dass er morgens zwar etwas früher aufstehen muss, aber dafür fitter ist und kein Geld mehr für die Tankstelle ausgeben muss.</p>
+  </div>
+</div>
+
+<div class="text-block">
+  <div class="text-header">
+    <div class="text-nr">Text 3</div>
+    <div class="antwort-label">Überschrift:&nbsp;</div>
+    <input class="antwort-feld" id="a3" type="text" maxlength="1" placeholder="?">
+  </div>
+  <div class="text-body">
+    <p>Achtung, Fußgänger und Radfahrer! Die kleine Brücke über den Fluss wird ab Montag für zwei Wochen komplett gesperrt. Grund dafür sind dringende Reparaturarbeiten am Geländer. Um auf die andere Seite zu kommen, müssen Sie leider den großen Umweg über die Hauptstraße nehmen. Planen Sie für Ihren Weg deshalb bitte etwas mehr Zeit ein und achten Sie an der Hauptstraße besonders auf den Autoverkehr.</p>
+  </div>
+</div>
+
+<div class="text-block">
+  <div class="text-header">
+    <div class="text-nr">Text 4</div>
+    <div class="antwort-label">Überschrift:&nbsp;</div>
+    <input class="antwort-feld" id="a4" type="text" maxlength="1" placeholder="?">
+  </div>
+  <div class="text-body">
+    <p>Immer mehr Städte testen ein neues System für Fahrräder. Man kann sich an verschiedenen Stationen in der Stadt ein Fahrrad ausleihen und es später an einer anderen Station wieder abgeben. Das ist besonders praktisch für Touristen, aber auch für Leute, die in der Stadt wohnen und kein eigenes Rad besitzen wollen. Man muss nur eine App auf dem Handy haben, um das Rad zu öffnen.</p>
+  </div>
+</div>
+
+<div class="text-block">
+  <div class="text-header">
+    <div class="text-nr">Text 5</div>
+    <div class="antwort-label">Überschrift:&nbsp;</div>
+    <input class="antwort-feld" id="a5" type="text" maxlength="1" placeholder="?">
+  </div>
+  <div class="text-body">
+    <p>Mein Onkel fährt seit 30 Jahren Auto und ist noch nie in einen Unfall verwickelt gewesen. Sein Geheimnis? Er fährt nicht zu schnell und hält immer viel Abstand zum Auto vor ihm. Außerdem schaut er nie auf sein Handy, wenn er am Steuer sitzt. Er sagt, dass viele Leute heutzutage zu ungeduldig sind und sich nicht mehr richtig konzentrieren. Nur wer ruhig bleibt, kommt sicher an.</p>
+  </div>
+</div>
+
+<div class="loesung-toggle">
+  <button class="btn-loesung" onclick="auswerten()">Auswerten</button>
+  <button class="btn-reset" onclick="reset()">Zurücksetzen</button>
+</div>
+
+<div class="ergebnis-box" id="ergebnis">
+  <span class="punkte" id="punkte-anzeige"></span>
+  <span id="ergebnis-text"></span>
+</div>
+
+<div class="loesung-section" id="loesung">
+  <h2>Lösungsschlüssel</h2>
+  <div class="loesung-grid">
+    <div class="loesung-item">Text 1<span>A</span></div>
+    <div class="loesung-item">Text 2<span>B</span></div>
+    <div class="loesung-item">Text 3<span>C</span></div>
+    <div class="loesung-item">Text 4<span>D</span></div>
+    <div class="loesung-item">Text 5<span>K</span></div>
+  </div>
+  <p style="font-size:0.85em; color:#666; margin-top:16px;">
+    <strong>Distraktoren:</strong> E, F, G, H, I – passen thematisch nicht präzise genug zu den Texten.
+  </p>
+</div>
+
+<script>
+const loesungen = { a1:'A', a2:'B', a3:'C', a4:'D', a5:'K' };
+let sekunden = 1200;
+let timerInterval = null;
+let laeuft = false;
+
+function updateAnzeige() {
+  const min = Math.floor(sekunden / 60);
+  const sek = sekunden % 60;
+  const anzeige = document.getElementById('timer');
+  anzeige.textContent = `${String(min).padStart(2,'0')}:${String(sek).padStart(2,'0')}`;
+  if (sekunden <= 0) { anzeige.classList.add('rot'); clearInterval(timerInterval); laeuft = false; }
+  else if (sekunden < 60) { anzeige.classList.add('rot'); }
+  else { anzeige.classList.remove('rot'); }
+}
+
+function startTimer() {
+  if (laeuft) return;
+  laeuft = true;
+  timerInterval = setInterval(() => { if (sekunden > 0) sekunden--; updateAnzeige(); }, 1000);
+}
+function pauseTimer() { clearInterval(timerInterval); laeuft = false; }
+function resetTimer() { clearInterval(timerInterval); laeuft = false; sekunden = 1200; updateAnzeige(); document.getElementById('timer').classList.remove('rot'); }
+
+function auswerten() {
+  let punkte = 0;
+  for (const [id, richtig] of Object.entries(loesungen)) {
+    const feld = document.getElementById(id);
+    const eingabe = feld.value.trim().toUpperCase();
+    feld.classList.remove('richtig','falsch');
+    if (eingabe === richtig) { feld.classList.add('richtig'); punkte++; }
+    else { feld.classList.add('falsch'); }
+  }
+  document.getElementById('punkte-anzeige').textContent = `${punkte} / 5`;
+  const texte = ['Noch üben! 💪', 'Guter Anfang! 📖', 'Solide! 👍', 'Sehr gut! 🎉', 'Fast perfekt! ⭐', 'Ausgezeichnet! 🏆'];
+  document.getElementById('ergebnis-text').textContent = texte[punkte];
+  document.getElementById('ergebnis').classList.add('visible');
+  document.getElementById('loesung').classList.add('visible');
+  document.getElementById('ergebnis').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  pauseTimer();
+}
+
+function reset() {
+  for (const id of Object.keys(loesungen)) {
+    const feld = document.getElementById(id);
+    feld.value = '';
+    feld.classList.remove('richtig','falsch');
+  }
+  document.getElementById('ergebnis').classList.remove('visible');
+  document.getElementById('loesung').classList.remove('visible');
+  resetTimer();
+}
+</script>
+</body>
+</html>
