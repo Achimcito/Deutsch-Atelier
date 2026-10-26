@@ -278,7 +278,8 @@
         const skill = card.querySelector('.skill-name').textContent.toLowerCase()
           .replace('ö','oe').replace('ü','ue').replace('ä','ae');
         card.href = `${level.toLowerCase()}-${skill === 'lesen' ? 'lesen' : 'hoeren'}.html`;
-        card.querySelector('.skill-desc').textContent = `${card.querySelector('.skill-name').textContent}verstehen ${level}`;
+        const fertigkeit = card.querySelector('.skill-name').textContent === 'Lesen' ? 'Leseverstehen' : 'Hörverstehen';
+        card.querySelector('.skill-desc').textContent = `${fertigkeit} ${level}`;
       });
       box.classList.add('visible');
     }, 200);
