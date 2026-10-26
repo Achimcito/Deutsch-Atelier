@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A2 – Lesen Teil 2 · Übung 4</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  body { font-family: 'Georgia', serif; max-width: 820px; margin: 40px auto; padding: 20px; background: #fafaf8; color: #2c2c2c; line-height: 1.7; }
+  h1 { font-size: 1.3em; border-bottom: 2px solid #1a3a6a; padding-bottom: 8px; margin-bottom: 6px; }
+  .meta { font-size: 0.85em; color: #666; margin-bottom: 30px; }
+  .anweisung { background: #eef2f7; border-left: 4px solid #1a3a6a; padding: 14px 18px; margin-bottom: 20px; font-size: 0.95em; }
+  .back { display: inline-block; margin-bottom: 24px; font-size: 0.82em; color: #666; text-decoration: none; letter-spacing: 0.05em; }
+  .back:hover { color: #1a3a6a; }
+  .timer-box { background: #fff; border: 2px solid #1a3a6a; border-radius: 4px; padding: 12px 20px; margin-bottom: 24px; display: flex; align-items: center; gap: 16px; justify-content: space-between; }
+  .timer-label { font-size: 0.85em; color: #444; letter-spacing: 0.05em; }
+  .timer-anzeige { font-family: monospace; font-size: 1.6em; font-weight: bold; color: #1a3a6a; min-width: 80px; text-align: center; }
+  .timer-anzeige.rot { color: #c0392b; animation: blinken 1s infinite; }
+  @keyframes blinken { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
+  .timer-buttons { display: flex; gap: 8px; }
+  .timer-btn { border: 1px solid #1a3a6a; background: transparent; color: #1a3a6a; padding: 5px 14px; font-size: 0.82em; cursor: pointer; border-radius: 2px; font-family: 'Georgia', serif; }
+  .timer-btn:hover { background: #1a3a6a; color: white; }
+  .timer-info { font-size: 0.75em; color: #999; font-style: italic; }
+  .artikel-box { background: #fff; border: 1px solid #ccc; padding: 28px 32px; margin-bottom: 36px; border-radius: 4px; }
+  .artikel-box h2 { font-size: 1.25em; font-weight: bold; margin-bottom: 6px; color: #2c2c2c; line-height: 1.3; }
+  .artikel-box .quelle { font-size: 0.78em; color: #999; margin-bottom: 20px; font-style: italic; }
+  .artikel-box p { margin-bottom: 14px; font-size: 0.97em; }
+  .aufgaben h2 { font-size: 1em; text-transform: uppercase; letter-spacing: 0.05em; color: #444; margin-bottom: 20px; }
+  .aufgabe { background: #fff; border: 1px solid #ddd; border-radius: 4px; padding: 18px 22px; margin-bottom: 18px; }
+  .aufgabe-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .aufgabe-nr { background: #1a3a6a; color: white; font-weight: bold; padding: 3px 10px; border-radius: 3px; font-size: 0.88em; white-space: nowrap; }
+  .aufgabe-frage { font-size: 0.97em; font-weight: bold; margin-bottom: 12px; color: #2c2c2c; }
+  .optionen { display: flex; flex-direction: column; gap: 8px; }
+  .option { display: flex; align-items: flex-start; gap: 10px; cursor: pointer; padding: 6px 8px; border-radius: 3px; transition: background 0.15s; font-size: 0.93em; }
+  .option:hover { background: #eef2f7; }
+  .option input[type="radio"] { margin-top: 3px; accent-color: #1a3a6a; flex-shrink: 0; }
+  .option.correct { background: #e6f4ea; border-left: 3px solid #3a7d44; }
+  .option.wrong { background: #fdecea; border-left: 3px solid #c0392b; }
+  .option.reveal-correct { background: #e6f4ea; border-left: 3px solid #3a7d44; }
+  .loesung-toggle { margin-top: 40px; text-align: center; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn-loesung, .btn-reset { border: none; padding: 12px 28px; font-size: 0.9em; letter-spacing: 0.06em; cursor: pointer; font-family: 'Georgia', serif; border-radius: 2px; }
+  .btn-loesung { background: #1a3a6a; color: white; }
+  .btn-loesung:hover { background: #142d54; }
+  .btn-reset { background: transparent; color: #666; border: 1px solid #ccc; }
+  .btn-reset:hover { background: #f0f0f0; }
+  .ergebnis-box { margin-top: 24px; text-align: center; font-size: 1.1em; display: none; }
+  .ergebnis-box.visible { display: block; }
+  .punkte { font-size: 2em; font-weight: bold; color: #1a3a6a; display: block; margin: 8px 0; }
+  .loesung-section { margin-top: 32px; border-top: 2px dashed #bbb; padding-top: 20px; display: none; }
+  .loesung-section.visible { display: block; }
+  .loesung-section h2 { font-size: 1em; text-transform: uppercase; letter-spacing: 0.05em; color: #444; margin-bottom: 12px; }
+  .loesung-section ul { list-style: none; font-size: 0.93em; }
+  .loesung-section li { background: #eef2f7; padding: 8px 14px; border-radius: 4px; margin-bottom: 8px; }
+  .loesung-section strong { color: #1a3a6a; }
+  @media (max-width: 500px) { .artikel-box { padding: 18px; } .timer-box { flex-wrap: wrap; } }
+  @media print { .back, .loesung-toggle, .ergebnis-box, .timer-box { display: none; } }
+</style>
+</head>
+<body>
+
+<a class="back" href="a2-lesen-teil2.html">← Zurück zur Übungsauswahl</a>
+<h1>Lesen Teil 2 · Übung 4</h1>
+<div class="meta">Übungsmaterial · Niveau A2 · Thema: Familie und Wohnen</div>
+
+<div class="anweisung">
+  <strong>Aufgabe:</strong> Lies zuerst den Text und beantworte dann die 5 Fragen (1–5).
+  Markiere die richtige Antwort (A, B oder C). Es gibt nur eine richtige Lösung.
+</div>
+
+<div class="timer-box">
+  <div>
+    <div class="timer-label">⏱ Zeit</div>
+    <div class="timer-anzeige" id="timer">10:00</div>
+    <div class="timer-info">Wird nach 10 Min. rot – die Aufgabe läuft weiter!</div>
+  </div>
+  <div class="timer-buttons">
+    <button class="timer-btn" onclick="startTimer()">Start</button>
+    <button class="timer-btn" onclick="pauseTimer()">Pause</button>
+    <button class="timer-btn" onclick="resetTimer()">Reset</button>
+  </div>
+</div>
+
+<div class="artikel-box">
+  <h2>Ein ungewöhnliches Familienprojekt</h2>
+  <div class="quelle">Niveau A2 · Übungsmaterial · Deutsch Atelier</div>
+
+  <p>Familie Berger wohnt in einem alten Bauernhaus am Stadtrand. Früher lebte die Familie in einer großen Wohnung mitten in der Stadt, aber nach der Geburt des dritten Kindes wurde es dort einfach zu eng. Vor fünf Jahren entschieden sich die Eltern, ein Haus auf dem Land zu kaufen, das sie gemeinsam mit ihren drei Kindern renovierten. Das war am Anfang sehr anstrengend, denn alle mussten mithelfen, sogar die Kleinsten.</p>
+
+  <p>Heute ist das Haus fertig und die Familie ist sehr glücklich. Die Eltern haben einen großen Gemüsegarten angelegt, in dem sie ihr eigenes Obst und Gemüse anbauen. Die Kinder haben gelernt, wie man Pflanzen pflegt und dass man Geduld braucht, bis etwas wächst. Frau Berger sagt, dass die Kinder durch diese Arbeit viel selbstständiger geworden sind. Aber die Familie hat nicht mehr so viel Freizeit wie früher, weil im Garten immer etwas zu tun ist.</p>
+
+  <p>Der älteste Sohn, Leon, war anfangs gar nicht begeistert von dem Umzug. Er vermisste seine Freunde aus der Stadt und fand das Landleben langweilig. Inzwischen hat er aber viele neue Freunde im Dorf gefunden und hilft seinem Vater oft in der Werkstatt. Herr Berger sagt, dass Leon dadurch viel gelernt hat und dass die Familie durch das gemeinsame Projekt noch enger zusammengewachsen ist.</p>
+</div>
+
+<div class="aufgaben">
+  <h2>Fragen 1 – 5</h2>
+
+  <div class="aufgabe" id="a1">
+    <div class="aufgabe-header"><div class="aufgabe-nr">1</div></div>
+    <div class="aufgabe-frage">Warum ist Familie Berger aus der Stadt weggezogen?</div>
+    <div class="optionen">
+      <label class="option"><input type="radio" name="q1" value="A"><span>A) Weil die Eltern einen Gemüsegarten anlegen wollten.</span></label>
+      <label class="option"><input type="radio" name="q1" value="B"><span>B) Weil die Wohnung für die Familie zu klein geworden war.</span></label>
+      <label class="option"><input type="radio" name="q1" value="C"><span>C) Weil die Kinder auf dem Land zur Schule gehen wollten.</span></label>
+    </div>
+  </div>
+
+  <div class="aufgabe" id="a2">
+    <div class="aufgabe-header"><div class="aufgabe-nr">2</div></div>
+    <div class="aufgabe-frage">Was hat sich für die Kinder durch den Garten verändert?</div>
+    <div class="optionen">
+      <label class="option"><input type="radio" name="q2" value="A"><span>A) Sie haben viel mehr Freizeit als früher.</span></label>
+      <label class="option"><input type="radio" name="q2" value="B"><span>B) Sie müssen jetzt jeden Tag in der Werkstatt helfen.</span></label>
+      <label class="option"><input type="radio" name="q2" value="C"><span>C) Sie haben gelernt, geduldig zu sein und selbstständiger zu werden.</span></label>
+    </div>
+  </div>
+
+  <div class="aufgabe" id="a3">
+    <div class="aufgabe-header"><div class="aufgabe-nr">3</div></div>
+    <div class="aufgabe-frage">Wie fand Leon den Umzug am Anfang?</div>
+    <div class="optionen">
+      <label class="option"><input type="radio" name="q3" value="A"><span>A) Er war unzufrieden und vermisste seine Freunde.</span></label>
+      <label class="option"><input type="radio" name="q3" value="B"><span>B) Er war sofort begeistert vom Landleben.</span></label>
+      <label class="option"><input type="radio" name="q3" value="C"><span>C) Er wollte unbedingt im Garten arbeiten.</span></label>
+    </div>
+  </div>
+
+  <div class="aufgabe" id="a4">
+    <div class="aufgabe-header"><div class="aufgabe-nr">4</div></div>
+    <div class="aufgabe-frage">Was hat sich für Leon inzwischen geändert?</div>
+    <div class="optionen">
+      <label class="option"><input type="radio" name="q4" value="A"><span>A) Er möchte zurück in die Stadt ziehen.</span></label>
+      <label class="option"><input type="radio" name="q4" value="B"><span>B) Er arbeitet nur noch im Gemüsegarten.</span></label>
+      <label class="option"><input type="radio" name="q4" value="C"><span>C) Er hat neue Freunde gefunden und hilft oft in der Werkstatt.</span></label>
+    </div>
+  </div>
+
+  <div class="aufgabe" id="a5">
+    <div class="aufgabe-header"><div class="aufgabe-nr">5</div></div>
+    <div class="aufgabe-frage">Was sagt Herr Berger über das Familienprojekt?</div>
+    <div class="optionen">
+      <label class="option"><input type="radio" name="q5" value="A"><span>A) Die Familie ist dadurch enger zusammengewachsen.</span></label>
+      <label class="option"><input type="radio" name="q5" value="B"><span>B) Es war ein Fehler, aus der Stadt wegzuziehen.</span></label>
+      <label class="option"><input type="radio" name="q5" value="C"><span>C) Die Kinder haben dadurch weniger gelernt.</span></label>
+    </div>
+  </div>
+
+</div>
+
+<div class="loesung-toggle">
+  <button class="btn-loesung" onclick="auswerten()">Auswerten</button>
+  <button class="btn-reset" onclick="reset()">Zurücksetzen</button>
+</div>
+
+<div class="ergebnis-box" id="ergebnis">
+  <span class="punkte" id="punkte-anzeige"></span>
+  <span id="ergebnis-text"></span>
+</div>
+
+<div class="loesung-section" id="loesung">
+  <h2>Lösungsschlüssel</h2>
+  <ul>
+    <li><strong>1 → B</strong> – Die Wohnung wurde „zu eng“ (= zu klein). A ist die Falle: Den Garten haben sie erst später angelegt, nicht als Grund für den Umzug. C steht nicht im Text.</li>
+    <li><strong>2 → C</strong> – Sie haben gelernt, wie man Pflanzen pflegt und dass man Geduld braucht. A ist falsch: Die Familie hat jetzt weniger Freizeit, nicht mehr. B ist falsch: Die Kinder helfen im Garten, nur Leon hilft in der Werkstatt.</li>
+    <li><strong>3 → A</strong> – Er war nicht begeistert und vermisste seine Freunde. B und C sind das Gegenteil.</li>
+    <li><strong>4 → C</strong> – Er hat neue Freunde gefunden und hilft in der Werkstatt. A und B sind falsch.</li>
+    <li><strong>5 → A</strong> – Die Familie ist enger zusammengewachsen. B ist das Gegenteil. C ist falsch: Die Kinder haben viel gelernt.</li>
+  </ul>
+</div>
+
+<script>
+const loesungen = { q1: 'B', q2: 'C', q3: 'A', q4: 'C', q5: 'A' };
+const START = 600;
+let sekunden = START;
+let timerInterval = null;
+let laeuft = false;
+
+function updateAnzeige() {
+  const min = Math.floor(sekunden / 60);
+  const sek = sekunden % 60;
+  const anzeige = document.getElementById('timer');
+  anzeige.textContent = `${String(min).padStart(2,'0')}:${String(sek).padStart(2,'0')}`;
+  if (sekunden <= 0) { anzeige.classList.add('rot'); clearInterval(timerInterval); laeuft = false; }
+  else if (sekunden < 60) { anzeige.classList.add('rot'); }
+  else { anzeige.classList.remove('rot'); }
+}
+
+function startTimer() {
+  if (laeuft) return;
+  laeuft = true;
+  timerInterval = setInterval(() => { if (sekunden > 0) sekunden--; updateAnzeige(); }, 1000);
+}
+function pauseTimer() { clearInterval(timerInterval); laeuft = false; }
+function resetTimer() { clearInterval(timerInterval); laeuft = false; sekunden = START; updateAnzeige(); document.getElementById('timer').classList.remove('rot'); }
+
+function auswerten() {
+  let punkte = 0;
+  for (const [name, richtig] of Object.entries(loesungen)) {
+    const aufgabe = document.getElementById(name.replace('q', 'a'));
+    const ausgewaehlt = document.querySelector(`input[name="${name}"]:checked`);
+    aufgabe.querySelectorAll('.option').forEach(opt => {
+      opt.classList.remove('correct', 'wrong', 'reveal-correct');
+      if (opt.querySelector('input').value === richtig) opt.classList.add('reveal-correct');
+    });
+    if (ausgewaehlt) {
+      const gewaehltOpt = ausgewaehlt.closest('.option');
+      if (ausgewaehlt.value === richtig) { gewaehltOpt.classList.add('correct'); punkte++; }
+      else { gewaehltOpt.classList.add('wrong'); }
+    }
+  }
+  document.getElementById('punkte-anzeige').textContent = `${punkte} / 5`;
+  const texte = ['Noch üben! 💪', 'Guter Anfang! 📖', 'Solide! 👍', 'Sehr gut! 🎉', 'Fast perfekt! ⭐', 'Ausgezeichnet! 🏆'];
+  document.getElementById('ergebnis-text').textContent = texte[punkte];
+  document.getElementById('ergebnis').classList.add('visible');
+  document.getElementById('loesung').classList.add('visible');
+  document.getElementById('ergebnis').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  pauseTimer();
+}
+
+function reset() {
+  document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+  document.querySelectorAll('.option').forEach(o => o.classList.remove('correct', 'wrong', 'reveal-correct'));
+  document.getElementById('ergebnis').classList.remove('visible');
+  document.getElementById('loesung').classList.remove('visible');
+  resetTimer();
+}
+</script>
+</body>
+</html>
