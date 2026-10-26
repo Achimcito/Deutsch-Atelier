@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A2 – Lesen Teil 2 · Übung 3</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  body { font-family: 'Georgia', serif; max-width: 820px; margin: 40px auto; padding: 20px; background: #fafaf8; color: #2c2c2c; line-height: 1.7; }
+  h1 { font-size: 1.3em; border-bottom: 2px solid #1a3a6a; padding-bottom: 8px; margin-bottom: 6px; }
+  .meta { font-size: 0.85em; color: #666; margin-bottom: 30px; }
+  .anweisung { background: #eef2f7; border-left: 4px solid #1a3a6a; padding: 14px 18px; margin-bottom: 20px; font-size: 0.95em; }
+  .back { display: inline-block; margin-bottom: 24px; font-size: 0.82em; color: #666; text-decoration: none; letter-spacing: 0.05em; }
+  .back:hover { color: #1a3a6a; }
+  .timer-box { background: #fff; border: 2px solid #1a3a6a; border-radius: 4px; padding: 12px 20px; margin-bottom: 24px; display: flex; align-items: center; gap: 16px; justify-content: space-between; }
+  .timer-label { font-size: 0.85em; color: #444; letter-spacing: 0.05em; }
+  .timer-anzeige { font-family: monospace; font-size: 1.6em; font-weight: bold; color: #1a3a6a; min-width: 80px; text-align: center; }
+  .timer-anzeige.rot { color: #c0392b; animation: blinken 1s infinite; }
+  @keyframes blinken { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
+  .timer-buttons { display: flex; gap: 8px; }
+  .timer-btn { border: 1px solid #1a3a6a; background: transparent; color: #1a3a6a; padding: 5px 14px; font-size: 0.82em; cursor: pointer; border-radius: 2px; font-family: 'Georgia', serif; }
+  .timer-btn:hover { background: #1a3a6a; color: white; }
+  .timer-info { font-size: 0.75em; color: #999; font-style: italic; }
+  .artikel-box { background: #fff; border: 1px solid #ccc; padding: 28px 32px; margin-bottom: 36px; border-radius: 4px; }
+  .artikel-box h2 { font-size: 1.25em; font-weight: bold; margin-bottom: 6px; color: #2c2c2c; line-height: 1.3; }
+  .artikel-box .quelle { font-size: 0.78em; color: #999; margin-bottom: 20px; font-style: italic; }
+  .artikel-box p { margin-bottom: 14px; font-size: 0.97em; }
+  .aufgaben h2 { font-size: 1em; text-transform: uppercase; letter-spacing: 0.05em; color: #444; margin-bottom: 20px; }
+  .aufgabe { background: #fff; border: 1px solid #ddd; border-radius: 4px; padding: 18px 22px; margin-bottom: 18px; }
+  .aufgabe-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .aufgabe-nr { background: #1a3a6a; color: white; font-weight: bold; padding: 3px 10px; border-radius: 3px; font-size: 0.88em; white-space: nowrap; }
+  .aufgabe-frage { font-size: 0.97em; font-weight: bold; margin-bottom: 12px; color: #2c2c2c; }
+  .optionen { display: flex; flex-direction: column; gap: 8px; }
+  .option { display: flex; align-items: flex-start; gap: 10px; cursor: pointer; padding: 6px 8px; border-radius: 3px; transition: background 0.15s; font-size: 0.93em; }
+  .option:hover { background: #eef2f7; }
+  .option input[type="radio"] { margin-top: 3px; accent-color: #1a3a6a; flex-shrink: 0; }
+  .option.correct { background: #e6f4ea; border-left: 3px solid #3a7d44; }
+  .option.wrong { background: #fdecea; border-left: 3px solid #c0392b; }
+  .option.reveal-correct { background: #e6f4ea; border-left: 3px solid #3a7d44; }
+  .loesung-toggle { margin-top: 40px; text-align: center; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn-loesung, .btn-reset { border: none; padding: 12px 28px; font-size: 0.9em; letter-spacing: 0.06em; cursor: pointer; font-family: 'Georgia', serif; border-radius: 2px; }
+  .btn-loesung { background: #1a3a6a; color: white; }
+  .btn-loesung:hover { background: #142d54; }
+  .btn-reset { background: transparent; color: #666; border: 1px solid #ccc; }
+  .btn-reset:hover { background: #f0f0f0; }
+  .ergebnis-box { margin-top: 24px; text-align: center; font-size: 1.1em; display: none; }
+  .ergebnis-box.visible { display: block; }
+  .punkte { font-size: 2em; font-weight: bold; color: #1a3a6a; display: block; margin: 8px 0; }
+  .loesung-section { margin-top: 32px; border-top: 2px dashed #bbb; padding-top: 20px; display: none; }
+  .loesung-section.visible { display: block; }
+  .loesung-section h2 { font-size: 1em; text-transform: uppercase; letter-spacing: 0.05em; color: #444; margin-bottom: 12px; }
+  .loesung-section ul { list-style: none; font-size: 0.93em; }
+  .loesung-section li { background: #eef2f7; padding: 8px 14px; border-radius: 4px; margin-bottom: 8px; }
+  .loesung-section strong { color: #1a3a6a; }
+  @media (max-width: 500px) { .artikel-box { padding: 18px; } .timer-box { flex-wrap: wrap; } }
+  @media print { .back, .loesung-toggle, .ergebnis-box, .timer-box { display: none; } }
+</style>
+</head>
+<body>
+
+<a class="back" href="a2-lesen-teil2.html">← Zurück zur Übungsauswahl</a>
+<h1>Lesen Teil 2 · Übung 3</h1>
+<div class="meta">Übungsmaterial · Niveau A2 · Thema: Arbeit und Natur</div>
+
+<div class="anweisung">
+  <strong>Aufgabe:</strong> Lies zuerst den Text und beantworte dann die 5 Fragen (1–5).
+  Markiere die richtige Antwort (A, B oder C). Es gibt nur eine richtige Lösung.
+</div>
+
+<div class="timer-box">
+  <div>
+    <div class="timer-label">⏱ Zeit</div>
+    <div class="timer-anzeige" id="timer">10:00</div>
+    <div class="timer-info">Wird nach 10 Min. rot – die Aufgabe läuft weiter!</div>
+  </div>
+  <div class="timer-buttons">
+    <button class="timer-btn" onclick="startTimer()">Start</button>
+    <button class="timer-btn" onclick="pauseTimer()">Pause</button>
+    <button class="timer-btn" onclick="resetTimer()">Reset</button>
+  </div>
+</div>
+
+<div class="artikel-box">
+  <h2>Ein ungewöhnlicher Traum</h2>
+  <div class="quelle">Niveau A2 · Übungsmaterial · Deutsch Atelier</div>
+
+  <p>Clara ist in einer großen Stadt in Deutschland aufgewachsen. Nach der Schule hat sie wie viele ihrer Freunde eine Ausbildung in einem Büro gemacht und später bei einer Versicherung gearbeitet. Sie hatte dort ein sicheres Einkommen, aber sie war mit ihrem Leben nicht wirklich glücklich. Sie saß den ganzen Tag vor dem Bildschirm und vermisste die frische Luft. Deshalb beschloss sie vor vier Jahren, alles zu ändern und eine Ausbildung zur Landwirtin zu beginnen.</p>
+
+  <p>Für ihre Familie war diese Entscheidung ein großer Schock. Ihre Eltern konnten am Anfang nicht verstehen, warum ihre Tochter plötzlich auf einem Bauernhof arbeiten wollte, wo sie doch einen sicheren Bürojob hatte. Auch das Gehalt in der Landwirtschaft war natürlich viel niedriger. Aber Clara blieb bei ihrer Entscheidung. Sie lernte schnell, wie man Tiere versorgt und wie man Pflanzen richtig anbaut. Heute sagt sie, dass sie noch nie so zufrieden war wie jetzt, auch wenn die Arbeit körperlich sehr hart ist.</p>
+
+  <p>Seit letztem Jahr arbeitet Clara nun auf einem Bio-Hof. Ihr Chef schätzt sie sehr, weil sie nicht nur fleißig ist, sondern auch gute Ideen hat, wie man den Hof umweltfreundlicher machen kann. Sie hat zum Beispiel vorgeschlagen, das Regenwasser zum Gießen der Pflanzen zu nutzen. Claras nächstes Ziel ist es, den Meisterbrief zu machen. Danach möchte sie einen eigenen kleinen Hof kaufen, auf dem sie vor allem alte Gemüsesorten anbauen will, die es heute nur noch selten gibt.</p>
+</div>
+
+<div class="aufgaben">
+  <h2>Fragen 1 – 5</h2>
+
+  <div class="aufgabe" id="a1">
+    <div class="aufgabe-header"><div class="aufgabe-nr">1</div></div>
+    <div class="aufgabe-frage">Warum hat Clara ihre Stelle bei der Versicherung gekündigt?</div>
+    <div class="optionen">
+      <label class="option"><input type="radio" name="q1" value="A"><span>A) Weil sie nicht genug Geld verdient hat.</span></label>
+      <label class="option"><input type="radio" name="q1" value="B"><span>B) Weil sie sich mit ihren Kollegen gestritten hat.</span></label>
+      <label class="option"><input type="radio" name="q1" value="C"><span>C) Weil sie draußen in der Natur arbeiten wollte.</span></label>
+    </div>
+  </div>
+
+  <div class="aufgabe" id="a2">
+    <div class="aufgabe-header"><div class="aufgabe-nr">2</div></div>
+    <div class="aufgabe-frage">Wie haben Claras Eltern auf ihre Entscheidung reagiert?</div>
+    <div class="optionen">
+      <label class="option"><input type="radio" name="q2" value="A"><span>A) Sie haben sich sofort sehr für sie gefreut.</span></label>
+      <label class="option"><input type="radio" name="q2" value="B"><span>B) Sie waren zuerst entsetzt und verstanden sie nicht.</span></label>
+      <label class="option"><input type="radio" name="q2" value="C"><span>C) Sie wollten, dass Clara sofort wieder auszieht.</span></label>
+    </div>
+  </div>
+
+  <div class="aufgabe" id="a3">
+    <div class="aufgabe-header"><div class="aufgabe-nr">3</div></div>
+    <div class="aufgabe-frage">Was sagt Clara über ihre Arbeit heute?</div>
+    <div class="optionen">
+      <label class="option"><input type="radio" name="q3" value="A"><span>A) Sie ist oft traurig, weil die Arbeit so hart ist.</span></label>
+      <label class="option"><input type="radio" name="q3" value="B"><span>B) Sie ist von ihrer Entscheidung enttäuscht und will zurück ins Büro.</span></label>
+      <label class="option"><input type="radio" name="q3" value="C"><span>C) Trotz der harten Arbeit ist sie sehr glücklich.</span></label>
+    </div>
+  </div>
+
+  <div class="aufgabe" id="a4">
+    <div class="aufgabe-header"><div class="aufgabe-nr">4</div></div>
+    <div class="aufgabe-frage">Warum mag Claras Chef sie so sehr?</div>
+    <div class="optionen">
+      <label class="option"><input type="radio" name="q4" value="A"><span>A) Weil sie umweltfreundliche Verbesserungen vorschlägt.</span></label>
+      <label class="option"><input type="radio" name="q4" value="B"><span>B) Weil sie bereit ist, jeden Tag länger zu arbeiten.</span></label>
+      <label class="option"><input type="radio" name="q4" value="C"><span>C) Weil sie das Regenwasser für den Chef kauft.</span></label>
+    </div>
+  </div>
+
+  <div class="aufgabe" id="a5">
+    <div class="aufgabe-header"><div class="aufgabe-nr">5</div></div>
+    <div class="aufgabe-frage">Was ist Claras Plan für die Zukunft?</div>
+    <div class="optionen">
+      <label class="option"><input type="radio" name="q5" value="A"><span>A) Sie will einen eigenen Hof kaufen und alte Gemüsesorten anbauen.</span></label>
+      <label class="option"><input type="radio" name="q5" value="B"><span>B) Sie will sofort den Bio-Hof von ihrem Chef übernehmen.</span></label>
+      <label class="option"><input type="radio" name="q5" value="C"><span>C) Sie will zurück in die Stadt ziehen und wieder im Büro arbeiten.</span></label>
+    </div>
+  </div>
+
+</div>
+
+<div class="loesung-toggle">
+  <button class="btn-loesung" onclick="auswerten()">Auswerten</button>
+  <button class="btn-reset" onclick="reset()">Zurücksetzen</button>
+</div>
+
+<div class="ergebnis-box" id="ergebnis">
+  <span class="punkte" id="punkte-anzeige"></span>
+  <span id="ergebnis-text"></span>
+</div>
+
+<div class="loesung-section" id="loesung">
+  <h2>Lösungsschlüssel</h2>
+  <ul>
+    <li><strong>1 → C</strong> – Sie vermisste die frische Luft und wollte Landwirtin werden.</li>
+    <li><strong>2 → B</strong> – Für die Familie war es ein großer Schock; die Eltern konnten es am Anfang nicht verstehen.</li>
+    <li><strong>3 → C</strong> – Sie war noch nie so zufrieden, auch wenn die Arbeit körperlich sehr hart ist.</li>
+    <li><strong>4 → A</strong> – Sie hat gute Ideen, wie man den Hof umweltfreundlicher machen kann.</li>
+    <li><strong>5 → A</strong> – Meisterbrief, dann ein eigener kleiner Hof mit alten Gemüsesorten.</li>
+  </ul>
+</div>
+
+<script>
+const loesungen = { q1: 'C', q2: 'B', q3: 'C', q4: 'A', q5: 'A' };
+const START = 600;
+let sekunden = START;
+let timerInterval = null;
+let laeuft = false;
+
+function updateAnzeige() {
+  const min = Math.floor(sekunden / 60);
+  const sek = sekunden % 60;
+  const anzeige = document.getElementById('timer');
+  anzeige.textContent = `${String(min).padStart(2,'0')}:${String(sek).padStart(2,'0')}`;
+  if (sekunden <= 0) { anzeige.classList.add('rot'); clearInterval(timerInterval); laeuft = false; }
+  else if (sekunden < 60) { anzeige.classList.add('rot'); }
+  else { anzeige.classList.remove('rot'); }
+}
+
+function startTimer() {
+  if (laeuft) return;
+  laeuft = true;
+  timerInterval = setInterval(() => { if (sekunden > 0) sekunden--; updateAnzeige(); }, 1000);
+}
+function pauseTimer() { clearInterval(timerInterval); laeuft = false; }
+function resetTimer() { clearInterval(timerInterval); laeuft = false; sekunden = START; updateAnzeige(); document.getElementById('timer').classList.remove('rot'); }
+
+function auswerten() {
+  let punkte = 0;
+  for (const [name, richtig] of Object.entries(loesungen)) {
+    const aufgabe = document.getElementById(name.replace('q', 'a'));
+    const ausgewaehlt = document.querySelector(`input[name="${name}"]:checked`);
+    aufgabe.querySelectorAll('.option').forEach(opt => {
+      opt.classList.remove('correct', 'wrong', 'reveal-correct');
+      if (opt.querySelector('input').value === richtig) opt.classList.add('reveal-correct');
+    });
+    if (ausgewaehlt) {
+      const gewaehltOpt = ausgewaehlt.closest('.option');
+      if (ausgewaehlt.value === richtig) { gewaehltOpt.classList.add('correct'); punkte++; }
+      else { gewaehltOpt.classList.add('wrong'); }
+    }
+  }
+  document.getElementById('punkte-anzeige').textContent = `${punkte} / 5`;
+  const texte = ['Noch üben! 💪', 'Guter Anfang! 📖', 'Solide! 👍', 'Sehr gut! 🎉', 'Fast perfekt! ⭐', 'Ausgezeichnet! 🏆'];
+  document.getElementById('ergebnis-text').textContent = texte[punkte];
+  document.getElementById('ergebnis').classList.add('visible');
+  document.getElementById('loesung').classList.add('visible');
+  document.getElementById('ergebnis').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  pauseTimer();
+}
+
+function reset() {
+  document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+  document.querySelectorAll('.option').forEach(o => o.classList.remove('correct', 'wrong', 'reveal-correct'));
+  document.getElementById('ergebnis').classList.remove('visible');
+  document.getElementById('loesung').classList.remove('visible');
+  resetTimer();
+}
+</script>
+</body>
+</html>
