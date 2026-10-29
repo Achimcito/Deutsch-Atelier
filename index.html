@@ -115,7 +115,8 @@
 
   .level-btn:hover,
   .level-btn.active {
-    background: var(--ink);
+    background: var(--accent);
+    border-color: var(--accent);
     color: var(--cream);
   }
 
@@ -128,6 +129,7 @@
 
   .level-btn.coming:hover {
     background: transparent;
+    border-color: var(--coming);
     color: var(--coming);
   }
 
@@ -182,6 +184,11 @@
     background: var(--accent);
     border-color: var(--accent);
     color: white;
+  }
+
+  .skills.a2 .skill-card:hover {
+    background: var(--accent-a2);
+    border-color: var(--accent-a2);
   }
 
   .skill-icon {
@@ -271,6 +278,7 @@
     btn.classList.add('active');
 
     const box = document.getElementById('skills-box');
+    box.classList.toggle('a2', level === 'A2');
     box.classList.remove('visible');
     setTimeout(() => {
       // Update links based on level
