@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A2 – Hören Teil 2 · Übung 1</title>
+<style>
+  body { font-family: 'Georgia', serif; max-width: 820px; margin: 40px auto; padding: 20px; background: #fafaf8; color: #2c2c2c; line-height: 1.7; }
+  h1 { font-size: 1.3em; border-bottom: 2px solid #1a3a6a; padding-bottom: 8px; margin-bottom: 6px; }
+  .meta { font-size: 0.85em; color: #666; margin-bottom: 30px; }
+  .anweisung { background: #eef2f7; border-left: 4px solid #1a3a6a; padding: 14px 18px; margin-bottom: 24px; font-size: 0.95em; }
+  .anweisung p + p { margin-top: 10px; }
+  .back { display: inline-block; margin-bottom: 24px; font-size: 0.82em; color: #666; text-decoration: none; letter-spacing: 0.05em; }
+  .back:hover { color: #1a3a6a; }
+
+  /* Lesezeit */
+  .lesezeit-box { background: #fff; border: 2px solid #1a3a6a; border-radius: 4px; padding: 12px 20px; margin-bottom: 14px; display: flex; align-items: center; gap: 16px; justify-content: space-between; flex-wrap: wrap; }
+  .lesezeit-label { font-size: 0.85em; color: #444; letter-spacing: 0.05em; }
+  .lesezeit-anzeige { font-family: monospace; font-size: 1.6em; font-weight: bold; color: #1a3a6a; min-width: 80px; }
+  .lesezeit-anzeige.rot { color: #c0392b; }
+  .lesezeit-info { font-size: 0.75em; color: #999; font-style: italic; }
+  .lz-buttons { display: flex; gap: 8px; }
+  .lz-btn { border: 1px solid #1a3a6a; background: transparent; color: #1a3a6a; padding: 5px 14px; font-size: 0.82em; cursor: pointer; border-radius: 2px; font-family: 'Georgia', serif; }
+  .lz-btn:hover:not(:disabled) { background: #1a3a6a; color: white; }
+  .lz-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  /* Audio */
+  .audio-box { background: #fff; border: 2px solid #1a3a6a; border-radius: 4px; padding: 18px 24px; margin-bottom: 28px; }
+  .audio-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .audio-label { font-size: 0.9em; color: #444; white-space: nowrap; }
+  .audio-gesperrt { font-size: 0.88em; color: #666; font-style: italic; }
+  .audio-status { font-size: 0.82em; color: #1a3a6a; margin-top: 8px; font-weight: bold; }
+  .audio-status.ende { color: #c0392b; font-weight: normal; font-style: italic; }
+
+  /* Notizzettel */
+  .zettel { background: #fffdf2; border: 1px solid #d8d2b8; border-top: 6px solid #1a3a6a; border-radius: 4px; padding: 22px 28px 26px; box-shadow: 0 2px 6px rgba(0,0,0,0.06); }
+  .zettel h2 { font-size: 1.05em; margin-bottom: 4px; color: #1a3a6a; }
+  .zettel .zettel-thema { font-size: 0.82em; color: #777; margin-bottom: 16px; }
+  .zeile { padding: 10px 0; border-bottom: 1px dashed #d8d2b8; }
+  .zeile:last-of-type { border-bottom: none; }
+  .zeile-kopf { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .zeile-nr { background: #1a3a6a; color: white; font-weight: bold; padding: 1px 9px; border-radius: 3px; font-size: 0.82em; }
+  .zeile label { font-size: 0.96em; }
+  .zeile input[type="text"] { font-family: 'Georgia', serif; font-size: 1em; border: none; border-bottom: 2px solid #1a3a6a; background: transparent; padding: 3px 6px; min-width: 150px; max-width: 100%; color: #1a3a6a; }
+  .zeile input[type="text"]:focus { outline: none; background: #eef2f7; }
+  .zeile input.kurz { min-width: 90px; width: 100px; }
+  .vorgabe { font-weight: bold; color: #444; }
+  .zeile.richtig { background: #e6f4ea; border-left: 4px solid #3a7d44; padding-left: 12px; }
+  .zeile.falsch { background: #fdecea; border-left: 4px solid #c0392b; padding-left: 12px; }
+  .feedback { display: none; margin-top: 8px; font-size: 0.85em; line-height: 1.5; }
+  .feedback.sichtbar { display: block; }
+  .zeile.richtig .feedback { color: #2c6a38; }
+  .zeile.falsch .feedback { color: #8e2b20; }
+
+  .loesung-toggle { margin-top: 32px; text-align: center; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn-loesung, .btn-reset { border: none; padding: 12px 28px; font-size: 0.9em; letter-spacing: 0.06em; cursor: pointer; font-family: 'Georgia', serif; border-radius: 2px; }
+  .btn-loesung { background: #1a3a6a; color: white; }
+  .btn-loesung:hover { background: #142d54; }
+  .btn-reset { background: transparent; color: #666; border: 1px solid #ccc; }
+  .btn-reset:hover { background: #f0f0f0; }
+  .ergebnis-box { margin-top: 24px; text-align: center; font-size: 1.1em; display: none; }
+  .ergebnis-box.visible { display: block; }
+  .punkte { font-size: 2em; font-weight: bold; color: #1a3a6a; display: block; margin: 8px 0; }
+
+  .hoertext { margin-top: 24px; display: none; background: #fff; border: 1px solid #ccc; border-radius: 4px; padding: 14px 22px; }
+  .hoertext.visible { display: block; }
+  .hoertext summary { cursor: pointer; font-size: 0.9em; color: #1a3a6a; font-weight: bold; }
+  .hoertext p { margin-top: 12px; font-size: 0.95em; }
+
+  @media (max-width: 560px) { .zettel { padding: 18px; } }
+  @media print { .back, .loesung-toggle, .ergebnis-box, .audio-box, .lesezeit-box { display: none; } }
+</style>
+</head>
+<body>
+
+<a class="back" href="a2-hoeren-teil2.html">← Zurück zur Übungsauswahl</a>
+<h1>Hören Teil 2 · Übung 1</h1>
+<div class="meta">Übungsmaterial · Niveau A2 · Thema: Fitnessstudio Info</div>
+
+<div class="anweisung">
+  <p><strong>Aufgabe:</strong> Lies die Aufgabe gut durch. Du hast 30 Sekunden Zeit.</p>
+  <p><strong>Situation:</strong> Du hörst folgende Nachricht. Höre gut zu und schreibe die wichtigsten Informationen auf den Notizzettel.
+  <em>Du hörst den Text zweimal.</em></p>
+</div>
+
+<!-- Lesezeit -->
+<div class="lesezeit-box">
+  <div>
+    <div class="lesezeit-label">⏱ Lesezeit</div>
+    <div class="lesezeit-anzeige" id="lz-anzeige">00:30</div>
+    <div class="lesezeit-info">Danach wird das Audio freigeschaltet.</div>
+  </div>
+  <div class="lz-buttons">
+    <button class="lz-btn" id="lz-start" type="button" onclick="startLesezeit()">Lesezeit starten</button>
+    <button class="lz-btn" id="lz-skip" type="button" onclick="freischalten()">Überspringen</button>
+  </div>
+</div>
+
+<!-- Audio: zweimal abspielbar -->
+<div class="audio-box">
+  <div class="audio-row">
+    <span class="audio-label">🎧 Nachricht:</span>
+    <span class="audio-gesperrt" id="audio-gesperrt">🔒 Das Audio wird nach der Lesezeit freigeschaltet.</span>
+    <audio id="main-audio" controls style="display:none;">
+      <source src="audio/a2-hoeren-teil2-uebung1.mp3" type="audio/mpeg">
+      Dein Browser unterstützt das Audio-Element nicht.
+    </audio>
+  </div>
+  <div class="audio-status" id="audio-status" style="display:none;"></div>
+</div>
+
+<!-- Notizzettel -->
+<div class="zettel">
+  <h2>📝 Notizzettel</h2>
+  <div class="zettel-thema">Fitnessstudio Info</div>
+
+  <div class="zeile" id="z1">
+    <div class="zeile-kopf">
+      <span class="zeile-nr">1</span>
+      <label for="f1">Preis bei Anmeldung diese Woche:</label>
+      <input type="text" id="f1" class="kurz" autocomplete="off">
+      <span>Euro pro Monat</span>
+    </div>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="zeile" id="z2">
+    <div class="zeile-kopf">
+      <span class="zeile-nr">2</span>
+      <label for="f2">Eröffnung ist am:</label>
+      <input type="text" id="f2" autocomplete="off">
+    </div>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="zeile" id="z3">
+    <div class="zeile-kopf">
+      <span class="zeile-nr">3</span>
+      <label for="f3">Kurse am Abend beginnen um:</label>
+      <input type="text" id="f3" class="kurz" autocomplete="off">
+      <span>Uhr</span>
+    </div>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="zeile" id="z4">
+    <div class="zeile-kopf">
+      <span class="zeile-nr">4</span>
+      <label for="f4">Gratis-Geschenk:</label>
+      <input type="text" id="f4" autocomplete="off">
+    </div>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="zeile" id="z5">
+    <div class="zeile-kopf">
+      <span class="zeile-nr">5</span>
+      <label for="f5">Telefonnummer:</label>
+      <span class="vorgabe">0511</span>
+      <input type="text" id="f5" inputmode="numeric" autocomplete="off">
+    </div>
+    <div class="feedback"></div>
+  </div>
+</div>
+
+<div class="loesung-toggle">
+  <button class="btn-loesung" type="button" onclick="auswerten()">Auswerten</button>
+  <button class="btn-reset" type="button" onclick="reset()">Zurücksetzen</button>
+</div>
+
+<div class="ergebnis-box" id="ergebnis">
+  <span class="punkte" id="punkte-anzeige"></span>
+  <span id="ergebnis-text"></span>
+</div>
+
+<details class="hoertext" id="hoertext">
+  <summary>Hörtext anzeigen</summary>
+  <p>„Hallo Julia, hier ist Markus vom Fitnessstudio ‚Fit &amp; Gesund‘ in der Bahnhofstraße. Ich wollte dir nur schnell wegen deiner Anfrage Bescheid geben. Du hast ja gefragt, was die Mitgliedschaft kostet. Normalerweise sind es 30 Euro im Monat, aber wenn du dich noch diese Woche anmeldest, zahlst du nur 25 Euro. Also beeil dich! Das Studio eröffnet offiziell am 1. September. Wir haben auch viele Kurse, zum Beispiel Yoga. Die Kurse am Abend fangen immer um 18 Uhr an, das ist praktisch, wenn man bis 17 Uhr arbeiten muss. Ach ja, und als kleines Willkommensgeschenk bekommst du von uns eine coole Trinkflasche. Wenn du noch Fragen hast, ruf mich einfach unter 0511 1233267 an. Bis bald!“</p>
+</details>
+
+<script>
+/* ---------- Lesezeit ---------- */
+const LESEZEIT = 30;
+let lesezeit = LESEZEIT;
+let lzInterval = null;
+const lzAnzeige = document.getElementById('lz-anzeige');
+const lzStart = document.getElementById('lz-start');
+const lzSkip = document.getElementById('lz-skip');
+
+function zeigeLesezeit() {
+  lzAnzeige.textContent = '00:' + String(lesezeit).padStart(2, '0');
+  lzAnzeige.classList.toggle('rot', lesezeit <= 5 && lesezeit > 0);
+}
+function startLesezeit() {
+  if (lzInterval) return;
+  lzStart.disabled = true;
+  lzInterval = setInterval(function () {
+    lesezeit--;
+    zeigeLesezeit();
+    if (lesezeit <= 0) freischalten();
+  }, 1000);
+}
+
+/* ---------- Audio: zweimal abspielbar ---------- */
+const MAXW = 2;
+const audio = document.getElementById('main-audio');
+const audioStatus = document.getElementById('audio-status');
+let wiedergaben = 0;
+
+function zeigeStatus() {
+  audioStatus.style.display = 'block';
+  if (wiedergaben >= MAXW) {
+    audioStatus.className = 'audio-status ende';
+    audioStatus.textContent = '⚠️ Du hast die Nachricht zweimal gehört. Im echten Test gibt es keine dritte Wiedergabe.';
+  } else {
+    audioStatus.className = 'audio-status';
+    audioStatus.textContent = 'Noch ' + (MAXW - wiedergaben) + '× hörbar.';
+  }
+}
+function freischalten() {
+  clearInterval(lzInterval);
+  lzInterval = null;
+  lesezeit = Math.max(lesezeit, 0);
+  lzAnzeige.textContent = '00:00';
+  lzAnzeige.classList.remove('rot');
+  lzStart.disabled = true;
+  lzSkip.disabled = true;
+  document.getElementById('audio-gesperrt').style.display = 'none';
+  audio.style.display = '';
+  zeigeStatus();
+}
+audio.addEventListener('ended', function () {
+  wiedergaben++;
+  if (wiedergaben >= MAXW) {
+    audio.controls = false;
+  } else {
+    audio.currentTime = 0;
+  }
+  zeigeStatus();
+});
+audio.addEventListener('play', function () {
+  if (wiedergaben >= MAXW) {
+    audio.pause();
+    audio.currentTime = 0;
+    audio.controls = false;
+    zeigeStatus();
+  }
+});
+
+/* ---------- Auswertung ---------- */
+function lev1(a, b) { /* Abstand höchstens 1 */
+  if (a === b) return true;
+  if (Math.abs(a.length - b.length) > 1) return false;
+  let i = 0, j = 0, fehler = 0;
+  while (i < a.length && j < b.length) {
+    if (a[i] === b[j]) { i++; j++; continue; }
+    if (++fehler > 1) return false;
+    if (a.length > b.length) i++;
+    else if (a.length < b.length) j++;
+    else { i++; j++; }
+  }
+  return fehler + (a.length - i) + (b.length - j) <= 1;
+}
+
+const felder = [
+  { id: 'f1', zeile: 'z1', loesung: '25 Euro',
+    pruefe: function (v) { const n = v.toLowerCase().replace(/euro|€|\s/g, '').replace(',', '.'); return n === '25' || n === '25.00' || n === '25.0'; },
+    erkl: 'Achtung, Falle! Er sagt zuerst 30 Euro, sagt dann aber noch 25 Euro bei Anmeldung in dieser Woche. Die Zahl 25 ist die richtige Information.' },
+  { id: 'f2', zeile: 'z2', loesung: '1. September',
+    pruefe: function (v) {
+      const n = v.toLowerCase().replace(/[\s.]/g, '').replace(/^am/, '').replace(/20\d\d$/, '');
+      return ['1september', '01september', '1sept', 'ersterseptember', '19', '109', '019', '0109'].indexOf(n) !== -1;
+    },
+    erkl: 'Die Zahl 1 und der Monat sind hier entscheidend.' },
+  { id: 'f3', zeile: 'z3', loesung: '18 Uhr',
+    pruefe: function (v) { const n = v.toLowerCase().replace(/\s|uhr/g, ''); return ['18', '18:00', '18.00', '1800', '18h'].indexOf(n) !== -1; },
+    erkl: 'Er sagt „18 Uhr“. Wenn du „17 Uhr“ aufgeschrieben hast, hast du die Arbeitszeit gehört, nicht den Kursbeginn.' },
+  { id: 'f4', zeile: 'z4', loesung: '(eine) Trinkflasche',
+    pruefe: function (v) {
+      const n = v.toLowerCase().replace(/[^a-zäöüß\s]/g, '').trim().replace(/^(eine|die|ne)\s+/, '');
+      return n === 'flasche' || lev1(n, 'trinkflasche');
+    },
+    erkl: 'Er sagt nicht nur „Geschenk“, sondern nennt konkret die Trinkflasche.' },
+  { id: 'f5', zeile: 'z5', loesung: '0511 1233267',
+    pruefe: function (v) { let d = v.replace(/\D/g, ''); if (d.indexOf('0511') === 0) d = d.slice(4); return d === '1233267'; },
+    erkl: 'Die Vorwahl ist schon vorgegeben, du musst nur die restlichen Ziffern ergänzen.' }
+];
+
+function auswerten() {
+  let punkte = 0;
+  felder.forEach(function (f) {
+    const wert = document.getElementById(f.id).value.trim();
+    const zeile = document.getElementById(f.zeile);
+    const fb = zeile.querySelector('.feedback');
+    const ok = wert !== '' && f.pruefe(wert);
+    zeile.classList.remove('richtig', 'falsch');
+    zeile.classList.add(ok ? 'richtig' : 'falsch');
+    if (ok) punkte++;
+    fb.textContent = (ok ? '✓ ' : 'Richtig wäre: ' + f.loesung + '. ') + f.erkl;
+    fb.classList.add('sichtbar');
+  });
+  document.getElementById('punkte-anzeige').textContent = punkte + ' / 5';
+  const texte = ['Noch üben! 💪', 'Guter Anfang! 📖', 'Solide! 👍', 'Sehr gut! 🎉', 'Fast perfekt! ⭐', 'Ausgezeichnet! 🏆'];
+  document.getElementById('ergebnis-text').textContent = texte[punkte];
+  const box = document.getElementById('ergebnis');
+  box.classList.add('visible');
+  document.getElementById('hoertext').classList.add('visible');
+  box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function reset() {
+  felder.forEach(function (f) {
+    document.getElementById(f.id).value = '';
+    const zeile = document.getElementById(f.zeile);
+    zeile.classList.remove('richtig', 'falsch');
+    const fb = zeile.querySelector('.feedback');
+    fb.textContent = '';
+    fb.classList.remove('sichtbar');
+  });
+  document.getElementById('ergebnis').classList.remove('visible');
+  const ht = document.getElementById('hoertext');
+  ht.classList.remove('visible');
+  ht.open = false;
+
+  /* Lesezeit und Audio zurücksetzen */
+  clearInterval(lzInterval);
+  lzInterval = null;
+  lesezeit = LESEZEIT;
+  zeigeLesezeit();
+  lzStart.disabled = false;
+  lzSkip.disabled = false;
+  wiedergaben = 0;
+  audio.pause();
+  audio.currentTime = 0;
+  audio.controls = true;
+  audio.style.display = 'none';
+  document.getElementById('audio-gesperrt').style.display = '';
+  audioStatus.style.display = 'none';
+}
+</script>
+</body>
+</html>
