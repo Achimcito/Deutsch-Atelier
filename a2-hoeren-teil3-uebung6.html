@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A2 – Hören Teil 3 · Übung 6</title>
+<style>
+  body { font-family: 'Georgia', serif; max-width: 820px; margin: 40px auto; padding: 20px; background: #fafaf8; color: #2c2c2c; line-height: 1.7; }
+  h1 { font-size: 1.3em; border-bottom: 2px solid #1a3a6a; padding-bottom: 8px; margin-bottom: 6px; }
+  .meta { font-size: 0.85em; color: #666; margin-bottom: 30px; }
+  .anweisung { background: #eef2f7; border-left: 4px solid #1a3a6a; padding: 14px 18px; margin-bottom: 24px; font-size: 0.95em; }
+  .anweisung p + p { margin-top: 10px; }
+  .back { display: inline-block; margin-bottom: 24px; font-size: 0.82em; color: #666; text-decoration: none; letter-spacing: 0.05em; }
+  .back:hover { color: #1a3a6a; }
+
+  /* Lesezeit */
+  .lesezeit-box { background: #fff; border: 2px solid #1a3a6a; border-radius: 4px; padding: 12px 20px; margin-bottom: 14px; display: flex; align-items: center; gap: 16px; justify-content: space-between; flex-wrap: wrap; }
+  .lesezeit-label { font-size: 0.85em; color: #444; letter-spacing: 0.05em; }
+  .lesezeit-anzeige { font-family: monospace; font-size: 1.6em; font-weight: bold; color: #1a3a6a; min-width: 80px; }
+  .lesezeit-anzeige.rot { color: #c0392b; }
+  .lesezeit-info { font-size: 0.75em; color: #999; font-style: italic; }
+  .lz-buttons { display: flex; gap: 8px; }
+  .lz-btn { border: 1px solid #1a3a6a; background: transparent; color: #1a3a6a; padding: 5px 14px; font-size: 0.82em; cursor: pointer; border-radius: 2px; font-family: 'Georgia', serif; }
+  .lz-btn:hover:not(:disabled) { background: #1a3a6a; color: white; }
+  .lz-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  /* Audio */
+  .audio-box { background: #fff; border: 2px solid #1a3a6a; border-radius: 4px; padding: 18px 24px; margin-bottom: 28px; }
+  .audio-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .audio-label { font-size: 0.9em; color: #444; white-space: nowrap; }
+  .audio-gesperrt { font-size: 0.88em; color: #666; font-style: italic; }
+  .audio-status { font-size: 0.82em; color: #1a3a6a; margin-top: 8px; font-weight: bold; }
+  .audio-status.ende { color: #c0392b; font-weight: normal; font-style: italic; }
+
+  /* Notizzettel */
+  .zettel { background: #fffdf2; border: 1px solid #d8d2b8; border-top: 6px solid #1a3a6a; border-radius: 4px; padding: 22px 28px 26px; box-shadow: 0 2px 6px rgba(0,0,0,0.06); }
+  .zettel h2 { font-size: 1.05em; margin-bottom: 4px; color: #1a3a6a; }
+  .zettel .zettel-thema { font-size: 0.82em; color: #777; margin-bottom: 16px; }
+  .zettel-frage { font-weight: bold; color: #444; margin: 4px 0 0; }
+  .zeile { padding: 10px 0; border-bottom: 1px dashed #d8d2b8; }
+  .zeile:last-of-type { border-bottom: none; }
+  .zeile-kopf { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .zeile-nr { background: #1a3a6a; color: white; font-weight: bold; padding: 1px 9px; border-radius: 3px; font-size: 0.82em; }
+  .zeile label { font-size: 0.96em; }
+  .zeile input[type="text"] { font-family: 'Georgia', serif; font-size: 1em; border: none; border-bottom: 2px solid #1a3a6a; background: transparent; padding: 3px 6px; min-width: 150px; max-width: 100%; color: #1a3a6a; }
+  .zeile input[type="text"]:focus { outline: none; background: #eef2f7; }
+  .zeile input.kurz { min-width: 90px; width: 100px; }
+  .vorgabe { font-weight: bold; color: #444; }
+  .zeile.richtig { background: #e6f4ea; border-left: 4px solid #3a7d44; padding-left: 12px; }
+  .zeile.falsch { background: #fdecea; border-left: 4px solid #c0392b; padding-left: 12px; }
+  .feedback { display: none; margin-top: 8px; font-size: 0.85em; line-height: 1.5; }
+  .feedback.sichtbar { display: block; }
+  .zeile.richtig .feedback { color: #2c6a38; }
+  .zeile.falsch .feedback { color: #8e2b20; }
+
+  .loesung-toggle { margin-top: 32px; text-align: center; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn-loesung, .btn-reset { border: none; padding: 12px 28px; font-size: 0.9em; letter-spacing: 0.06em; cursor: pointer; font-family: 'Georgia', serif; border-radius: 2px; }
+  .btn-loesung { background: #1a3a6a; color: white; }
+  .btn-loesung:hover { background: #142d54; }
+  .btn-reset { background: transparent; color: #666; border: 1px solid #ccc; }
+  .btn-reset:hover { background: #f0f0f0; }
+  .ergebnis-box { margin-top: 24px; text-align: center; font-size: 1.1em; display: none; }
+  .ergebnis-box.visible { display: block; }
+  .punkte { font-size: 2em; font-weight: bold; color: #1a3a6a; display: block; margin: 8px 0; }
+
+  .hoertext { margin-top: 24px; display: none; background: #fff; border: 1px solid #ccc; border-radius: 4px; padding: 14px 22px; }
+  .hoertext.visible { display: block; }
+  .hoertext summary { cursor: pointer; font-size: 0.9em; color: #1a3a6a; font-weight: bold; }
+  .hoertext p { margin-top: 12px; font-size: 0.95em; }
+
+
+  /* Matrix */
+  .matrix-box { background: #fff; border: 1px solid #ddd; border-top: 6px solid #1a3a6a; border-radius: 4px; padding: 22px 24px 26px; }
+  .matrix-box h2 { font-size: 1.05em; color: #1a3a6a; margin-bottom: 12px; }
+  .legende { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 6px 18px; margin-bottom: 18px; font-size: 0.93em; }
+  .legende .l { background: #1a3a6a; color: white; font-weight: bold; padding: 1px 8px; border-radius: 3px; font-size: 0.85em; margin-right: 8px; }
+  table.matrix { width: 100%; border-collapse: collapse; }
+  table.matrix th, table.matrix td { border: 1px solid #ddd; padding: 8px 4px; text-align: center; }
+  table.matrix th { background: #eef2f7; color: #1a3a6a; font-size: 0.95em; }
+  table.matrix th.sprecher, table.matrix td.sprecher { text-align: left; padding-left: 12px; font-weight: bold; white-space: nowrap; font-size: 0.92em; }
+  table.matrix input[type="checkbox"] { width: 20px; height: 20px; accent-color: #1a3a6a; cursor: pointer; }
+  table.matrix td.zelle { transition: background 0.15s; }
+  table.matrix td.ok { background: #e6f4ea; }
+  table.matrix td.falsch { background: #fdecea; }
+  table.matrix td.fehlt { background: #fff; outline: 2px dashed #3a7d44; outline-offset: -4px; }
+  tr.zeile-ok td.sprecher { border-left: 4px solid #3a7d44; }
+  tr.zeile-falsch td.sprecher { border-left: 4px solid #c0392b; }
+  .erkl-liste { margin-top: 18px; display: none; }
+  .erkl-liste.sichtbar { display: block; }
+  .erkl-eintrag { padding: 10px 14px; border-radius: 4px; margin-bottom: 10px; font-size: 0.88em; line-height: 1.5; background: #f4f6fa; border-left: 4px solid #1a3a6a; }
+  .erkl-eintrag.ok { background: #e6f4ea; border-left-color: #3a7d44; }
+  .erkl-eintrag.falsch { background: #fdecea; border-left-color: #c0392b; }
+  .erkl-eintrag strong { display: block; margin-bottom: 2px; }
+  .kreuz-info { margin-top: 6px; font-size: 0.85em; color: #666; display: block; }
+  .hoertext .rolle { font-weight: bold; color: #1a3a6a; display: block; margin-top: 14px; }
+  @media (max-width: 560px) { .legende { grid-template-columns: 1fr; } .matrix-box { padding: 16px 10px 20px; } table.matrix th.sprecher, table.matrix td.sprecher { white-space: normal; padding-left: 6px; font-size: 0.82em; } }
+  @media (max-width: 560px) { .zettel { padding: 18px; } }
+  @media print { .back, .loesung-toggle, .ergebnis-box, .audio-box, .lesezeit-box { display: none; } }
+</style>
+</head>
+<body>
+
+<a class="back" href="a2-hoeren-teil3-weitere.html">← Zurück zur Übungsauswahl</a>
+<h1>Hören Teil 3 · Übung 6</h1>
+<div class="meta">Übungsmaterial · Niveau A2 · Thema: Arbeitsplatz</div>
+
+<div class="anweisung">
+  <p><strong>Aufgabe:</strong> Lies die Aufgabe gut durch. Du hast 30 Sekunden Zeit.</p>
+  <p><strong>Situation:</strong> Du hörst eine Radiosendung. Fünf Personen werden interviewt und erzählen, was ihnen an ihrem Arbeitsplatz am wichtigsten ist.</p>
+  <p>Kreuze an (X), was den Personen am Arbeitsplatz wichtig ist. <strong>Achtung:</strong> Pro Person können mehrere Kreuze richtig sein.
+  <em>Du hörst die Texte nur einmal.</em></p>
+</div>
+
+<!-- Lesezeit -->
+<div class="lesezeit-box">
+  <div>
+    <div class="lesezeit-label">⏱ Lesezeit</div>
+    <div class="lesezeit-anzeige" id="lz-anzeige">00:30</div>
+    <div class="lesezeit-info">Danach wird das Audio freigeschaltet.</div>
+  </div>
+  <div class="lz-buttons">
+    <button class="lz-btn" id="lz-start" type="button" onclick="startLesezeit()">Lesezeit starten</button>
+    <button class="lz-btn" id="lz-skip" type="button" onclick="freischalten()">Überspringen</button>
+  </div>
+</div>
+
+<!-- Audio: zweimal abspielbar -->
+<div class="audio-box">
+  <div class="audio-row">
+    <span class="audio-label">🎧 Radiosendung:</span>
+    <span class="audio-gesperrt" id="audio-gesperrt">🔒 Das Audio wird nach der Lesezeit freigeschaltet.</span>
+    <audio id="main-audio" controls style="display:none;">
+      <source src="audio/a2-hoeren-teil3-uebung6.mp3" type="audio/mpeg">
+      Dein Browser unterstützt das Audio-Element nicht.
+    </audio>
+  </div>
+  <div class="audio-status" id="audio-status" style="display:none;"></div>
+</div>
+
+<!-- Notizzettel -->
+<div class="matrix-box">
+  <h2>Was ist am Arbeitsplatz wichtig?</h2>
+  <ul class="legende">
+    <li><span class="l">A</span>Gutes Gehalt</li>
+    <li><span class="l">B</span>Nette Kollegen</li>
+    <li><span class="l">C</span>Kurze Arbeitswege</li>
+    <li><span class="l">D</span>Flexible Arbeitszeiten</li>
+    <li><span class="l">E</span>Ein eigener Büroraum</li>
+  </ul>
+  <table class="matrix">
+    <thead>
+      <tr><th class="sprecher"></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th></tr>
+    </thead>
+    <tbody>
+      <tr id="r1"><td class="sprecher">Sprecher 1</td><td class="zelle"><input type="checkbox" data-r="1" data-k="A" aria-label="Sprecher 1: Gutes Gehalt"></td><td class="zelle"><input type="checkbox" data-r="1" data-k="B" aria-label="Sprecher 1: Nette Kollegen"></td><td class="zelle"><input type="checkbox" data-r="1" data-k="C" aria-label="Sprecher 1: Kurze Arbeitswege"></td><td class="zelle"><input type="checkbox" data-r="1" data-k="D" aria-label="Sprecher 1: Flexible Arbeitszeiten"></td><td class="zelle"><input type="checkbox" data-r="1" data-k="E" aria-label="Sprecher 1: Ein eigener Büroraum"></td></tr>
+      <tr id="r2"><td class="sprecher">Sprecherin 2</td><td class="zelle"><input type="checkbox" data-r="2" data-k="A" aria-label="Sprecherin 2: Gutes Gehalt"></td><td class="zelle"><input type="checkbox" data-r="2" data-k="B" aria-label="Sprecherin 2: Nette Kollegen"></td><td class="zelle"><input type="checkbox" data-r="2" data-k="C" aria-label="Sprecherin 2: Kurze Arbeitswege"></td><td class="zelle"><input type="checkbox" data-r="2" data-k="D" aria-label="Sprecherin 2: Flexible Arbeitszeiten"></td><td class="zelle"><input type="checkbox" data-r="2" data-k="E" aria-label="Sprecherin 2: Ein eigener Büroraum"></td></tr>
+      <tr id="r3"><td class="sprecher">Sprecher 3</td><td class="zelle"><input type="checkbox" data-r="3" data-k="A" aria-label="Sprecher 3: Gutes Gehalt"></td><td class="zelle"><input type="checkbox" data-r="3" data-k="B" aria-label="Sprecher 3: Nette Kollegen"></td><td class="zelle"><input type="checkbox" data-r="3" data-k="C" aria-label="Sprecher 3: Kurze Arbeitswege"></td><td class="zelle"><input type="checkbox" data-r="3" data-k="D" aria-label="Sprecher 3: Flexible Arbeitszeiten"></td><td class="zelle"><input type="checkbox" data-r="3" data-k="E" aria-label="Sprecher 3: Ein eigener Büroraum"></td></tr>
+      <tr id="r4"><td class="sprecher">Sprecherin 4</td><td class="zelle"><input type="checkbox" data-r="4" data-k="A" aria-label="Sprecherin 4: Gutes Gehalt"></td><td class="zelle"><input type="checkbox" data-r="4" data-k="B" aria-label="Sprecherin 4: Nette Kollegen"></td><td class="zelle"><input type="checkbox" data-r="4" data-k="C" aria-label="Sprecherin 4: Kurze Arbeitswege"></td><td class="zelle"><input type="checkbox" data-r="4" data-k="D" aria-label="Sprecherin 4: Flexible Arbeitszeiten"></td><td class="zelle"><input type="checkbox" data-r="4" data-k="E" aria-label="Sprecherin 4: Ein eigener Büroraum"></td></tr>
+      <tr id="r5"><td class="sprecher">Sprecher 5</td><td class="zelle"><input type="checkbox" data-r="5" data-k="A" aria-label="Sprecher 5: Gutes Gehalt"></td><td class="zelle"><input type="checkbox" data-r="5" data-k="B" aria-label="Sprecher 5: Nette Kollegen"></td><td class="zelle"><input type="checkbox" data-r="5" data-k="C" aria-label="Sprecher 5: Kurze Arbeitswege"></td><td class="zelle"><input type="checkbox" data-r="5" data-k="D" aria-label="Sprecher 5: Flexible Arbeitszeiten"></td><td class="zelle"><input type="checkbox" data-r="5" data-k="E" aria-label="Sprecher 5: Ein eigener Büroraum"></td></tr>
+    </tbody>
+  </table>
+  <div class="erkl-liste" id="erkl-liste"></div>
+</div>
+
+<div class="loesung-toggle">
+  <button class="btn-loesung" type="button" onclick="auswerten()">Auswerten</button>
+  <button class="btn-reset" type="button" onclick="reset()">Zurücksetzen</button>
+</div>
+
+<div class="ergebnis-box" id="ergebnis">
+  <span class="punkte" id="punkte-anzeige"></span>
+  <span id="ergebnis-text"></span>
+</div>
+
+<details class="hoertext" id="hoertext">
+  <summary>Hörtext anzeigen</summary>
+  <p><span class="rolle">Moderator</span>„Liebe Hörerinnen und Hörer, heute wollen wir von Ihnen wissen: Was ist Ihnen an Ihrem Arbeitsplatz am wichtigsten? Wir haben fünf Leute auf der Straße gefragt und spannende Antworten bekommen.“</p>
+  <p><span class="rolle">Sprecher 1</span>„Also für mich ist das Wichtigste, dass ich morgens nicht so lange fahren muss. Ich wohne weit außerhalb und hasse den Berufsverkehr. Wenn ich im Stau stehe, bin ich schon vor der Arbeit gestresst. Ein eigenes Büro brauche ich übrigens überhaupt nicht, ich arbeite viel lieber im Team mit anderen zusammen. Und das Gehalt ist okay, aber ich würde nicht für mehr Geld jeden Tag zwei Stunden fahren. Die Nähe zu meinem Zuhause ist mir wirklich viel wert.“</p>
+  <p><span class="rolle">Sprecherin 2</span>„Ich habe zwei kleine Kinder zu Hause, das verändert natürlich alles. Deshalb ist es mir total wichtig, dass ich meine Arbeit einteilen kann, wie ich es brauche. Manchmal fange ich früh an, manchmal später, je nachdem, wie die Kinder drauf sind. Mein Mann und ich wechseln uns da ab. Das Geld ist mir nicht so wichtig. Die Freiheit bei der Zeitplanung steht bei mir ganz oben. Meine Kollegen sehe ich kaum, weil ich viel von zu Hause arbeite.“</p>
+  <p><span class="rolle">Sprecher 3</span>„Ich arbeite in einem Großraumbüro, das ist manchmal ganz schön laut, aber ich habe mich daran gewöhnt. Am meisten schätze ich aber meine Kolleginnen und Kollegen. Wir halten zusammen und helfen uns gegenseitig, das ist Gold wert. Über das Gehalt beschwere ich mich nicht, aber wegen des Geldes würde ich nicht bleiben, wenn das Team nicht so toll wäre. Und ich habe zum Glück einen sehr kurzen Weg zur Arbeit – nur zehn Minuten mit dem Rad, das ist perfekt für mich.“</p>
+  <p><span class="rolle">Sprecherin 4</span>„Ich bin sehr ehrgeizig, deshalb ist mir ein gutes Gehalt sehr wichtig. Ich arbeite viel und möchte dafür auch entsprechend belohnt werden. Am Monatsende muss die Zahl auf dem Konto einfach stimmen. Meine Kollegen sind okay, aber wir haben nicht so viel Kontakt. Was ich gar nicht mag, sind feste Zeiten von neun bis fünf – ich arbeite lieber dann, wenn ich am produktivsten bin, auch mal abends. Hauptsache, die Ergebnisse stimmen.“</p>
+  <p><span class="rolle">Sprecher 5</span>„Ich brauche meine Ruhe, um konzentriert arbeiten zu können. In meinem alten Job gab es nur Großraumbüros, das war der Horror für mich. Deshalb war es mein größter Wunsch, endlich eine eigene Tür hinter mir zu haben. Ich habe jetzt ein eigenes Büro und das ist perfekt. Das Gehalt ist mir nicht so wichtig. Die Ruhe und die netten Leute hier sind mir viel wichtiger. Der Weg zur Arbeit ist leider etwas lang, aber das akzeptiere ich.“</p>
+  <p><span class="rolle">Moderator</span>„Das waren die Stimmen aus der Stadt. Vielen Dank fürs Zuhören!“</p>
+</details>
+
+<script>
+/* ---------- Lesezeit ---------- */
+const LESEZEIT = 30;
+let lesezeit = LESEZEIT;
+let lzInterval = null;
+const lzAnzeige = document.getElementById('lz-anzeige');
+const lzStart = document.getElementById('lz-start');
+const lzSkip = document.getElementById('lz-skip');
+
+function zeigeLesezeit() {
+  lzAnzeige.textContent = '00:' + String(lesezeit).padStart(2, '0');
+  lzAnzeige.classList.toggle('rot', lesezeit <= 5 && lesezeit > 0);
+}
+function startLesezeit() {
+  if (lzInterval) return;
+  lzStart.disabled = true;
+  lzInterval = setInterval(function () {
+    lesezeit--;
+    zeigeLesezeit();
+    if (lesezeit <= 0) freischalten();
+  }, 1000);
+}
+
+/* ---------- Audio: zweimal abspielbar ---------- */
+const MAXW = 1;
+const audio = document.getElementById('main-audio');
+const audioStatus = document.getElementById('audio-status');
+let wiedergaben = 0;
+
+function zeigeStatus() {
+  audioStatus.style.display = 'block';
+  if (wiedergaben >= MAXW) {
+    audioStatus.className = 'audio-status ende';
+    audioStatus.textContent = '⚠️ Du hast die Radiosendung bereits gehört. Im echten Test ist nur ein Abspielen möglich.';
+  } else {
+    audioStatus.className = 'audio-status';
+    audioStatus.textContent = 'Du hörst die Radiosendung nur einmal.';
+  }
+}
+function freischalten() {
+  clearInterval(lzInterval);
+  lzInterval = null;
+  lesezeit = Math.max(lesezeit, 0);
+  lzAnzeige.textContent = '00:00';
+  lzAnzeige.classList.remove('rot');
+  lzStart.disabled = true;
+  lzSkip.disabled = true;
+  document.getElementById('audio-gesperrt').style.display = 'none';
+  audio.style.display = '';
+  zeigeStatus();
+}
+audio.addEventListener('ended', function () {
+  wiedergaben++;
+  if (wiedergaben >= MAXW) {
+    audio.controls = false;
+  } else {
+    audio.currentTime = 0;
+  }
+  zeigeStatus();
+});
+audio.addEventListener('play', function () {
+  if (wiedergaben >= MAXW) {
+    audio.pause();
+    audio.currentTime = 0;
+    audio.controls = false;
+    zeigeStatus();
+  }
+});
+
+/* ---------- Auswertung ---------- */
+const LOESUNG = { 1: ['C'], 2: ['D'], 3: ['B', 'C'], 4: ['A', 'D'], 5: ['B', 'E'] };
+const NAMEN = { 1: 'Sprecher 1', 2: 'Sprecherin 2', 3: 'Sprecher 3', 4: 'Sprecherin 4', 5: 'Sprecher 5' };
+const ITEMS = { A: 'Gutes Gehalt', B: 'Nette Kollegen', C: 'Kurze Arbeitswege', D: 'Flexible Arbeitszeiten', E: 'Ein eigener Büroraum' };
+const ERKL = {
+  1: 'Er sagt: „… dass ich morgens nicht so lange fahren muss“ und „Die Nähe zu meinem Zuhause ist mir wirklich viel wert“ (C). Falle: Ein eigenes Büro braucht er „überhaupt nicht“ (E), und das Gehalt ist nur „okay“ (A).',
+  2: 'Sie sagt: „… dass ich meine Arbeit einteilen kann, wie ich es brauche“ (D). Das Geld ist ihr „nicht so wichtig“ (A). Ihre Kollegen sieht sie „kaum“ (B).',
+  3: 'Er sagt: „Am meisten schätze ich aber meine Kolleginnen und Kollegen“ (B) und „nur zehn Minuten mit dem Rad“ (C). Falle: Das Großraumbüro ist „ganz schön laut“ (E), und „wegen des Geldes würde ich nicht bleiben“ (A).',
+  4: 'Sie sagt: „… ist mir ein gutes Gehalt sehr wichtig“ (A) und mag keine festen Zeiten von neun bis fünf, sie arbeitet „auch mal abends“ (D). Die Kollegen sind nur „okay“, sie haben „nicht so viel Kontakt“ (B).',
+  5: 'Er sagt: „Ich habe jetzt ein eigenes Büro und das ist perfekt“ (E) und „die Ruhe und die netten Leute hier sind mir viel wichtiger“ (B). Falle: Das Gehalt ist ihm „nicht so wichtig“ (A), und der Weg ist zwar „leider etwas lang“, aber „das akzeptiere ich“ (C).'
+};
+
+function gewaehlt(r) {
+  return Array.prototype.slice.call(document.querySelectorAll('input[data-r="' + r + '"]:checked')).map(function (b) { return b.dataset.k; }).sort();
+}
+
+function auswerten() {
+  let punkte = 0, richtigKreuze = 0, falscheKreuze = 0;
+  const liste = document.getElementById('erkl-liste');
+  liste.innerHTML = '';
+  for (let r = 1; r <= 5; r++) {
+    const soll = LOESUNG[r];
+    const ist = gewaehlt(r);
+    const exakt = ist.join() === soll.join();
+    if (exakt) punkte++;
+    const zeile = document.getElementById('r' + r);
+    zeile.classList.remove('zeile-ok', 'zeile-falsch');
+    zeile.classList.add(exakt ? 'zeile-ok' : 'zeile-falsch');
+    'ABCDE'.split('').forEach(function (k) {
+      const cb = zeile.querySelector('input[data-k="' + k + '"]');
+      const td = cb.parentNode;
+      td.classList.remove('ok', 'falsch', 'fehlt');
+      const istRichtig = soll.indexOf(k) !== -1;
+      if (cb.checked && istRichtig) { td.classList.add('ok'); richtigKreuze++; }
+      else if (cb.checked && !istRichtig) { td.classList.add('falsch'); falscheKreuze++; }
+      else if (!cb.checked && istRichtig) { td.classList.add('fehlt'); }
+    });
+    const e = document.createElement('div');
+    e.className = 'erkl-eintrag ' + (exakt ? 'ok' : 'falsch');
+    e.innerHTML = '<strong>' + NAMEN[r] + ': ' + (exakt ? '✓ richtig' : 'Richtig wäre: ' + soll.join(', ') + ' (' + soll.map(function (k) { return ITEMS[k]; }).join(', ') + ')') + '</strong>' + ERKL[r];
+    liste.appendChild(e);
+  }
+  liste.classList.add('sichtbar');
+  document.getElementById('punkte-anzeige').textContent = punkte + ' / 5';
+  const texte = ['Noch üben! 💪', 'Guter Anfang! 📖', 'Solide! 👍', 'Sehr gut! 🎉', 'Fast perfekt! ⭐', 'Ausgezeichnet! 🏆'];
+  document.getElementById('ergebnis-text').innerHTML = texte[punkte] +
+    '<span class="kreuz-info">Pro Person zählt nur die komplett richtige Auswahl. Richtige Kreuze: ' + richtigKreuze + ' von 8 · falsche Kreuze: ' + falscheKreuze + '</span>';
+  const box = document.getElementById('ergebnis');
+  box.classList.add('visible');
+  document.getElementById('hoertext').classList.add('visible');
+  box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function reset() {
+  document.querySelectorAll('table.matrix input[type="checkbox"]').forEach(function (cb) { cb.checked = false; });
+  document.querySelectorAll('table.matrix td').forEach(function (td) { td.classList.remove('ok', 'falsch', 'fehlt'); });
+  document.querySelectorAll('table.matrix tr').forEach(function (tr) { tr.classList.remove('zeile-ok', 'zeile-falsch'); });
+  const liste = document.getElementById('erkl-liste');
+  liste.classList.remove('sichtbar');
+  liste.innerHTML = '';
+  document.getElementById('ergebnis').classList.remove('visible');
+  const ht = document.getElementById('hoertext');
+  ht.classList.remove('visible');
+  ht.open = false;
+
+  /* Lesezeit und Audio zurücksetzen */
+  clearInterval(lzInterval);
+  lzInterval = null;
+  lesezeit = LESEZEIT;
+  zeigeLesezeit();
+  lzStart.disabled = false;
+  lzSkip.disabled = false;
+  wiedergaben = 0;
+  audio.pause();
+  audio.currentTime = 0;
+  audio.controls = true;
+  audio.style.display = 'none';
+  document.getElementById('audio-gesperrt').style.display = '';
+  audioStatus.style.display = 'none';
+}
+</script>
+</body>
+</html>
