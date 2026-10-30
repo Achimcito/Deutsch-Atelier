@@ -18,6 +18,7 @@
   .divider { width: 48px; height: 1px; background: var(--ink-muted); margin: 0 auto 44px; }
   .section-label { text-align: center; font-size: 0.72em; letter-spacing: 0.18em; color: var(--ink-muted); margin-bottom: 24px; font-weight: 400; }
   .parts { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 480px; width: 100%; margin-bottom: 48px; }
+  .part-card:last-child:nth-child(odd) { grid-column: 1 / -1; }
   .part-card { border: 1px solid var(--ink); padding: 28px 20px; text-align: center; cursor: pointer; text-decoration: none; display: block; transition: background 0.2s, color 0.2s; background: transparent; color: var(--ink); }
   .part-card:hover { background: var(--accent); border-color: var(--accent); color: white; }
   .part-card.coming { border-color: var(--coming); color: var(--coming); pointer-events: none; }
@@ -50,17 +51,10 @@
     <span class="part-name">Anrufbeantworter</span>
     <span class="part-desc">Eine Nachricht hören und Notizen ergänzen</span>
   </a>
-  <a class="part-card coming" href="#">
+  <a class="part-card" href="a2-hoeren-teil3.html">
     <span class="part-nr">Teil 3</span>
-    <span class="part-name">demnächst</span>
-    <span class="part-desc"></span>
-    <span class="coming-tag">demnächst</span>
-  </a>
-  <a class="part-card coming" href="#">
-    <span class="part-nr">Teil 4</span>
-    <span class="part-name">demnächst</span>
-    <span class="part-desc"></span>
-    <span class="coming-tag">demnächst</span>
+    <span class="part-name">Kurzinterviews</span>
+    <span class="part-desc">Fünf Interviews hören und Aussagen zuordnen</span>
   </a>
 </div>
 <div class="footer">© Deutsch Atelier by Achim · Medellín</div>
