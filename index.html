@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<link rel="icon" type="image/png" href="favicon.png">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Deutsch Atelier by Achim</title>
@@ -18,10 +17,6 @@
     --accent-light: #eaf0ec;
     --accent-a2: #1a3a6a;
     --coming: #c8c2ba;
-  }
-
-  html, body {
-    height: 100%;
   }
 
   body {
@@ -47,7 +42,7 @@
     display: block;
     margin: 0 auto 4px;
     width: 180px;
-    height: 28px;
+    height: 34px;
   }
 
   .logo-feather {
@@ -179,6 +174,7 @@
     display: block;
     transition: background 0.2s, color 0.2s;
     background: transparent;
+    color: var(--ink);
   }
 
   .skill-card:hover {
@@ -190,6 +186,21 @@
   .skills.a2 .skill-card:hover {
     background: var(--accent-a2);
     border-color: var(--accent-a2);
+  }
+
+  .skill-card.coming {
+    border-color: var(--coming);
+    color: var(--coming);
+    pointer-events: none;
+  }
+
+  .skill-card.coming .skill-desc {
+    color: var(--coming);
+  }
+
+  .skill-card .coming-tag {
+    font-size: 0.7em;
+    margin-top: 8px;
   }
 
   .skill-icon {
@@ -237,9 +248,12 @@
 
 <!-- Logo -->
 <div class="logo-area">
-  <svg class="logo-arc" viewBox="0 0 180 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M10 24 Q90 2 170 24" stroke="#2a2825" stroke-width="1" fill="none"/>
-    <text x="90" y="14" text-anchor="middle" font-size="14" fill="#2a2825">🪶</text>
+  <svg class="logo-arc" viewBox="0 0 180 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M10 30 Q90 10 170 30" stroke="#2a2825" stroke-width="1" fill="none"/>
+    <g transform="translate(79 1) scale(1)" stroke="#2a2825" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" fill="none">
+      <path d="M20 1 C12 1 6 6 4 14 C3.2 17 3.6 19 3.6 19 C9 18 15.500 15 18.500 9.500 C20.200 6.300 20.300 3 20 1 Z"/>
+      <path d="M3 21 L16 7"/>
+    </g>
   </svg>
   <div class="logo-title">Deutsch Atelier</div>
   <div class="logo-sub">by Achim</div>
@@ -259,15 +273,22 @@
 <!-- Skills -->
 <div class="section-label">Fertigkeit wählen</div>
 <div class="skills visible" id="skills-box">
-  <a class="skill-card" href="b2-lesen.html">
+  <a class="skill-card" data-skill="lesen" href="b2-lesen.html">
     <span class="skill-icon">📖</span>
     <span class="skill-name">Lesen</span>
     <span class="skill-desc">Leseverstehen B2</span>
   </a>
-  <a class="skill-card" href="b2-hoeren.html">
+  <a class="skill-card" data-skill="hoeren" href="b2-hoeren.html">
     <span class="skill-icon">🎧</span>
     <span class="skill-name">Hören</span>
     <span class="skill-desc">Hörverstehen B2</span>
+  </a>
+  <!-- Nur bei A2 sichtbar. Zum Freischalten: class "coming" und den coming-tag entfernen -->
+  <a class="skill-card coming" data-skill="spielen" data-only="A2" href="a2-spielen.html" style="display:none">
+    <span class="skill-icon">🎲</span>
+    <span class="skill-name">Spielen</span>
+    <span class="skill-desc">Textadventure A2</span>
+    <span class="coming-tag">demnächst</span>
   </a>
 </div>
 
@@ -282,13 +303,15 @@
     box.classList.toggle('a2', level === 'A2');
     box.classList.remove('visible');
     setTimeout(() => {
-      // Update links based on level
+      // Links, Beschriftungen und Sichtbarkeit je nach Niveau
       box.querySelectorAll('.skill-card').forEach(card => {
-        const skill = card.querySelector('.skill-name').textContent.toLowerCase()
-          .replace('ö','oe').replace('ü','ue').replace('ä','ae');
-        card.href = `${level.toLowerCase()}-${skill === 'lesen' ? 'lesen' : 'hoeren'}.html`;
-        const fertigkeit = card.querySelector('.skill-name').textContent === 'Lesen' ? 'Leseverstehen' : 'Hörverstehen';
-        card.querySelector('.skill-desc').textContent = `${fertigkeit} ${level}`;
+        const skill = card.dataset.skill;
+        const nurFuer = card.dataset.only;
+        card.style.display = (nurFuer && nurFuer !== level) ? 'none' : '';
+        card.href = `${level.toLowerCase()}-${skill}.html`;
+        if (skill === 'lesen') card.querySelector('.skill-desc').textContent = `Leseverstehen ${level}`;
+        if (skill === 'hoeren') card.querySelector('.skill-desc').textContent = `Hörverstehen ${level}`;
+        if (skill === 'spielen') card.querySelector('.skill-desc').textContent = `Textadventure ${level}`;
       });
       box.classList.add('visible');
     }, 200);
