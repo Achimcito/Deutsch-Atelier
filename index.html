@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
- <link rel="icon" type="image/png" href="favicon.png">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Deutsch Atelier by Achim</title>
@@ -284,12 +283,10 @@
     <span class="skill-name">Hören</span>
     <span class="skill-desc">Hörverstehen B2</span>
   </a>
-  <!-- Nur bei A2 sichtbar. Zum Freischalten: class "coming" und den coming-tag entfernen -->
-  <a class="skill-card coming" data-skill="spielen" data-only="A2" href="a2-spielen.html" style="display:none">
+  <a class="skill-card" data-skill="spielen" href="adventures/index.html">
     <span class="skill-icon">🎲</span>
     <span class="skill-name">Spielen</span>
-    <span class="skill-desc">Textadventure A2</span>
-    <span class="coming-tag">demnächst</span>
+    <span class="skill-desc">Textadventure B2</span>
   </a>
 </div>
 
@@ -309,7 +306,7 @@
         const skill = card.dataset.skill;
         const nurFuer = card.dataset.only;
         card.style.display = (nurFuer && nurFuer !== level) ? 'none' : '';
-        card.href = `${level.toLowerCase()}-${skill}.html`;
+        if (skill !== 'spielen') card.href = `${level.toLowerCase()}-${skill}.html`;
         if (skill === 'lesen') card.querySelector('.skill-desc').textContent = `Leseverstehen ${level}`;
         if (skill === 'hoeren') card.querySelector('.skill-desc').textContent = `Hörverstehen ${level}`;
         if (skill === 'spielen') card.querySelector('.skill-desc').textContent = `Textadventure ${level}`;
