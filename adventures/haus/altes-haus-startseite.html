@@ -213,12 +213,21 @@ button[type=submit]:hover{background:#3f6682}
 <p class="subtitle">Ein geheimnisvolles Abenteuer · A2</p>
 </header>
 <section class="scene" aria-label="Aktuelle Szene">
-<img id="sceneImage" class="scene-image" src="bilder/tor.jpg" alt="Ein altes, verrostetes Gittertor an der Lindauer Straße">
+<div class="scene-image-frame">
+  <img id="sceneImage" class="scene-image" src="bilder/tor.jpg" alt="Ein altes, verrostetes Gittertor an der Lindauer Straße">
+</div>
 
-<img id="vladImage" class="scene-image" src="bilder/vlad.png" alt="Vlad, der Piranha" hidden>
-<div class="story">
-<p id="storyText" aria-live="polite"></p>
-<button class="skip" id="skipButton" type="button" hidden>Text vollständig anzeigen</button>
+<div class="dialogue">
+  <div class="speech-bubble">
+    <div class="story">
+      <p id="storyText" aria-live="polite"></p>
+      <button class="skip" id="skipButton" type="button" hidden>Text vollständig anzeigen</button>
+    </div>
+  </div>
+
+  <div class="character-slot">
+    <img id="characterImage" src="" alt="" hidden>
+  </div>
 </div>
 <form class="interaction" id="commandForm" hidden>
 <label class="prompt" for="command">Was möchtest du tun?</label>
