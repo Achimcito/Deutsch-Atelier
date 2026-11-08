@@ -303,13 +303,15 @@ commandForm.addEventListener("submit",event=>{
 
   answer="Du schiebst das Gittertor vorsichtig auf und gehst hindurch. Hinter dir fällt das Tor leise zurück. Vor dir liegt ein verwilderter Garten ...";
 }else if(command.includes("sieh")command.includes("schau")command.includes("untersuch")){
-answer="Du siehst dir das Tor genauer an. Der Rost ist alt, und das Metall fühlt sich kalt und feucht an. Das Tor ist tatsächlich offen.";
-}
+ answer="Du siehst dir das Tor genauer an. Der Rost ist alt, und das Metall fühlt sich kalt und feucht an. Das Tor ist tatsächlich offen.";
+ }
 
-response.textContent=answer;
-commandInput.value="";
-commandInput.focus();
-});
-</script>
+ response.textContent=answer;
+ commandInput.value="";
+
+ if(!commandInput.disabled){
+  commandInput.focus();
+ }
+});</script>
 </body>
 </html>
