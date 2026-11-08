@@ -287,7 +287,8 @@ commandForm.addEventListener("submit",event=>{
   sceneImage.src="bilder/schlafzimmer.jpg";
   sceneImage.alt="Ein gemütliches Schlafzimmer";
   vladImage.hidden=false;
-  commandForm.hidden=true;
+  commandInput.disabled=true;
+commandForm.querySelector('button[type="submit"]').disabled=true;
  
  }else if(/(oeffne|mach)\s*(tor|gitter)/.test(command)){
 answer="Du versuchst, das Tor zu öffnen. Dabei bemerkst du, dass es gar nicht verschlossen ist. Es steht bereits einen Spalt offen.";
