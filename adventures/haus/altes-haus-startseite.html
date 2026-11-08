@@ -375,8 +375,14 @@ commandForm.addEventListener("submit",event=>{
   answer="Du beschließt, nach Hause zu gehen. Eine warme Dusche und dein Bett sind jetzt doch verlockender als dieses seltsame Tor.\n\nVlad würde sagen: „Das war aber nicht sehr mutig!“\n\nGAME OVER";
 
   sceneImage.src="bilder/schlafzimmer.jpg";
-  sceneImage.alt="Ein gemütliches Schlafzimmer";
-  vladImage.hidden=false;
+sceneImage.alt="Ein gemütliches Schlafzimmer";
+
+characterImage.src="bilder/vlad.png";
+characterImage.alt="Vlad, der Piranha";
+characterImage.hidden=false;
+
+storyText.textContent=answer;
+skipButton.hidden=true;
 
   commandInput.disabled=true;
   commandForm.querySelector("button").disabled=true;
