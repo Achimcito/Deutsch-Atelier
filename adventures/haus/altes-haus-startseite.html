@@ -391,6 +391,25 @@ commandForm.addEventListener("submit",event=>{
  let answer="Du überlegst kurz. Aber dir fällt gerade nichts ein, was du damit anfangen könntest.";
   let understood=false;
   let sceneChanged=false;
+  if(
+  command.includes("schalte die lampe ein")||
+  command.includes("benutze die handylampe")||
+  command.includes("mach licht")
+){
+  understood=true;
+
+  if(!handylampe){
+    handylampe=true;
+    lampStartTime=Date.now();
+
+    answer="Du schaltest die Handylampe ein. Ein heller Lichtkegel durchbricht die Dunkelheit. Der Pfad zum Haus ist jetzt sichtbar.\n\nAber pass auf: Die Batterie hält nur 30 Minuten!";
+  }else{
+    answer="Die Handylampe ist bereits eingeschaltet. Der Akku wird nicht wieder voller.";
+  }
+
+  storyText.textContent=answer;
+  sceneChanged=true;
+}
  if(/(geh|gehe|lauf|laufe)\s*(nach hause|heim)/.test(command)||command.includes("ins bett")){
    understood=true;
 
