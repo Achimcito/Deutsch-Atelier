@@ -320,8 +320,26 @@ const commandForm=document.getElementById("commandForm");
 const commandInput=document.getElementById("command");
 const response=document.getElementById("response");
 const sceneImage=document.getElementById("sceneImage");
-const vladImage=document.getElementById("vladImage");
+const characterImage=document.getElementById("characterImage");
+function showCharacter(name){
+  const characters={
+    vlad:"bilder/vlad-kommentar.png",
+    pepe:"bilder/pepe-kommentar.png"
+  };
 
+  characterImage.src=characters[name];
+  characterImage.alt=name==="vlad"
+    ?"Vlad, der Piranha"
+    :"Pepe, der Papagei";
+
+  characterImage.hidden=false;
+}
+
+function hideCharacter(){
+  characterImage.hidden=true;
+  characterImage.removeAttribute("src");
+}
+  
 let typingTimer=null;
 let characterIndex=0;
 
