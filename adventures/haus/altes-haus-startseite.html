@@ -93,12 +93,68 @@ h1{
   box-shadow:0 12px 35px rgba(35,51,61,.12);
 }
 
+.scene-image-frame{
+  overflow:hidden;
+  background:#f1efea;
+  border:1px solid var(--line);
+  box-shadow:0 5px 18px rgba(35,51,61,.10);
+}
+
 .scene-image{
   display:block;
   width:100%;
   max-height:760px;
   object-fit:contain;
   background:#f1efea;
+}
+
+.dialogue{
+  display:grid;
+  grid-template-columns:2fr 1fr;
+  gap:18px;
+  align-items:center;
+  padding:24px clamp(14px,3vw,28px);
+}
+
+.speech-bubble{
+  position:relative;
+  min-width:0;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:5px;
+}
+
+.speech-bubble::after{
+  content:"";
+  position:absolute;
+  top:28px;
+  right:-9px;
+  width:16px;
+  height:16px;
+  background:#fff;
+  border-top:1px solid var(--line);
+  border-right:1px solid var(--line);
+  transform:rotate(45deg);
+}
+
+.story{
+  padding:clamp(18px,4vw,30px);
+  min-height:160px;
+}
+
+.character-slot{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-width:0;
+}
+
+.character-slot img{
+  display:block;
+  width:100%;
+  max-width:150px;
+  max-height:180px;
+  object-fit:contain;
 }
 
 .story{
