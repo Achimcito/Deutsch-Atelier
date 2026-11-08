@@ -427,9 +427,25 @@ skipButton.hidden=true;
   answer="Du siehst dir das Tor genauer an. Der Rost ist alt, und das Metall fühlt sich kalt und feucht an. Das Tor ist tatsächlich offen.";
  }
 
- if(!commandInput.disabled){
+if(understood){
+  failedAttempts=0;
+  hideCharacter();
+}else{
+  failedAttempts++;
+
+  if(failedAttempts===1){
+    showCharacter("vlad");
+    answer="Was? Ich habe dich nicht verstanden.";
+  }else{
+    showCharacter("pepe");
+    answer="Ich erklär es dir nochmal. Versuche es mit einem klaren Befehl, zum Beispiel: „Geh durch das Tor.“";
+  }
+}
+
+if(!commandInput.disabled){
   response.textContent=answer;
 }
+
 commandInput.value="";
 
  if(!commandInput.disabled){
