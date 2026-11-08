@@ -417,10 +417,16 @@ skipButton.hidden=true;
   answer="Du gehst nach rechts und stehst jetzt direkt vor dem verrosteten Gittertor. Dahinter kannst du kaum etwas erkennen.";
 
  }else if(/(geh|gehe|lauf|laufe)\s*(durch das tor|durchs tor|durch das gitter|in den garten)/.test(command)){
-   understood=true;
+  understood=true;
 
-  answer="Du schiebst das Gittertor vorsichtig auf und gehst hindurch. Hinter dir fällt das Tor leise zurück. Vor dir liegt ein verwilderter Garten ...";
+  sceneImage.src="bilder/vorgarten.jpg";
+  sceneImage.alt="Ein dunkler, verwilderter Vorgarten";
 
+  answer="Du stehst hinter dem schweren Eisentor. Ein schmaler, überwucherter Pfad führt zu einem alten Haus.\n\nDas hohe Gras ist nass und kalt. Es ist absolut still. Kein Wind. Kein Tier.\n\nDu schaust nach oben, aber du siehst nichts. Kein Mond. Kein einziger Stern. Der Himmel ist dunkelblau, fast schwarz. Du kannst kaum deine eigene Hand vor Augen sehen.";
+
+  storyText.textContent=answer;
+  skipButton.hidden=true;
+   
  }else if(command.includes("sieh")||command.includes("schau")||command.includes("untersuch")){
    understood=true;
 
