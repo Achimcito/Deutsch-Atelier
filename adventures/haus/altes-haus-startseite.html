@@ -287,18 +287,21 @@ commandForm.addEventListener("submit",event=>{
   sceneImage.src="bilder/schlafzimmer.jpg";
   sceneImage.alt="Ein gemütliches Schlafzimmer";
   vladImage.hidden=false;
+
   commandInput.disabled=true;
-commandForm.querySelector('button[type="submit"]').disabled=true;
- 
+  commandForm.querySelector("button").disabled=true;
+
  }else if(/(oeffne|mach)\s*(tor|gitter)/.test(command)){
-answer="Du versuchst, das Tor zu öffnen. Dabei bemerkst du, dass es gar nicht verschlossen ist. Es steht bereits einen Spalt offen.";
 
-}else if(/(geh|gehe|lauf|laufe)\s*(nach rechts|zum tor|ans tor|zum gitter)/.test(command)){
-answer="Du gehst nach rechts und stehst jetzt direkt vor dem verrosteten Gittertor. Dahinter kannst du kaum etwas erkennen.";
+  answer="Du versuchst, das Tor zu öffnen. Dabei bemerkst du, dass es gar nicht verschlossen ist. Es steht bereits einen Spalt offen.";
 
-}else if(/(geh|gehe|lauf|laufe)\s*(durch das tor|durchs tor|durch das gitter|in den garten)/.test(command)){
-answer="Du schiebst das Gittertor vorsichtig auf und gehst hindurch. Hinter dir fällt das Tor leise zurück. Vor dir liegt ein verwilderter Garten ...";
+ }else if(/(geh|gehe|lauf|laufe)\s*(nach rechts|zum tor|ans tor|zum gitter)/.test(command)){
 
+  answer="Du gehst nach rechts und stehst jetzt direkt vor dem verrosteten Gittertor. Dahinter kannst du kaum etwas erkennen.";
+
+ }else if(/(geh|gehe|lauf|laufe)\s*(durch das tor|durchs tor|durch das gitter|in den garten)/.test(command)){
+
+  answer="Du schiebst das Gittertor vorsichtig auf und gehst hindurch. Hinter dir fällt das Tor leise zurück. Vor dir liegt ein verwilderter Garten ...";
 }else if(command.includes("sieh")command.includes("schau")command.includes("untersuch")){
 answer="Du siehst dir das Tor genauer an. Der Rost ist alt, und das Metall fühlt sich kalt und feucht an. Das Tor ist tatsächlich offen.";
 }
