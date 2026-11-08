@@ -429,7 +429,10 @@ skipButton.hidden=true;
 
 if(understood){
   failedAttempts=0;
-  hideCharacter();
+
+  if(!commandInput.disabled){
+    hideCharacter();
+  }
 }else{
   failedAttempts++;
 
