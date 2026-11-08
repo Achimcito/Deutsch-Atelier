@@ -9,35 +9,196 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-:root{--night:#101820;--paper:#e9e5dc;--muted:#aeb8b8;--blue:#8ba9c2;--line:rgba(210,220,220,.18)}
+:root{
+  --paper:#fbfaf7;
+  --ink:#26333b;
+  --muted:#78858b;
+  --blue:#547b98;
+  --line:rgba(65,91,108,.2);
+}
+
 *{box-sizing:border-box}
-body{margin:0;min-height:100vh;color:var(--paper);background:radial-gradient(ellipse at 50% 0%,rgba(53,76,88,.25),transparent 55%),var(--night);font-family:Jost,sans-serif;font-weight:300}
-.page{width:min(100% - 36px,980px);margin:auto;padding:24px 0 48px}
-.topline{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-bottom:18px;border-bottom:1px solid var(--line)}
-.back{color:var(--muted);text-decoration:none;font-size:.9rem;letter-spacing:.03em}.back:hover{color:white}
-.brand{text-align:right;line-height:1.1;color:var(--paper);font:500 1.25rem Cormorant Garamond,serif;letter-spacing:.04em}
-.brand small{display:block;margin-top:3px;color:var(--muted);font:300 .65rem Jost,sans-serif;letter-spacing:.2em;text-transform:uppercase}
-header{text-align:center;padding:34px 0 24px}
-h1{margin:0;font:500 clamp(2rem,5vw,3.2rem)/1.05 Cormorant Garamond,serif}
-.subtitle{margin:10px 0 0;color:var(--muted);font-size:.82rem;letter-spacing:.18em;text-transform:uppercase}
-.scene{overflow:hidden;background:rgba(7,13,17,.45);border:1px solid rgba(190,204,207,.22);box-shadow:0 18px 55px rgba(0,0,0,.42),0 0 0 5px rgba(190,204,207,.025)}
-.scene-image{display:block;width:100%;max-height:760px;object-fit:contain;background:#080d11}
-.story{padding:clamp(22px,5vw,38px);min-height:160px}
-#storyText{margin:0;white-space:pre-line;color:#e5e1d8;font:400 clamp(1.15rem,2.5vw,1.42rem)/1.65 Cormorant Garamond,serif;letter-spacing:.01em}
-.skip{display:block;margin:12px 0 0 auto;padding:4px 0;border:0;background:transparent;color:#91a9ba;font:300 .78rem Jost,sans-serif;cursor:pointer}
-.skip:hover{color:white}
-.interaction{margin-top:18px;padding:22px clamp(18px,4vw,30px) 26px;border-top:1px solid var(--line);background:rgba(5,10,13,.28)}
-.prompt{display:block;margin-bottom:11px;color:#c9d0ce;font-size:.9rem;letter-spacing:.06em}
-.command-row{display:flex;gap:10px}
-input{flex:1;min-width:0;padding:13px 15px;border:1px solid rgba(194,207,208,.28);border-radius:2px;outline:none;background:rgba(225,231,228,.07);color:white;font:400 1rem Jost,sans-serif}
-input:focus{border-color:var(--blue)}input::placeholder{color:#899596}
-button[type=submit]{padding:0 22px;border:1px solid #7894aa;border-radius:2px;background:#263c4b;color:#f2f0e9;font:400 .9rem Jost,sans-serif;cursor:pointer}
-button[type=submit]:hover{background:#355367}
-#response{min-height:28px;margin:17px 0 0;color:#c7d0ce;font:400 1.12rem/1.5 Cormorant Garamond,serif;white-space:pre-line}
-.footer{padding-top:26px;color:#778587;text-align:center;font-size:.72rem;letter-spacing:.08em}
-@media(max-width:560px){.page{width:min(100% - 22px,980px);padding-top:15px}header{padding:28px 0 20px}.command-row{flex-direction:column}button[type=submit]{min-height:44px}.scene-image{max-height:78vh}}
-</style>
-</head>
+
+body{
+  margin:0;
+  min-height:100vh;
+  color:var(--ink);
+  background:var(--paper);
+  font-family:Jost,sans-serif;
+  font-weight:300;
+}
+
+.page{
+  width:min(100% - 36px,980px);
+  margin:auto;
+  padding:24px 0 48px;
+}
+
+.topline{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
+  padding-bottom:18px;
+  border-bottom:1px solid var(--line);
+}
+
+.back{
+  color:var(--muted);
+  text-decoration:none;
+  font-size:.9rem;
+  letter-spacing:.03em;
+}
+.back:hover{color:var(--blue)}
+
+.brand{
+  text-align:right;
+  line-height:1.1;
+  color:var(--ink);
+  font:500 1.25rem Cormorant Garamond,serif;
+  letter-spacing:.04em;
+}
+
+.brand small{
+  display:block;
+  margin-top:3px;
+  color:var(--muted);
+  font:300 .65rem Jost,sans-serif;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+}
+
+header{
+  text-align:center;
+  padding:34px 0 24px;
+}
+
+h1{
+  margin:0;
+  font:500 clamp(2rem,5vw,3.2rem)/1.05 Cormorant Garamond,serif;
+}
+
+.subtitle{
+  margin:10px 0 0;
+  color:var(--muted);
+  font-size:.82rem;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+
+.scene{
+  overflow:hidden;
+  background:#fff;
+  border:1px solid var(--line);
+  box-shadow:0 12px 35px rgba(35,51,61,.12);
+}
+
+.scene-image{
+  display:block;
+  width:100%;
+  max-height:760px;
+  object-fit:contain;
+  background:#f1efea;
+}
+
+.story{
+  padding:clamp(22px,5vw,38px);
+  min-height:160px;
+}
+
+#storyText{
+  margin:0;
+  white-space:pre-line;
+  color:var(--ink);
+  font:400 clamp(1.15rem,2.5vw,1.42rem)/1.65 Cormorant Garamond,serif;
+  letter-spacing:.01em;
+}
+
+.skip{
+  display:block;
+  margin:12px 0 0 auto;
+  padding:4px 0;
+  border:0;
+  background:transparent;
+  color:var(--blue);
+  font:300 .78rem Jost,sans-serif;
+  cursor:pointer;
+}
+.skip:hover{color:#26333b}
+
+.interaction{
+  margin-top:18px;
+  padding:22px clamp(18px,4vw,30px) 26px;
+  border-top:1px solid var(--line);
+  background:#f5f4f0;
+}
+
+.prompt{
+  display:block;
+  margin-bottom:11px;
+  color:#53636c;
+  font-size:.9rem;
+  letter-spacing:.06em;
+}
+
+.command-row{
+  display:flex;
+  gap:10px;
+}
+
+input{
+  flex:1;
+  min-width:0;
+  padding:13px 15px;
+  border:1px solid rgba(65,91,108,.3);
+  border-radius:2px;
+  outline:none;
+  background:#fff;
+  color:var(--ink);
+  font:400 1rem Jost,sans-serif;
+}
+
+input:focus{border-color:var(--blue)}
+input::placeholder{color:#9ba4a7}
+
+button[type=submit]{
+  padding:0 22px;
+  border:1px solid var(--blue);
+  border-radius:2px;
+  background:var(--blue);
+  color:white;
+  font:400 .9rem Jost,sans-serif;
+  cursor:pointer;
+}
+button[type=submit]:hover{background:#3f6682}
+
+#response{
+  min-height:28px;
+  margin:17px 0 0;
+  color:#354b59;
+  font:400 1.12rem/1.5 Cormorant Garamond,serif;
+  white-space:pre-line;
+}
+
+.footer{
+  padding-top:26px;
+  color:var(--muted);
+  text-align:center;
+  font-size:.72rem;
+  letter-spacing:.08em;
+}
+
+@media(max-width:560px){
+  .page{
+    width:min(100% - 22px,980px);
+    padding-top:15px;
+  }
+  header{padding:28px 0 20px}
+  .command-row{flex-direction:column}
+  button[type=submit]{min-height:44px}
+  .scene-image{max-height:78vh}
+}
+</style></head>
 <body>
 <main class="page">
 <nav class="topline" aria-label="Navigation">
