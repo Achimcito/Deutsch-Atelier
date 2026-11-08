@@ -387,7 +387,7 @@ commandForm.addEventListener("submit",event=>{
  if(!command)return;
 
  let answer="Du überlegst kurz. Aber dir fällt gerade nichts ein, was du damit anfangen könntest.";
-
+let understood=false;
  if(/(geh|gehe|lauf|laufe)\s*(nach hause|heim)/.test(command)||command.includes("ins bett")){
 
   answer="Du beschließt, nach Hause zu gehen. Eine warme Dusche und dein Bett sind jetzt doch verlockender als dieses seltsame Tor.\n\nVlad würde sagen: „Das war aber nicht sehr mutig!“\n\nGAME OVER";
