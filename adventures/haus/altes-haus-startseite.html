@@ -453,7 +453,7 @@ if(understood){
 }
 
 if(!commandInput.disabled){
-  response.textContent=answer;
+  response.textContent=sceneChanged ? "" : answer;
 }
 
 commandInput.value="";
