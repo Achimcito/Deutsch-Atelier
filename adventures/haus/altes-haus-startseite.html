@@ -102,7 +102,7 @@ typeNextCharacter();
 function normalize(s){
  return s.toLocaleLowerCase("de").replace(/[.!?,;:]/g,"")
  .replace(/ä/g,"ae").replace(/ö/g,"oe").replace(/ü/g,"ue").replace(/ß/g,"ss")
- .trim().replace(/\\s+/g," ");
+ .trim().replace(/\s+/g," ");
 }
 commandForm.addEventListener("submit",event=>{
  event.preventDefault();
