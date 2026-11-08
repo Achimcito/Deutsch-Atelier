@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101820">
+<title>Das Haus an der Lindauer Straße – Deutsch Atelier Adventures</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--night:#101820;--paper:#e9e5dc;--muted:#aeb8b8;--blue:#8ba9c2;--line:rgba(210,220,220,.18)}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;color:var(--paper);background:radial-gradient(ellipse at 50% 0%,rgba(53,76,88,.25),transparent 55%),var(--night);font-family:Jost,sans-serif;font-weight:300}
+.page{width:min(100% - 36px,980px);margin:auto;padding:24px 0 48px}
+.topline{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-bottom:18px;border-bottom:1px solid var(--line)}
+.back{color:var(--muted);text-decoration:none;font-size:.9rem;letter-spacing:.03em}.back:hover{color:white}
+.brand{text-align:right;line-height:1.1;color:var(--paper);font:500 1.25rem Cormorant Garamond,serif;letter-spacing:.04em}
+.brand small{display:block;margin-top:3px;color:var(--muted);font:300 .65rem Jost,sans-serif;letter-spacing:.2em;text-transform:uppercase}
+header{text-align:center;padding:34px 0 24px}
+h1{margin:0;font:500 clamp(2rem,5vw,3.2rem)/1.05 Cormorant Garamond,serif}
+.subtitle{margin:10px 0 0;color:var(--muted);font-size:.82rem;letter-spacing:.18em;text-transform:uppercase}
+.scene{overflow:hidden;background:rgba(7,13,17,.45);border:1px solid rgba(190,204,207,.22);box-shadow:0 18px 55px rgba(0,0,0,.42),0 0 0 5px rgba(190,204,207,.025)}
+.scene-image{display:block;width:100%;max-height:760px;object-fit:contain;background:#080d11}
+.story{padding:clamp(22px,5vw,38px);min-height:160px}
+#storyText{margin:0;white-space:pre-line;color:#e5e1d8;font:400 clamp(1.15rem,2.5vw,1.42rem)/1.65 Cormorant Garamond,serif;letter-spacing:.01em}
+.skip{display:block;margin:12px 0 0 auto;padding:4px 0;border:0;background:transparent;color:#91a9ba;font:300 .78rem Jost,sans-serif;cursor:pointer}
+.skip:hover{color:white}
+.interaction{margin-top:18px;padding:22px clamp(18px,4vw,30px) 26px;border-top:1px solid var(--line);background:rgba(5,10,13,.28)}
+.prompt{display:block;margin-bottom:11px;color:#c9d0ce;font-size:.9rem;letter-spacing:.06em}
+.command-row{display:flex;gap:10px}
+input{flex:1;min-width:0;padding:13px 15px;border:1px solid rgba(194,207,208,.28);border-radius:2px;outline:none;background:rgba(225,231,228,.07);color:white;font:400 1rem Jost,sans-serif}
+input:focus{border-color:var(--blue)}input::placeholder{color:#899596}
+button[type=submit]{padding:0 22px;border:1px solid #7894aa;border-radius:2px;background:#263c4b;color:#f2f0e9;font:400 .9rem Jost,sans-serif;cursor:pointer}
+button[type=submit]:hover{background:#355367}
+#response{min-height:28px;margin:17px 0 0;color:#c7d0ce;font:400 1.12rem/1.5 Cormorant Garamond,serif;white-space:pre-line}
+.footer{padding-top:26px;color:#778587;text-align:center;font-size:.72rem;letter-spacing:.08em}
+@media(max-width:560px){.page{width:min(100% - 22px,980px);padding-top:15px}header{padding:28px 0 20px}.command-row{flex-direction:column}button[type=submit]{min-height:44px}.scene-image{max-height:78vh}}
+</style>
+</head>
+<body>
+<main class="page">
+<nav class="topline" aria-label="Navigation">
+<a class="back" href="../index.html">← Zurück zu den Adventures</a>
+<div class="brand">Deutsch Atelier<small>by Achim</small></div>
+</nav>
+<header>
+<h1>Das Haus an der Lindauer Straße</h1>
+<p class="subtitle">Ein geheimnisvolles Abenteuer · A2</p>
+</header>
+<section class="scene" aria-label="Aktuelle Szene">
+<img class="scene-image" src="bilder/Tor.jpg" alt="Ein altes, verrostetes Gittertor an der Lindauer Straße">
+<div class="story">
+<p id="storyText" aria-live="polite"></p>
+<button class="skip" id="skipButton" type="button" hidden>Text vollständig anzeigen</button>
+</div>
+<form class="interaction" id="commandForm" hidden>
+<label class="prompt" for="command">Was möchtest du tun?</label>
+<div class="command-row">
+<input id="command" name="command" type="text" autocomplete="off" placeholder="Schreibe deinen Befehl ..." required>
+<button type="submit">Los</button>
+</div>
+<p id="response" aria-live="polite"></p>
+</form>
+</section>
+<footer class="footer">Deutsch Atelier Adventures · Medellín</footer>
+</main>
+<script>
+const openingText =
+"Du stehst auf dem Bürgersteig der Lindauer Straße. Es ist sieben Uhr abends und es wird langsam dunkel.\\n\\n" +
+"Rechts von dir siehst du ein verrostetes Gittertor. Dahinter liegt alles im Dunkeln. Google Maps zeigt hier aber kein Haus an.\\n\\n" +
+"„Komisch“, denkst du ... und fasst das Tor an. Du merkst, dass es offen ist.";
+
+const storyText=document.getElementById("storyText");
+const skipButton=document.getElementById("skipButton");
+const commandForm=document.getElementById("commandForm");
+const commandInput=document.getElementById("command");
+const response=document.getElementById("response");
+let typingTimer=null,characterIndex=0;
+
+function finishTyping(){
+ if(typingTimer)clearTimeout(typingTimer);
+ storyText.textContent=openingText;
+ skipButton.hidden=true;
+ commandForm.hidden=false;
+ commandInput.focus();
+}
+function typeNextCharacter(){
+ if(characterIndex>=openingText.length){finishTyping();return;}
+ const ch=openingText.charAt(characterIndex++);
+ storyText.textContent+=ch;
+ let delay=29;
+ if(".!?…".includes(ch))delay=420;
+ else if(ch===",")delay=150;
+ else if(ch==="\\n")delay=260;
+ typingTimer=setTimeout(typeNextCharacter,delay);
+}
+skipButton.addEventListener("click",finishTyping);
+skipButton.hidden=false;
+typeNextCharacter();
+
+function normalize(s){
+ return s.toLocaleLowerCase("de").replace(/[.!?,;:]/g,"")
+ .replace(/ä/g,"ae").replace(/ö/g,"oe").replace(/ü/g,"ue").replace(/ß/g,"ss")
+ .trim().replace(/\\s+/g," ");
+}
+commandForm.addEventListener("submit",event=>{
+ event.preventDefault();
+ const command=normalize(commandInput.value);
+ if(!command)return;
+ let answer="Du überlegst kurz. Aber dir fällt gerade nichts ein, was du damit anfangen könntest.";
+ if(/(geh|gehe|lauf|laufe).*(nach hause|heim)/.test(command)||command.includes("ins bett")){
+  answer="Du beschließt, nach Hause zu gehen. Eine warme Dusche und dein Bett sind jetzt doch verlockender als dieses seltsame Tor.\\n\\nVlad würde sagen: „Das war aber nicht mutig.“\\n\\nGAME OVER";
+ }else if(/(oeffne|mach).*(tor|gitter)/.test(command)){
+  answer="Du versuchst, das Tor zu öffnen. Dabei bemerkst du, dass es gar nicht verschlossen ist. Es steht bereits einen Spalt offen.";
+ }else if(/(geh|gehe|lauf|laufe).*(nach rechts|zum tor|ans tor|zum gitter)/.test(command)){
+  answer="Du gehst nach rechts und stehst jetzt direkt vor dem verrosteten Gittertor. Dahinter kannst du kaum etwas erkennen.";
+ }else if(/(geh|gehe|lauf|laufe).*(durch das tor|durchs tor|durch das gitter|in den garten)/.test(command)){
+  answer="Du schiebst das Gittertor vorsichtig auf und gehst hindurch. Hinter dir fällt das Tor leise zurück. Vor dir liegt ein verwilderter Garten ...";
+ }else if(command.includes("sieh")||command.includes("schau")||command.includes("untersuch")){
+  answer="Du siehst dir das Tor genauer an. Der Rost ist alt, und das Metall fühlt sich kalt und feucht an. Das Tor ist tatsächlich offen.";
+ }
+ response.textContent=answer;
+ commandInput.value="";
+ commandInput.focus();
+});
+</script>
+</body>
+</html>
