@@ -359,32 +359,49 @@ let characterIndex=0;
     lampStartTime:lampStartTime
   });
 }
+let currentTypingText="";
+
 function finishTyping(){
  if(typingTimer)clearTimeout(typingTimer);
- storyText.textContent=openingText;
+ storyText.textContent=currentTypingText;
  skipButton.hidden=true;
  commandForm.hidden=false;
- commandInput.focus();
+
+ if(!commandInput.disabled){
+  commandInput.focus();
+ }
 }
 
 function typeNextCharacter(){
- if(characterIndex>=openingText.length){
+ if(characterIndex>=currentTypingText.length){
   finishTyping();
   return;
  }
- const ch=openingText.charAt(characterIndex++);
+
+ const ch=currentTypingText.charAt(characterIndex++);
  storyText.textContent+=ch;
+
  let delay=29;
  if(".!?…".includes(ch))delay=420;
  else if(ch===",")delay=150;
  else if(ch==="\n")delay=260;
+
  typingTimer=setTimeout(typeNextCharacter,delay);
 }
 
-skipButton.addEventListener("click",finishTyping);
-skipButton.hidden=false;
-typeNextCharacter();
+function startTyping(text){
+ if(typingTimer)clearTimeout(typingTimer);
 
+ currentTypingText=text;
+ characterIndex=0;
+ storyText.textContent="";
+ skipButton.hidden=false;
+
+ typeNextCharacter();
+}
+
+skipButton.addEventListener("click",finishTyping);
+startTyping(openingText);
 function normalize(s){
  return s.toLocaleLowerCase("de")
   .replace(/[.!?,;:]/g,"")
