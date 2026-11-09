@@ -596,8 +596,74 @@ if(handylampe){
   }
 
   skipButton.hidden=true;
- }else if(command.includes("sieh")||command.includes("schau")||command.includes("untersuch")){
-   understood=true;
+}else if(amGrabstein && (
+  command.includes("untersuche den grabstein")||
+  command.includes("untersuche grabstein")||
+  command.includes("ich untersuche den grabstein")||
+  command.includes("ich untersuche den stein")
+)){
+  understood=true;
+  answer="Der Stein ist alt und mit grünem Moos bedeckt. Du siehst einen Namen und zwei Daten.";
+
+}else if(amGrabstein && (
+  command.includes("lies den namen")||
+  command.includes("lese den namen")||
+  command.includes("ich lese den namen")
+)){
+  understood=true;
+  answer="Auf dem Stein steht: Dolores Ayala.";
+
+}else if(amGrabstein && (
+  command.includes("lies die daten")||
+  command.includes("lese die daten")||
+  command.includes("ich lese die daten")
+)){
+  understood=true;
+  answer="Geboren: 05.04.1793 | Gestorben: 31.10.1821";
+
+}else if(amGrabstein && (
+  command.includes("untersuche das moos")||
+  command.includes("untersuche moos")||
+  command.includes("ich untersuche das moos")
+)){
+  understood=true;
+  answer="Das Moos ist dick und grün. Es wächst fast über den ganzen Stein.";
+
+}else if(amGrabstein && (
+  command.includes("sieh dich um")||
+  command.includes("sehe mich um")||
+  command.includes("schau dich um")||
+  command.includes("schaue mich um")
+)){
+  understood=true;
+  answer="Du siehst den Grabstein, den engen, verwilderten Pfad hinter dir und den rostigen Grundstückszaun. In der Ferne erkennst du eine Burg auf einem Hügel.";
+
+}else if(amGrabstein && (
+  command.includes("schau nach oben")||
+  command.includes("schaue nach oben")||
+  command.includes("sieh nach oben")||
+  command.includes("sehe nach oben")
+)){
+  understood=true;
+  answer="Der Himmel ist dunkel. Es ist eine kalte, mondlose Nacht.";
+
+}else if(amGrabstein && (
+  command.includes("grabe am grab")||
+  command.includes("grabe am grabstein")||
+  command.includes("ich grabe am grab")||
+  command.includes("ich grabe am grabstein")
+)){
+  understood=true;
+  answer="Der Boden ist hart und von Wurzeln durchsetzt. Du brichst dir einen Fingernagel ab. Autsch!";
+
+}else if(amTor && (
+  command.includes("sieh")||
+  command.includes("schau")||
+  command.includes("untersuch")
+)){
+  understood=true;
+  answer="Du siehst dir das Tor genauer an. Der Rost ist alt, und das Metall fühlt sich kalt und feucht an. Das Tor ist tatsächlich offen.";
+}   understood=true;
 
   answer="Du siehst dir das Tor genauer an. Der Rost ist alt, und das Metall fühlt sich kalt und feucht an. Das Tor ist tatsächlich offen.";
  }
