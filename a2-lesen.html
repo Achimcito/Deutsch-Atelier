@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
- <link rel="icon" type="image/png" href="favicon.png">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Deutsch Atelier – A2 Leseverstehen</title>
@@ -28,6 +27,9 @@
   .part-card:hover .part-desc { color: rgba(255,255,255,0.65); }
   .part-card.coming .part-desc { color: var(--coming); }
   .coming-tag { display: inline-block; font-size: 0.65em; letter-spacing: 0.1em; color: var(--coming); margin-top: 4px; }
+  .wechsel { text-align: center; margin-top: -8px; }
+  .wechsel-btn { display: inline-block; font-size: 0.75em; letter-spacing: 0.14em; padding: 11px 24px; border: 1px solid var(--ink-muted); color: var(--ink-soft); text-decoration: none; transition: border-color 0.2s, color 0.2s, background 0.2s; }
+  .wechsel-btn:hover { border-color: var(--accent); color: var(--accent); }
   .footer { margin-top: 48px; font-size: 0.72em; color: var(--ink-muted); text-align: center; letter-spacing: 0.06em; }
 </style>
 </head>
@@ -37,7 +39,7 @@
   <div class="logo-title">Deutsch Atelier</div>
   <div class="logo-sub">by Achim</div>
 </div>
-<div class="breadcrumb">A2 · Leseverstehen</div>
+<div class="breadcrumb">A2 · Leseverstehen · ÖSD</div>
 <div class="divider"></div>
 <div class="section-label">Aufgabe wählen</div>
 <div class="parts">
@@ -51,19 +53,8 @@
     <span class="part-name">Multiple Choice</span>
     <span class="part-desc">Texte lesen und Fragen mit A, B oder C beantworten</span>
   </a>
-  <a class="part-card coming" href="#">
-    <span class="part-nr">Teil 3</span>
-    <span class="part-name">demnächst</span>
-    <span class="part-desc"></span>
-    <span class="coming-tag">demnächst</span>
-  </a>
-  <a class="part-card coming" href="#">
-    <span class="part-nr">Teil 4</span>
-    <span class="part-name">demnächst</span>
-    <span class="part-desc"></span>
-    <span class="coming-tag">demnächst</span>
-  </a>
 </div>
+<div class="wechsel"><a class="wechsel-btn" href="a2-goethe-lesen.html">Zu Goethe →</a></div>
 <div class="footer">© Deutsch Atelier by Achim · Medellín</div>
 </body>
 </html>
