@@ -457,29 +457,7 @@ skipButton.hidden=true;
  }else if(/(geh|gehe|lauf|laufe)\s*(durch das tor|durchs tor|durch das gitter|in den garten)/.test(command)){
   understood=true;
    speichereOrt();
-   function geheZurueck(){
-  if(ortVerlauf.length===0){
-    return false;
-  }
-
-  const vorherigerOrt=ortVerlauf.pop();
-
-  sceneImage.src=vorherigerOrt.bild;
-  sceneImage.alt=vorherigerOrt.alt;
-  storyText.textContent=vorherigerOrt.text;
-
-  imVorgarten=vorherigerOrt.imVorgarten;
-  amGrabstein=vorherigerOrt.amGrabstein;
-  handylampe=vorherigerOrt.handylampe;
-  lampStartTime=vorherigerOrt.lampStartTime;
-
-  sceneChanged=true;
-  skipButton.hidden=true;
-  hideCharacter();
-
-  return true;
-}
-   imVorgarten=true;
+      imVorgarten=true;
 sceneChanged=true;
   sceneImage.src="bilder/vorgarten.jpg";
   sceneImage.alt="Ein dunkler, verwilderter Vorgarten";
