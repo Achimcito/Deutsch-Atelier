@@ -359,6 +359,33 @@ let characterIndex=0;
     lampStartTime:lampStartTime
   };
 }
+  function geheZurueck(){
+  if(!vorherigerOrt){
+    response.textContent="Du kannst hier nicht weiter zurückgehen.";
+    return;
+  }
+
+  const aktuellerOrt={
+    bild:sceneImage.getAttribute("src"),
+    alt:sceneImage.alt,
+    text:storyText.textContent,
+    imVorgarten:imVorgarten,
+    amGrabstein:amGrabstein
+  };
+
+  const ziel=vorherigerOrt;
+  vorherigerOrt=aktuellerOrt;
+
+  sceneImage.src=ziel.bild;
+  sceneImage.alt=ziel.alt;
+  storyText.textContent=ziel.text;
+
+  imVorgarten=ziel.imVorgarten;
+  amGrabstein=ziel.amGrabstein;
+
+  hideCharacter();
+  response.textContent="";
+}
 let currentTypingText="";
 
 function finishTyping(){
