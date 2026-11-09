@@ -482,6 +482,33 @@ sceneChanged=true;
 
   storyText.textContent=answer;
   skipButton.hidden=true;  
+   }else if(imVorgarten && (
+  command.includes("geh nach links")||
+  command.includes("gehe nach links")||
+  command.includes("ich gehe nach links")||
+  command.includes("geh links weiter")||
+  command.includes("ich gehe links weiter")||
+  command.includes("geh zum grab")||
+  command.includes("gehe zum grab")||
+  command.includes("ich gehe zum grab")||
+  command.includes("gehe weiter zum grab")||
+  command.includes("ich gehe weiter zum grab")
+)){
+  understood=true;
+  sceneChanged=true;
+
+  if(!handylampe){
+    answer="Du tastest dich vorsichtig nach links. Aber es ist viel zu dunkel. Du kannst den Weg nicht erkennen und kehrst lieber um.";
+  }else{
+    amGrabstein=true;
+    sceneImage.src="bilder/grabstein.jpg";
+    sceneImage.alt="Der alte Grabstein von Dolores Ayala";
+
+    answer="Du verlässt den Hauptweg und gehst nach links. Der schmale Pfad führt dich tiefer ins Dickicht. Im Licht deiner Handylampe erkennst du plötzlich einen alten Grabstein. Du bist an einem Grab angekommen.";
+  }
+
+  storyText.textContent=answer;
+  skipButton.hidden=true;
  }else if(command.includes("sieh")||command.includes("schau")||command.includes("untersuch")){
    understood=true;
 
