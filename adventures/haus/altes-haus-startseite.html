@@ -406,29 +406,6 @@ commandForm.addEventListener("submit",event=>{
   let understood=false;
   let sceneChanged=false;
   if(
-  command.includes("geh zurück")||
-  command.includes("gehe zurück")||
-  command.includes("ich geh zurück")||
-  command.includes("ich gehe zurück")||
-  command.includes("kehr um")||
-  command.includes("kehre um")||
-  command.includes("ich kehre um")||
-  command.includes("geh zurueck")||
-  command.includes("gehe zurueck")||
-  command.includes("kehr um")
-){
-  understood=true;
-
-  if(ortVerlauf.length>0){
-    geheZurueck();
-  }else{
-    answer="Du bist bereits am Ausgangstor. Weiter zurück geht es nicht.";
-    response.textContent=answer;
-  }
-
-}else if(
-  command.includes("schalte die lampe ein")||
-  if(
   command.includes("schalte die lampe ein")||
   command.includes("benutze die handylampe")||
   command.includes("mach licht")
