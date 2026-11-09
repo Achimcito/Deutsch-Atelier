@@ -546,7 +546,12 @@ if(understood){
     answer="Ich erklär es dir nochmal. Versuche es mit einem klaren Befehl, zum Beispiel: „Geh durch das Tor.“";
   }
 }
-
+if(sceneChanged){
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
 if(!commandInput.disabled){
   response.textContent=sceneChanged ? "" : answer;
 }
