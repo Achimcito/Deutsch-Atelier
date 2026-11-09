@@ -522,8 +522,9 @@ skipButton.hidden=true;
   understood=true;
   speichereOrt();
 imVorgarten=true;
+amTor=false;
 sceneChanged=true;
-   amTor=false;
+   
 
 if(handylampe){
   sceneImage.src="bilder/vorgarten-licht.jpg";
@@ -552,6 +553,7 @@ if(handylampe){
   if(!handylampe){
     speichereOrt();
     imVorgarten=false;
+    amTor=true;
 
     sceneImage.src="bilder/tor.jpg";
     sceneImage.alt="Das schwere Eisentor";
