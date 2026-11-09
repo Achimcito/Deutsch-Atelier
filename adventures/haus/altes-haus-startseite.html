@@ -452,7 +452,35 @@ sceneChanged=true;
 
   storyText.textContent=answer;
   skipButton.hidden=true;
-   
+ }else if(imVorgarten && (
+  command.includes("folge dem pfad")||
+  command.includes("folge dem weg")||
+  command.includes("geh weiter")||
+  command.includes("gehe weiter")||
+  command.includes("lauf weiter")||
+  command.includes("laufe weiter")||
+  command.includes("geh den pfad entlang")||
+  command.includes("gehe den pfad entlang")
+)){
+  understood=true;
+  sceneChanged=true;
+
+  if(!handylampe){
+    imVorgarten=false;
+
+    sceneImage.src="bilder/tor.jpg";
+    sceneImage.alt="Das schwere Eisentor";
+
+    answer="Es ist zu dunkel. Du tappst blind durch das hohe Gras und stolperst über eine Wurzel. Mit Mühe findest du zurück zum Eisentor.";
+  }else{
+    sceneImage.src="bilder/vorgarten-abzweig.jpg";
+    sceneImage.alt="Die Abzweigung im verwilderten Garten";
+
+    answer="Du folgst dem schmalen Pfad. Im Licht deiner Handylampe erkennst du eine Abzweigung. Ein kleiner Weg führt nach links ins Dickicht. Der Hauptweg führt weiter zum alten Haus.";
+  }
+
+  storyText.textContent=answer;
+  skipButton.hidden=true;  
  }else if(command.includes("sieh")||command.includes("schau")||command.includes("untersuch")){
    understood=true;
 
