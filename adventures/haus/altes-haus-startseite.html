@@ -348,6 +348,17 @@ let lampStartTime=null;
 let typingTimer=null;
 let characterIndex=0;
 
+  function speichereOrt(){
+  ortVerlauf.push({
+    bild:sceneImage.getAttribute("src"),
+    alt:sceneImage.alt,
+    text:storyText.textContent,
+    imVorgarten:imVorgarten,
+    amGrabstein:amGrabstein,
+    handylampe:handylampe,
+    lampStartTime:lampStartTime
+  });
+}
 function finishTyping(){
  if(typingTimer)clearTimeout(typingTimer);
  storyText.textContent=openingText;
