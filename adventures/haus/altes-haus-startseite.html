@@ -517,10 +517,16 @@ skipButton.hidden=true;
   
   understood=true;
   speichereOrt();
-  imVorgarten=true;
-  sceneChanged=true;
+imVorgarten=true;
+sceneChanged=true;
+
+if(handylampe){
+  sceneImage.src="bilder/vorgarten-licht.jpg";
+  sceneImage.alt="Der verwilderte Vorgarten im Licht der Handylampe";
+}else{
   sceneImage.src="bilder/vorgarten.jpg";
   sceneImage.alt="Ein dunkler, verwilderter Vorgarten";
+}
 
   answer="Du stehst hinter dem schweren Eisentor. Ein schmaler, überwucherter Pfad führt zu einem alten Haus.\n\nDas hohe Gras ist nass und kalt. Es ist absolut still. Kein Wind. Kein Tier.\n\nDu schaust nach oben, aber du siehst nichts. Kein Mond. Kein einziger Stern. Der Himmel ist dunkelblau, fast schwarz. Du kannst kaum deine eigene Hand vor Augen sehen.";
 
