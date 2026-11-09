@@ -450,6 +450,21 @@ commandForm.addEventListener("submit",event=>{
   let understood=false;
   let sceneChanged=false;
   if(
+  command.includes("geh zurueck") ||
+  command.includes("gehe zurueck") ||
+  command.includes("geh zurueck zum vorherigen ort")
+){
+  if(vorherigerOrt){
+    geheZurueck();
+    answer=storyText.textContent;
+    understood=true;
+    sceneChanged=true;
+  }else{
+    answer="Du bist bereits am Anfang. Weiter zurück geht es nicht.";
+    understood=true;
+  }
+}
+  if(
   command.includes("schalte die lampe ein")||
   command.includes("benutze die handylampe")||
   command.includes("mach licht")
