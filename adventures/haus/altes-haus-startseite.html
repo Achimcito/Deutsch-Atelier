@@ -539,6 +539,7 @@ skipButton.hidden=true;
   sceneChanged=true;
 
   if(!handylampe){
+    speichereOrt();
     imVorgarten=false;
 
     sceneImage.src="bilder/tor.jpg";
@@ -546,6 +547,7 @@ skipButton.hidden=true;
 
     answer="Es ist zu dunkel. Du tappst blind durch das hohe Gras und stolperst über eine Wurzel. Mit Mühe findest du zurück zum Eisentor.";
   }else{
+    speichereOrt();
     sceneImage.src="bilder/vorgarten-abzweig.jpg";
     sceneImage.alt="Die Abzweigung im verwilderten Garten";
 
