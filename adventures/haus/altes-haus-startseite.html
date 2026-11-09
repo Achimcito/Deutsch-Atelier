@@ -349,7 +349,7 @@ let typingTimer=null;
 let characterIndex=0;
 
   function speichereOrt(){
-  ortVerlauf.push({
+  vorherigerOrt={
     bild:sceneImage.getAttribute("src"),
     alt:sceneImage.alt,
     text:storyText.textContent,
@@ -357,7 +357,7 @@ let characterIndex=0;
     amGrabstein:amGrabstein,
     handylampe:handylampe,
     lampStartTime:lampStartTime
-  });
+  };
 }
 let currentTypingText="";
 
