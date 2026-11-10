@@ -740,6 +740,27 @@ if(handylampe){
   }
 
   skipButton.hidden=true;
+
+   }else if(anDerAbzweigung && (
+  command.includes("geh nach rechts")||
+  command.includes("gehe nach rechts")||
+  command.includes("ich gehe nach rechts")||
+  command.includes("geh die stufen hoch")||
+  command.includes("gehe die stufen hoch")||
+  command.includes("ich gehe die stufen hoch")
+)){
+  understood=true;
+  sceneChanged=true;
+  speichereOrt();
+  anDerAbzweigung=false;
+  imVorgarten=false;
+  amTor=false;
+
+  sceneImage.src="bilder/eingang.jpg";
+  sceneImage.alt="Die alte Haustür des Hauses";
+
+  answer="Du gehst nach rechts und steigst vorsichtig die alten Steinstufen hinauf. Vor dir liegt die schwere, verwitterte Haustür. Efeu rankt sich über das Mauerwerk. Es ist vollkommen still.";
+  skipButton.hidden=true;
 }else if(amGrabstein && (
   command.includes("untersuche den grabstein")||
   command.includes("untersuche grabstein")||
