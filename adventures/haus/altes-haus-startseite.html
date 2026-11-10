@@ -570,7 +570,15 @@ if(handylampe){
   }else{
     answer="Du hast keinen Empfang. Nur ein schwaches Batteriesymbol blinkt dich an.";
   }
-
+}else if(imVorgarten && !amGrabstein && (
+  command.includes("sieh nach oben")||
+  command.includes("sehe nach oben")||
+  command.includes("schau nach oben")||
+  command.includes("schaue nach oben")
+)){
+  understood=true;
+  answer="Der Himmel ist dunkelblau. Es ist eine mond- und sternlose Nacht.";
+   
  }else if(imVorgarten && (
   command.includes("folge dem pfad")||
   command.includes("folge dem weg")||
