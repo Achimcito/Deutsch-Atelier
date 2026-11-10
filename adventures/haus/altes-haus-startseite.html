@@ -607,6 +607,34 @@ if(handylampe){
 )){
   understood=true;
   answer="Du gehst in die Hocke und schaust unter die Bank. Dort liegen nur nasse Blätter und kleine Zweige.";
+
+   }else if(imVorgarten && !amGrabstein && (
+  command.includes("geh zur steinsaeule")||
+  command.includes("gehe zur steinsaeule")||
+  command.includes("ich gehe zur steinsaeule")||
+  command.includes("untersuche die steinsaeule")||
+  command.includes("untersuche steinsaeule")||
+  command.includes("beruehre die steinsaeule")||
+  command.includes("fass die steinsaeule an")
+)){
+  understood=true;
+  answer="Es ist eine eckige Säule aus Stein. Auf ihr steht eine große, alte Steinurne, aus der wilde Pflanzen wachsen.";
+
+}else if(imVorgarten && !amGrabstein && (
+  command.includes("untersuche die urne")||
+  command.includes("untersuche urne")
+)){
+  understood=true;
+  answer="Die große Steinurne ist alt und verwittert. Wilde Pflanzen wachsen aus ihr heraus.";
+
+}else if(imVorgarten && !amGrabstein && (
+  command.includes("sieh in die urne")||
+  command.includes("schau in die urne")||
+  command.includes("schaue in die urne")||
+  command.includes("sehe in die urne")
+)){
+  understood=true;
+  answer="Du blickst in die alte Steinurne. Zwischen den wilden Pflanzen kannst du im Dunkeln kaum etwas erkennen.";
    
  }else if(imVorgarten && (
   command.includes("folge dem pfad")||
