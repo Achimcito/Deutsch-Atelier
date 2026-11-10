@@ -599,6 +599,18 @@ if(handylampe){
   understood=true;
   answer="Du siehst dich um. Hinter dir liegt der dunkle, überwucherte Garten. Links führt ein schmaler Pfad ins Dickicht. Rechts führen alte Steinstufen hinauf zum Haus. Der Efeu wächst dicht an der feuchten Hauswand entlang.";
 
+}else if(anDerAbzweigung && (
+  command.includes("hoer genau hin")||
+  command.includes("ich hoere genau hin")||
+  command.includes("lausche")||
+  command.includes("ich lausche")||
+  command.includes("hoere genau hin")||
+  command.includes("hoer hin")||
+  command.includes("ich hoere hin")
+)){
+  understood=true;
+  answer="Du hältst den Atem an und lauschst. Nichts. Kein Wind, kein Rascheln, kein Laut aus dem Haus. Die Stille wirkt beinahe unnatürlich.";
+   
 }else if(imVorgarten && !amGrabstein && (
   command.includes("hoer genau hin")||
   command.includes("ich hoere genau hin")||
