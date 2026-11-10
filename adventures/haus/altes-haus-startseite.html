@@ -683,6 +683,24 @@ if(handylampe){
 )){
   understood=true;
   answer="Der Efeu wächst dicht an der alten Hauswand empor. Seine Ranken sind feucht und fühlen sich kalt an."; 
+
+   }else if(anDerAbzweigung && (
+  command.includes("schau in die fenster")||
+  command.includes("schaue in die fenster")||
+  command.includes("sieh in die fenster")||
+  command.includes("sehe in die fenster")
+)){
+  understood=true;
+  answer="Du blickst in die dunklen Fenster. Dahinter kannst du nichts erkennen.";
+
+}else if(anDerAbzweigung && (
+  command.includes("schau zum haus")||
+  command.includes("schaue zum haus")||
+  command.includes("sieh zum haus")||
+  command.includes("sehe zum haus")
+)){
+  understood=true;
+  answer="Das alte Haus steht dunkel vor dir. Die Fenster sind schwarz, und dichter Efeu bedeckt Teile der Fassade.";
  
  }else if((imVorgarten || amGrabstein) && (
   command.includes("untersuche den pfad")||
