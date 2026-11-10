@@ -588,6 +588,31 @@ if(handylampe){
   understood=true;
   answer="Der Himmel ist dunkelblau. Es ist eine mond- und sternlose Nacht.";
 
+   }else if(anDerAbzweigung && (
+  command.includes("gehe in den vorgarten")||
+  command.includes("geh in den vorgarten")||
+  command.includes("ich gehe in den vorgarten")
+)){
+  understood=true;
+  sceneChanged=true;
+  speichereOrt();
+
+  anDerAbzweigung=false;
+  imVorgarten=true;
+  amGrabstein=false;
+  amTor=false;
+
+  if(handylampe){
+    sceneImage.src="bilder/vorgarten-licht.jpg";
+    sceneImage.alt="Der verwilderte Vorgarten im Licht der Handylampe";
+  }else{
+    sceneImage.src="bilder/vorgarten.jpg";
+    sceneImage.alt="Ein dunkler, verwilderter Vorgarten";
+  }
+
+  answer="Du stehst wieder auf dem verwilderten Pfad im Vorgarten.";
+  skipButton.hidden=true;
+   
 }else if(anDerAbzweigung && (
   command.includes("sieh dich um")||
   command.includes("siehe dich um")||
