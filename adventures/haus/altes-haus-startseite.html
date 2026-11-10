@@ -635,6 +635,16 @@ if(handylampe){
 )){
   understood=true;
   answer="Du blickst in die alte Steinurne. Zwischen den wilden Pflanzen kannst du im Dunkeln kaum etwas erkennen.";
+
+   }else if((imVorgarten || amGrabstein) && (
+  command.includes("untersuche den pfad")||
+  command.includes("untersuche pfad")||
+  command.includes("sieh dir den pfad an")||
+  command.includes("schaue dir den pfad an")||
+  command.includes("wie sieht der pfad aus")
+)){
+  understood=true;
+  answer="Der Pfad ist von Pflanzen überwuchert und mit Gartensteinen übersät.";
    
  }else if(imVorgarten && (
   command.includes("folge dem pfad")||
