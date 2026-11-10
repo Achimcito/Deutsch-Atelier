@@ -555,7 +555,121 @@ if(handylampe){
   answer="Du stehst hinter dem schweren Eisentor. Ein schmaler, überwucherter Pfad führt zu einem alten Haus.\nDas hohe Gras ist nass und kalt. Es ist absolut still. Kein Wind. Kein Tier.\n\nDu schaust nach oben, aber du siehst nichts. Kein Mond. Kein einziger Stern. Der Himmel ist dunkelblau, fast schwarz. Du kannst kaum deine eigene Hand vor Augen sehen.";
 
   skipButton.hidden=true;
- }else if(imVorgarten && (
+ }else if(imVorgarten && !amGrabstein && (
+  command.includes("sieh auf das handy")||
+  command.includes("sehe auf das handy")||
+  command.includes("schau auf das handy")||
+  command.includes("sieh nach oben")||
+  command.includes("sehe nach oben")||
+  command.includes("untersuche die bank")||
+  command.includes("untersuche bank")||
+  command.includes("setz dich auf die bank")||
+  command.includes("setze mich auf die bank")||
+  command.includes("beruehre die bank")||
+  command.includes("fass die bank an")||
+  command.includes("schaue unter die bank")||
+  command.includes("schau unter die bank")||
+  command.includes("untersuche die steinsaeule")||
+  command.includes("untersuche steinsaeule")||
+  command.includes("untersuche die urne")||
+  command.includes("untersuche urne")||
+  command.includes("sieh in die urne")||
+  command.includes("schaue in die urne")||
+  command.includes("beruehre die steinsaeule")||
+  command.includes("fass die steinsaeule an")||
+  command.includes("sieh dich um")||
+  command.includes("sehe mich um")||
+  command.includes("schau dich um")||
+  command.includes("schaue mich um")||
+  command.includes("rufe hallo")||
+  command.includes("ich rufe hallo")||
+  command.includes("fass die pflanzen an")||
+  command.includes("fasse die pflanzen an")||
+  command.includes("rieche an den pflanzen")||
+  command.includes("untersuche den kiesweg")||
+  command.includes("untersuche kiesweg")||
+  command.includes("sieh zum haus")||
+  command.includes("schau zum haus")||
+  command.includes("hoere genau hin")||
+  command.includes("lausche")||
+  command.includes("geh zur bank")||
+  command.includes("gehe zur bank")||
+  command.includes("geh zur steinsaeule")||
+  command.includes("gehe zur steinsaeule")||
+  command.includes("geh zum haus")||
+  command.includes("gehe zum haus")
+)){
+  understood=true;
+
+  if(command.includes("handy")){
+    if(handylampe){
+      const minuten=verbleibendeMinuten();
+      answer=minuten>0
+        ? "Du siehst auf dein Handy. Deine Batterieanzeige blinkt. Du hast nur noch "+minuten+" Minuten Licht."
+        : "Du siehst auf dein Handy. Die Batterie ist leer. Deine Handylampe funktioniert nicht mehr.";
+    }else{
+      answer="Du hast keinen Empfang. Nur ein schwaches Batteriesymbol blinkt dich an.";
+    }
+
+  }else if(command.includes("nach oben")){
+    answer="Der Himmel ist dunkelblau. Es ist eine mond- und sternlose Nacht.";
+
+  }else if(command.includes("bank")){
+    if(command.includes("untersuche")){
+      answer="Die Bank ist aus altem, rostigem Eisen. Sie ist sehr kalt und von feuchtem Moos überwuchert.";
+    }else if(command.includes("setz")||command.includes("setze")){
+      answer="Du setzt dich vorsichtig auf die kalte Eisenbank. Das feuchte Moos fühlt sich unangenehm an. Einen Moment lang lauschst du der Stille.";
+    }else if(command.includes("unter")){
+      answer="Du gehst in die Hocke und schaust unter die Bank. Dort liegen nur nasse Blätter und kleine Zweige.";
+    }else{
+      answer="Du berührst die alte Eisenbank. Das Metall ist eiskalt und feucht.";
+    }
+
+  }else if(command.includes("urne")){
+    if(command.includes("in die urne")){
+      answer="Du blickst in die alte Steinurne. Zwischen den wilden Pflanzen kannst du im Dunkeln kaum etwas erkennen.";
+    }else{
+      answer="Die große Steinurne ist alt und verwittert. Wilde Pflanzen wachsen aus ihr heraus.";
+    }
+
+  }else if(command.includes("steinsaeule")){
+    answer="Die Säule ist aus massivem Stein. Ihre Oberfläche ist rau und kalt. Oben steht eine große, alte Steinurne.";
+
+  }else if(command.includes("um")){
+    if(handylampe){
+      answer="Du stehst auf einem nassen Kiesweg in einem verwilderten Vorgarten. Hinter dir sind ein rostiges Eisentor und die Straße. Vor dir führt der Weg weiter. Rechts hinten siehst du den dunklen Schatten eines Hauses. Rechts ist eine alte Eisenbank, links eine Steinsäule. Überall sind nasse Pflanzen. Das Dunkel wird nur vom Licht deiner Handylampe durchbrochen.";
+}else{
+      answer="Es ist stockdunkel. Du siehst deine Hand vor Augen nicht. Du musst deine Handylampe einschalten!";
+    }
+
+  }else if(command.includes("hallo")){
+    answer="Deine Stimme verhallt im Gebüsch. Keine Antwort. Nur das leise Tropfen von Wasser.";
+
+  }else if(command.includes("pflanzen")){
+    if(command.includes("rieche")){
+      answer="Die Pflanzen riechen modrig und feucht. Es ist kein angenehmer Geruch.";
+    }else{
+      answer="Die Blätter sind nass, kalt und klebrig. Es fühlt sich unangenehm an.";
+    }
+
+  }else if(command.includes("kiesweg")){
+    answer="Der Kies ist nass. Zwischen den Steinen haben sich kleine Pfützen gebildet.";
+
+  }else if(command.includes("haus")){
+    answer="Zwischen den dunklen Ästen erkennst du die Umrisse eines alten Hauses. In keinem Fenster brennt Licht.";
+
+  }else if(command.includes("hoere")||command.includes("lausche")){
+    answer="Du hältst einen Moment still und lauschst. Du hörst das leise Tropfen von Wasser und das Rascheln nasser Blätter. Sonst ist es vollkommen still.";
+
+  }else if(command.includes("bank")){
+    answer="Du gehst zur alten Eisenbank. Sie steht rechts am Kiesweg.";
+
+  }else if(command.includes("steinsaeule")){
+    answer="Du gehst zur Steinsäule auf der linken Seite des Weges.";
+
+  }else if(command.includes("geh zum haus")||command.includes("gehe zum haus")){
+    answer="Du gehst ein paar Schritte in Richtung des dunklen Hauses. Der Weg führt weiter geradeaus.";
+  }
   command.includes("folge dem pfad")||
   command.includes("folge dem weg")||
   command.includes("geh weiter")||
