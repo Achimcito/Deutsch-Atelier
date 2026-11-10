@@ -555,6 +555,22 @@ if(handylampe){
   answer="Du stehst hinter dem schweren Eisentor. Ein schmaler, überwucherter Pfad führt zu einem alten Haus.\nDas hohe Gras ist nass und kalt. Es ist absolut still. Kein Wind. Kein Tier.\n\nDu schaust nach oben, aber du siehst nichts. Kein Mond. Kein einziger Stern. Der Himmel ist dunkelblau, fast schwarz. Du kannst kaum deine eigene Hand vor Augen sehen.";
 
   skipButton.hidden=true;
+   }else if(imVorgarten && !amGrabstein && (
+  command.includes("sieh auf das handy")||
+  command.includes("sehe auf das handy")||
+  command.includes("schau auf das handy")||
+  command.includes("schaue auf das handy")
+)){
+  understood=true;
+
+  if(handylampe){
+    const minuten=verbleibendeMinuten();
+
+    answer="Du siehst auf dein Handy. Deine Batterieanzeige blinkt. Du hast nur noch "+minuten+" Minuten Licht.";
+  }else{
+    answer="Du hast keinen Empfang. Nur ein schwaches Batteriesymbol blinkt dich an.";
+  }
+
  }else if(imVorgarten && (
   command.includes("folge dem pfad")||
   command.includes("folge dem weg")||
