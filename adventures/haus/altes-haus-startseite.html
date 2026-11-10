@@ -582,7 +582,7 @@ if(handylampe){
   understood=true;
   answer="Der Himmel ist dunkelblau. Es ist eine mond- und sternlose Nacht.";
 
-}else if(imVorgarten && !amGrabstein && command.includes("lausche")){
+}else if(imVorgarten && !amGrabstein){
   command.includes("hoer genau hin")||
   command.includes("ich hoere genau hin")||
   command.includes("lausche")||
@@ -592,7 +592,7 @@ if(handylampe){
   command.includes("ich hoere hin")
 )){
   understood=true;
-  answer="Hörtest erkannt";
+answer="Test: Du bist im Vorgarten und nicht am Grabstein.";
 
    }else if(imVorgarten && !amGrabstein && (
   command.includes("untersuche die bank")||
