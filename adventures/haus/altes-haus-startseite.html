@@ -583,6 +583,18 @@ if(handylampe){
   answer="Der Himmel ist dunkelblau. Es ist eine mond- und sternlose Nacht.";
 
    }else if(imVorgarten && !amGrabstein && (
+  command.includes("hoer genau hin")||
+  command.includes("ich hoere genau hin")||
+  command.includes("lausche")||
+  command.includes("ich lausche")||
+  command.includes("hoere genau hin")||
+  command.includes("hoer hin")||
+  command.includes("ich hoere hin")
+)){
+  understood=true;
+  answer="Du hältst einen Moment inne und lauschst. Irgendwo tropft Wasser. Im feuchten Laub raschelt es leise.";
+
+   }else if(imVorgarten && !amGrabstein && (
   command.includes("untersuche die bank")||
   command.includes("untersuche bank")||
   command.includes("geh zur bank")||
