@@ -454,7 +454,14 @@ startTyping(openingText);
   .trim()
   .replace(/\s+/g," ");
 }
+function verbleibendeMinuten(){
+  if(!handylampe || !lampStartTime)return 30;
 
+  const vergangen=Date.now()-lampStartTime;
+  const rest=Math.max(0,30*60*1000-vergangen);
+
+  return Math.ceil(rest/60000);
+}
 commandForm.addEventListener("submit",event=>{
  event.preventDefault();
 
