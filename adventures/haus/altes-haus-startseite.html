@@ -668,7 +668,23 @@ if(handylampe){
   understood=true;
   answer="Du blickst in die alte Steinurne. Zwischen den wilden Pflanzen kannst du im Dunkeln kaum etwas erkennen.";
 
-   }else if((imVorgarten || amGrabstein) && (
+ }else if(anDerAbzweigung && (
+  command.includes("untersuche die stufen")||
+  command.includes("untersuche stufen")||
+  command.includes("ich untersuche die stufen")
+)){
+  understood=true;
+  answer="Die alten Steinstufen sind uneben und feucht. In den Fugen wächst Moos. Du musst aufpassen, wo du hintrittst.";
+
+}else if(anDerAbzweigung && (
+  command.includes("untersuche den efeu")||
+  command.includes("untersuche efeu")||
+  command.includes("ich untersuche den efeu")
+)){
+  understood=true;
+  answer="Der Efeu wächst dicht an der alten Hauswand empor. Seine Ranken sind feucht und fühlen sich kalt an."; 
+ 
+ }else if((imVorgarten || amGrabstein) && (
   command.includes("untersuche den pfad")||
   command.includes("untersuche pfad")||
   command.includes("sieh dir den pfad an")||
