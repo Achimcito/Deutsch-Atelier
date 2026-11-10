@@ -443,14 +443,7 @@ function startTyping(text){
 
 skipButton.addEventListener("click",finishTyping);
 startTyping(openingText);
-function verbleibendeMinuten(){
-  if(!lampStartTime)return 30;
 
-  const vergangen=Date.now()-lampStartTime;
-  const rest=Math.max(0,30*60*1000-vergangen);
-
-  return Math.ceil(rest/60000);
-}
   function normalize(s){
  return s.toLocaleLowerCase("de")
   .replace(/[.!?,;:]/g,"")
