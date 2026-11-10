@@ -578,6 +578,35 @@ if(handylampe){
 )){
   understood=true;
   answer="Der Himmel ist dunkelblau. Es ist eine mond- und sternlose Nacht.";
+
+   }else if(imVorgarten && !amGrabstein && (
+  command.includes("untersuche die bank")||
+  command.includes("untersuche bank")||
+  command.includes("geh zur bank")||
+  command.includes("gehe zur bank")||
+  command.includes("ich gehe zur bank")||
+  command.includes("beruehre die bank")||
+  command.includes("fass die bank an")
+)){
+  understood=true;
+  answer="Die Bank ist aus altem, rostigem Eisen. Sie ist sehr kalt und von feuchtem Moos überwuchert.";
+
+}else if(imVorgarten && !amGrabstein && (
+  command.includes("setz dich auf die bank")||
+  command.includes("setze mich auf die bank")||
+  command.includes("ich setze mich auf die bank")
+)){
+  understood=true;
+  answer="Du setzt dich vorsichtig auf die kalte Eisenbank. Das feuchte Moos fühlt sich unangenehm an. Einen Moment lang lauschst du der Stille.";
+
+}else if(imVorgarten && !amGrabstein && (
+  command.includes("schau unter die bank")||
+  command.includes("schaue unter die bank")||
+  command.includes("sieh unter die bank")||
+  command.includes("sehe unter die bank")
+)){
+  understood=true;
+  answer="Du gehst in die Hocke und schaust unter die Bank. Dort liegen nur nasse Blätter und kleine Zweige.";
    
  }else if(imVorgarten && (
   command.includes("folge dem pfad")||
