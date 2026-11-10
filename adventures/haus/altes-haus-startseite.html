@@ -587,6 +587,17 @@ if(handylampe){
   understood=true;
   answer="Der Himmel ist dunkelblau. Es ist eine mond- und sternlose Nacht.";
 
+}else if(anDerAbzweigung && (
+  command.includes("sieh dich um")||
+  command.includes("siehe dich um")||
+  command.includes("schau dich um")||
+  command.includes("schaue dich um")||
+  command.includes("ich sehe mich um")||
+  command.includes("ich schaue mich um")
+)){
+  understood=true;
+  answer="Du siehst dich um. Hinter dir liegt der dunkle, überwucherte Garten. Links führt ein schmaler Pfad ins Dickicht. Rechts führen alte Steinstufen hinauf zum Haus. Der Efeu wächst dicht an der feuchten Hauswand entlang.";
+
 }else if(imVorgarten && !amGrabstein && (
   command.includes("hoer genau hin")||
   command.includes("ich hoere genau hin")||
