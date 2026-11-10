@@ -582,7 +582,7 @@ if(handylampe){
   understood=true;
   answer="Der Himmel ist dunkelblau. Es ist eine mond- und sternlose Nacht.";
 
-}else if(imVorgarten && command.includes("lausche")){
+}else if(imVorgarten && !amGrabstein && command.includes("lausche")){
   command.includes("hoer genau hin")||
   command.includes("ich hoere genau hin")||
   command.includes("lausche")||
