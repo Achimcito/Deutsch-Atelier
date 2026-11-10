@@ -589,6 +589,26 @@ if(handylampe){
   answer="Der Himmel ist dunkelblau. Es ist eine mond- und sternlose Nacht.";
 
    }else if(anDerAbzweigung && (
+  command.includes("gehe zum eingangstor")||
+  command.includes("geh zum eingangstor")||
+  command.includes("ich gehe zum eingangstor")
+)){
+  understood=true;
+  sceneChanged=true;
+  speichereOrt();
+
+  anDerAbzweigung=false;
+  imVorgarten=false;
+  amGrabstein=false;
+  amTor=true;
+
+  sceneImage.src="bilder/tor.jpg";
+  sceneImage.alt="Das schwere Eisentor";
+
+  answer="Du gehst den bekannten Weg zurück zum schweren Eisentor. Das hohe Gras streift deine Beine. Hinter dir liegt der dunkle, verwilderte Garten.";
+  skipButton.hidden=true;
+   
+   }else if(anDerAbzweigung && (
   command.includes("gehe in den vorgarten")||
   command.includes("geh in den vorgarten")||
   command.includes("ich gehe in den vorgarten")
