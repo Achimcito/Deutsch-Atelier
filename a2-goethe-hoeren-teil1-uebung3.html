@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Goethe A2 – Hören Teil 1 · Übung 3</title>
+<style>
+  body { font-family: 'Georgia', serif; max-width: 820px; margin: 40px auto; padding: 20px; background: #fafaf8; color: #2c2c2c; line-height: 1.7; }
+  h1 { font-size: 1.3em; border-bottom: 2px solid #1a3a6a; padding-bottom: 8px; margin-bottom: 6px; }
+  .meta { font-size: 0.85em; color: #666; margin-bottom: 30px; }
+  .anweisung { background: #eef2f7; border-left: 4px solid #1a3a6a; padding: 14px 18px; margin-bottom: 24px; font-size: 0.95em; }
+  .back { display: inline-block; margin-bottom: 24px; font-size: 0.82em; color: #666; text-decoration: none; letter-spacing: 0.05em; }
+  .back:hover { color: #1a3a6a; }
+
+  .audio-box { background: #fff; border: 2px solid #1a3a6a; border-radius: 4px; padding: 18px 24px; margin-bottom: 28px; }
+  .audio-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .audio-label { font-size: 0.9em; color: #444; white-space: nowrap; }
+  .audio-hinweis { font-size: 0.82em; color: #c0392b; font-style: italic; display: none; margin-top: 8px; }
+  .audio-hinweis.sichtbar { display: block; }
+
+  .aufgabe { background: #fff; border: 1px solid #ddd; border-radius: 4px; padding: 18px 22px; margin-bottom: 18px; }
+  .aufgabe-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .aufgabe-nr { background: #1a3a6a; color: white; font-weight: bold; padding: 3px 10px; border-radius: 3px; font-size: 0.88em; white-space: nowrap; }
+  .aufgabe-frage { font-size: 0.97em; font-weight: bold; margin-bottom: 12px; color: #2c2c2c; }
+  .optionen { display: flex; flex-direction: column; gap: 8px; }
+  .option { display: flex; align-items: flex-start; gap: 10px; cursor: pointer; padding: 6px 8px; border-radius: 3px; transition: background 0.15s; font-size: 0.93em; }
+  .option:hover { background: #eef2f7; }
+  .option input[type="radio"] { margin-top: 3px; accent-color: #1a3a6a; flex-shrink: 0; }
+  .option.correct { background: #e6f4ea; border-left: 3px solid #3a7d44; }
+  .option.wrong { background: #fdecea; border-left: 3px solid #c0392b; }
+  .option.reveal-correct { background: #e6f4ea; border-left: 3px solid #3a7d44; }
+  .erkl { display: none; margin-top: 10px; font-size: 0.86em; line-height: 1.5; padding: 8px 12px; border-radius: 3px; background: #f4f6fa; border-left: 3px solid #1a3a6a; }
+  .erkl.sichtbar { display: block; }
+  .erkl.ok { background: #e6f4ea; border-left-color: #3a7d44; color: #2c6a38; }
+  .erkl.falsch { background: #fdecea; border-left-color: #c0392b; color: #8e2b20; }
+
+  .loesung-toggle { margin-top: 32px; text-align: center; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn-loesung, .btn-reset { border: none; padding: 12px 28px; font-size: 0.9em; letter-spacing: 0.06em; cursor: pointer; font-family: 'Georgia', serif; border-radius: 2px; }
+  .btn-loesung { background: #1a3a6a; color: white; }
+  .btn-loesung:hover { background: #142d54; }
+  .btn-reset { background: transparent; color: #666; border: 1px solid #ccc; }
+  .btn-reset:hover { background: #f0f0f0; }
+  .ergebnis-box { margin-top: 24px; text-align: center; font-size: 1.1em; display: none; }
+  .ergebnis-box.visible { display: block; }
+  .punkte { font-size: 2em; font-weight: bold; color: #1a3a6a; display: block; margin: 8px 0; }
+
+  .hoertext { margin-top: 24px; display: none; background: #fff; border: 1px solid #ccc; border-radius: 4px; padding: 14px 22px; }
+  .hoertext.visible { display: block; }
+  .hoertext summary { cursor: pointer; font-size: 0.9em; color: #1a3a6a; font-weight: bold; }
+  .hoertext p { margin-top: 12px; font-size: 0.95em; }
+  .hoertext .rolle { font-weight: bold; color: #1a3a6a; display: block; }
+
+  @media print { .back, .loesung-toggle, .ergebnis-box, .audio-box { display: none; } }
+</style>
+</head>
+<body>
+
+<a class="back" href="a2-goethe-hoeren-teil1.html">← Zurück zur Übungsauswahl</a>
+<h1>Goethe A2 · Hören Teil 1 · Übung 3</h1>
+<div class="meta">Übungsmaterial · Niveau A2 · Goethe-Format · Thema: Alltag &amp; Termine</div>
+
+<div class="anweisung">
+  <strong>Aufgabe:</strong> Du hörst fünf kurze Texte. Zu jedem Text gibt es eine Aufgabe. Was ist richtig: A, B oder C? Markiere die richtige Antwort.
+  <br><br><em>Du hörst jeden Text zweimal.</em>
+</div>
+
+<!-- Audio: nur einmal abspielbar (jeder Text ist im Audio schon zweimal enthalten) -->
+<div class="audio-box">
+  <div class="audio-row">
+    <span class="audio-label">🎧 Fünf Texte:</span>
+    <audio id="main-audio" controls>
+      <source src="audio/a2-goethe-hoeren-teil1-uebung3.mp3" type="audio/mpeg">
+      Dein Browser unterstützt das Audio-Element nicht.
+    </audio>
+  </div>
+  <div class="audio-hinweis" id="audio-hinweis">⚠️ Du hast das Audio bereits gehört. Im echten Test ist nur ein Abspielen möglich.</div>
+</div>
+
+<div class="aufgaben">
+  <div class="aufgabe" id="a1">
+    <div class="aufgabe-header"><div class="aufgabe-nr">Text 1</div></div>
+    <div class="aufgabe-frage">Wann gibt es noch freie Termine?</div>
+    <div class="optionen">
+      <label class="option"><input type="radio" name="q1" value="A"><span>A) Am Dienstag um 10 Uhr und am Donnerstag um 15 Uhr.</span></label>
+      <label class="option"><input type="radio" name="q1" value="B"><span>B) Am Montag um 10 Uhr und am Dienstag um 15 Uhr.</span></label>
+      <label class="option"><input type="radio" name="q1" value="C"><span>C) Am Freitag um 12 Uhr.</span></label>
+    </div>
+    <div class="erkl" id="e1"></div>
+  </div>
+
+  <div class="aufgabe" id="a2">
+    <div class="aufgabe-header"><div class="aufgabe-nr">Text 2</div></div>
+    <div class="aufgabe-frage">Wo gibt es einen Unfall?</div>
+    <div class="optionen">
+      <label class="option"><input type="radio" name="q2" value="A"><span>A) Auf der B 83.</span></label>
+      <label class="option"><input type="radio" name="q2" value="B"><span>B) In Bad Eilsen.</span></label>
+      <label class="option"><input type="radio" name="q2" value="C"><span>C) Auf der A 2.</span></label>
+    </div>
+    <div class="erkl" id="e2"></div>
+  </div>
+
+  <div class="aufgabe" id="a3">
+    <div class="aufgabe-header"><div class="aufgabe-nr">Text 3</div></div>
+    <div class="aufgabe-frage">Von welchem Gleis fährt der Zug nach Hamburg?</div>
+    <div class="optionen">
+      <label class="option"><input type="radio" name="q3" value="A"><span>A) Gleis 5.</span></label>
+      <label class="option"><input type="radio" name="q3" value="B"><span>B) Gleis 8.</span></label>
+      <label class="option"><input type="radio" name="q3" value="C"><span>C) Gleis 10.</span></label>
+    </div>
+    <div class="erkl" id="e3"></div>
+  </div>
+
+  <div class="aufgabe" id="a4">
+    <div class="aufgabe-header"><div class="aufgabe-nr">Text 4</div></div>
+    <div class="aufgabe-frage">Warum ist die Praxis heute geschlossen?</div>
+    <div class="optionen">
+      <label class="option"><input type="radio" name="q4" value="A"><span>A) Weil Feiertag ist.</span></label>
+      <label class="option"><input type="radio" name="q4" value="B"><span>B) Weil sie Urlaub macht.</span></label>
+      <label class="option"><input type="radio" name="q4" value="C"><span>C) Weil der Arzt einen Notfall hat.</span></label>
+    </div>
+    <div class="erkl" id="e4"></div>
+  </div>
+
+  <div class="aufgabe" id="a5">
+    <div class="aufgabe-header"><div class="aufgabe-nr">Text 5</div></div>
+    <div class="aufgabe-frage">Wie warm wird es am Nachmittag höchstens?</div>
+    <div class="optionen">
+      <label class="option"><input type="radio" name="q5" value="A"><span>A) 5 Grad.</span></label>
+      <label class="option"><input type="radio" name="q5" value="B"><span>B) 8 Grad.</span></label>
+      <label class="option"><input type="radio" name="q5" value="C"><span>C) 15 Grad.</span></label>
+    </div>
+    <div class="erkl" id="e5"></div>
+  </div>
+</div>
+
+<div class="loesung-toggle">
+  <button class="btn-loesung" type="button" onclick="auswerten()">Auswerten</button>
+  <button class="btn-reset" type="button" onclick="reset()">Zurücksetzen</button>
+</div>
+
+<div class="ergebnis-box" id="ergebnis">
+  <span class="punkte" id="punkte-anzeige"></span>
+  <span id="ergebnis-text"></span>
+</div>
+
+<details class="hoertext" id="hoertext">
+  <summary>Transkript anzeigen</summary>
+  <p><span class="rolle">Text 1 – Anrufbeantworter (Friseur)</span>„Guten Tag, hier ist der Friseursalon ‚Haarstudio Anna‘. Wir haben nächste Woche noch freie Termine. Am Dienstag um 10 Uhr und am Donnerstag um 15 Uhr. Bitte rufen Sie uns bis Freitagmittag an, wenn Sie einen Termin möchten. Unsere Telefonnummer ist 4 5 1 3 2. Vielen Dank und auf Wiederhören.“</p>
+  <p><span class="rolle">Text 2 – Radiomeldung (Verkehr)</span>„Und nun die Verkehrsmeldungen. Auf der A2 gibt es heute Morgen einen Unfall zwischen Rehren und Bad Eilsen. Die Polizei ist vor Ort. Der Verkehr läuft nur langsam. Bitte nehmen Sie die Umleitung über die B 83. Dort haben Sie freie Fahrt. Die Fahrt dauert etwa 30 Minuten länger. Wir wünschen Ihnen eine gute Fahrt.“</p>
+  <p><span class="rolle">Text 3 – Durchsage am Bahnhof</span>„Achtung, Achtung, eine wichtige Information für die Reisenden nach Hamburg. Der Intercity Express 787 nach Hamburg fährt heute nicht von Gleis 5, sondern von Gleis 8. Der Zug hat 20 Minuten Verspätung. Bitte gehen Sie zu Gleis 8. Der Zug fährt um 14 Uhr 27. Wir bitten um Entschuldigung.“</p>
+  <p><span class="rolle">Text 4 – Anrufbeantworter (Arztpraxis)</span>„Guten Tag, hier ist die Praxis Dr. Müller. Heute ist Feiertag und unsere Praxis ist geschlossen. Bei Notfällen wenden Sie sich bitte an die Praxis Dr. Massow in der Neumarktstraße 28. Ab Freitag sind wir wieder wie gewohnt von 8 bis 12 Uhr für Sie da. Vielen Dank.“</p>
+  <p><span class="rolle">Text 5 – Radiomeldung (Wetter)</span>„Und hier das Wetter für morgen: Am Morgen ist es neblig und kalt. Die Temperaturen liegen bei 5 bis 8 Grad. Am Nachmittag steigen die Temperaturen und die Sonne scheint. Die Höchsttemperatur ist 15 Grad. Am Abend ist es wieder kühl. Denken Sie an eine warme Jacke.“</p>
+</details>
+
+<script>
+  const loesungen = { q1: 'A', q2: 'C', q3: 'B', q4: 'A', q5: 'C' };
+  const erklaerungen = {
+    1: "Sie sagt: „Am Dienstag um 10 Uhr und am Donnerstag um 15 Uhr.“ Bis Freitagmittag muss man anrufen, das ist kein Termin.",
+    2: "Er sagt: „Auf der A2 gibt es heute Morgen einen Unfall zwischen Rehren und Bad Eilsen.“ Auf der B 83 hat man freie Fahrt.",
+    3: "Sie sagt: „… fährt heute nicht von Gleis 5, sondern von Gleis 8.“",
+    4: "Er sagt: „Heute ist Feiertag und unsere Praxis ist geschlossen.“ Einen Notfall hat der Arzt nicht, bei Notfällen soll man zu einer anderen Praxis gehen.",
+    5: "Sie sagt: „Am Nachmittag steigen die Temperaturen und die Sonne scheint. Die Höchsttemperatur ist 15 Grad.“ Die 5 bis 8 Grad gelten für den Morgen."
+  };
+
+  /* Audio: nur einmal abspielbar */
+  const audio = document.getElementById('main-audio');
+  const hinweis = document.getElementById('audio-hinweis');
+  let hatGespielt = false;
+  audio.addEventListener('ended', function () {
+    hatGespielt = true; audio.controls = false; hinweis.classList.add('sichtbar');
+  });
+  audio.addEventListener('play', function () {
+    if (hatGespielt) { audio.pause(); audio.currentTime = 0; audio.controls = false; hinweis.classList.add('sichtbar'); }
+  });
+
+  function auswerten() {
+    let punkte = 0;
+    for (const [name, richtig] of Object.entries(loesungen)) {
+      const nr = name.replace('q', '');
+      const aufgabe = document.getElementById('a' + nr);
+      const gewaehlt = document.querySelector('input[name="' + name + '"]:checked');
+      aufgabe.querySelectorAll('.option').forEach(function (opt) {
+        opt.classList.remove('correct', 'wrong', 'reveal-correct');
+        if (opt.querySelector('input').value === richtig) opt.classList.add('reveal-correct');
+      });
+      const ok = !!gewaehlt && gewaehlt.value === richtig;
+      if (gewaehlt) {
+        const o = gewaehlt.closest('.option');
+        if (ok) { o.classList.add('correct'); } else { o.classList.add('wrong'); }
+      }
+      if (ok) punkte++;
+      const e = document.getElementById('e' + nr);
+      e.className = 'erkl sichtbar ' + (ok ? 'ok' : 'falsch');
+      e.textContent = (ok ? '✓ ' : 'Richtig ist ' + richtig + '. ') + erklaerungen[nr];
+    }
+    document.getElementById('punkte-anzeige').textContent = punkte + ' / 5';
+    const texte = ['Noch üben! 💪', 'Guter Anfang! 📖', 'Solide! 👍', 'Sehr gut! 🎉', 'Fast perfekt! ⭐', 'Ausgezeichnet! 🏆'];
+    document.getElementById('ergebnis-text').textContent = texte[punkte];
+    document.getElementById('ergebnis').classList.add('visible');
+    document.getElementById('hoertext').classList.add('visible');
+    document.getElementById('ergebnis').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function reset() {
+    document.querySelectorAll('input[type="radio"]').forEach(function (r) { r.checked = false; });
+    document.querySelectorAll('.option').forEach(function (o) { o.classList.remove('correct', 'wrong', 'reveal-correct'); });
+    document.querySelectorAll('.erkl').forEach(function (e) { e.className = 'erkl'; e.textContent = ''; });
+    document.getElementById('ergebnis').classList.remove('visible');
+    const ht = document.getElementById('hoertext'); ht.classList.remove('visible'); ht.open = false;
+    audio.controls = true; audio.currentTime = 0; hatGespielt = false; hinweis.classList.remove('sichtbar');
+  }
+</script>
+</body>
+</html>
