@@ -357,6 +357,14 @@ let vorherigerOrt=null;
 let amGrabstein=false;
 let handylampe=false;
 let lampStartTime=null;
+// Katzenbilder und Sound liegen im Ordner "bilder".
+// Die Dateinamen können hier zentral angepasst werden.
+const katzenBild = "bilder/katze.jpg";
+const katzenSprungBild = "bilder/katze-sprung.jpg";
+const katzenFauchSound = "bilder/fauchen.mp3";
+let katzeEntdeckt=false;
+let katzeWeg=false;
+let schluesselSichtbar=false;
 let typingTimer=null;
 let characterIndex=0;
 
@@ -370,7 +378,10 @@ let characterIndex=0;
     amGrabstein:amGrabstein,
     amTor:amTor,
     handylampe:handylampe,
-    lampStartTime:lampStartTime
+    lampStartTime:lampStartTime,
+    katzeEntdeckt:katzeEntdeckt,
+    katzeWeg:katzeWeg,
+    schluesselSichtbar:schluesselSichtbar
   };
 }
   function geheZurueck(){
@@ -386,7 +397,12 @@ let characterIndex=0;
     imVorgarten:imVorgarten,
     anDerAbzweigung:anDerAbzweigung,
     amGrabstein:amGrabstein,
-    amTor:amTor
+    amTor:amTor,
+    handylampe:handylampe,
+    lampStartTime:lampStartTime,
+    katzeEntdeckt:katzeEntdeckt,
+    katzeWeg:katzeWeg,
+    schluesselSichtbar:schluesselSichtbar
   };
 
   const ziel=vorherigerOrt;
@@ -466,6 +482,12 @@ function verbleibendeMinuten(){
 
   return Math.ceil(rest/60000);
 }
+function spieleKatzenFauchen(){
+  const sound=new Audio(katzenFauchSound);
+  sound.currentTime=0;
+  sound.play().catch(()=>{});
+}
+
 commandForm.addEventListener("submit",event=>{
  event.preventDefault();
 
@@ -656,9 +678,11 @@ if(handylampe){
   understood=true;
   answer="Du hältst den Atem an und lauschst. Nichts. Kein Wind, kein Rascheln, kein Laut aus dem Haus. Die Stille wirkt beinahe unnatürlich.";
    
-}else if(imVorgarten && !amGrabstein && (
+}else if(imVorgarten && !amGrabstein && !katzeEntdeckt && (
   command.includes("hoer genau hin")||
   command.includes("ich hoere genau hin")||
+  command.includes("hoere genau")||
+  command.includes("ich hoere genau")||
   command.includes("lausche")||
   command.includes("ich lausche")||
   command.includes("hoere genau hin")||
@@ -666,9 +690,56 @@ if(handylampe){
   command.includes("ich hoere hin")
 )){
   understood=true;
-  answer="Du hältst einen Moment lang ganz still und lauschst. Zuerst hörst du nichts. Dann raschelt irgendwo im Garten trockenes Laub. Es klingt, als wäre dort etwas.";
+  sceneChanged=true;
+  katzeEntdeckt=true;
+  sceneImage.src=katzenBild;
+  sceneImage.alt="Eine schwarze Katze sitzt im Gebüsch";
+  answer="Du hältst den Atem an und lauschst. Es raschelt im Gebüsch.\n\nZwischen den dunklen Blättern entdeckst du eine schwarze Katze. Sie beobachtet dich regungslos.";
+  skipButton.hidden=true;
 
-   }else if(imVorgarten && !amGrabstein && (
+}else if(imVorgarten && !amGrabstein && katzeEntdeckt && !katzeWeg && (
+  command.includes("sprich mit der katze")||
+  command.includes("sprich mit katze")||
+  command.includes("ich spreche mit der katze")||
+  command.includes("ich spreche mit katze")
+)){
+  understood=true;
+  answer="Du sprichst leise mit der Katze. Sie sieht dich mit großen Augen an. 😊";
+
+}else if(imVorgarten && !amGrabstein && katzeEntdeckt && !katzeWeg && (
+  command.includes("streichle katze")||
+  command.includes("streichle die katze")||
+  command.includes("ich streichle die katze")||
+  command.includes("fass die katze an")||
+  command.includes("ich fasse die katze an")||
+  command.includes("beruehre die katze")||
+  command.includes("ich beruehre die katze")||
+  command.includes("vertreib die katze")||
+  command.includes("scheuch die katze weg")
+)){
+  understood=true;
+  sceneChanged=true;
+  katzeWeg=true;
+  schluesselSichtbar=true;
+  sceneImage.src=katzenSprungBild;
+  sceneImage.alt="Die schwarze Katze springt fauchend ins Dickicht";
+  spieleKatzenFauchen();
+  answer="Die Katze springt fauchend ins Dickicht!\n\nErschrocken weichst du zurück. Doch dann bemerkst du etwas im Gras: Zwischen den Blättern liegt ein rostiger Schlüssel.";
+  skipButton.hidden=true;
+
+}else if(imVorgarten && !amGrabstein && katzeWeg && (
+  command.includes("streichle katze")||
+  command.includes("streichle die katze")||
+  command.includes("ich streichle die katze")||
+  command.includes("fass die katze an")||
+  command.includes("ich fasse die katze an")||
+  command.includes("beruehre die katze")||
+  command.includes("ich beruehre die katze")
+)){
+  understood=true;
+  answer="Die Katze ist längst im Dickicht verschwunden. Du hörst nur noch ein leises Rascheln.";
+
+}else if(imVorgarten && !amGrabstein && (
   command.includes("untersuche die bank")||
   command.includes("untersuche bank")||
   command.includes("geh zur bank")||
