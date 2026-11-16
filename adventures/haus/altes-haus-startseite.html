@@ -356,6 +356,7 @@ let anDerAbzweigung=false;
 let vorherigerOrt=null;
 let amGrabstein=false;
 let anDerHaustuer=false;
+let amKatzenfenster=false;
 let handylampe=false;
 let lampStartTime=null;
 // Katzenbilder und Sound liegen im Ordner "bilder".
@@ -378,6 +379,7 @@ let characterIndex=0;
     anDerAbzweigung:anDerAbzweigung,
     amGrabstein:amGrabstein,
     anDerHaustuer:anDerHaustuer,
+    amKatzenfenster:amKatzenfenster,
     amTor:amTor,
     handylampe:handylampe,
     lampStartTime:lampStartTime,
@@ -400,6 +402,7 @@ let characterIndex=0;
     anDerAbzweigung:anDerAbzweigung,
     amGrabstein:amGrabstein,
     anDerHaustuer:anDerHaustuer,
+    amKatzenfenster:amKatzenfenster,
     amTor:amTor,
     handylampe:handylampe,
     lampStartTime:lampStartTime,
@@ -419,6 +422,7 @@ let characterIndex=0;
   anDerAbzweigung=ziel.anDerAbzweigung;
   amGrabstein=ziel.amGrabstein;
   anDerHaustuer=ziel.anDerHaustuer;
+  amKatzenfenster=ziel.amKatzenfenster;
   amTor=ziel.amTor;
   handylampe=ziel.handylampe;
   lampStartTime=ziel.lampStartTime;
@@ -871,6 +875,13 @@ if(handylampe){
   command.includes("geh nach rechts")||
   command.includes("gehe nach rechts")||
   command.includes("ich gehe nach rechts")||
+  command.includes("geh rechts")||
+  command.includes("ich gehe rechts")||
+  command.includes("geh zum haus")||
+  command.includes("gehe zum haus")||
+  command.includes("ich gehe zum haus")||
+  command.includes("folge dem hauptweg")||
+  command.includes("ich folge dem hauptweg")||
   command.includes("geh die stufen hoch")||
   command.includes("gehe die stufen hoch")||
   command.includes("ich gehe die stufen hoch")
@@ -883,6 +894,7 @@ if(handylampe){
   amTor=false;
   amGrabstein=false;
   anDerHaustuer=true;
+  amKatzenfenster=false;
 
   sceneImage.src="bilder/eingang.jpg";
   sceneImage.alt="Die alte Haustür des Hauses";
@@ -892,9 +904,13 @@ if(handylampe){
 }else if(anDerHaustuer && (
   command.includes("mach die haustuer auf")||
   command.includes("mache die haustuer auf")||
+  command.includes("mach die tuer auf")||
+  command.includes("mache die tuer auf")||
   command.includes("oeffne die haustuer")||
   command.includes("ich mache die haustuer auf")||
-  command.includes("ich oeffne die haustuer")
+  command.includes("ich mache die tuer auf")||
+  command.includes("ich oeffne die haustuer")||
+  command.includes("ich oeffne die tuer")
 )){
   understood=true;
   answer="Die Tür bewegt sich nicht. Sie ist fest verschlossen.";
@@ -953,7 +969,19 @@ if(handylampe){
   command.includes("ich folge dem pfad")
 )){
   understood=true;
-  answer="Du gehst ein paar Schritte nach links und folgst dem schmalen Pfad an der Hauswand entlang. Das mannshohe Dickicht bewegt sich kaum im Dunkeln. Du bist noch immer vor der Haustür.";
+  sceneChanged=true;
+  speichereOrt();
+  anDerHaustuer=false;
+  anDerAbzweigung=false;
+  imVorgarten=false;
+  amGrabstein=false;
+  amTor=false;
+  amKatzenfenster=true;
+  katzeEntdeckt=true;
+  sceneImage.src=katzenBild;
+  sceneImage.alt="Eine Katze vor einem Fenster im dunklen Gebüsch";
+  answer="Du quetschst dich an der Hauswand entlang. Das Gebüsch ist dornig. Auf einmal ist der Pfad zu Ende. Du stehst vor einem Fenster.";
+  skipButton.hidden=true;
 
 }else if(anDerHaustuer && (
   command.includes("ich gehe zur abzweigung")||
