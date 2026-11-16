@@ -355,6 +355,7 @@ let imVorgarten=false;
 let anDerAbzweigung=false;
 let vorherigerOrt=null;
 let amGrabstein=false;
+let anDerHaustuer=false;
 let handylampe=false;
 let lampStartTime=null;
 // Katzenbilder und Sound liegen im Ordner "bilder".
@@ -376,6 +377,7 @@ let characterIndex=0;
     imVorgarten:imVorgarten,
     anDerAbzweigung:anDerAbzweigung,
     amGrabstein:amGrabstein,
+    anDerHaustuer:anDerHaustuer,
     amTor:amTor,
     handylampe:handylampe,
     lampStartTime:lampStartTime,
@@ -397,6 +399,7 @@ let characterIndex=0;
     imVorgarten:imVorgarten,
     anDerAbzweigung:anDerAbzweigung,
     amGrabstein:amGrabstein,
+    anDerHaustuer:anDerHaustuer,
     amTor:amTor,
     handylampe:handylampe,
     lampStartTime:lampStartTime,
@@ -415,7 +418,13 @@ let characterIndex=0;
   imVorgarten=ziel.imVorgarten;
   anDerAbzweigung=ziel.anDerAbzweigung;
   amGrabstein=ziel.amGrabstein;
+  anDerHaustuer=ziel.anDerHaustuer;
   amTor=ziel.amTor;
+  handylampe=ziel.handylampe;
+  lampStartTime=ziel.lampStartTime;
+  katzeEntdeckt=ziel.katzeEntdeckt;
+  katzeWeg=ziel.katzeWeg;
+  schluesselSichtbar=ziel.schluesselSichtbar;
 
   hideCharacter();
   response.textContent="";
@@ -622,6 +631,7 @@ if(handylampe){
   anDerAbzweigung=false;
   imVorgarten=false;
   amGrabstein=false;
+  anDerHaustuer=false;
   amTor=true;
 
   sceneImage.src="bilder/tor.jpg";
@@ -642,6 +652,7 @@ if(handylampe){
   anDerAbzweigung=false;
   imVorgarten=true;
   amGrabstein=false;
+  anDerHaustuer=false;
   amTor=false;
 
   if(handylampe){
@@ -678,7 +689,7 @@ if(handylampe){
   understood=true;
   answer="Du hältst den Atem an und lauschst. Nichts. Kein Wind, kein Rascheln, kein Laut aus dem Haus. Die Stille wirkt beinahe unnatürlich.";
    
-}else if(imVorgarten && !amGrabstein && !katzeEntdeckt && (
+}else if(imVorgarten && !amGrabstein && (
   command.includes("hoer genau hin")||
   command.includes("ich hoere genau hin")||
   command.includes("hoere genau")||
@@ -690,54 +701,7 @@ if(handylampe){
   command.includes("ich hoere hin")
 )){
   understood=true;
-  sceneChanged=true;
-  katzeEntdeckt=true;
-  sceneImage.src=katzenBild;
-  sceneImage.alt="Eine schwarze Katze sitzt im Gebüsch";
-  answer="Du hältst den Atem an und lauschst. Es raschelt im Gebüsch.\n\nZwischen den dunklen Blättern entdeckst du eine schwarze Katze. Sie beobachtet dich regungslos.";
-  skipButton.hidden=true;
-
-}else if(imVorgarten && !amGrabstein && katzeEntdeckt && !katzeWeg && (
-  command.includes("sprich mit der katze")||
-  command.includes("sprich mit katze")||
-  command.includes("ich spreche mit der katze")||
-  command.includes("ich spreche mit katze")
-)){
-  understood=true;
-  answer="Du sprichst leise mit der Katze. Sie sieht dich mit großen Augen an. 😊";
-
-}else if(imVorgarten && !amGrabstein && katzeEntdeckt && !katzeWeg && (
-  command.includes("streichle katze")||
-  command.includes("streichle die katze")||
-  command.includes("ich streichle die katze")||
-  command.includes("fass die katze an")||
-  command.includes("ich fasse die katze an")||
-  command.includes("beruehre die katze")||
-  command.includes("ich beruehre die katze")||
-  command.includes("vertreib die katze")||
-  command.includes("scheuch die katze weg")
-)){
-  understood=true;
-  sceneChanged=true;
-  katzeWeg=true;
-  schluesselSichtbar=true;
-  sceneImage.src=katzenSprungBild;
-  sceneImage.alt="Die schwarze Katze springt fauchend ins Dickicht";
-  spieleKatzenFauchen();
-  answer="Die Katze springt fauchend ins Dickicht!\n\nErschrocken weichst du zurück. Doch dann bemerkst du etwas im Gras: Zwischen den Blättern liegt ein rostiger Schlüssel.";
-  skipButton.hidden=true;
-
-}else if(imVorgarten && !amGrabstein && katzeWeg && (
-  command.includes("streichle katze")||
-  command.includes("streichle die katze")||
-  command.includes("ich streichle die katze")||
-  command.includes("fass die katze an")||
-  command.includes("ich fasse die katze an")||
-  command.includes("beruehre die katze")||
-  command.includes("ich beruehre die katze")
-)){
-  understood=true;
-  answer="Die Katze ist längst im Dickicht verschwunden. Du hörst nur noch ein leises Rascheln.";
+  answer="Du hältst einen Moment lang ganz still und lauschst. Zuerst hörst du nichts. Dann raschelt irgendwo im Garten trockenes Laub. Es klingt, als wäre dort etwas.";
 
 }else if(imVorgarten && !amGrabstein && (
   command.includes("untersuche die bank")||
@@ -917,12 +881,98 @@ if(handylampe){
   anDerAbzweigung=false;
   imVorgarten=false;
   amTor=false;
+  amGrabstein=false;
+  anDerHaustuer=true;
 
   sceneImage.src="bilder/eingang.jpg";
   sceneImage.alt="Die alte Haustür des Hauses";
 
   answer="Du gehst nach rechts und steigst vorsichtig die alten Steinstufen hinauf. Vor dir liegt die schwere, verwitterte Haustür. Efeu rankt sich über das Mauerwerk. Es ist vollkommen still.";
   skipButton.hidden=true;
+}else if(anDerHaustuer && (
+  command.includes("mach die haustuer auf")||
+  command.includes("mache die haustuer auf")||
+  command.includes("oeffne die haustuer")||
+  command.includes("ich mache die haustuer auf")||
+  command.includes("ich oeffne die haustuer")
+)){
+  understood=true;
+  answer="Die Tür bewegt sich nicht. Sie ist fest verschlossen.";
+
+}else if(anDerHaustuer && (
+  command.includes("sieh dich um")||
+  command.includes("ich sehe mich um")||
+  command.includes("sehe mich um")||
+  command.includes("schau dich um")||
+  command.includes("ich schaue mich um")||
+  command.includes("schaue mich um")
+)){
+  understood=true;
+  answer="Du stehst vor einer massiven Holztür mit einem alten Schloss und einer rostigen Klinke. Rechts liegt nur mannshohes Dickicht. Links führt ein kleiner Pfad weiter. Hinter dir führen die Treppenstufen und ein kleiner Pfad zurück zur Abzweigung.";
+
+}else if(anDerHaustuer && (
+  command.includes("hoer genau hin")||
+  command.includes("ich hoere genau hin")||
+  command.includes("lausch")||
+  command.includes("ich lausche")||
+  command.includes("lausche")
+)){
+  understood=true;
+  answer="Du hältst den Atem an und lauschst. Es ist totenstill. Keine Vögel, kein Rascheln, keine Insekten.";
+
+}else if(anDerHaustuer && (
+  command.includes("sieh auf das handy")||
+  command.includes("ich sehe auf das handy")||
+  command.includes("sehe auf das handy")
+)){
+  understood=true;
+  const minuten=verbleibendeMinuten();
+  answer="Du siehst auf dein Handy. Du hast nur noch "+minuten+" Minuten Licht.";
+
+}else if(anDerHaustuer && (
+  command.includes("klopf an die tuer")||
+  command.includes("ich klopfe an die tuer")||
+  command.includes("klopfe an die tuer")
+)){
+  understood=true;
+  answer="Du klopfst an die Tür. Keine Antwort. Es bleibt still.";
+
+}else if(anDerHaustuer && (
+  command.includes("untersuche den pfad")||
+  command.includes("ich untersuche den pfad")||
+  command.includes("untersuche pfad")
+)){
+  understood=true;
+  answer="Der Pfad führt direkt an der Hauswand entlang. Er scheint nicht lang zu sein.";
+
+}else if(anDerHaustuer && (
+  command.includes("geh nach links")||
+  command.includes("ich gehe nach links")||
+  command.includes("gehe nach links")||
+  command.includes("folge dem pfad")||
+  command.includes("ich folge dem pfad")
+)){
+  understood=true;
+  answer="Du gehst ein paar Schritte nach links und folgst dem schmalen Pfad an der Hauswand entlang. Das mannshohe Dickicht bewegt sich kaum im Dunkeln. Du bist noch immer vor der Haustür.";
+
+}else if(anDerHaustuer && (
+  command.includes("ich gehe zur abzweigung")||
+  command.includes("geh zur abzweigung")||
+  command.includes("gehe zur abzweigung")
+)){
+  understood=true;
+  sceneChanged=true;
+  speichereOrt();
+  anDerHaustuer=false;
+  anDerAbzweigung=true;
+  imVorgarten=false;
+  amGrabstein=false;
+  amTor=false;
+  sceneImage.src="bilder/vorgarten-abzweig.jpg";
+  sceneImage.alt="Die Abzweigung im verwilderten Garten";
+  answer="Du gehst die Treppenstufen hinunter und folgst dem kleinen Pfad zurück zur Abzweigung.";
+  skipButton.hidden=true;
+
 }else if(amGrabstein && (
   command.includes("untersuche den grabstein")||
   command.includes("untersuche grabstein")||
