@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Goethe A2 – Hören Teil 2 · Übung 4</title>
+<style>
+  body { font-family: 'Georgia', serif; max-width: 820px; margin: 40px auto; padding: 20px; background: #fafaf8; color: #2c2c2c; line-height: 1.7; }
+  h1 { font-size: 1.3em; border-bottom: 2px solid #1a3a6a; padding-bottom: 8px; margin-bottom: 6px; }
+  .meta { font-size: 0.85em; color: #666; margin-bottom: 30px; }
+  .anweisung { background: #eef2f7; border-left: 4px solid #1a3a6a; padding: 14px 18px; margin-bottom: 24px; font-size: 0.95em; }
+  .anweisung p + p { margin-top: 10px; }
+  .back { display: inline-block; margin-bottom: 24px; font-size: 0.82em; color: #666; text-decoration: none; letter-spacing: 0.05em; }
+  .back:hover { color: #1a3a6a; }
+
+  .audio-box { background: #fff; border: 2px solid #1a3a6a; border-radius: 4px; padding: 18px 24px; margin-bottom: 24px; }
+  .audio-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .audio-label { font-size: 0.9em; color: #444; white-space: nowrap; }
+  .audio-hinweis { font-size: 0.82em; color: #c0392b; font-style: italic; display: none; margin-top: 8px; }
+  .audio-hinweis.sichtbar { display: block; }
+
+  /* Bild */
+  .bild-box { background: #fff; border: 1px solid #ddd; border-radius: 4px; padding: 12px; margin-bottom: 24px; text-align: center; }
+  .bild-box button { all: unset; cursor: zoom-in; display: block; margin: 0 auto; max-width: 560px; width: 100%; }
+  .bild-box img { width: 100%; height: auto; display: block; border-radius: 2px; }
+  .bild-hinweis { font-size: 0.8em; color: #777; margin-top: 8px; }
+  .lightbox { position: fixed; inset: 0; background: rgba(20, 28, 40, 0.92); display: none; align-items: center; justify-content: center; z-index: 50; padding: 12px; cursor: zoom-out; }
+  .lightbox.offen { display: flex; }
+  .lightbox img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 2px; }
+  .lightbox .zu { position: absolute; top: 10px; right: 16px; color: #fff; font-size: 2em; line-height: 1; }
+
+  /* Tabelle */
+  .tabelle { background: #fff; border: 1px solid #ddd; border-radius: 4px; padding: 8px 22px 14px; margin-bottom: 8px; }
+  .zeile { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px dashed #d8dde6; flex-wrap: wrap; }
+  .zeile:last-child { border-bottom: none; }
+  .nr { background: #1a3a6a; color: white; font-weight: bold; padding: 2px 10px; border-radius: 3px; font-size: 0.88em; min-width: 32px; text-align: center; }
+  .nr.bsp { background: #777; }
+  .tag { flex: 1; min-width: 140px; font-size: 0.98em; }
+  select { font-family: 'Georgia', serif; font-size: 1em; padding: 6px 10px; border: 1px solid #1a3a6a; border-radius: 2px; background: #fff; color: #2c2c2c; min-width: 90px; }
+  select:disabled { background: #eef2f7; color: #1a3a6a; font-weight: bold; border-color: #b7c3d6; }
+  .zeile.doppelt select { border-color: #d68910; background: #fef5e7; }
+  .zeile.richtig { background: #e6f4ea; border-left: 4px solid #3a7d44; padding-left: 10px; }
+  .zeile.falsch { background: #fdecea; border-left: 4px solid #c0392b; padding-left: 10px; }
+  .erkl { display: none; width: 100%; font-size: 0.86em; line-height: 1.5; padding-left: 44px; }
+  .erkl.sichtbar { display: block; }
+  .zeile.richtig .erkl { color: #2c6a38; }
+  .zeile.falsch .erkl { color: #8e2b20; }
+  .warnung { font-size: 0.82em; color: #b36b00; min-height: 1.4em; margin: 6px 0 0; }
+
+  .loesung-toggle { margin-top: 28px; text-align: center; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn-loesung, .btn-reset { border: none; padding: 12px 28px; font-size: 0.9em; letter-spacing: 0.06em; cursor: pointer; font-family: 'Georgia', serif; border-radius: 2px; }
+  .btn-loesung { background: #1a3a6a; color: white; }
+  .btn-loesung:hover { background: #142d54; }
+  .btn-reset { background: transparent; color: #666; border: 1px solid #ccc; }
+  .btn-reset:hover { background: #f0f0f0; }
+  .ergebnis-box { margin-top: 24px; text-align: center; font-size: 1.1em; display: none; }
+  .ergebnis-box.visible { display: block; }
+  .punkte { font-size: 2em; font-weight: bold; color: #1a3a6a; display: block; margin: 8px 0; }
+  .distraktoren { display: block; font-size: 0.85em; color: #555; margin-top: 6px; }
+
+  .hoertext { margin-top: 24px; display: none; background: #fff; border: 1px solid #ccc; border-radius: 4px; padding: 14px 22px; }
+  .hoertext.visible { display: block; }
+  .hoertext summary { cursor: pointer; font-size: 0.9em; color: #1a3a6a; font-weight: bold; }
+  .hoertext p { margin-top: 8px; font-size: 0.95em; }
+  .hoertext .rolle { font-weight: bold; color: #1a3a6a; margin-right: 6px; }
+
+  @media (max-width: 520px) { .tabelle { padding: 6px 14px 12px; } .erkl { padding-left: 0; } }
+  @media print { .back, .loesung-toggle, .ergebnis-box, .audio-box { display: none; } }
+</style>
+</head>
+<body>
+
+<a class="back" href="a2-goethe-hoeren-teil2.html">← Zurück zur Übungsauswahl</a>
+<h1>Goethe A2 · Hören Teil 2 · Übung 4</h1>
+<div class="meta">Übungsmaterial · Niveau A2 · Goethe-Format · Thema: Eine Reise nach Mexiko</div>
+
+<div class="anweisung">
+  <p><strong>Aufgabe:</strong> Du hörst ein Gespräch zwischen Marilia und Mark. Was machen die beiden in Mexiko? Welches Bild passt zu welchem Tag? Wähle für jede Aufgabe (1–5) das passende Bild (a–i). Drei Bilder passen nicht.</p>
+  <p>Ein Beispiel ist schon gelöst. <em>Du hörst das Gespräch nur einmal.</em></p>
+</div>
+
+<!-- Audio: nur einmal abspielbar -->
+<div class="audio-box">
+  <div class="audio-row">
+    <span class="audio-label">🎧 Gespräch:</span>
+    <audio id="main-audio" controls controlslist="nodownload noplaybackrate" oncontextmenu="return false;">
+      <source src="audio/a2-goethe-hoeren-teil2-uebung4.mp3" type="audio/mpeg">
+      Dein Browser unterstützt das Audio-Element nicht.
+    </audio>
+  </div>
+  <div class="audio-hinweis" id="audio-hinweis">⚠️ Du hast das Gespräch bereits gehört. Im echten Test ist nur ein Abspielen möglich.</div>
+</div>
+
+<!-- Bild: zum Vergrößern anklicken -->
+<div class="bild-box">
+  <button type="button" id="bild-knopf" aria-label="Bild vergrößern">
+    <img src="bilder/a2-goethe-hoeren-teil2-uebung4.webp" alt="Neun Bilder a bis i: am Pool, im Restaurant, im Museum, Maya-Pyramide, Tanzen, Strandspaziergang, Markt, Schnorcheln, Zenote">
+  </button>
+  <div class="bild-hinweis">Zum Vergrößern auf das Bild tippen oder klicken.</div>
+</div>
+<div class="lightbox" id="lightbox" role="dialog" aria-label="Bild vergrößert">
+  <span class="zu" aria-hidden="true">×</span>
+  <img src="bilder/a2-goethe-hoeren-teil2-uebung4.webp" alt="">
+</div>
+
+<div class="tabelle" id="tabelle">
+  <div class="zeile">
+    <span class="nr bsp">0</span>
+    <span class="tag">Beispiel: Sonntag</span>
+    <select disabled aria-label="Beispiel"><option>a</option></select>
+  </div>
+
+  <div class="zeile" id="z1">
+    <span class="nr">1</span><span class="tag">Montag</span>
+    <select id="s1" aria-label="Montag"></select>
+    <div class="erkl" id="e1"></div>
+  </div>
+  <div class="zeile" id="z2">
+    <span class="nr">2</span><span class="tag">Dienstag</span>
+    <select id="s2" aria-label="Dienstag"></select>
+    <div class="erkl" id="e2"></div>
+  </div>
+  <div class="zeile" id="z3">
+    <span class="nr">3</span><span class="tag">Mittwoch</span>
+    <select id="s3" aria-label="Mittwoch"></select>
+    <div class="erkl" id="e3"></div>
+  </div>
+  <div class="zeile" id="z4">
+    <span class="nr">4</span><span class="tag">Donnerstag</span>
+    <select id="s4" aria-label="Donnerstag"></select>
+    <div class="erkl" id="e4"></div>
+  </div>
+  <div class="zeile" id="z5">
+    <span class="nr">5</span><span class="tag">Freitag</span>
+    <select id="s5" aria-label="Freitag"></select>
+    <div class="erkl" id="e5"></div>
+  </div>
+</div>
+<p class="warnung" id="warnung" aria-live="polite"></p>
+
+<div class="loesung-toggle">
+  <button class="btn-loesung" type="button" onclick="auswerten()">Auswerten</button>
+  <button class="btn-reset" type="button" onclick="reset()">Zurücksetzen</button>
+</div>
+
+<div class="ergebnis-box" id="ergebnis">
+  <span class="punkte" id="punkte-anzeige"></span>
+  <span id="ergebnis-text"></span>
+  <span class="distraktoren" id="distraktoren"></span>
+</div>
+
+<details class="hoertext" id="hoertext">
+  <summary>Transkript anzeigen</summary>
+  <p><span class="rolle">Marilia:</span>Mark, morgen fliegen wir nach Mexiko! Hast du überlegt, was wir machen?</p>
+  <p><span class="rolle">Mark:</span>Ja, ich habe schon einiges recherchiert. Lass es uns durchgehen.</p>
+  <p><span class="rolle">Marilia:</span>Okay, wir kommen am Sonntag an. Was machen wir dann?</p>
+  <p><span class="rolle">Mark:</span>Nach dem Check-in sind wir bestimmt müde vom Flug. Lass uns einfach am Pool entspannen und Cocktails trinken.</p>
+  <p><span class="rolle">Marilia:</span>Gute Idee! Und am Montag? Wollen wir zu den Maya-Pyramiden nach Chichén Itzá?</p>
+  <p><span class="rolle">Mark:</span>Ja, aber wir müssen früh aufstehen. Die Tour beginnt um 7 Uhr. Wir sollen viel Wasser mitnehmen, und wir müssen natürlich unsere Handys aufladen.</p>
+  <p><span class="rolle">Marilia:</span>Okay, Pyramiden am Montag. Und am Dienstag? Ich wollte unbedingt schnorcheln gehen!</p>
+  <p><span class="rolle">Mark:</span>Einverstanden, lass uns das so planen. Wenn das Wetter schlecht ist, gehen wir halt am Strand spazieren.</p>
+  <p><span class="rolle">Marilia:</span>Okay, hoffen wir auf gutes Wetter! Und am Mittwoch? Da gehen wir tanzen! Ich will Cumbia lernen!</p>
+  <p><span class="rolle">Mark:</span>Marilia, wir sind schon so viel gelaufen und geschwommen. Ich bin da bestimmt zu müde zum Tanzen. Lass uns lieber gut essen gehen. Ich habe ein tolles, typisches Restaurant gefunden.</p>
+  <p><span class="rolle">Marilia:</span>Okay, Restaurant statt Tanzen. Das ist schade. Und am Donnerstag?</p>
+  <p><span class="rolle">Mark:</span>Da machen wir einen Ausflug zu einer Zenote. Das ist ein natürlicher Pool im Dschungel. Das Wasser ist kristallklar!</p>
+  <p><span class="rolle">Marilia:</span>Das klingt toll! Und am Freitag? Wollen wir auf dem Markt Souvenirs kaufen?</p>
+  <p><span class="rolle">Mark:</span>Ich glaube, der Markt ist nur am Wochenende. Aber wir können ins Museum gehen.</p>
+  <p><span class="rolle">Marilia:</span>Perfekt! Dann haben wir am Samstag noch Zeit zum Packen, bevor wir fliegen.</p>
+  <p><span class="rolle">Mark:</span>Genau. Ich freue mich schon!</p>
+</details>
+
+<script>
+  const BILDER = { a: 'Am Pool', b: 'Essen gehen', c: 'Im Museum', d: 'Maya-Pyramide', e: 'Tanzen', f: 'Strandspaziergang', g: 'Markt', h: 'Schnorcheln', i: 'Zenote' };
+  const BEISPIEL = 'a';
+  const LOESUNGEN = { 1: 'd', 2: 'h', 3: 'b', 4: 'i', 5: 'c' };
+  const ERKLAERUNGEN = {
+    1: 'Im Text heißt es: „Okay, Pyramiden am Montag.“ Die Tour nach Chichén Itzá beginnt um 7 Uhr.',
+    2: 'Im Text heißt es: „Ich wollte unbedingt schnorcheln gehen!“ Einverstanden. Den Strandspaziergang (f) machen sie nur bei schlechtem Wetter.',
+    3: 'Im Text heißt es: „Lass uns lieber gut essen gehen.“ Tanzen (e) fällt aus, weil Mark zu müde ist.',
+    4: 'Im Text heißt es: „Da machen wir einen Ausflug zu einer Zenote.“',
+    5: 'Im Text heißt es: „Aber wir können ins Museum gehen.“ Der Markt (g) ist nur am Wochenende.'
+  };
+
+  /* Auswahlfelder füllen (das Beispiel ist nicht wählbar) */
+  for (let n = 1; n <= 5; n++) {
+    const s = document.getElementById('s' + n);
+    let h = '<option value="">–</option>';
+    Object.keys(BILDER).forEach(function (b) {
+      h += b === BEISPIEL ? '<option value="' + b + '" disabled>' + b + ' (Beispiel)</option>' : '<option value="' + b + '">' + b + '</option>';
+    });
+    s.innerHTML = h;
+    s.addEventListener('change', pruefeDoppelte);
+  }
+
+  /* Warnung bei doppelter Auswahl */
+  function pruefeDoppelte() {
+    const zaehler = {};
+    for (let n = 1; n <= 5; n++) { const v = document.getElementById('s' + n).value; if (v) zaehler[v] = (zaehler[v] || 0) + 1; }
+    let doppelt = false;
+    for (let n = 1; n <= 5; n++) {
+      const v = document.getElementById('s' + n).value;
+      const d = !!v && zaehler[v] > 1;
+      document.getElementById('z' + n).classList.toggle('doppelt', d);
+      if (d) doppelt = true;
+    }
+    document.getElementById('warnung').textContent = doppelt ? 'Jedes Bild passt nur zu einem Tag. Ein Buchstabe ist doppelt gewählt.' : '';
+  }
+
+  /* Bild vergrößern */
+  const lb = document.getElementById('lightbox');
+  document.getElementById('bild-knopf').addEventListener('click', function () { lb.classList.add('offen'); });
+  lb.addEventListener('click', function () { lb.classList.remove('offen'); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') lb.classList.remove('offen'); });
+
+  /* Audio: nur einmal abspielbar */
+  const audio = document.getElementById('main-audio');
+  const hinweis = document.getElementById('audio-hinweis');
+  let hatGespielt = false;
+  audio.addEventListener('ended', function () { hatGespielt = true; audio.controls = false; hinweis.classList.add('sichtbar'); });
+  audio.addEventListener('play', function () {
+    if (hatGespielt) { audio.pause(); audio.currentTime = 0; audio.controls = false; hinweis.classList.add('sichtbar'); }
+  });
+
+  function auswerten() {
+    let punkte = 0;
+    for (let n = 1; n <= 5; n++) {
+      const wahl = document.getElementById('s' + n).value;
+      const soll = LOESUNGEN[n];
+      const ok = wahl === soll;
+      if (ok) punkte++;
+      const z = document.getElementById('z' + n);
+      z.classList.remove('richtig', 'falsch');
+      z.classList.add(ok ? 'richtig' : 'falsch');
+      const e = document.getElementById('e' + n);
+      e.className = 'erkl sichtbar';
+      e.textContent = (ok ? '✓ ' : 'Richtig ist ' + soll + ' (' + BILDER[soll] + '). ') + ERKLAERUNGEN[n];
+    }
+    document.getElementById('punkte-anzeige').textContent = punkte + ' / 5';
+    const texte = ['Noch üben! 💪', 'Guter Anfang! 📖', 'Solide! 👍', 'Sehr gut! 🎉', 'Fast perfekt! ⭐', 'Ausgezeichnet! 🏆'];
+    document.getElementById('ergebnis-text').textContent = texte[punkte];
+    const benutzt = Object.values(LOESUNGEN).concat([BEISPIEL]);
+    const rest = Object.keys(BILDER).filter(function (b) { return benutzt.indexOf(b) === -1; });
+    document.getElementById('distraktoren').textContent = 'Diese Bilder passten nicht: ' + rest.map(function (b) { return b + ' (' + BILDER[b] + ')'; }).join(', ');
+    document.getElementById('ergebnis').classList.add('visible');
+    document.getElementById('hoertext').classList.add('visible');
+    document.getElementById('ergebnis').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function reset() {
+    for (let n = 1; n <= 5; n++) {
+      document.getElementById('s' + n).value = '';
+      const z = document.getElementById('z' + n); z.classList.remove('richtig', 'falsch', 'doppelt');
+      const e = document.getElementById('e' + n); e.className = 'erkl'; e.textContent = '';
+    }
+    document.getElementById('warnung').textContent = '';
+    document.getElementById('ergebnis').classList.remove('visible');
+    const ht = document.getElementById('hoertext'); ht.classList.remove('visible'); ht.open = false;
+    audio.controls = true; audio.currentTime = 0; hatGespielt = false; hinweis.classList.remove('sichtbar');
+  }
+</script>
+</body>
+</html>
