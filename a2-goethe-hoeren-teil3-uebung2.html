@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Goethe A2 – Hören Teil 3 · Übung 2</title>
+<style>
+  body { font-family: 'Georgia', serif; max-width: 820px; margin: 40px auto; padding: 20px; background: #fafaf8; color: #2c2c2c; line-height: 1.7; }
+  h1 { font-size: 1.3em; border-bottom: 2px solid #1a3a6a; padding-bottom: 8px; margin-bottom: 6px; }
+  .meta { font-size: 0.85em; color: #666; margin-bottom: 30px; }
+  .anweisung { background: #eef2f7; border-left: 4px solid #1a3a6a; padding: 14px 18px; margin-bottom: 24px; font-size: 0.95em; }
+  .anweisung p + p { margin-top: 10px; }
+  .back { display: inline-block; margin-bottom: 24px; font-size: 0.82em; color: #666; text-decoration: none; letter-spacing: 0.05em; }
+  .back:hover { color: #1a3a6a; }
+
+  .audio-box { background: #fff; border: 2px solid #1a3a6a; border-radius: 4px; padding: 18px 24px; margin-bottom: 24px; }
+  .audio-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .audio-label { font-size: 0.9em; color: #444; white-space: nowrap; }
+  .audio-hinweis { font-size: 0.82em; color: #c0392b; font-style: italic; display: none; margin-top: 8px; }
+  .audio-hinweis.sichtbar { display: block; }
+
+  /* Bild */
+  .bild-box { background: #fff; border: 1px solid #ddd; border-radius: 4px; padding: 12px; margin-bottom: 24px; text-align: center; }
+  .bild-box button { all: unset; cursor: zoom-in; display: block; margin: 0 auto; max-width: 560px; width: 100%; }
+  .bild-box img { width: 100%; height: auto; display: block; border-radius: 2px; }
+  .bild-hinweis { font-size: 0.8em; color: #777; margin-top: 8px; }
+  .lightbox { position: fixed; inset: 0; background: rgba(20, 28, 40, 0.92); display: none; align-items: center; justify-content: center; z-index: 50; padding: 12px; cursor: zoom-out; }
+  .lightbox.offen { display: flex; }
+  .lightbox img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 2px; }
+  .lightbox .zu { position: absolute; top: 10px; right: 16px; color: #fff; font-size: 2em; line-height: 1; }
+
+  /* Tabelle */
+  .tabelle { background: #fff; border: 1px solid #ddd; border-radius: 4px; padding: 8px 22px 14px; margin-bottom: 8px; }
+  .zeile { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px dashed #d8dde6; flex-wrap: wrap; }
+  .zeile:last-child { border-bottom: none; }
+  .nr { background: #1a3a6a; color: white; font-weight: bold; padding: 2px 10px; border-radius: 3px; font-size: 0.88em; min-width: 32px; text-align: center; }
+  .nr.bsp { background: #777; }
+  .tag { flex: 1; min-width: 140px; font-size: 0.98em; }
+  select { font-family: 'Georgia', serif; font-size: 1em; padding: 6px 10px; border: 1px solid #1a3a6a; border-radius: 2px; background: #fff; color: #2c2c2c; min-width: 90px; }
+  select:disabled { background: #eef2f7; color: #1a3a6a; font-weight: bold; border-color: #b7c3d6; }
+  .zeile.doppelt select { border-color: #d68910; background: #fef5e7; }
+  .zeile.richtig { background: #e6f4ea; border-left: 4px solid #3a7d44; padding-left: 10px; }
+  .zeile.falsch { background: #fdecea; border-left: 4px solid #c0392b; padding-left: 10px; }
+  .erkl { display: none; width: 100%; font-size: 0.86em; line-height: 1.5; padding-left: 44px; }
+  .erkl.sichtbar { display: block; }
+  .zeile.richtig .erkl { color: #2c6a38; }
+  .zeile.falsch .erkl { color: #8e2b20; }
+  .warnung { font-size: 0.82em; color: #b36b00; min-height: 1.4em; margin: 6px 0 0; }
+
+  .loesung-toggle { margin-top: 28px; text-align: center; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn-loesung, .btn-reset { border: none; padding: 12px 28px; font-size: 0.9em; letter-spacing: 0.06em; cursor: pointer; font-family: 'Georgia', serif; border-radius: 2px; }
+  .btn-loesung { background: #1a3a6a; color: white; }
+  .btn-loesung:hover { background: #142d54; }
+  .btn-reset { background: transparent; color: #666; border: 1px solid #ccc; }
+  .btn-reset:hover { background: #f0f0f0; }
+  .ergebnis-box { margin-top: 24px; text-align: center; font-size: 1.1em; display: none; }
+  .ergebnis-box.visible { display: block; }
+  .punkte { font-size: 2em; font-weight: bold; color: #1a3a6a; display: block; margin: 8px 0; }
+  .distraktoren { display: block; font-size: 0.85em; color: #555; margin-top: 6px; }
+
+  .hoertext { margin-top: 24px; display: none; background: #fff; border: 1px solid #ccc; border-radius: 4px; padding: 14px 22px; }
+  .hoertext.visible { display: block; }
+  .hoertext summary { cursor: pointer; font-size: 0.9em; color: #1a3a6a; font-weight: bold; }
+  .hoertext p { margin-top: 8px; font-size: 0.95em; }
+  .hoertext .rolle { font-weight: bold; color: #1a3a6a; margin-right: 6px; }
+
+  @media (max-width: 520px) { .tabelle { padding: 6px 14px 12px; } .erkl { padding-left: 0; } }
+  @media print { .back, .loesung-toggle, .ergebnis-box, .audio-box { display: none; } }
+
+  /* Aufgaben mit Bild und A/B/C */
+  .aufgabe { padding: 16px 0 14px; border-bottom: 1px dashed #d8dde6; }
+  .aufgabe:last-child { border-bottom: none; }
+  .aufgabe.richtig { background: #e6f4ea; border-left: 4px solid #3a7d44; padding-left: 10px; }
+  .aufgabe.falsch { background: #fdecea; border-left: 4px solid #c0392b; padding-left: 10px; }
+  .kopf { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .frage { font-size: 1.02em; }
+  .aufgabe .bild-knopf { all: unset; cursor: zoom-in; display: block; max-width: 560px; width: 100%; margin: 0 auto 10px; }
+  .aufgabe .bild-knopf img { width: 100%; height: auto; display: block; border: 1px solid #e3e3e3; border-radius: 3px; }
+  .wahl { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .chip { position: relative; cursor: pointer; }
+  .chip input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+  .chip span { display: inline-block; min-width: 64px; text-align: center; padding: 8px 20px; border: 1px solid #1a3a6a; border-radius: 3px; background: #fff; font-size: 1em; font-weight: bold; color: #1a3a6a; }
+  .chip input:checked + span { background: #1a3a6a; color: #fff; }
+  .chip input:focus-visible + span { outline: 2px solid #d68910; outline-offset: 2px; }
+  .chip.soll span { background: #3a7d44; border-color: #3a7d44; color: #fff; }
+  .chip.falsch-gewaehlt span { background: #c0392b; border-color: #c0392b; color: #fff; }
+  .aufgabe .erkl { padding-left: 0; margin-top: 10px; }
+  .hoertext .gespraech { margin-top: 16px; font-weight: bold; color: #1a3a6a; }
+</style>
+</head>
+<body>
+
+<a class="back" href="a2-goethe-hoeren-teil3.html">← Zurück zur Übungsauswahl</a>
+<h1>Goethe A2 · Hören Teil 3 · Übung 2</h1>
+<div class="meta">Übungsmaterial · Niveau A2 · Goethe-Format · Thema: Alltag und Freizeit</div>
+
+<div class="anweisung">
+  <p><strong>Aufgabe:</strong> Hör die fünf kurzen Gespräche. Was ist richtig? Wähl A, B oder C.</p>
+  <p><em>Du hörst die Gespräche nur einmal.</em></p>
+</div>
+
+<!-- Audio: nur einmal abspielbar -->
+<div class="audio-box">
+  <div class="audio-row">
+    <span class="audio-label">🎧 Gespräche 1–5:</span>
+    <audio id="main-audio" controls controlslist="nodownload noplaybackrate" oncontextmenu="return false;">
+      <source src="audio/a2-goethe-hoeren-teil3-uebung2.mp3" type="audio/mpeg">
+      Dein Browser unterstützt das Audio-Element nicht.
+    </audio>
+  </div>
+  <div class="audio-hinweis" id="audio-hinweis">⚠️ Du hast die Gespräche bereits gehört. Im echten Test ist nur ein Abspielen möglich.</div>
+</div>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-label="Bild vergrößert">
+  <span class="zu" aria-hidden="true">×</span>
+  <img src="" alt="">
+</div>
+
+<div class="tabelle" id="tabelle">
+  <div class="aufgabe" id="z1">
+    <div class="kopf"><span class="nr">1</span><span class="frage">Wo treffen sich Tom und Lisa?</span></div>
+    <button type="button" class="bild-knopf" data-src="bilder/a2-goethe-hoeren-teil3-uebung2-aufgabe1.webp" aria-label="Bild zu Aufgabe 1 vergrößern">
+      <img src="bilder/a2-goethe-hoeren-teil3-uebung2-aufgabe1.webp" alt="Drei Bilder: A Café, B Bibliothek, C Parkbank">
+    </button>
+    <div class="wahl" role="radiogroup" aria-label="Aufgabe 1">
+      <label class="chip"><input type="radio" name="a1" value="A"><span>A</span></label>
+      <label class="chip"><input type="radio" name="a1" value="B"><span>B</span></label>
+      <label class="chip"><input type="radio" name="a1" value="C"><span>C</span></label>
+    </div>
+    <div class="erkl" id="e1"></div>
+  </div>
+  <div class="aufgabe" id="z2">
+    <div class="kopf"><span class="nr">2</span><span class="frage">Welche Größe nimmt die Frau?</span></div>
+    <button type="button" class="bild-knopf" data-src="bilder/a2-goethe-hoeren-teil3-uebung2-aufgabe2.webp" aria-label="Bild zu Aufgabe 2 vergrößern">
+      <img src="bilder/a2-goethe-hoeren-teil3-uebung2-aufgabe2.webp" alt="Drei Jacken: A Größe S, B Größe M, C Größe L">
+    </button>
+    <div class="wahl" role="radiogroup" aria-label="Aufgabe 2">
+      <label class="chip"><input type="radio" name="a2" value="A"><span>A</span></label>
+      <label class="chip"><input type="radio" name="a2" value="B"><span>B</span></label>
+      <label class="chip"><input type="radio" name="a2" value="C"><span>C</span></label>
+    </div>
+    <div class="erkl" id="e2"></div>
+  </div>
+  <div class="aufgabe" id="z3">
+    <div class="kopf"><span class="nr">3</span><span class="frage">Was nehmen Anna und Ben zum Strand mit?</span></div>
+    <button type="button" class="bild-knopf" data-src="bilder/a2-goethe-hoeren-teil3-uebung2-aufgabe3.webp" aria-label="Bild zu Aufgabe 3 vergrößern">
+      <img src="bilder/a2-goethe-hoeren-teil3-uebung2-aufgabe3.webp" alt="Drei Bilder: A Regenschirm, B Sonnencreme, C Wasserflasche">
+    </button>
+    <div class="wahl" role="radiogroup" aria-label="Aufgabe 3">
+      <label class="chip"><input type="radio" name="a3" value="A"><span>A</span></label>
+      <label class="chip"><input type="radio" name="a3" value="B"><span>B</span></label>
+      <label class="chip"><input type="radio" name="a3" value="C"><span>C</span></label>
+    </div>
+    <div class="erkl" id="e3"></div>
+  </div>
+  <div class="aufgabe" id="z4">
+    <div class="kopf"><span class="nr">4</span><span class="frage">Mit welchem Zimmer fängt der Mann an?</span></div>
+    <button type="button" class="bild-knopf" data-src="bilder/a2-goethe-hoeren-teil3-uebung2-aufgabe4.webp" aria-label="Bild zu Aufgabe 4 vergrößern">
+      <img src="bilder/a2-goethe-hoeren-teil3-uebung2-aufgabe4.webp" alt="Drei Bilder: A Küche, B Bad, C Schlafzimmer">
+    </button>
+    <div class="wahl" role="radiogroup" aria-label="Aufgabe 4">
+      <label class="chip"><input type="radio" name="a4" value="A"><span>A</span></label>
+      <label class="chip"><input type="radio" name="a4" value="B"><span>B</span></label>
+      <label class="chip"><input type="radio" name="a4" value="C"><span>C</span></label>
+    </div>
+    <div class="erkl" id="e4"></div>
+  </div>
+  <div class="aufgabe" id="z5">
+    <div class="kopf"><span class="nr">5</span><span class="frage">Wann öffnet der Supermarkt am Samstag?</span></div>
+    <button type="button" class="bild-knopf" data-src="bilder/a2-goethe-hoeren-teil3-uebung2-aufgabe5.webp" aria-label="Bild zu Aufgabe 5 vergrößern">
+      <img src="bilder/a2-goethe-hoeren-teil3-uebung2-aufgabe5.webp" alt="Drei Uhren: A 9:00 Uhr, B 10:00 Uhr, C 11:00 Uhr">
+    </button>
+    <div class="wahl" role="radiogroup" aria-label="Aufgabe 5">
+      <label class="chip"><input type="radio" name="a5" value="A"><span>A</span></label>
+      <label class="chip"><input type="radio" name="a5" value="B"><span>B</span></label>
+      <label class="chip"><input type="radio" name="a5" value="C"><span>C</span></label>
+    </div>
+    <div class="erkl" id="e5"></div>
+  </div>
+</div>
+<div class="bild-hinweis" style="text-align:center;margin-top:8px;">Zum Vergrößern auf ein Bild tippen oder klicken.</div>
+<p class="warnung" id="warnung" aria-live="polite"></p>
+
+<div class="loesung-toggle">
+  <button class="btn-loesung" type="button" onclick="auswerten()">Auswerten</button>
+  <button class="btn-reset" type="button" onclick="reset()">Zurücksetzen</button>
+</div>
+
+<div class="ergebnis-box" id="ergebnis">
+  <span class="punkte" id="punkte-anzeige"></span>
+  <span id="ergebnis-text"></span>
+</div>
+
+<details class="hoertext" id="hoertext">
+  <summary>Transkript anzeigen</summary>
+  <p class="gespraech">Gespräch 1</p>
+  <p><span class="rolle">Tom:</span>Wollen wir uns am Sonntag treffen? Sagen wir 15 Uhr im Café?</p>
+  <p><span class="rolle">Lisa:</span>Nein, dort ist es immer so laut, ich kann dich nicht verstehen.</p>
+  <p><span class="rolle">Tom:</span>Okay. Dann in der Bibliothek?</p>
+  <p><span class="rolle">Lisa:</span>Am Sonntag ist die geschlossen, hast du das vergessen?</p>
+  <p><span class="rolle">Tom:</span>Stimmt! Dann treffen wir uns einfach im Park bei der großen Bank.</p>
+  <p><span class="rolle">Lisa:</span>Perfekt, bis 15 Uhr!</p>
+  <p class="gespraech">Gespräch 2</p>
+  <p><span class="rolle">Frau:</span>Diese Jacke sieht cool aus. Haben Sie die auch in Größe S?</p>
+  <p><span class="rolle">Verkäufer:</span>Ja, hier. Wollen Sie sie anprobieren?</p>
+  <p><span class="rolle">Frau:</span>Hmm, die ist zu klein. Haben Sie etwas Größeres?</p>
+  <p><span class="rolle">Verkäufer:</span>Dann nehmen Sie L.</p>
+  <p><span class="rolle">Frau:</span>Nein, die ist viel zu groß. Geben Sie mir lieber die mittlere Größe.</p>
+  <p><span class="rolle">Verkäufer:</span>Das ist dann M – die passt sicher perfekt.</p>
+  <p><span class="rolle">Frau:</span>Ja, die nehme ich!</p>
+  <p class="gespraech">Gespräch 3</p>
+  <p><span class="rolle">Anna:</span>Wir fahren zum Strand! Was nehmen wir mit?</p>
+  <p><span class="rolle">Ben:</span>Einen Regenschirm? An der Küste weiß man nie.</p>
+  <p><span class="rolle">Anna:</span>Nein, der Wetterbericht sagt 28 Grad und sonnig!</p>
+  <p><span class="rolle">Ben:</span>Okay. Dann brauchen wir Sonnencreme?</p>
+  <p><span class="rolle">Anna:</span>Ja, die müssen wir einpacken.</p>
+  <p><span class="rolle">Ben:</span>Und eine große Flasche Wasser. Ohne Wasser gehe ich nirgendwo hin.</p>
+  <p><span class="rolle">Anna:</span>Nein, das ist viel zu schwer. Wasser können wir dort kaufen.</p>
+  <p class="gespraech">Gespräch 4</p>
+  <p><span class="rolle">Mann:</span>Ich renoviere meine Wohnung. Die Küche ist schon ganz neu!</p>
+  <p><span class="rolle">Freund:</span>Dann fängst du mit dem Schlafzimmer an?</p>
+  <p><span class="rolle">Mann:</span>Nein, das ist egal, ich schlafe nur dort. Aber das Bad ist eine Katastrophe – es ist alles so alt und kaputt.</p>
+  <p><span class="rolle">Freund:</span>Oh, dann ist das Bad wirklich dringend.</p>
+  <p><span class="rolle">Mann:</span>Genau, damit fange ich sofort an.</p>
+  <p class="gespraech">Gespräch 5</p>
+  <p><span class="rolle">Frau:</span>Ich muss am Samstag einkaufen. Öffnet der Supermarkt um 9 Uhr?</p>
+  <p><span class="rolle">Mann:</span>Nein, am Samstag macht er erst später auf.</p>
+  <p><span class="rolle">Frau:</span>Um 11 Uhr? Das ist mir zu spät, ich muss noch zum Arzt.</p>
+  <p><span class="rolle">Mann:</span>Nein, er öffnet schon um 10 Uhr. Dann ist er noch schön leer. Da bist du in einer halben Stunde fertig.</p>
+  <p><span class="rolle">Frau:</span>Super, dann gehe ich um 10 hin.</p>
+</details>
+
+<script>
+  const OPTIONEN = {
+    1: { A: 'Café', B: 'Bibliothek', C: 'Park' },
+    2: { A: 'S', B: 'M', C: 'L' },
+    3: { A: 'Regenschirm', B: 'Sonnencreme', C: 'Wasserflasche' },
+    4: { A: 'Küche', B: 'Bad', C: 'Schlafzimmer' },
+    5: { A: '9 Uhr', B: '10 Uhr', C: '11 Uhr' }
+  };
+  const LOESUNGEN = { 1: 'C', 2: 'B', 3: 'B', 4: 'B', 5: 'B' };
+  const ERKLAERUNGEN = {
+    1: 'Im Text heißt es: „Dann treffen wir uns einfach im Park bei der großen Bank.“ Das Café ist zu laut, die Bibliothek ist am Sonntag geschlossen.',
+    2: 'Im Text heißt es: „Geben Sie mir lieber die mittlere Größe.“ S ist zu klein, L ist zu groß, also M.',
+    3: 'Im Text heißt es: „Ja, die müssen wir einpacken.“ Einen Regenschirm brauchen sie bei 28 Grad und Sonne nicht, und Wasser ist zu schwer, das kaufen sie dort.',
+    4: 'Im Text heißt es: „Das Bad ist eine Katastrophe.“ Die Küche ist schon neu, das Schlafzimmer ist egal.',
+    5: 'Im Text heißt es: „Er öffnet schon um 10 Uhr.“ 9 Uhr ist zu früh, 11 Uhr ist der Frau zu spät, sie muss noch zum Arzt.'
+  };
+
+  /* Bild vergrößern */
+  const lb = document.getElementById('lightbox');
+  const lbBild = lb.querySelector('img');
+  document.querySelectorAll('.bild-knopf').forEach(function (k) {
+    k.addEventListener('click', function () { lbBild.src = k.dataset.src; lb.classList.add('offen'); });
+  });
+  lb.addEventListener('click', function () { lb.classList.remove('offen'); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') lb.classList.remove('offen'); });
+
+  /* Audio: nur einmal abspielbar */
+  const audio = document.getElementById('main-audio');
+  const hinweis = document.getElementById('audio-hinweis');
+  let hatGespielt = false;
+  audio.addEventListener('ended', function () { hatGespielt = true; audio.controls = false; hinweis.classList.add('sichtbar'); });
+  audio.addEventListener('play', function () {
+    if (hatGespielt) { audio.pause(); audio.currentTime = 0; audio.controls = false; hinweis.classList.add('sichtbar'); }
+  });
+
+  function auswerten() {
+    let punkte = 0;
+    for (let n = 1; n <= 5; n++) {
+      const gewaehlt = document.querySelector('input[name="a' + n + '"]:checked');
+      const wahl = gewaehlt ? gewaehlt.value : '';
+      const soll = LOESUNGEN[n];
+      const ok = wahl === soll;
+      if (ok) punkte++;
+      const z = document.getElementById('z' + n);
+      z.classList.remove('richtig', 'falsch');
+      z.classList.add(ok ? 'richtig' : 'falsch');
+      z.querySelectorAll('.chip').forEach(function (c) {
+        const v = c.querySelector('input').value;
+        c.classList.toggle('soll', v === soll);
+        c.classList.toggle('falsch-gewaehlt', v === wahl && !ok);
+      });
+      const e = document.getElementById('e' + n);
+      e.className = 'erkl sichtbar';
+      e.textContent = (ok ? '✓ ' : 'Richtig ist ' + soll + ' (' + OPTIONEN[n][soll] + '). ') + ERKLAERUNGEN[n];
+    }
+    document.getElementById('punkte-anzeige').textContent = punkte + ' / 5';
+    const texte = ['Noch üben! 💪', 'Guter Anfang! 📖', 'Solide! 👍', 'Sehr gut! 🎉', 'Fast perfekt! ⭐', 'Ausgezeichnet! 🏆'];
+    document.getElementById('ergebnis-text').textContent = texte[punkte];
+    document.getElementById('ergebnis').classList.add('visible');
+    document.getElementById('hoertext').classList.add('visible');
+    document.getElementById('ergebnis').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function reset() {
+    for (let n = 1; n <= 5; n++) {
+      document.querySelectorAll('input[name="a' + n + '"]').forEach(function (i) { i.checked = false; });
+      const z = document.getElementById('z' + n); z.classList.remove('richtig', 'falsch');
+      z.querySelectorAll('.chip').forEach(function (c) { c.classList.remove('soll', 'falsch-gewaehlt'); });
+      const e = document.getElementById('e' + n); e.className = 'erkl'; e.textContent = '';
+    }
+    document.getElementById('ergebnis').classList.remove('visible');
+    const ht = document.getElementById('hoertext'); ht.classList.remove('visible'); ht.open = false;
+    audio.controls = true; audio.currentTime = 0; hatGespielt = false; hinweis.classList.remove('sichtbar');
+  }
+</script>
+</body>
+</html>
